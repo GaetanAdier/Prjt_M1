@@ -1,0 +1,24 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: User_requirements.aux
+The style file: plain.bst
+Database file #1: User_requirements.bib
+Name 1 in "Herve Goeau, Alexis Joly, Pierre Bonnet, Souheil Selmi, Jean-Franois Molino, Daniel Barthelemy, and Nozha Boujemaa" has a comma at the end for entry GOEAU2014
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Herve Goeau, Alexis Joly, Pierre Bonnet, Souheil Selmi, Jean-Franois Molino, Daniel Barthelemy, and Nozha Boujemaa" for entry GOEAU2014
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Herve Goeau, Alexis Joly, Pierre Bonnet, Souheil Selmi, Jean-Franois Molino, Daniel Barthelemy, and Nozha Boujemaa" for entry GOEAU2014
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Herve Goeau, Alexis Joly, Pierre Bonnet, Souheil Selmi, Jean-Franois Molino, Daniel Barthelemy, and Nozha Boujemaa" for entry GOEAU2014
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Qiang Chen, Mani Abedini, Rahil Garnavi, Xi Liang" for entry QUIANG2014
+while executing---line 1049 of file plain.bst
+Name 1 in "Herve Goeau, Alexis Joly, Pierre Bonnet, Souheil Selmi, Jean-Franois Molino, Daniel Barthelemy, and Nozha Boujemaa" has a comma at the end for entry GOEAU2014
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Herve Goeau, Alexis Joly, Pierre Bonnet, Souheil Selmi, Jean-Franois Molino, Daniel Barthelemy, and Nozha Boujemaa" for entry GOEAU2014
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Herve Goeau, Alexis Joly, Pierre Bonnet, Souheil Selmi, Jean-Franois Molino, Daniel Barthelemy, and Nozha Boujemaa" for entry GOEAU2014
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Herve Goeau, Alexis Joly, Pierre Bonnet, Souheil Selmi, Jean-Franois Molino, Daniel Barthelemy, and Nozha Boujemaa" for entry GOEAU2014
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Qiang Chen, Mani Abedini, Rahil Garnavi, Xi Liang" for entry QUIANG2014
+while executing---line 1090 of file plain.bst
+(There were 10 error messages)

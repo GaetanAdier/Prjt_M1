@@ -1,0 +1,26 @@
+@CONFERENCE{QUIANG2014,
+  author =       {Qiang Chen, Mani Abedini, Rahil Garnavi, Xi Liang},
+  title =        {IBM Research Australia at LifeCLEF2014: Plant Identication Task},
+  booktitle =    {Information Access Evaluation},
+  year =         {2014},
+  series =       {5th},
+  pages  =       {693 - 704},
+  month =        {September},
+  organization = {CLEF},
+  publisher =    {Springer},
+  key =          {LNCS 8685},
+}
+
+@CONFERENCE{GOEAU2014,
+  author =       {Herve Goeau, Alexis Joly, Pierre Bonnet, Souheil Selmi, Jean-Franois
+                    Molino, Daniel Barthelemy, and Nozha Boujemaa},
+  title =        {LifeCLEF Plant Identication Task 2014},
+  booktitle =    {Information Access Evaluation},
+  year =         {2014},
+  series =       {5th},
+  pages  =       {598 - 615},
+  month =        {September},
+  organization = {CLEF},
+  publisher =    {Springer},
+  key =          {LNCS 8685},
+}
