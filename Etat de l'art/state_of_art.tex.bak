@@ -1,0 +1,21 @@
+\section{Context}
+\subsection{Context and environment}
+The project will take place in the XLIM-SIC laboratory of Poitiers University.
+
+It will be about researching for new feature matching and indexing solutions by using new attributes including color and texture features. The final aim of the project will be the participation
+to the life CLEF contest 2015 which is a competition on the indexing of nature images.
+
+\subsection{Aim of project}
+
+The project is about identifying and indexing images. The aim is to obtain a new system for image indexing and recognition which is able to work on nature images (that is a huge problem for the standard descriptors which do not include texture or color features). We will have to develop a software program to test the effectiveness of many descriptors. Using this software program, we will be able to compare our results, with the new texture and color descriptors, to obtain the best results in the CLEF challenge.
+
+This project is completely relevant to our training because it includes many subject as image processing and we will have to use many technologies (as Python or C++) to implement it.
+
+There are many educational topics related to this project. We will have to work on project management, do some teamwork and use many image processing skills that we did not know before. We will have to report to our customer and it will be a good exercise for our future professional life.
+
+\subsection{Scope of work}
+We will have to design a software program which, by using the CLEF image learning Database, will be able to index the whole Database according to the different features which are specified in the CLEF rules.
+
+The aim of this project is to adapt the last up to date designed texture and color attributes to the current image classification and then to measure how they perform with photographies taken from nature in order to test their competitiveness through the CLEF challenge.
+
+The XLIM-SIC laboratory is currently working on the design of new image descriptors by integrating texture and color attributes more effectively.
