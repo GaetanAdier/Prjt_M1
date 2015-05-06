@@ -12,11 +12,7 @@
 
 \section{State of the art}
 
-Since few years color image processing is a major problem, indeed lot of the colour texture discrimination has been explored in a marginal colour way. The problematic is that today we can do color image recognition on numerical images but we don't have good results on nature images. 
-
-The CLEF contest is an answer to that problematic, the aim of the challenge is to put in competition some university laboratories and company laboratories. In this contest each laboratories could compare its colour texture feature against all the other challengers.
-
-In this way 
+tiny introduction
 
 \subsection{Key-points}
 
