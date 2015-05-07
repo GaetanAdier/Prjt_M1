@@ -35,6 +35,25 @@ The algorithm is patented in the US; the owner is the University of British Colu
 \paragraph{}
 SIFT keypoints of objects are first extracted from a set of reference images and stored in a database. An object is recognized in a new image by individually comparing each feature from the new image to this database and finding candidate matching features based on Euclidean distance of their feature vectors. From the full set of matches, subsets of keypoints that agree on the object and its location, scale, and orientation in the new image are identified to filter out good matches. The determination of consistent clusters is performed rapidly by using an efficient hash table implementation of the generalized Hough transform. Each cluster of 3 or more features that agree on an object and its pose is then subject to further detailed model verification and subsequently outliers are discarded. Finally the probability that a particular set of features indicates the presence of an object is computed, given the accuracy of fit and number of probable false matches. Object matches that pass all these tests can be identified as correct with high confidence.
 
+\paragraph{}
+Algorithm:
+\begin{itemize}
+	\item Scale-space extrema detection
+	
+	
+This is the stage where the interest points, which are called keypoints in the SIFT framework, are detected. For this, the image is convolved with Gaussian filters at different scales, and then the difference of successive Gaussian-blurred images are taken. Keypoints are then taken as maxima/minima of the Difference of Gaussians (DoG) that occur at multiple scales. Specifically, a DoG image D(x,y,$\sigma$) is given by:
+ 
+\begin{equation}
+D(x,y,\sigma)=L(x,y,k_i\sigma)-L(x,y,k_j\sigma)
+\end{equation}
+
+where L(x,y,k$\sigma$) is the convolution of the original image I(x,y) with the Gaussian blur G(x,y,k$\sigma$) at scale k$\sigma$, i.e., L(x,y,k$\sigma$)= G(x,y,k$\sigma$)*I(x,y)
+	\item Keypoint localization
+	\item Orientation assignment
+	\item Keypoint descriptor
+ 
+
+\end{itemize}
 \subsubsection{SURF}
 
 \subsubsection{Opponent SIFT}
