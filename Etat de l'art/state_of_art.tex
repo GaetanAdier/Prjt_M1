@@ -50,9 +50,28 @@ D(x,y,\sigma)=L(x,y,k_i\sigma)-L(x,y,k_j\sigma)
 where L(x,y,k$\sigma$) is the convolution of the original image I(x,y) with the Gaussian blur G(x,y,k$\sigma$) at scale k$\sigma$, i.e., L(x,y,k$\sigma$)= G(x,y,k$\sigma$)*I(x,y)
 	\item Keypoint localization
 	\item Orientation assignment
-	\item Keypoint descriptor
- 
+	
+	In this step, each keypoint is assigned one or more orientations based on local image gradient directions. This is the key step in achievinginvariance to rotation as the keypoint descriptor can be represented relative to this orientation and therefore achieve invariance to image rotation.
+First, the Gaussian-smoothed image L(x,y,k$\sigma$) at the keypoint's scale $\sigma$ is taken so that all computations are performed in a scale-invariant manner. For an image sample L(x,y) at scale $\sigma$, the gradient magnitude, m(x,y), and orientation, $\theta$(x,y), are precomputed using pixel differences:
+\begin{equation}
+m(x,y)=\sqrt{(L(x+1,y)-L(x-1,y))^2+(L(x,y+1)-L(x,y-1))^2}
+\end{equation}
 
+\begin{equation}
+\theta(x,y)=atan2(L(x,y+1)-L(x,y-1),L(x+1,y)-L(x-1,y))
+\end{equation}
+
+The magnitude and direction calculations for the gradient are done for every pixel in a neighboring region around the keypoint in the Gaussian-blurred image L. An orientation histogram with 36 bins is formed, with each bin covering 10 degrees. Each sample in the neighboring window added to a histogram bin is weighted by its gradient magnitude and by a Gaussian-weighted circular window with a $\sigma$ that is 1.5 times that of the scale of the keypoint. The peaks in this histogram correspond to dominant orientations. Once the histogram is filled, the orientations corresponding to the highest peak and local peaks that are within 80\% of the highest peaks are assigned to the keypoint. In the case of multiple orientations being assigned, an additional keypoint is created having the same location and scale as the original keypoint for each additional orientation.
+
+	\item Keypoint descriptor
+
+Previous steps found keypoint locations at particular scales and assigned orientations to them. This ensured invariance to image location, scale and rotation. Now we want to compute a descriptor vector for each keypoint such that the descriptor is highly distinctive and partially invariant to the remaining variations such as illumination, 3D viewpoint, etc. This step is performed on the image closest in scale to the keypoint's scale.
+First a set of orientation histograms is created on 4x4 pixel neighborhoods with 8 bins each. These histograms are computed from magnitude and orientation values of samples in a 16 x 16 region around the keypoint such that each histogram contains samples from a 4 x 4 subregion of the original neighborhood region. The magnitudes are further weighted by a Gaussian function with   equal to one half the width of the descriptor window. The descriptor then becomes a vector of all the values of these histograms. Since there are 4 x 4 = 16 histograms each with 8 bins the vector has 128 elements. This vector is then normalized to unit length in order to enhance invariance to affine changes in illumination. To reduce the effects of non-linear illumination a threshold of 0.2 is applied and the vector is again normalized.
+Although the dimension of the descriptor, i.e. 128, seems high, descriptors with lower dimension than this don't perform as well across the range of matching tasks and the computational cost remains low due to the approximate BBF (see below) method used for finding the nearest-neighbor. Longer descriptors continue to do better but not by much and there is an additional danger of increased sensitivity to distortion and occlusion. It is also shown that feature matching accuracy is above 50\% for viewpoint changes of up to 50 degrees. Therefore SIFT descriptors are invariant to minor affine changes. To test the distinctiveness of the SIFT descriptors, matching accuracy is also measured against varying number of keypoints in the testing database, and it is shown that matching accuracy decreases only very slightly for very large database sizes, thus indicating that SIFT features are highly distinctive.
+	
+	
+	
+	
 \end{itemize}
 \subsubsection{SURF}
 
