@@ -49,6 +49,31 @@ D(x,y,\sigma)=L(x,y,k_i\sigma)-L(x,y,k_j\sigma)
 
 where L(x,y,k$\sigma$) is the convolution of the original image I(x,y) with the Gaussian blur G(x,y,k$\sigma$) at scale k$\sigma$, i.e., L(x,y,k$\sigma$)= G(x,y,k$\sigma$)*I(x,y)
 	\item Keypoint localization
+	Scale-space extrema detection produces too many keypoint candidates, some of which are unstable. The next step in the algorithm is to perform a detailed fit to the nearby data for accurate location, scale, and ratio of principal curvatures. This information allows points to be rejected that have low contrast (and are therefore sensitive to noise) or are poorly localized along an edge.
+	\paragraph{}
+	\subitem Interpolation of nearby data for accurate position
+	
+	First, for each candidate keypoint, interpolation of nearby data is used to accurately determine its position. The initial approach was to just locate each keypoint at the location and scale of the candidate keypoint. The new approach calculates the interpolated location of the extremum, which substantially improves matching and stability. The interpolation is done using the quadratic Taylor expansion of the Difference-of-Gaussian scale-space function, D(x,y,k$\sigma$) with the candidate keypoint as the origin. This Taylor expansion is given by:
+\begin{equation}
+D(X)=D+\frac{\partial D^T}{\partial X}X+\frac{1}{2}X^T \frac{\partial^2 D}{\partial X^2}
+\end{equation}
+where D and its derivatives are evaluated at the candidate keypoint and  X=(x,y,k$\sigma$) is the offset from this point. The location of the extremum, $\hat{X}$ , is determined by taking the derivative of this function with respect to X and setting it to zero. If the offset $\hat{X}$ is larger than   in any dimension, then that's an indication that the extremum lies closer to another candidate keypoint. In this case, the candidate keypoint is changed and the interpolation performed instead about that point. Otherwise the offset is added to its candidate keypoint to get the interpolated estimate for the location of the extremum. A similar subpixel determination of the locations of scale-space extrema is performed in the real-time implementation based on hybrid pyramids developed by Lindeberg and his co-workers.
+ 	\paragraph{}
+	\subitem Discarding low-contrast keypoints
+	
+	To discard the keypoints with low contrast, the value of the second-order Taylor expansion D(X) is computed at the offset $\hat{X}$. If this value is less than 0.03, the candidate keypoint is discarded. Otherwise it is kept, with final scale-space location Y+$\hat{X}$, where Y is the original location of the keypoint.
+	\paragraph{}
+	\subitem Eliminating edge responses
+	
+	The DoG function will have strong responses along edges, even if the candidate keypoint is not robust to small amounts of noise. Therefore, in order to increase stability, we need to eliminate the keypoints that have poorly determined locations but have high edge responses.
+For poorly defined peaks in the DoG function, the principal curvature across the edge would be much larger than the principal curvature along it. Finding these principal curvatures amounts to solving for the eigenvalues of the second-order Hessian matrix, H:
+
+
+$$H=\begin{bmatrix}
+	{D_x}_x& {D_x}_y\\
+	{D_x}_y& {D_y}_y
+\end{bmatrix}$$
+	
 	\item Orientation assignment
 	
 	In this step, each keypoint is assigned one or more orientations based on local image gradient directions. This is the key step in achievinginvariance to rotation as the keypoint descriptor can be represented relative to this orientation and therefore achieve invariance to image rotation.
