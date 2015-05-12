@@ -55,6 +55,35 @@ SURF descriptors can be used to locate and recognize objects, people or faces, m
 
 SURF was first presented by Herbert Bay et al. at the 2006 European Conference on Computer Vision. An application of the algorithm is patented in the US.
 \subsubsection{SIFT vs SURF}
+The recognition of images or objects, is one of the most important applications of computer vision, becomes a comparison of local descriptors SIFT (Scale Invariant Feature Transform) and SURF (Speeded-UP Feature transform). These two local descriptors detect structures or very significant points in an image for a discriminating description of these areas from its neighboring points, in order to compare them with other descriptors using similar measures.
+	\paragraph{}
+	SIFT Algorithm:
+	\begin{itemize}
+		\item Detection of edges on the scale: the first stage performs a search in different scales and dimensions of the image by identifying possible points of interest, invariant to changes in orientation and scaling. This procedure is carried out with the function (DoG (Difference-of-Gaussian) giving different values to the $\sigma$, in the following equation):
+\begin{equation}
+D(x,y,\sigma)=L(x,y,k_i\sigma)-L(x,y,k_j\sigma)
+\end{equation}
+where L(x,y,k$\sigma$) is the convolution of the original image I(x,y) with the Gaussian blur G(x,y,k$\sigma$) at scale k$\sigma$, i.e., L(x,y,k$\sigma$)= G(x,y,k$\sigma$)*I(x,y).
+		\item Location of the keypoints: key points are chosen on the basis of stability measures, removed the key points with low.
+
+		\item Contrast or are located in the margins-orientation assignment: invariance to rotation is achieved by assigning to each of the points of orientation based on the local properties of the image and which represents the descriptor for this orientation.
+
+		\item Descriptor keypoints: the local gradients of the image are measured in the region surrounding the key point. These are processed by means of a representation which allows distortion levels and changes in lighting locally.
+	\end{itemize}
+	\paragraph{}
+	SURF Algorithm:
+	\begin{itemize}
+		\item Detection of points of interest, keypoints.
+
+		\item Assignment guidance.
+
+		\item Extraction of those described.More information in the sections of features.
+	\end{itemize}
+	\paragraph{}
+	Differences between algorithms
+	
+	
+	The main differences between the algorithms SIFT and SURF are the speed of implementation of respect for one another, but with both points of interest of the image keep invariants, scale and orientation, and changes in the lighting. The main differences of data in multiple experiments are that SIFT is kept the position, scale and orientation, since it is possible that in a same position (x, and), we find several points of interest to different scale and / or orientation ?. But another side in the SURF in a position (x, and) appears only a single point of interest, by what is not saved the scale and orientation, however if that registers the matrix of second order and the sign of the Laplacian.
 
 \subsubsection{Opponent SIFT}
 
