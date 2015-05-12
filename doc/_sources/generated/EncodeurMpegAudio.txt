@@ -1,0 +1,7 @@
+EncodeurMpegAudio module
+========================
+
+.. automodule:: EncodeurMpegAudio
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>sphinx_doc &mdash; Test 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Test 0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Test 0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for sphinx_doc</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Ce module sert a la génération de documentation automatique avec Sphinx. Il se compose de deux fonction : configure_doc() et genere_doc() qui devront toutes deux être apellées comme expliqué ci dessous.</span>
+<span class="sd">Pour créer la documentation d&#39;un module, il faudra mettre le fichier contenant ces deux fonctions dans le même dossier que les fichiers sources, et taper les lignes de code suivantes dans les import de votre module de base.</span>
+<span class="sd">::</span>
+<span class="sd">    from sphinx_doc import genere_doc</span>
+<span class="sd">    from sphinx_doc import configure_doc</span>
+
+<span class="sd">Il faudra ensuite dans votre main apeller les fonction commes expliqué dans leur documetation respective.</span>
+<span class="sd">Le résultat de la génération de vos documentation devra vous donner une arborescence semblable a celle décrite ci dessous : </span>
+
+<span class="sd">.. image:: arbo.png </span>
+<span class="sd">   :align: center</span>
+
+<span class="sd">.. note:: La documentation générée dépendra des commentaires placés sur chaque fonction. Pour connaitre les syntaxe à appliquer, se référer a la documentation suivante : </span>
+<span class="sd">          Tutoriel Openclassroom &lt;http://deusyss.developpez.com/tutoriels/Python/SphinxDoc/#LIII-D/&gt;</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">sphinx</span>
+<span class="kn">import</span> <span class="nn">sphinx.quickstart</span>
+<span class="kn">import</span> <span class="nn">sphinx.apidoc</span>
+
+
+<div class="viewcode-block" id="configure_doc"><a class="viewcode-back" href="../generated/sphinx_doc.html#sphinx_doc.configure_doc">[docs]</a><span class="k">def</span> <span class="nf">configure_doc</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            </span>
+<span class="sd">    </span>
+<span class="sd">    Procédure de configuration de l&#39;auto-configuration</span>
+<span class="sd">    </span>
+<span class="sd">    Il y a a l&#39;appel de cette procedure une certain quantité de parametres qui seront a completer \:</span>
+
+<span class="sd">     * **Root path for the documentation** : On renseignera le nom &quot;doc&quot; qui créera un dossier du même nom pour stocker la documentation </span>
+<span class="sd">     * **Separate source and build directories (Y/N) :** Ici on renseignera &#39;n&#39; (par défaut)</span>
+<span class="sd">     * **Name prefix for templates and static dir :** Laisser par defaut (&quot;_&quot;) </span>
+<span class="sd">     * **Project name :** Nom du projet (au choix)</span>
+<span class="sd">     * **Author name(s) :** Nom de l&#39;auteur (au choix)</span>
+<span class="sd">     * **Project version :** Numéro de version du projet</span>
+<span class="sd">     * **Project release :** Numéro de release</span>
+<span class="sd">     * **Source file suffix :** Laisser par defaut (&quot;.rst&quot;)</span>
+<span class="sd">     * **Name of your master document (without suffix) :** Laisser par defaut (&quot;index.rst&quot;)</span>
+<span class="sd">     * **Do you want to use the epub builder (y/N) :** Mettre a non (je ne sait pas ce que c&#39;est)</span>
+<span class="sd">     * **autodoc: automatically insert docstrings from modules (y/N) :** Mettre à oui (sinon on ne pourra pas utiliser l&#39;autodocumentation)</span>
+<span class="sd">     * **doctest: automatically test code snippets in doctest blocks (y/N) :** Laisser a non (je sait pas ce que c&#39;est non plus)</span>
+<span class="sd">     * **intersphinx: link between Sphinx documentation of different projects (y/N) :** Dans notre cas mettre a non</span>
+<span class="sd">     * **todo: write « todo » entries that can be shown or hidden on build (y/N) :** Cela peut être bien de le mettre à oui</span>
+<span class="sd">     * **coverage: checks for documentation coverage (y/N) :** je sait pas ce que c&#39;est mais dans le doute on laisse a non</span>
+<span class="sd">     * **pngmath: include math, rendered as PNG images (y/N) :** Mettre à oui pour pouvoir inclure des formules au format LateX</span>
+<span class="sd">     * **mathjax: include math, rendered in the browser by MathJax (y/N) :** Substitut a pngmath, mettre a non</span>
+<span class="sd">     * **ifconfig: conditional inclusion of content based on config values (y/N) :** Je sait pas mais quand on le laisse a &quot;non&quot; sa fonctionne très bien alors ^^</span>
+<span class="sd">     * **viewcode: include links to the source code of documented Python objects (y/N) :** Fait le lien avec le code source, intéressant a mettre a oui</span>
+<span class="sd">     * **Create Makefile? (Y/n) :** Mettre a oui</span>
+<span class="sd">     * **Create Windows command file? (Y/n) :** Mettre a oui</span>
+<span class="sd">    </span>
+
+<span class="sd">        </span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    .. note:: Cette fonction n&#39;est apellée qu&#39;une fois a la création du projet de documentation</span>
+<span class="sd">    </span>
+<span class="sd">        </span>
+
+<span class="sd">    </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">sphinx</span><span class="o">.</span><span class="n">quickstart</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><span class="s">&#39;sphinx-quickstart&#39;</span><span class="p">])</span>
+
+</div>
+<div class="viewcode-block" id="genere_doc"><a class="viewcode-back" href="../generated/sphinx_doc.html#sphinx_doc.genere_doc">[docs]</a><span class="k">def</span> <span class="nf">genere_doc</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fonction de génération de l&#39;autodocumentation. La documentation sera générée a chaque appel de cette procédure.</span>
+<span class="sd">    </span>
+<span class="sd">   </span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    .. warning:: Cette fonction peut faire ressortir certain warning sans raison apparente. Cela n&#39;influe pas sur le résultat de la documentation qui sera tout de même générée mais il sera nécessaire de couper l&#39;éxécution de la console de manière manuelle afin d&#39;effectuer une nouvelle éxécution (appuyer sur le bouton en forme e fleche verte en haut a droite de la console)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sphinx</span><span class="o">.</span><span class="n">apidoc</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><span class="s">&#39;sphinx-apidoc&#39;</span><span class="p">,</span> <span class="s">&#39;-f&#39;</span><span class="p">,</span> <span class="s">&#39;--output-dir=doc/generated&#39;</span><span class="p">,</span> <span class="s">&#39;./&#39;</span><span class="p">])</span>
+    <span class="n">sphinx</span><span class="o">.</span><span class="n">main</span><span class="p">([</span><span class="s">&#39;sphinx-build&#39;</span><span class="p">,</span> <span class="s">&#39;-b&#39;</span><span class="p">,</span> <span class="s">&#39;html&#39;</span><span class="p">,</span> <span class="s">&#39;doc&#39;</span><span class="p">,</span> <span class="s">&#39;doc/_build/html&#39;</span><span class="p">])</span>
+<span class="c">#    sphinx.main([&#39;sphinx-build&#39;, &#39;-b&#39;, &#39;latex&#39;, &#39;doc&#39;, &#39;doc/_build/latex&#39;])</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Test 0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, EC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

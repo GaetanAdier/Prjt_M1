@@ -1,0 +1,7 @@
+filtre module
+=============
+
+.. automodule:: filtre
+    :members:
+    :undoc-members:
+    :show-inheritance:

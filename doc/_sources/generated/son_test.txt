@@ -1,0 +1,7 @@
+son_test module
+===============
+
+.. automodule:: son_test
+    :members:
+    :undoc-members:
+    :show-inheritance:

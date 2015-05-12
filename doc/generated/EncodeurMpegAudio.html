@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>EncodeurMpegAudio module &mdash; Test 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Test 0 documentation" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Test 0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/generated/EncodeurMpegAudio.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-EncodeurMpegAudio">
+<span id="encodeurmpegaudio-module"></span><h1>EncodeurMpegAudio module<a class="headerlink" href="#module-EncodeurMpegAudio" title="Permalink to this headline">¶</a></h1>
+<p>Created on Fri Feb 21 14:34:20 2014</p>
+<p>&#64;author: ecaill06</p>
+<dl class="class">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio">
+<em class="property">class </em><code class="descclassname">EncodeurMpegAudio.</code><code class="descname">EncodeurMpegAudio</code><a class="reference internal" href="../_modules/EncodeurMpegAudio.html#EncodeurMpegAudio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encodeur MPEG audio</p>
+<dl class="attribute">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.M">
+<code class="descname">M</code><em class="property"> = array([[ 0.70710678,  0.67155895,  0.63439328, ..., -0.80320753,         -0.77301045, -0.74095113],        [-0.70710678, -0.80320753, -0.88192126, ...,  0.33688985,          0.47139674,  0.5956993 ],        [-0.70710678, -0.51410274, -0.29028468, ...,  0.99879546,          0.95694034,  0.85772861],        ...,         [-0.70710678,  0.51410274, -0.29028468, ..., -0.99879546,          0.95694034, -0.85772861],        [-0.70710678,  0.80320753, -0.88192126, ..., -0.33688985,          0.47139674, -0.5956993 ],        [ 0.70710678, -0.67155895,  0.63439328, ...,  0.80320753,         -0.77301045,  0.74095113]])</em><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.M" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.N">
+<code class="descname">N</code><em class="property"> = array([[ 0.70710678, -0.70710678, -0.70710678, ..., -0.70710678,         -0.70710678,  0.70710678],        [ 0.74095113, -0.5956993 , -0.85772861, ..., -0.85772861,         -0.5956993 ,  0.74095113],        [ 0.77301045, -0.47139674, -0.95694034, ..., -0.95694034,         -0.47139674,  0.77301045],        ...,         [ 0.80320753, -0.33688985, -0.99879546, ..., -0.99879546,         -0.33688985,  0.80320753],        [ 0.77301045, -0.47139674, -0.95694034, ..., -0.95694034,         -0.47139674,  0.77301045],        [ 0.74095113, -0.5956993 , -0.85772861, ..., -0.85772861,         -0.5956993 ,  0.74095113]])</em><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.N" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.analyse_spectre">
+<code class="descname">analyse_spectre</code><span class="sig-paren">(</span><em>signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/EncodeurMpegAudio.html#EncodeurMpegAudio.analyse_spectre"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.analyse_spectre" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fonction de mise en forme du spectre du signal e vue de son etude aprofondie</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.calcul_module_fft">
+<code class="descname">calcul_module_fft</code><span class="sig-paren">(</span><em>signal</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/EncodeurMpegAudio.html#EncodeurMpegAudio.calcul_module_fft"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.calcul_module_fft" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calcul du module de la FFT de signal</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.calcul_sous_bandes">
+<code class="descname">calcul_sous_bandes</code><span class="sig-paren">(</span><em>X</em>, <em>k</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/EncodeurMpegAudio.html#EncodeurMpegAudio.calcul_sous_bandes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.calcul_sous_bandes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calcul des 32 sous bandes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.decode">
+<code class="descname">decode</code><span class="sig-paren">(</span><em>Sub_band</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/EncodeurMpegAudio.html#EncodeurMpegAudio.decode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.decode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fonction de decodage a partir des 32 sous bandes de frequence</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.encodage">
+<code class="descname">encodage</code><span class="sig-paren">(</span><em>input_audio</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/EncodeurMpegAudio.html#EncodeurMpegAudio.encodage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.encodage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fonction encodage en 32 sous bandes</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.f">
+<code class="descname">f</code><em class="property"> = array([-22050.       , -21963.8671875, -21877.734375 , -21791.6015625,        -21705.46875  , -21619.3359375, -21533.203125 , -21447.0703125,        -21360.9375   , -21274.8046875, -21188.671875 , -21102.5390625,        -21016.40625  , -20930.2734375, -20844.140625 , -20758.0078125,        -20671.875    , -20585.7421875, -20499.609375 , -20413.4765625,        -20327.34375  , -20241.2109375, -20155.078125 , -20068.9453125,        -19982.8125   , -19896.6796875, -19810.546875 , -19724.4140625,        -19638.28125  , -19552.1484375, -19466.015625 , -19379.8828125,        -19293.75     , -19207.6171875, -19121.484375 , -19035.3515625,        -18949.21875  , -18863.0859375, -18776.953125 , -18690.8203125,        -18604.6875   , -18518.5546875, -18432.421875 , -18346.2890625,        -18260.15625  , -18174.0234375, -18087.890625 , -18001.7578125,        -17915.625    , -17829.4921875, -17743.359375 , -17657.2265625,        -17571.09375  , -17484.9609375, -17398.828125 , -17312.6953125,        -17226.5625   , -17140.4296875, -17054.296875 , -16968.1640625,        -16882.03125  , -16795.8984375, -16709.765625 , -16623.6328125,        -16537.5      , -16451.3671875, -16365.234375 , -16279.1015625,        -16192.96875  , -16106.8359375, -16020.703125 , -15934.5703125,        -15848.4375   , -15762.3046875, -15676.171875 , -15590.0390625,        -15503.90625  , -15417.7734375, -15331.640625 , -15245.5078125,        -15159.375    , -15073.2421875, -14987.109375 , -14900.9765625,        -14814.84375  , -14728.7109375, -14642.578125 , -14556.4453125,        -14470.3125   , -14384.1796875, -14298.046875 , -14211.9140625,        -14125.78125  , -14039.6484375, -13953.515625 , -13867.3828125,        -13781.25     , -13695.1171875, -13608.984375 , -13522.8515625,        -13436.71875  , -13350.5859375, -13264.453125 , -13178.3203125,        -13092.1875   , -13006.0546875, -12919.921875 , -12833.7890625,        -12747.65625  , -12661.5234375, -12575.390625 , -12489.2578125,        -12403.125    , -12316.9921875, -12230.859375 , -12144.7265625,        -12058.59375  , -11972.4609375, -11886.328125 , -11800.1953125,        -11714.0625   , -11627.9296875, -11541.796875 , -11455.6640625,        -11369.53125  , -11283.3984375, -11197.265625 , -11111.1328125,        -11025.       , -10938.8671875, -10852.734375 , -10766.6015625,        -10680.46875  , -10594.3359375, -10508.203125 , -10422.0703125,        -10335.9375   , -10249.8046875, -10163.671875 , -10077.5390625,         -9991.40625  ,  -9905.2734375,  -9819.140625 ,  -9733.0078125,         -9646.875    ,  -9560.7421875,  -9474.609375 ,  -9388.4765625,         -9302.34375  ,  -9216.2109375,  -9130.078125 ,  -9043.9453125,         -8957.8125   ,  -8871.6796875,  -8785.546875 ,  -8699.4140625,         -8613.28125  ,  -8527.1484375,  -8441.015625 ,  -8354.8828125,         -8268.75     ,  -8182.6171875,  -8096.484375 ,  -8010.3515625,         -7924.21875  ,  -7838.0859375,  -7751.953125 ,  -7665.8203125,         -7579.6875   ,  -7493.5546875,  -7407.421875 ,  -7321.2890625,         -7235.15625  ,  -7149.0234375,  -7062.890625 ,  -6976.7578125,         -6890.625    ,  -6804.4921875,  -6718.359375 ,  -6632.2265625,         -6546.09375  ,  -6459.9609375,  -6373.828125 ,  -6287.6953125,         -6201.5625   ,  -6115.4296875,  -6029.296875 ,  -5943.1640625,         -5857.03125  ,  -5770.8984375,  -5684.765625 ,  -5598.6328125,         -5512.5      ,  -5426.3671875,  -5340.234375 ,  -5254.1015625,         -5167.96875  ,  -5081.8359375,  -4995.703125 ,  -4909.5703125,         -4823.4375   ,  -4737.3046875,  -4651.171875 ,  -4565.0390625,         -4478.90625  ,  -4392.7734375,  -4306.640625 ,  -4220.5078125,         -4134.375    ,  -4048.2421875,  -3962.109375 ,  -3875.9765625,         -3789.84375  ,  -3703.7109375,  -3617.578125 ,  -3531.4453125,         -3445.3125   ,  -3359.1796875,  -3273.046875 ,  -3186.9140625,         -3100.78125  ,  -3014.6484375,  -2928.515625 ,  -2842.3828125,         -2756.25     ,  -2670.1171875,  -2583.984375 ,  -2497.8515625,         -2411.71875  ,  -2325.5859375,  -2239.453125 ,  -2153.3203125,         -2067.1875   ,  -1981.0546875,  -1894.921875 ,  -1808.7890625,         -1722.65625  ,  -1636.5234375,  -1550.390625 ,  -1464.2578125,         -1378.125    ,  -1291.9921875,  -1205.859375 ,  -1119.7265625,         -1033.59375  ,   -947.4609375,   -861.328125 ,   -775.1953125,          -689.0625   ,   -602.9296875,   -516.796875 ,   -430.6640625,          -344.53125  ,   -258.3984375,   -172.265625 ,    -86.1328125,             0.       ,     86.1328125,    172.265625 ,    258.3984375,           344.53125  ,    430.6640625,    516.796875 ,    602.9296875,           689.0625   ,    775.1953125,    861.328125 ,    947.4609375,          1033.59375  ,   1119.7265625,   1205.859375 ,   1291.9921875,          1378.125    ,   1464.2578125,   1550.390625 ,   1636.5234375,          1722.65625  ,   1808.7890625,   1894.921875 ,   1981.0546875,          2067.1875   ,   2153.3203125,   2239.453125 ,   2325.5859375,          2411.71875  ,   2497.8515625,   2583.984375 ,   2670.1171875,          2756.25     ,   2842.3828125,   2928.515625 ,   3014.6484375,          3100.78125  ,   3186.9140625,   3273.046875 ,   3359.1796875,          3445.3125   ,   3531.4453125,   3617.578125 ,   3703.7109375,          3789.84375  ,   3875.9765625,   3962.109375 ,   4048.2421875,          4134.375    ,   4220.5078125,   4306.640625 ,   4392.7734375,          4478.90625  ,   4565.0390625,   4651.171875 ,   4737.3046875,          4823.4375   ,   4909.5703125,   4995.703125 ,   5081.8359375,          5167.96875  ,   5254.1015625,   5340.234375 ,   5426.3671875,          5512.5      ,   5598.6328125,   5684.765625 ,   5770.8984375,          5857.03125  ,   5943.1640625,   6029.296875 ,   6115.4296875,          6201.5625   ,   6287.6953125,   6373.828125 ,   6459.9609375,          6546.09375  ,   6632.2265625,   6718.359375 ,   6804.4921875,          6890.625    ,   6976.7578125,   7062.890625 ,   7149.0234375,          7235.15625  ,   7321.2890625,   7407.421875 ,   7493.5546875,          7579.6875   ,   7665.8203125,   7751.953125 ,   7838.0859375,          7924.21875  ,   8010.3515625,   8096.484375 ,   8182.6171875,          8268.75     ,   8354.8828125,   8441.015625 ,   8527.1484375,          8613.28125  ,   8699.4140625,   8785.546875 ,   8871.6796875,          8957.8125   ,   9043.9453125,   9130.078125 ,   9216.2109375,          9302.34375  ,   9388.4765625,   9474.609375 ,   9560.7421875,          9646.875    ,   9733.0078125,   9819.140625 ,   9905.2734375,          9991.40625  ,  10077.5390625,  10163.671875 ,  10249.8046875,         10335.9375   ,  10422.0703125,  10508.203125 ,  10594.3359375,         10680.46875  ,  10766.6015625,  10852.734375 ,  10938.8671875,         11025.       ,  11111.1328125,  11197.265625 ,  11283.3984375,         11369.53125  ,  11455.6640625,  11541.796875 ,  11627.9296875,         11714.0625   ,  11800.1953125,  11886.328125 ,  11972.4609375,         12058.59375  ,  12144.7265625,  12230.859375 ,  12316.9921875,         12403.125    ,  12489.2578125,  12575.390625 ,  12661.5234375,         12747.65625  ,  12833.7890625,  12919.921875 ,  13006.0546875,         13092.1875   ,  13178.3203125,  13264.453125 ,  13350.5859375,         13436.71875  ,  13522.8515625,  13608.984375 ,  13695.1171875,         13781.25     ,  13867.3828125,  13953.515625 ,  14039.6484375,         14125.78125  ,  14211.9140625,  14298.046875 ,  14384.1796875,         14470.3125   ,  14556.4453125,  14642.578125 ,  14728.7109375,         14814.84375  ,  14900.9765625,  14987.109375 ,  15073.2421875,         15159.375    ,  15245.5078125,  15331.640625 ,  15417.7734375,         15503.90625  ,  15590.0390625,  15676.171875 ,  15762.3046875,         15848.4375   ,  15934.5703125,  16020.703125 ,  16106.8359375,         16192.96875  ,  16279.1015625,  16365.234375 ,  16451.3671875,         16537.5      ,  16623.6328125,  16709.765625 ,  16795.8984375,         16882.03125  ,  16968.1640625,  17054.296875 ,  17140.4296875,         17226.5625   ,  17312.6953125,  17398.828125 ,  17484.9609375,         17571.09375  ,  17657.2265625,  17743.359375 ,  17829.4921875,         17915.625    ,  18001.7578125,  18087.890625 ,  18174.0234375,         18260.15625  ,  18346.2890625,  18432.421875 ,  18518.5546875,         18604.6875   ,  18690.8203125,  18776.953125 ,  18863.0859375,         18949.21875  ,  19035.3515625,  19121.484375 ,  19207.6171875,         19293.75     ,  19379.8828125,  19466.015625 ,  19552.1484375,         19638.28125  ,  19724.4140625,  19810.546875 ,  19896.6796875,         19982.8125   ,  20068.9453125,  20155.078125 ,  20241.2109375,         20327.34375  ,  20413.4765625,  20499.609375 ,  20585.7421875,         20671.875    ,  20758.0078125,  20844.140625 ,  20930.2734375,         21016.40625  ,  21102.5390625,  21188.671875 ,  21274.8046875,         21360.9375   ,  21447.0703125,  21533.203125 ,  21619.3359375,         21705.46875  ,  21791.6015625,  21877.734375 ,  21963.8671875])</em><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.f" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.fe">
+<code class="descname">fe</code><em class="property"> = array([     0.    ,    689.0625,   1378.125 ,   2067.1875,   2756.25  ,          3445.3125,   4134.375 ,   4823.4375,   5512.5   ,   6201.5625,          6890.625 ,   7579.6875,   8268.75  ,   8957.8125,   9646.875 ,         10335.9375,  11025.    ,  11714.0625,  12403.125 ,  13092.1875,         13781.25  ,  14470.3125,  15159.375 ,  15848.4375,  16537.5   ,         17226.5625,  17915.625 ,  18604.6875,  19293.75  ,  19982.8125,         20671.875 ,  21360.9375])</em><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.fe" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.fft_size">
+<code class="descname">fft_size</code><em class="property"> = 512</em><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.fft_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.fs">
+<code class="descname">fs</code><em class="property"> = 44100</em><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.fs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.genere_son">
+<code class="descname">genere_son</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/EncodeurMpegAudio.html#EncodeurMpegAudio.genere_son"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.genere_son" title="Permalink to this definition">¶</a></dt>
+<dd><p>Genere le signal sonore de base</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.i">
+<code class="descname">i</code><em class="property"> = 31</em><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.i" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.temps">
+<code class="descname">temps</code><em class="property"> = array([  0.00000000e+00,   2.26757370e-05,   4.53514739e-05, ...,          9.99931973e-01,   9.99954649e-01,   9.99977324e-01])</em><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.temps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.test_decodage">
+<code class="descname">test_decodage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/EncodeurMpegAudio.html#EncodeurMpegAudio.test_decodage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.test_decodage" title="Permalink to this definition">¶</a></dt>
+<dd><p>fonction de test du decodage</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.test_encodage">
+<code class="descname">test_encodage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/EncodeurMpegAudio.html#EncodeurMpegAudio.test_encodage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.test_encodage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test de la premiere partie de encodage</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.test_son">
+<code class="descname">test_son</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/EncodeurMpegAudio.html#EncodeurMpegAudio.test_son"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.test_son" title="Permalink to this definition">¶</a></dt>
+<dd><p>Teste le bon fonctionnement de la fonction de generation du son</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.test_sous_bandes">
+<code class="descname">test_sous_bandes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/EncodeurMpegAudio.html#EncodeurMpegAudio.test_sous_bandes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.test_sous_bandes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fonction de test de la bonne constitution des sous bandes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="EncodeurMpegAudio.EncodeurMpegAudio.tonal_comp">
+<code class="descname">tonal_comp</code><span class="sig-paren">(</span><em>son_buffer</em>, <em>k</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/EncodeurMpegAudio.html#EncodeurMpegAudio.tonal_comp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#EncodeurMpegAudio.EncodeurMpegAudio.tonal_comp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detection des composantes tonales du son</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>son_buffer</strong> (<em>integer or None</em>) &#8211; Je sait plus mais c&#8217;est un test</td>
+</tr>
+</tbody>
+</table>
+<div class="math">
+<p><img src="../_images/math/7fa51c7fa8ad03cf0d9cd94b5fcdca177e9f0504.png" alt="\sum_{a}^{b} x_n = c_1 + c_2^3 + \cos(\pi)"/></p>
+</div><div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Du calme hein vraiment c&#8217;est juste un test !!</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Ceci est une boite « Note »</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Ceci est une boite « voir aussi »</p>
+</div>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td>Ceci est un test</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="f2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td>Oui oui un test</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="f3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td>Non mis c&#8217;est vraiment un test hein ^^</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Test 0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, EC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>
