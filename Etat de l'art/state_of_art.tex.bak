@@ -24,13 +24,7 @@ In this way, we will make a little presentation of what is a Key-points and how 
 
 \subsubsection{Dense Grid}
 
-The dense grid method is an easy way to extract Key-points. First we have to divide the image in k subimages, where k is the number of subimages choose by the user. After you just have to take as Key-points the corner of each subimages. 
-
-\begin{figure}[h]
-    \center
-    \includegraphics[scale=1]{Dense_grid.png}
-    \caption{Dense grid}\label{fig:dense_grid}
-\end{figure}
+The dense grid method is an easy way to extract Key-points. To resume the method, you just have to take as Key-points the intersection of 
 
 \subsection{Descriptors}
 
@@ -176,12 +170,10 @@ $Det(H aprox) = {D_x}_x {D_y}_y-(w{D_x}_y)^2$
 The opponent SIFT descriptors is an algorithm which use the same method than the classical SIFT descriptor. The only difference is that we calculate three descriptors for each Key-points. There are obtained from the color opponent channel, defined as
 
 \begin{equation}
-O_{1} = \frac{R - G}{\sqrt{2}}, O_{2} = \frac{R + G - 2B}{\sqrt{6}}, O_{3} = \frac{R + G + B}{\sqrt{3}}. 
+O_{1} = {R - G}over{sqrt{2}}, O_{1} = {R + G - 2B}over{sqrt{6}}, O_{3} = {R + G + B}over{sqrt{3}}. 
 \end{equation}
 
-The opponent SIFT describes the three opponent color spaces, we can see that the two first channels $O_1$, $O_2$ contain some intensity information, but they are not invariant to changes of lights intensity. The last channel will contain the intensity information. 
 
-The strength of these method is that that use a color spaces, and we can see directly information of that with the algorithm of the SIFT descriptor. The weakness is that, in this approach we use the RGB space to make this computation.   
 
 \subsubsection{C$_2$O}
 
