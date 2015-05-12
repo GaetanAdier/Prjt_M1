@@ -109,17 +109,59 @@ To compute it, there is two steps to respect : the calculation of the Color Cont
 ~~\\
 ~~\\
 To compute this descriptor, the aim is to calculate a matrix which represents each keypoint by a probability. This probability represents (a revoir).
-To compute it, the image has to be used in a color space which is able to separate best the color and the luminance information. Tests ave shown that the CIE L* a* b* space separate “has minimum correlation between luminance and chrominance information” (“Color Constrast Occurence, a full vector for color and texture”).
+To compute it, the image has to be used in a color space which is able to separate best the color and the luminance information. Tests have shown that the CIE L* a* b* space separate "has minimum correlation between luminance and chrominance information" ("Color Constrast Occurence, a full vector for color and texture").
 So the image is passed in the CIE L* a* b* color space before the calculation of the descriptor.
-(Insérer les formules correspondantes en syntaxes LateX)
+Before the calculation of the L* a* b* space, its needed to transform our image througth the XYZ space that is a perceptual space based on a linear transformation of the RGB space.
 
-After that, we can calculate the descriptor. The principle is simple : for each keypoint, we have tu calculate the probability to have a specific color difference between two pixels separated by a spatial vector (a voir si le dit vecteur est vecteur type). The color difference is calculate by considering the angles created by the L* a* b* representation and a perceptual distance (probablement sur la luminance mais a vérifier).
+
+\vspace{0.5cm}
+$$A=\begin{pmatrix}
+	X_r&X_g&X_b\\
+	Y_r&Y_g&Y_b\\
+    Z_r&Z_g&Z_b
+\end{pmatrix}$$
+\vspace{0.5cm}
+\begin{equation}
+\begin{pmatrix}X\\Y\\Z\end{pmatrix}=A*\begin{pmatrix}R\\G\\B\end{pmatrix}
+\end{equation}
+
+With A a matrix which coeficients are dependind on the choosen standard illimuninant.
+When this XYZ space has been computed, we have to compute the following transformation to get our image in the L* a* b* space.
+
+\vspace{0.5cm}
+\begin{equation}
+L^*=  \left \{
+   \begin{array}{l}
+      116*(\frac{Y}{Y_0})^\frac{1}{3}-16~~~~si \frac{Y}{Y_0}>0.008856\\
+   903.3*(\frac{Y}{Y_0})~~~~~~~~~~si \frac{Y}{Y_0}<0.008856\\
+   \end{array}
+   \right .
+\end{equation}
+\vspace{0.5cm}
+\begin{equation}
+a^*=500*\begin{bmatrix}f(\frac{X}{X_0})-f(\frac{Y}{Y_0})\end{bmatrix}
+\end{equation}
+\vspace{0.5cm}
+\begin{equation}
+b^*=300*\begin{bmatrix}f(\frac{Y}{Y_0})-f(\frac{Z}{Z_0})\end{bmatrix}
+\end{equation}
+After that, we can calculate the descriptor. The principle is simple : for each keypoint, we have to calculate the probability to have a specific color difference between two pixels separated by a spatial vector (a voir si le dit vecteur est vecteur type). The color difference is calculate by considering the angles created by the L* a* b* representation and a perceptual distance (probablement sur la luminance mais a vérifier).
 
 (insérer ET COMPRENDRE les formules en syntaxe LateX)
 
-This computation gives us a cloud of point which characterize the keypoint by its color and texture neighborhood.
+This computation gives us a cloud of point which characterize the keypoint by its color and texture neighborhood (see below).
 
+\begin{figure}[h]
+    \center
+    \includegraphics[scale=0.45]{IllustrationMatriceC2O.png}
+    \caption{Color Contrast Occurence Matrix}\label{fig:Color Contrast Occurence Matrix}
+\end{figure}
 
+On the figure shown above, we can see an example of the cloud of points that we expect to obtain. There to thing which characterize the image :
+\begin{itemize}
+\item the size and the form of the cloud which characterize the texture around the keypoint.
+\item the projections on the three plans of the representation which characterize the color information around the keypoint.
+\end{itemize}
 \paragraph{The Color Constrast Occurence feature}
 ~~\\
 ~~\\
@@ -131,6 +173,5 @@ Each sphere will include a number of points of the cloud, but to have a better d
 
 
 When these “quarter of sphere” are calculate, we put all the values computed in a vector (quarter after quarter and sphere after sphere) which will be our descriptor.
-
 % ----------------------------------------------------------------
 \end{document} 
