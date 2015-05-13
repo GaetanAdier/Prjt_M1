@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.4.27)  13 MAY 2015 00:39
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.4.27)  13 MAY 2015 11:39
 entering extended mode
 **D:/Etudes/Projet*M1/Prjt_M1/Etat*de*l'art/state_of_art.tex
 ("D:/Etudes/Projet M1/Prjt_M1/Etat de l'art/state_of_art.tex"
@@ -301,45 +301,46 @@ Underfull \hbox (badness 10000) in paragraph at lines 109--115
 [4]
 Missing character: There is no é in font cmr12!
 Missing character: There is no é in font cmr12!
- <IllustrationMatriceC2O.png, id=24, 343.2825pt x 356.83313pt>
+ <IllustrationMatriceC2O.png, id=24, 362.85562pt x 368.1253pt>
 File: IllustrationMatriceC2O.png Graphic file (type png)
 
 <use IllustrationMatriceC2O.png>
-Package pdftex.def Info: IllustrationMatriceC2O.png used on input line 156.
-(pdftex.def)             Requested size: 154.4757pt x 160.57341pt.
+Package pdftex.def Info: IllustrationMatriceC2O.png used on input line 160.
+(pdftex.def)             Requested size: 163.28352pt x 165.65485pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 166--171
+Underfull \hbox (badness 10000) in paragraph at lines 170--175
 
  []
 
 [5 <D:/Etudes/Projet M1/Prjt_M1/Etat de l'art/IllustrationMatriceC2O.png>]
-Missing character: There is no é in font cmr12!
-Missing character: There is no é in font cmr12!
-Missing character: There is no é in font cmr12!
-Missing character: There is no “ in font cmr12!
-Missing character: There is no ” in font cmr12!
+<QuantificationSpherique.png, id=30, 433.62pt x 309.40594pt>
+File: QuantificationSpherique.png Graphic file (type png)
 
-[6] ("D:\Etudes\Projet M1\Prjt_M1\Etat de l'art\state_of_art.aux") ) 
+<use QuantificationSpherique.png>
+Package pdftex.def Info: QuantificationSpherique.png used on input line 178.
+(pdftex.def)             Requested size: 325.2142pt x 232.05388pt.
+ [6 <D:/Etudes/Projet M1/Prjt_M1/Etat de l'art/QuantificationSpherique.png>]
+("D:\Etudes\Projet M1\Prjt_M1\Etat de l'art\state_of_art.aux") ) 
 Here is how much of TeX's memory you used:
- 3011 strings out of 493921
- 39392 string characters out of 3147276
- 108709 words of memory out of 3000000
- 6267 multiletter control sequences out of 15000+200000
+ 3017 strings out of 493921
+ 39575 string characters out of 3147276
+ 108717 words of memory out of 3000000
+ 6272 multiletter control sequences out of 15000+200000
  9803 words of font info for 37 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 27i,7n,28p,1126b,248s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.
-9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/
-type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/pub
-lic/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfo
-nts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr
-8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C
-:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on state_of_art.pdf (6 pages, 276205 bytes).
+ 27i,13n,28p,1126b,248s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on state_of_art.pdf (6 pages, 365157 bytes).
 PDF statistics:
- 61 PDF objects out of 1000 (max. 8388607)
+ 62 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
