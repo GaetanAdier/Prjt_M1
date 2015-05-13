@@ -6,25 +6,38 @@ Created on Mon May 04 15:51:37 2015
 """
 
 import os
+import function_project as fc
+from sphinx_doc import genere_doc
+from sphinx_doc import configure_doc
 
-##############################################################################
-################################Function######################################
-##############################################################################
 
-def descript(path, name_desc, img):
-
-    path_desc = "%s/%s" % (path, name_desc)    
-    
-    if not(os.path.isdir(path_desc)):
-        os.mkdir(path_desc)
-    
 ##############################################################################
 ################################Main##########################################
 ##############################################################################    
+
+path_images = "D:\\MASTER\\Projet\\test"   
+path_work = "D:\\MASTER\\Projet\\directory"
+descriptor = "SIFT"
+
+
+if not(os.path.isdir(path_work)):
+    os.mkdir(path_work)
     
-path = "C:\Users\gaetan\Documents\MASTER\Projet\directory"
+if not(os.path.isdir(path_images)):
+    print("path for work on images doesn't exist")
+    exit(0)
+    
+fc.descript(path_work, descriptor, path_images)
 
-if not(os.path.isdir(path)):
-    os.mkdir(path)
 
-descript(path, "tot")
+
+
+
+
+
+
+
+
+
+
+
