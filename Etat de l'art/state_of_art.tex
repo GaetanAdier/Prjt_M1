@@ -148,10 +148,17 @@ b^*=300*\begin{bmatrix}f(\frac{Y}{Y_0})-f(\frac{Z}{Z_0})\end{bmatrix}
 After that, we can calculate the descriptor. The principle is simple : for each keypoint, we have to calculate the probability to have a specific color difference between two pixels separated by a spatial vector (a voir si le dit vecteur est vecteur type). The color difference is calculate by considering the angles created by the L* a* b* representation and a perceptual distance (probablement sur la luminance mais a vérifier).
 
 (insérer ET COMPRENDRE les formules en syntaxe LateX)
-\begin{equation}
-\overrightarrow{\Lambda(C_i,C_j)}
-\end{equation}
 
+So we define the color constrast occurence value as : $\overrightarrow{\Lambda(C_i,C_j)}$
+\begin{equation}
+\overrightarrow{\Lambda(C_i,C_j)} : prob(\overrightarrow{\Lambda(C_i,C_j)} = \overrightarrow{\Lambda_\chi}
+\end{equation}
+\begin{equation}
+~~~~~~~~~~~~~~~~~~~~ with~ \|\overrightarrow{\Lambda(C_i,C_j)}\| = \Delta E_\chi
+\end{equation}
+\begin{equation}
+~~~~~~~~~~~~~~~~~~~~~~~~~~ and ~ \,(\overrightarrow{Oa},\overrightarrow{c_ic_j}) = (\alpha,\beta) = \,\overrightarrow{\Lambda_\chi}
+\end{equation}
 
 This computation gives us a cloud of point which characterize the keypoint by its color and texture neighborhood (see below).
 
@@ -171,6 +178,19 @@ On the figure shown above, we can see an example of the cloud of points that we 
 ~~\\
 With the cloud of point obtained by the computation of the Color Contrast Occurence matrix, we have a 3 dimensional representation of our keypoint. To reduce the quantity of data to store and to facilitate the distance calculation, we have to represent this matrix by at least a 2-dimensional feature.
 To do that, the solution used is to realize a spherical quantization on the cloud of point to have a histogram which will represent our keypoint on two dimensions.
+Mathematically, this quantization is expressed as follows : 
+
+\begin{equation}
+Sig_{C_2O}(I) = h_{\Delta i\alpha j\beta k)} = prob(\Delta_i\leq\|\overrightarrow{\Lambda(C_i,C_j)}\|<\Delta_j+\Delta E_{step})
+\end{equation}
+
+\begin{equation}
+~~~~~~~~~~~~~~~ and~  \frac{2\pi}{n_{\alpha}}j \leq \alpha < \frac{2\pi}{n_{\alpha}}(j+1)
+\end{equation}
+\begin{equation}
+~~~~~~ and~ 0 \leq \beta < \frac{2\pi}{n_{\beta}}(k)
+\end{equation}
+
 Each sphere will include a number of points of the cloud, but to have a better distribution, each sphere will be split in some part as shown below :
 
 \begin{figure}[h]
@@ -178,6 +198,8 @@ Each sphere will include a number of points of the cloud, but to have a better d
     \includegraphics[scale=0.75]{QuantificationSpherique.png}
     \caption{Spheric quantizaton}\label{fig:Qantification sphérique}
 \end{figure}
+
+
 
 Here we can see a sectionnal view of our spherical quantization. Each sphere is divided by n parts as show above, and the number of points in each part are concatenates one by one in the description vector (quarter after quarter and sphere after sphere).
 % ----------------------------------------------------------------
