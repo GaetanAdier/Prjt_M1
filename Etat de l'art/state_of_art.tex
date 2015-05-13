@@ -14,19 +14,20 @@
 
 \section{State of the art}
 
-Since few years color image processing is a major problem, indeed lot of the colour texture discrimination has been explored in a marginal colour way. The problematic is that today we can do color image recognition on numerical images but we don't have good results on nature images.
+Color image processing has become a major issue since a few years, most of the colour texture discrimination having been explored using the marginal colours way. The issue is that we are now able to do colour image recognition on digital images but the results on nature pictures are rather mediocre.
 
-The CLEF contest is an answer to that problematic, the aim of the challenge is to put in competition some university laboratories and company laboratories. In this contest each laboratories could compare its colour texture feature against all the other challengers.
+The CLEF contest has been created as an answer to that problematic, making universities' and laboratories' own solutions compete against each other in order to find the best colour texture feature.
 
-In this way, we will make a little presentation of what is a Key-points and how we used them. In a first time with the classical descriptors, SIFT, SURF, and opponent SIFT. We choose to present the last one because this is the descriptors used by FINKI, which is the laboratory of the last year contest we choose as reference for their methodology and to compare our results in a first place. In a second time, we will use a new descriptors purposed by Noel Richard. This descriptors is the C$_2$O, which we going to describe in this part with his strengths and weakness.
+In this document we will introduce key-points and their use in the various descriptors. We will go first with the standard ones which are SIFT SURF and opponent SIFT. The last one being the descriptor used by FINKI, the laboratory from the last year contest we chose as reference to compare our results. We will then use a new descriptor offered by Noel Richard, the C$_2$O.
+
 
 \subsection{Key-points}
 
 \subsubsection{Classical}
 
 \subsubsection{Dense Grid}
-
-The dense grid method is an easy way to extract Key-points. First we have to divide the image in k subimages, where k is the number of subimages choose by the user. After you just have to take as Key-points the corner of each subimages.
+The dense grid method is the easiest way to extract key-points.
+The image has first to be divided into k sub-images and the intersections of the sub-images' outlines become the key-points.
 
 \begin{figure}[h]
     \center
@@ -178,7 +179,7 @@ On the figure shown above, we can see an example of the cloud of points that we 
 ~~\\
 With the cloud of point obtained by the computation of the Color Contrast Occurence matrix, we have a 3 dimensional representation of our keypoint. To reduce the quantity of data to store and to facilitate the distance calculation, we have to represent this matrix by at least a 2-dimensional feature.
 To do that, the solution used is to realize a spherical quantization on the cloud of point to have a histogram which will represent our keypoint on two dimensions.
-Mathematically, this quantization is expressed as follows : 
+Mathematically, this quantization is expressed as follows :
 
 \begin{equation}
 Sig_{C_2O}(I) = h_{\Delta i\alpha j\beta k)} = prob(\Delta_i\leq\|\overrightarrow{\Lambda(C_i,C_j)}\|<\Delta_j+\Delta E_{step})
