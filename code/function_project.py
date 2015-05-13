@@ -6,6 +6,9 @@ Created on Wed May 13 10:50:51 2015
 """
 
 import os
+import glob
+import cv2
+
 from sphinx_doc import genere_doc
 from sphinx_doc import configure_doc
 
@@ -23,9 +26,29 @@ def descript(path_work, name_desc, path_images, nb_images = "ALL", start_img = 1
      
     """
     
-    path_desc = "%s/%s" % (path_work, name_desc)    
+    #creation du dossier contenant les donnnées de chaque images pour le descripteur choisi
+    path_desc = "%s\\%s" % (path_work, name_desc) 
     
     if not(os.path.isdir(path_desc)):
         os.mkdir(path_desc)
 
-genere_doc()
+    #creation d'une variable contenant les chemins de toutes les images contenues dans le dossier des images à traiter
+    test =  "%s\\*.jpg" % (path_images)
+    list_path_img = glob.glob(test)   
+    print(len(list_path_img))
+    
+    
+
+def SIFT(img):
+    
+    img_trait=cv2.imread(img)
+    
+    grayimage=cv2.cvtColor(img_trait, cv2.COLOR_BGR2GRAY)
+    cv2.imwrite("grayimage.jpg",grayimage)
+    
+    sift = cv2.SIFT()
+    kp,des = sift.detectAndCompute(grayimage,None)
+    
+    return des
+
+#genere_doc()
