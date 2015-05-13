@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Image>
+  <ObservationId>37497</ObservationId>
+  <MediaId>2</MediaId>
+  <Vote>3</Vote>
+  <Content>Flower</Content>
+  <ClassId>780</ClassId>
+  <Family>Asteraceae</Family>
+  <Genus>Erigeron</Genus>
+  <Species>Erigeron karvinskianus DC.</Species>
+  <Author>herve goeau</Author>
+  <Date>2012-11-26</Date>
+  <Location>St Leu Les brules de St Leu</Location>
+  <Latitude>-21.10527</Latitude>
+  <Longitude>55.38092</Longitude>
+  <YearInCLEF>PlantCLEF2015</YearInCLEF>
+  <ObservationId2014 />
+  <ImageId2014 />
+  <LearnTag>Train</LearnTag>
+</Image>

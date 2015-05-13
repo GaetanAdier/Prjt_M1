@@ -1,0 +1,6 @@
+<root>
+  <keypoints>
+    <kp1 name="kp1">keypoint1 coords</kp1>
+    <kp2 name="kp2">keypoint2 coords</kp2>
+  </keypoints>
+</root>
