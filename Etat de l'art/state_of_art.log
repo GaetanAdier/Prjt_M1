@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.4.27)  13 MAY 2015 12:43
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.4.27)  13 MAY 2015 16:43
 entering extended mode
 **D:/Etudes/Projet*M1/Prjt_M1/Etat*de*l'art/state_of_art.tex
 ("D:/Etudes/Projet M1/Prjt_M1/Etat de l'art/state_of_art.tex"
@@ -276,54 +276,53 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 21.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-<Dense_grid.png, id=1, 331.2375pt x 196.48407pt>
+) [1
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
+<Dense_grid.png, id=11, 331.2375pt x 196.48407pt>
 File: Dense_grid.png Graphic file (type png)
  <use Dense_grid.png>
-Package pdftex.def Info: Dense_grid.png used on input line 33.
+Package pdftex.def Info: Dense_grid.png used on input line 54.
 (pdftex.def)             Requested size: 331.23668pt x 196.48358pt.
- [1
-
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map} <D:/Etudes/Projet M1/Prjt_
-M1/Etat de l'art/Dense_grid.png>] [2]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 62.
+ [2 <D:/Etudes/Projet M1/Prjt_M1/Etat de l'art/Dense_grid.png>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 83.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 62.
- [3]
-Underfull \hbox (badness 10000) in paragraph at lines 109--115
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 83.
+ [3] [4]
+Underfull \hbox (badness 10000) in paragraph at lines 130--136
 
  []
 
-[4]
 Missing character: There is no é in font cmr12!
 Missing character: There is no é in font cmr12!
- <IllustrationMatriceC2O.png, id=24, 362.85562pt x 368.1253pt>
+[5] <IllustrationMatriceC2O.png, id=29, 362.85562pt x 368.1253pt>
 File: IllustrationMatriceC2O.png Graphic file (type png)
 
 <use IllustrationMatriceC2O.png>
-Package pdftex.def Info: IllustrationMatriceC2O.png used on input line 167.
+Package pdftex.def Info: IllustrationMatriceC2O.png used on input line 188.
 (pdftex.def)             Requested size: 163.28352pt x 165.65485pt.
- [5 <D:/Etudes/Projet M1/Prjt_M1/Etat de l'art/IllustrationMatriceC2O.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 177--182
+
+Underfull \hbox (badness 10000) in paragraph at lines 198--203
 
  []
 
-<QuantificationSpherique.png, id=30, 433.62pt x 309.40594pt>
+[6 <D:/Etudes/Projet M1/Prjt_M1/Etat de l'art/IllustrationMatriceC2O.png>]
+<QuantificationSpherique.png, id=33, 433.62pt x 309.40594pt>
 File: QuantificationSpherique.png Graphic file (type png)
 
 <use QuantificationSpherique.png>
-Package pdftex.def Info: QuantificationSpherique.png used on input line 198.
+Package pdftex.def Info: QuantificationSpherique.png used on input line 219.
 (pdftex.def)             Requested size: 325.2142pt x 232.05388pt.
- [6 <D:/Etudes/Projet M1/Prjt_M1/Etat de l'art/QuantificationSpherique.png>]
+ [7 <D:/Etudes/Projet M1/Prjt_M1/Etat de l'art/QuantificationSpherique.png>]
 ("D:\Etudes\Projet M1\Prjt_M1\Etat de l'art\state_of_art.aux") ) 
 Here is how much of TeX's memory you used:
  3017 strings out of 493921
  39575 string characters out of 3147276
- 110717 words of memory out of 3000000
+ 108717 words of memory out of 3000000
  6272 multiletter control sequences out of 15000+200000
  9803 words of font info for 37 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
@@ -337,9 +336,9 @@ amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
 cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pf
 b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Pr
 ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on state_of_art.pdf (6 pages, 373824 bytes).
+Output written on state_of_art.pdf (7 pages, 376425 bytes).
 PDF statistics:
- 62 PDF objects out of 1000 (max. 8388607)
+ 67 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
