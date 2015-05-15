@@ -46,7 +46,7 @@ With all these difference calculated, the algorithm will take the maxima of each
 
 \begin{figure}[h]
     \center
-    \includegraphics[scale=0.75]{DoG.png}
+    \includegraphics[scale=0.6]{DoG.png}
     \caption{Difference of Gaussians illustration (example from wikipedia)}\label{fig:Difference of Gaussians}
 \end{figure}
 After doing that, the algorithm must discriminate and precise the coordinate of a part of the key-point. Indeed, using different resolutions give some imprecise coordinate so it's necessary to make an interpolation to obtain the coordinate corresponding to the original image for key-point extracted from the most reduced resolutions images.  It is necessary to remove some kind of point too. The points that have not enough contrast comparing to the other are removed as the points that are on ridges (these points are really unstable and could move or disappear for many reasons so it's better to remove them).
@@ -60,7 +60,7 @@ The image has first to be divided into k sub-images and the intersections of the
 
 \begin{figure}[h]
     \center
-    \includegraphics[scale=1]{Dense_grid.png}
+    \includegraphics[scale=0.7]{Dense_grid.png}
     \caption{Dense grid}\label{fig:dense_grid}
 \end{figure}
 
@@ -83,7 +83,7 @@ A histogram with 36 intervals is realized on the vicinity and each interval cove
     \center
     \includegraphics[scale=1]{SIFT_histogram_construction.png}
     \caption{SIFT histogram construction}\label{fig:SIFT_histogram_construction}
-\end{figure} 
+\end{figure}
 
 On one hand, the histogram is moderated by a Gaussian window circular with a factor equal to 1.5 times of the scale factor of the key-point . On the other hand by the amplitude of each point. The peaks in this histogram correspond to the dominant orientations. All dominant orientations allow to have at least 80\% of the maximum value are taking in consideration and other additional key-points are detected. These new key-points detected are only different by the principal orientation.
 
@@ -96,7 +96,7 @@ After that, the 16 histograms with 8 intervals each one, are concatenated and no
     \center
     \includegraphics[scale=0.75]{SIFT_gradient_magnitude_and_orientation_computation.png}
     \caption{SIFT gradient magnitude and orientation computation}\label{fig:SIFT_gradient_magnitude_and_orientation_computation}
-\end{figure} 
+\end{figure}
 
 
 \end{itemize}
@@ -106,7 +106,7 @@ After that, the 16 histograms with 8 intervals each one, are concatenated and no
 
 SURF for Speeded Up Robust Features is an descriptor and algorithm of feature detection. It also used in the sector of computer vision and image understanding for objects detection or 3D reconstruction.
 
-SURF is in part inspired by the SIFT descriptor but it is more fast from a time calculation point of view. According to the authors, it is also more robust for different image transformations. 
+SURF is in part inspired by the SIFT descriptor but it is more fast from a time calculation point of view. According to the authors, it is also more robust for different image transformations.
 
 SURF is based on sums of Haar 2D wavelets responses and uses efficiently the integrals images.
 	
@@ -221,7 +221,7 @@ Each sphere will include a number of points of the cloud, but to have a better d
 
 \begin{figure}[h]
     \center
-    \includegraphics[scale=0.75]{QuantificationSpherique.png}
+    \includegraphics[scale=0.65]{QuantificationSpherique.png}
     \caption{Spheric quantizaton}\label{fig:Qantification sphérique}
 \end{figure}
 
