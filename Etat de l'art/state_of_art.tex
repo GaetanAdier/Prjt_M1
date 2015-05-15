@@ -85,11 +85,11 @@ $$m(x,y)=\sqrt{(L(x+1,y)-L(x-1,y))^2+(L(x,y+1)-L(x,y-1))^2}$$
 $$\theta(x,y)=atan2(L(x,y+1)-L(x,y-1),L(x+1,y)-L(x-1,y))$$
 A histogram with 36 intervals is realized on the vicinity and each interval covering an angle of 10 degrees. On one hand, the histogram is moderated by a Gaussian window circular with a factor equal to 1.5 times of the scale factor of the key-point . On the other hand by the amplitude of each point. The peaks in this histogram correspond to the dominant orientations. All dominant orientations allow to have at least 80\% of the maximum value are taking in consideration and other additional key-points are detected. These new key-points detected are only different by the principal orientation.
 
-	\item Key-point descriptor:Key-point descriptor: In this stage, a descriptor vector is created for each key-point detected such the descriptor is distinctive and invariant to the remaining variations like illumination, 3D viewing, etc. This stage is made on image which is more near the scale of the key-point scale. 
- 
+	\item Key-point descriptor:Key-point descriptor: In this stage, a descriptor vector is created for each key-point detected such the descriptor is distinctive and invariant to the remaining variations like illumination, 3D viewing, etc. This stage is made on image which is more near the scale of the key-point scale.
+
 The local system coordinates is modified for guarantee the invariance to the rotation by using an angle rotation equal to the orientation of the key-point in reverse direction.  Then, an area of 16x16 pixels is taken around the key-point; subdivide in 4x4 zones of 4x4 pixels each one. A histogram including 8 intervals is calculated on each zone. At each point of the zone, the orientation and the amplitude are calculated like previously. The orientation determines the interval to increment in the histogram which done by double weighted by the amplitude and by a center window Gaussian on the key-point of parameter 1.5 times of the scale factor of the key-point.
 
-After that, the 16 histograms with 8 intervals each one, are concatenate and normalized. In object to reduce the sensibility of the descriptor to the changes of the luminosity, the values are fixed to 0.2 and the histogram is calculated again for finally give the descriptor of the key-point of 128 dimension. 
+After that, the 16 histograms with 8 intervals each one, are concatenated and normalized. In object to reduce the sensibility of the descriptor to the changes of the luminosity, the values are fixed to 0.2 and the histogram is calculated again for finally give the descriptor of the key-point of 128 dimension.
 
 
 
@@ -113,15 +113,15 @@ The recognition of images or objects, is one of the most important applications 
 
 \subsubsection{Opponent SIFT}
 
-The opponent SIFT descriptors is an algorithm which use the same method than the classical SIFT descriptor. The only difference is that we calculate three descriptors for each Key-points. There are obtained from the color opponent channel, defined as
+The opponent SIFT descriptor is an algorithm using the same method as the standard SIFT descriptor except for the fact that it calculates three descriptors for each Key-points, obtained from the color opponent channel and defined as
 
 \begin{equation}
 O_{1} = \frac{R - G}{\sqrt{2}}, O_{2} = \frac{R + G - 2B}{\sqrt{6}}, O_{3} = \frac{R + G + B}{\sqrt{3}}.
 \end{equation}
 
-The opponent SIFT describes the three opponent color spaces, we can see that the two first channels $O_1$, $O_2$ contain some intensity information, but they are not invariant to changes of lights intensity. The last channel will contain the intensity information.
+The opponent SIFT describes the three opponent color spaces : the two first channels $O_1$, $O_2$ contain some intensity information, but they are sensible to changes in light intensity. The last channel will contain the intensity information.
 
-The strength of these method is that that use a color spaces, and we can see directly information of that with the algorithm of the SIFT descriptor. The weakness is that, in this approach we use the RGB space to make this computation.
+The strength of this method is that it uses a color space, and we can see directly information of that with the algorithm of the SIFT descriptor. The weakness is that the color space used is the RGB one.
 
 \subsubsection{C$_2$O}
 
@@ -171,7 +171,7 @@ a^*=500*\begin{bmatrix}f(\frac{X}{X_0})-f(\frac{Y}{Y_0})\end{bmatrix}
 \begin{equation}
 b^*=300*\begin{bmatrix}f(\frac{Y}{Y_0})-f(\frac{Z}{Z_0})\end{bmatrix}
 \end{equation}
-After that, we can calculate the descriptor. The principle is simple : for each key-point, we have to calculate the probability to have a specific color difference between two pixels separated by a spatial vector (a voir si le dit vecteur est vecteur type). The color difference is calculate by considering the angles created by the L* a* b* representation and a perceptual distance (probablement sur la luminance mais a vérifier).
+After that, we can calculate the descriptor. The principle is simple : for each key-point, we have to calculate the probability to have a specific color difference between two pixels separated by a spatial vector (a voir si le dit vecteur est vecteur type). The color difference is calculated by considering the angles created by the L* a* b* representation and a perceptual distance (probablement sur la luminance mais a vérifier).
 
 
 So we define the color contrast occurrence value as : $\overrightarrow{\Lambda(C_i,C_j)}$
@@ -185,7 +185,7 @@ So we define the color contrast occurrence value as : $\overrightarrow{\Lambda(C
 ~~~~~~~~~~~~~~~~~~~~~~~~~~ and ~ \,(\overrightarrow{Oa},\overrightarrow{c_ic_j}) = (\alpha,\beta) = \,\overrightarrow{\Lambda_\chi}
 \end{equation}
 
-This computation gives us a cloud of point which characterize the key-point by its color and texture neighborhood (see below).
+This computation gives us a cloud of point which characterizes the key-point by its color and texture neighborhood (see below).
 
 \begin{figure}[h]
     \center
@@ -193,9 +193,9 @@ This computation gives us a cloud of point which characterize the key-point by i
     \caption{Color Contrast Occurrence Matrix}\label{fig:Color Contrast Occurence Matrix}
 \end{figure}
 
-On the figure shown above, we can see an example of the cloud of points that we expect to obtain. There to thing which characterize the image :
+On the figure shown above, we can see an example of the cloud of points that we expect to obtain. There are two thing which characterize the image :
 \begin{itemize}
-\item the size and the form of the cloud which characterize the texture around the key-point.
+\item the size and the form of the cloud characterizing the texture around the key-point.
 \item the projections on the three plans of the representation which characterize the color information around the key-point.
 \end{itemize}
 \paragraph{The Color Contrast Occurrence feature}
@@ -226,6 +226,6 @@ Each sphere will include a number of points of the cloud, but to have a better d
 
 
 
-Here we can see a sectional view of our spherical quantization. Each sphere is divided by n parts as show above, and the number of points in each part are concatenates one by one in the description vector (quarter after quarter and sphere after sphere).
+Here we can see a sectional view of our spherical quantization. Each sphere is divided by n parts as shown above, and the number of points in each part are concatenated one by one in the description vector (quarter after quarter and sphere after sphere).
 % ----------------------------------------------------------------
-\end{document} 
+\end{document}
