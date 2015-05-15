@@ -49,10 +49,9 @@ With all these difference calculated, the algorithm will take the maxima of each
     \includegraphics[scale=0.75]{DoG.png}
     \caption{Difference of Gaussians illustration (example from wikipedia)}\label{fig:Difference of Gaussians}
 \end{figure}
-
 After doing that, the algorithm must discriminate and precise the coordinate of a part of the key-point. Indeed, using different resolutions give some imprecise coordinate so it's necessary to make an interpolation to obtain the coordinate corresponding to the original image for key-point extracted from the most reduced resolutions images.  It is necessary to remove some kind of point too. The points that have not enough contrast comparing to the other are removed as the points that are on ridges (these points are really unstable and could move or disappear for many reasons so it's better to remove them).
 
-When these operations have been computed, we obtain a set of keypoints that characterize the image. This method allows to obtain the keypoints to characterize an image without taking a predefined set of point. So the set of points obtained is potentially ligther than the one obtained by the dense grid method and it is more accurate because only important points wherever they are are conserved.
+When these operations have been computed, we obtain a set of key-points that characterize the image. This method allows to obtain the key-points to characterize an image without taking a predefined set of point. So the set of points obtained is potentially lighter than the one obtained by the dense grid method and it is more accurate because only important points wherever they are are conserved.
 
 
 \subsubsection{Dense Grid}
@@ -121,19 +120,19 @@ The strength of these method is that that use a color spaces, and we can see dir
 
 \subsubsection{C$_2$O}
 
-C2O feature is a color descriptor which aim is to characterize an image by its color and texture characteristics. Indeed, the currents descriptors previously presented are some satisfying solutions to characterize current images in gray levels or in color levels but pretty weak for highly textured images like nature images.
-So the university of Poitiers has worked on a descriptor named C2O (Color Constrast Occurence) which is based on a vector that include the texture and color information separately.
-To compute it, there is two steps to respect : the calculation of the Color Contrast Occurence Matrix and the feature (descriptor) from the matrix.
+C$_2$O feature is a color descriptor which aim is to characterize an image by its color and texture characteristics. Indeed, the descriptors previously presented are satisfying to characterize images in gray or color levels but are pretty weak for highly textured images like nature pictures.
+That's why the university of Poitiers has worked on a descriptor named C$_2$O (Color Contrast Occurrence), based on a vector including texture and color informations separately.
+To compute it, there is two steps to follow : the calculation of the Color Contrast Occurrence Matrix and the feature (descriptor) from the matrix.
 
 
 
-\paragraph{The Color Contrast Occurence Matrix}
+\paragraph{The Color Contrast Occurrence Matrix}
 ~~\\
 ~~\\
-To compute this descriptor, the aim is to calculate a matrix which represents each keypoint by a probability. This probability represents (a revoir).
-To compute it, the image has to be used in a color space which is able to separate best the color and the luminance information. Tests have shown that the CIE L* a* b* space separate "has minimum correlation between luminance and chrominance information" ("Color Constrast Occurence, a full vector for color and texture").
+To compute this descriptor, the aim is to calculate a matrix which represents each key-point by a probability.
+To compute it, the image has to be used in a color space which is able to separate best the color and the luminance information. Tests have shown that the CIE L* a* b* space separate "has minimum correlation between luminance and chrominance information" ("Color Contrast Occurrence, a full vector for color and texture").
 So the image is passed in the CIE L* a* b* color space before the calculation of the descriptor.
-Before the calculation of the L* a* b* space, its needed to transform our image througth the XYZ space that is a perceptual space based on a linear transformation of the RGB space.
+Before the calculation of the L* a* b* space, its needed to transform our image through the XYZ space that is a perceptual space based on a linear transformation of the RGB space.
 
 
 \vspace{0.5cm}
@@ -147,7 +146,7 @@ $$A=\begin{pmatrix}
 \begin{pmatrix}X\\Y\\Z\end{pmatrix}=A*\begin{pmatrix}R\\G\\B\end{pmatrix}
 \end{equation}
 
-With A a matrix which coeficients are dependind on the choosen standard illimuninant.
+With A a matrix which coefficients are depending on the chosen standard illuminant.
 When this XYZ space has been computed, we have to compute the following transformation to get our image in the L* a* b* space.
 
 \vspace{0.5cm}
@@ -167,11 +166,10 @@ a^*=500*\begin{bmatrix}f(\frac{X}{X_0})-f(\frac{Y}{Y_0})\end{bmatrix}
 \begin{equation}
 b^*=300*\begin{bmatrix}f(\frac{Y}{Y_0})-f(\frac{Z}{Z_0})\end{bmatrix}
 \end{equation}
-After that, we can calculate the descriptor. The principle is simple : for each keypoint, we have to calculate the probability to have a specific color difference between two pixels separated by a spatial vector (a voir si le dit vecteur est vecteur type). The color difference is calculate by considering the angles created by the L* a* b* representation and a perceptual distance (probablement sur la luminance mais a vérifier).
+After that, we can calculate the descriptor. The principle is simple : for each key-point, we have to calculate the probability to have a specific color difference between two pixels separated by a spatial vector (a voir si le dit vecteur est vecteur type). The color difference is calculate by considering the angles created by the L* a* b* representation and a perceptual distance (probablement sur la luminance mais a vérifier).
 
-(insérer ET COMPRENDRE les formules en syntaxe LateX)
 
-So we define the color constrast occurence value as : $\overrightarrow{\Lambda(C_i,C_j)}$
+So we define the color contrast occurrence value as : $\overrightarrow{\Lambda(C_i,C_j)}$
 \begin{equation}
 \overrightarrow{\Lambda(C_i,C_j)} : prob(\overrightarrow{\Lambda(C_i,C_j)} = \overrightarrow{\Lambda_\chi}
 \end{equation}
@@ -182,24 +180,24 @@ So we define the color constrast occurence value as : $\overrightarrow{\Lambda(C
 ~~~~~~~~~~~~~~~~~~~~~~~~~~ and ~ \,(\overrightarrow{Oa},\overrightarrow{c_ic_j}) = (\alpha,\beta) = \,\overrightarrow{\Lambda_\chi}
 \end{equation}
 
-This computation gives us a cloud of point which characterize the keypoint by its color and texture neighborhood (see below).
+This computation gives us a cloud of point which characterize the key-point by its color and texture neighborhood (see below).
 
 \begin{figure}[h]
     \center
     \includegraphics[scale=0.45]{IllustrationMatriceC2O.png}
-    \caption{Color Contrast Occurence Matrix}\label{fig:Color Contrast Occurence Matrix}
+    \caption{Color Contrast Occurrence Matrix}\label{fig:Color Contrast Occurence Matrix}
 \end{figure}
 
 On the figure shown above, we can see an example of the cloud of points that we expect to obtain. There to thing which characterize the image :
 \begin{itemize}
-\item the size and the form of the cloud which characterize the texture around the keypoint.
-\item the projections on the three plans of the representation which characterize the color information around the keypoint.
+\item the size and the form of the cloud which characterize the texture around the key-point.
+\item the projections on the three plans of the representation which characterize the color information around the key-point.
 \end{itemize}
-\paragraph{The Color Constrast Occurence feature}
+\paragraph{The Color Contrast Occurrence feature}
 ~~\\
 ~~\\
-With the cloud of point obtained by the computation of the Color Contrast Occurence matrix, we have a 3 dimensional representation of our keypoint. To reduce the quantity of data to store and to facilitate the distance calculation, we have to represent this matrix by at least a 2-dimensional feature.
-To do that, the solution used is to realize a spherical quantization on the cloud of point to have a histogram which will represent our keypoint on two dimensions.
+With the cloud of point obtained by the computation of the Color Contrast Occurrence matrix, we have a 3 dimensional representation of our key-point. To reduce the quantity of data to store and to facilitate the distance calculation, we have to represent this matrix by at least a 2-dimensional feature.
+To do that, the solution used is to realize a spherical quantization on the cloud of point to have a histogram which will represent our key-point on two dimensions.
 Mathematically, this quantization is expressed as follows :
 
 \begin{equation}
@@ -223,6 +221,6 @@ Each sphere will include a number of points of the cloud, but to have a better d
 
 
 
-Here we can see a sectionnal view of our spherical quantization. Each sphere is divided by n parts as show above, and the number of points in each part are concatenates one by one in the description vector (quarter after quarter and sphere after sphere).
+Here we can see a sectional view of our spherical quantization. Each sphere is divided by n parts as show above, and the number of points in each part are concatenates one by one in the description vector (quarter after quarter and sphere after sphere).
 % ----------------------------------------------------------------
 \end{document} 
