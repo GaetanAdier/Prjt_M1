@@ -19,7 +19,7 @@ def descript(path_work, name_desc, path_images, nb_images = "ALL", start_img = 1
     Cette fonction principale appelée dans le main qui permettra de créer les paths directory en fonction des différents descripteurs que l'utilisateur utilisera. Dans cette fonction nous retrouverons les paramètres suivant \:
     
      * **path_work** : Chemin où l'utlisateur souhaite créer ses dossiers pour les différents descripteurs.
-     * **name_desc** : Nnom du descripteur choisi.
+     * **name_desc** : Nom du descripteur choisi.
      * **path_images** : Chemin où se trouve les images surlesquelles on vas travailler.
      * **nb_images** : Nombre d'images à traiter. Par défaut : ALL
      * **start_img** : Numéro de l'image de départ . Par défaut : 1
@@ -33,13 +33,22 @@ def descript(path_work, name_desc, path_images, nb_images = "ALL", start_img = 1
         os.mkdir(path_desc)
 
     #creation d'une variable contenant les chemins de toutes les images contenues dans le dossier des images à traiter
-    test =  "%s\\*.jpg" % (path_images)
-    list_path_img = glob.glob(test)   
-    print(len(list_path_img))
+    temp =  "%s\\*.jpg" % (path_images)
+    list_path_img = glob.glob(temp)   
+    nb_img = len(list_path_img)
     
     
 
 def SIFT(img):
+    
+    """
+    
+    Cette fonction a pour but d'appliquer le calcul d'un descripteur SIFT à une image \:
+    
+     * **img** : Chemin de l'image que l'on souhaite traiter.
+     * **des** : Valeurs retourner il s'agit d'une liste contenant les valeurs décrivant l'image
+     
+    """
     
     img_trait=cv2.imread(img)
     

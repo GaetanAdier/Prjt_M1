@@ -55,6 +55,9 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
 <span class="kn">from</span> <span class="nn">sphinx_doc</span> <span class="kn">import</span> <span class="n">genere_doc</span>
 <span class="kn">from</span> <span class="nn">sphinx_doc</span> <span class="kn">import</span> <span class="n">configure_doc</span>
 
@@ -65,17 +68,46 @@
 <span class="sd">    Cette fonction principale appelée dans le main qui permettra de créer les paths directory en fonction des différents descripteurs que l&#39;utilisateur utilisera. Dans cette fonction nous retrouverons les paramètres suivant \:</span>
 <span class="sd">    </span>
 <span class="sd">     * **path_work** : Chemin où l&#39;utlisateur souhaite créer ses dossiers pour les différents descripteurs.</span>
-<span class="sd">     * **name_desc** : Nnom du descripteur choisi.</span>
+<span class="sd">     * **name_desc** : Nom du descripteur choisi.</span>
 <span class="sd">     * **path_images** : Chemin où se trouve les images surlesquelles on vas travailler.</span>
 <span class="sd">     * **nb_images** : Nombre d&#39;images à traiter. Par défaut : ALL</span>
-<span class="sd">     * **start_img** : Numéro de l&#39;image de départ . Par défaut : 1 olkjhgf</span>
+<span class="sd">     * **start_img** : Numéro de l&#39;image de départ . Par défaut : 1</span>
 <span class="sd">     </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="n">path_desc</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">/</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">path_work</span><span class="p">,</span> <span class="n">name_desc</span><span class="p">)</span>    
+    <span class="c">#creation du dossier contenant les donnnées de chaque images pour le descripteur choisi</span>
+    <span class="n">path_desc</span> <span class="o">=</span> <span class="s">&quot;</span><span class="si">%s</span><span class="se">\\</span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">path_work</span><span class="p">,</span> <span class="n">name_desc</span><span class="p">)</span> 
     
     <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path_desc</span><span class="p">)):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">path_desc</span><span class="p">)</span>
+
+    <span class="c">#creation d&#39;une variable contenant les chemins de toutes les images contenues dans le dossier des images à traiter</span>
+    <span class="n">test</span> <span class="o">=</span>  <span class="s">&quot;</span><span class="si">%s</span><span class="se">\\</span><span class="s">*.jpg&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">path_images</span><span class="p">)</span>
+    <span class="n">list_path_img</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>   
+    <span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">list_path_img</span><span class="p">))</span>
+    
+    
+</div>
+<div class="viewcode-block" id="SIFT"><a class="viewcode-back" href="../generated/function_project.html#function_project.SIFT">[docs]</a><span class="k">def</span> <span class="nf">SIFT</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+    
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    Cette fonction a pour but d&#39;appliquer le calcul d&#39;un descripteur SIFT à une image \:</span>
+<span class="sd">    </span>
+<span class="sd">     * **img** : Chemin de l&#39;image que l&#39;on souhaite traiter.</span>
+<span class="sd">     * **des** : Valeurs retourner il s&#39;agit d&#39;une liste contenant les valeurs décrivant l&#39;image</span>
+<span class="sd">     </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">img_trait</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    
+    <span class="n">grayimage</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img_trait</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s">&quot;grayimage.jpg&quot;</span><span class="p">,</span><span class="n">grayimage</span><span class="p">)</span>
+    
+    <span class="n">sift</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">SIFT</span><span class="p">()</span>
+    <span class="n">kp</span><span class="p">,</span><span class="n">des</span> <span class="o">=</span> <span class="n">sift</span><span class="o">.</span><span class="n">detectAndCompute</span><span class="p">(</span><span class="n">grayimage</span><span class="p">,</span><span class="bp">None</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">des</span>
 </div>
 <span class="n">genere_doc</span><span class="p">()</span>
 </pre></div>
