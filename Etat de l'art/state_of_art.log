@@ -1,13 +1,22 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.5.13)  15 MAY 2015 11:39
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2015.4.27)  15 MAY 2015 11:51
 entering extended mode
-**"C:/Users/Projet/Documents/GitHub/Prjt_M1/Etat de l'art/state_of_art.tex"
-("C:/Users/Projet/Documents/GitHub/Prjt_M1/Etat de l'art/state_of_art.tex"
-LaTeX2e <2015/01/01>
-Babel <3.9l> and hyphenation patterns for 69 languages loaded.
+**D:/Etudes/Projet*M1/Prjt_M1/Etat*de*l'art/state_of_art.tex
+("D:/Etudes/Projet M1/Prjt_M1/Etat de l'art/state_of_art.tex"
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
+abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
+croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
+lician, german, german-x-2013-05-26, greek, gujarati, hindi, hungarian, iceland
+ic, indonesian, interlingua, irish, italian, kannada, kurmanji, latin, latvian,
+ lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, n
+german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
+ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
+an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
+ishmax, welsh, loaded.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\article.cls"
-Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\size12.clo"
-File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -21,8 +30,8 @@ File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\babel\babel.sty"
-Package: babel 2014/09/25 3.9l The Babel package
+("C:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.sty"
+Package: babel 2008/07/08 v3.8m The Babel package
 
 *************************************
 * Local config file bblopts.cfg used
@@ -30,11 +39,11 @@ Package: babel 2014/09/25 3.9l The Babel package
 ("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\bblopts.cfg"
 File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\babel-english\english.ldf"
-Language: english 2012/08/20 v3.3p English support from the babel system
+("C:\Program Files\MiKTeX 2.9\tex\generic\babel\english.ldf"
+Language: english 2005/03/30 v3.3o English support from the babel system
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\babel\babel.def"
-File: babel.def 2014/09/25 3.9l Babel common definitions
+("C:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.def"
+File: babel.def 2008/07/08 v3.8m Babel common definitions
 \babel@savecnt=\count87
 \U@D=\dimen103
 )
@@ -101,7 +110,7 @@ LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amscls\amsthm.sty"
-Package: amsthm 2015/03/04 v2.20.2
+Package: amsthm 2004/08/06 v2.20
 \thm@style=\toks19
 \thm@bodyfont=\toks20
 \thm@headfont=\toks21
@@ -113,14 +122,14 @@ Package: amsthm 2015/03/04 v2.20.2
 \dth@everypar=\toks24
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
-Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
-Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks25
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
-Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\trig.sty"
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
@@ -128,7 +137,7 @@ Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 ("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
 File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
-Package graphics Info: Driver file: pdftex.def on input line 94.
+Package graphics Info: Driver file: pdftex.def on input line 91.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
@@ -197,7 +206,7 @@ Package: titlesec 2011/12/15 v2.10.0 Sectioning titles
 \titlewidthlast=\dimen126
 \titlewidthfirst=\dimen127
 )
-(state_of_art.aux)
+("D:\Etudes\Projet M1\Prjt_M1\Etat de l'art\state_of_art.aux")
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 13.
@@ -210,7 +219,8 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 13.
 LaTeX Font Info:    ... okay on input line 13.
- ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+
+("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count104
 \scratchdimen=\dimen128
@@ -266,72 +276,83 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 21.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
-
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-<Dense_grid.png, id=11, 331.2375pt x 196.48407pt>
-File: Dense_grid.png Graphic file (type png)
- <use Dense_grid.png>
-Package pdftex.def Info: Dense_grid.png used on input line 58.
-(pdftex.def)             Requested size: 331.23668pt x 196.48358pt.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 68.
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 68.
- [2 <./Dense_grid.png>] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 125--131
-
- []
-
-[4]
-Missing character: There is no é in font cmr12!
-Missing character: There is no é in font cmr12!
- [5] <IllustrationMatriceC2O.png, id=29, 362.85562pt x 368.1253pt>
-File: IllustrationMatriceC2O.png Graphic file (type png)
-
-<use IllustrationMatriceC2O.png>
-Package pdftex.def Info: IllustrationMatriceC2O.png used on input line 183.
-(pdftex.def)             Requested size: 163.28352pt x 165.65485pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 193--198
-
- []
-
-<QuantificationSpherique.png, id=30, 433.62pt x 309.40594pt>
-File: QuantificationSpherique.png Graphic file (type png)
-
-<use QuantificationSpherique.png>
-Package pdftex.def Info: QuantificationSpherique.png used on input line 214.
-(pdftex.def)             Requested size: 325.2142pt x 232.05388pt.
+<DoG.png, id=1, 441.65pt x 377.41pt>
+File: DoG.png Graphic file (type png)
+ <use DoG.png>
+Package pdftex.def Info: DoG.png used on input line 49.
+(pdftex.def)             Requested size: 331.23668pt x 283.0568pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[6 <./IllustrationMatriceC2O.png>] [7 <./QuantificationSpherique.png>]
-(state_of_art.aux) ) 
+[1
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
+<Dense_grid.png, id=13, 331.2375pt x 196.48407pt>
+File: Dense_grid.png Graphic file (type png)
+ <use Dense_grid.png>
+Package pdftex.def Info: Dense_grid.png used on input line 64.
+(pdftex.def)             Requested size: 331.23668pt x 196.48358pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[2 <D:/Etudes/Projet M1/Prjt_M1/Etat de l'art/DoG.png>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 74.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 74.
+ [3 <D:/Etudes/Projet M1/Prjt_M1/Etat de l'art/Dense_grid.png>] [4]
+Underfull \hbox (badness 10000) in paragraph at lines 131--137
+
+ []
+
+[5]
+Missing character: There is no é in font cmr12!
+Missing character: There is no é in font cmr12!
+ <IllustrationMatriceC2O.png, id=29, 362.85562pt x 368.1253pt>
+File: IllustrationMatriceC2O.png Graphic file (type png)
+
+<use IllustrationMatriceC2O.png>
+Package pdftex.def Info: IllustrationMatriceC2O.png used on input line 189.
+(pdftex.def)             Requested size: 163.28352pt x 165.65485pt.
+ [6 <D:/Etudes/Projet M1/Prjt_M1/Etat de l'art/IllustrationMatriceC2O.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 199--204
+
+ []
+
+<QuantificationSpherique.png, id=35, 433.62pt x 309.40594pt>
+File: QuantificationSpherique.png Graphic file (type png)
+
+<use QuantificationSpherique.png>
+Package pdftex.def Info: QuantificationSpherique.png used on input line 220.
+(pdftex.def)             Requested size: 325.2142pt x 232.05388pt.
+ [7 <D:/Etudes/Projet M1/Prjt_M1/Etat de l'art/QuantificationSpherique.png>]
+("D:\Etudes\Projet M1\Prjt_M1\Etat de l'art\state_of_art.aux") ) 
 Here is how much of TeX's memory you used:
- 3115 strings out of 493671
- 40948 string characters out of 3143859
- 122330 words of memory out of 3000000
- 6421 multiletter control sequences out of 15000+200000
+ 3023 strings out of 493921
+ 39658 string characters out of 3147276
+ 110725 words of memory out of 3000000
+ 6277 multiletter control sequences out of 15000+200000
  9803 words of font info for 37 fonts, out of 3000000 for 9000
- 1025 hyphenation exceptions out of 8191
- 27i,14n,28p,689b,248s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmbx12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.
-pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/
-Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program F
-iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/p
-ublic/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmsy8.pfb>
-Output written on state_of_art.pdf (7 pages, 377325 bytes).
+ 841 hyphenation exceptions out of 8191
+ 27i,14n,28p,674b,248s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Fil
+es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pf
+b><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on state_of_art.pdf (7 pages, 453353 bytes).
 PDF statistics:
- 67 PDF objects out of 1000 (max. 8388607)
+ 69 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -44,6 +44,12 @@ The remaining objects on the image obtained are the ones which size is included 
 Thanks to the different resolutions, for each octave the difference result will keep higher and higher object that will allow us to detect approximately all the sizes of important features on the image.
 With all these difference calculated, the algorithm will take the maxima of each one as key-points.
 
+\begin{figure}[h]
+    \center
+    \includegraphics[scale=0.75]{DoG.png}
+    \caption{Difference of Gaussians illustration (example from wikipedia)}\label{fig:Difference of Gaussians}
+\end{figure}
+
 After doing that, the algorithm must discriminate and precise the coordinate of a part of the key-point. Indeed, using different resolutions give some imprecise coordinate so it's necessary to make an interpolation to obtain the coordinate corresponding to the original image for key-point extracted from the most reduced resolutions images.  It is necessary to remove some kind of point too. The points that have not enough contrast comparing to the other are removed as the points that are on ridges (these points are really unstable and could move or disappear for many reasons so it's better to remove them).
 
 When these operations have been computed, we obtain a set of keypoints that characterize the image. This method allows to obtain the keypoints to characterize an image without taking a predefined set of point. So the set of points obtained is potentially ligther than the one obtained by the dense grid method and it is more accurate because only important points wherever they are are conserved.

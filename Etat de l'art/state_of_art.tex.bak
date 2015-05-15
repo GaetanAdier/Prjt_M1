@@ -23,7 +23,31 @@ In this document we will introduce key-points and their use in the various descr
 
 \subsection{Key-points}
 
-\subsubsection{Classical}
+\subsubsection{Scale-space extrema detection}
+
+For this type of key-point detection, the aim is to only retrieve the useful key-points (which are characterizing the image the best) without taking an "abstract" of the whole image as the dense grid method.
+To do it, the first thing that is done is to create a pyramidal tree containing some copies of the image at different resolutions. These copies will be blurred by different Gaussian filters.
+\begin{equation}
+L(x,y,k\sigma)=G(x,y,k\sigma)*I(x,y)
+\end{equation}
+
+The images are grouped by octaves (an octave being a level of the pyramidal tree). The resolution is divided by 2 with each consecutive octave : for the difference of Gaussians, it's equivalent to multiply $\sigma$ by 2.
+\begin{equation}
+D(x,y,\sigma)=L(x,y,k_i\sigma)-L(x,y,k_j\sigma)
+\end{equation}
+
+%For each octave, it's made a difference between each two consecutive images blur by the filter at scale $k*\sigma$.
+Then, for each octave, the difference between every two consecutive blurred images (by the filter at scale $k*\sigma$) is computed.
+%This difference result is that the objects that are remaining on the difference image are thus which size is included between $\sigma$ and $k*\sigma$.The parameter k is a constant of the algorithm that is fixed following a precise rule which depend on the precision that the user would.
+The remaining objects on the image obtained are the ones which size is included between $\sigma$ and $k*\sigma$. The parameter k is a constant defined according to the precision wanted.
+
+Thanks to the different resolutions, for each octave the difference result will keep higher and higher object that will allow us to detect approximately all the sizes of important features on the image.
+With all these difference calculated, the algorithm will take the maxima of each one as key-points.
+
+After doing that, the algorithm must discriminate and precise the coordinate of a part of the key-point. Indeed, using different resolutions give some imprecise coordinate so it's necessary to make an interpolation to obtain the coordinate corresponding to the original image for key-point extracted from the most reduced resolutions images.  It is necessary to remove some kind of point too. The points that have not enough contrast comparing to the other are removed as the points that are on ridges (these points are really unstable and could move or disappear for many reasons so it's better to remove them).
+
+When these operations have been computed, we obtain a set of keypoints that characterize the image. This method allows to obtain the keypoints to characterize an image without taking a predefined set of point. So the set of points obtained is potentially ligther than the one obtained by the dense grid method and it is more accurate because only important points wherever they are are conserved.
+
 
 \subsubsection{Dense Grid}
 The dense grid method is the easiest way to extract key-points.
@@ -36,14 +60,30 @@ The image has first to be divided into k sub-images and the intersections of the
 \end{figure}
 
 \subsection{Descriptors}
-
+The detection of key-points in images is increasingly used because it helps to do many tasks for example recognition, images assembly, 3D modeling, image indexation, video tracking etc. The key-points extraction in one image allows characterizing this image. Comparing the key-points of two images we can deduce if they have common information or not.
 \subsubsection{SIFT}
-Scale-invariant feature transform (or SIFT) is an algorithm in computer vision to detect and describe local features in images. The algorithm was published by David Lowe in 1999.
-Applications include object recognition, robotic mapping and navigation, image stitching, 3D modeling, gesture recognition, video tracking, individual identification of wildlife and match moving.
+SIFT (scale-invariant feature transform) is an algorithm used in sector of computer vision for detection and identification of similar elements between different numeric images.
+The principal method proposed by the author David Lowe is to calculate the SIFT descriptors on images studied. These descriptors are numeric information which derived of local analysis of the image and they characterize the visual content of this image so that this one is independent of the scale, the framing, the angle of observation and the luminosity.
+\begin{itemize}
+	\item Scale-space extrema detection: In this step the key-points detection is done in scale space with three dimensions: the Cartesian coordinates(x,y) and the scale factor $\sigma$. The Gradient with scale factor $\sigma$ is given by the following equation.
+	
+ $$L(x,y,k\sigma)= G(x,y,k\sigma)*I(x,y)$$
 
-The algorithm is patented in the US; the owner is the University of British Columbia.
-\paragraph{}
-SIFT keypoints of objects are first extracted from a set of reference images and stored in a database. An object is recognized in a new image by individually comparing each feature from the new image to this database and finding candidate matching features based on Euclidean distance of their feature vectors. From the full set of matches, subsets of keypoints that agree on the object and its location, scale, and orientation in the new image are identified to filter out good matches. The determination of consistent clusters is performed rapidly by using an efficient hash table implementation of the generalized Hough transform. Each cluster of 3 or more features that agree on an object and its pose is then subject to further detailed model verification and subsequently outliers are discarded. Finally the probability that a particular set of features indicates the presence of an object is computed, given the accuracy of fit and number of probable false matches. Object matches that pass all these tests can be identified as correct with high confidence.
+This convolution allows smoothing the original image in such a way that details which radius is smaller than $\sigma$ value are stomped. The detection of objects which dimensions are approximately equal to $\sigma$ is done by the difference of Gaussion (DoG).
+ $$D(x,y,\sigma)=L(x,y,k_i\sigma)-L(x,y,k_j\sigma)$$
+Where k is the fixed factor of the algorithm and depends to the finesse of the scale space.
+	\item Orientation assignment: On the base of local image gradient detections each key-point detected is assigned to one or many orientations. Insofar as descriptors are calculated from these orientations, it is important to safeguard the invariance of these descriptors to the rotation because whatever the orientation we must obtain the same descriptors using the same image.
+
+For example with a key-point ($x_0$,$y_0$,$\sigma_0$), the calculation is done on the Gradient of the pyramid L(x,y,$\sigma_0$) which factor is nearest the scale factor of the point. In this way the calculation is also independent to the scale variance. With the symmetric finite difference, the gradient and the amplitude are calculated for each position around the key-point.
+The calculation of these two factors is given by the following relations:
+$$m(x,y)=\sqrt{(L(x+1,y)-L(x-1,y))^2+(L(x,y+1)-L(x,y-1))^2}$$
+$$\theta(x,y)=atan2(L(x,y+1)-L(x,y-1),L(x+1,y)-L(x-1,y))$$
+A histogram with 36 intervals is realized on the vicinity and each interval covering an angle of 10 degrees. On one hand, the histogram is moderated by a Gaussian window circular with a factor equal to 1.5 times of the scale factor of the key-point . On the other hand by the amplitude of each point. The peaks in this histogram correspond to the dominant orientations. All dominant orientations allow to have at least 80\% of the maximum value are taking in consideration and other additional key-points are detected. These new key-points detected are only different by the principal orientation.
+
+	\item Key-point descriptor:
+
+
+\end{itemize}
 
 
 \subsubsection{SURF}
@@ -57,34 +97,9 @@ SURF descriptors can be used to locate and recognize objects, people or faces, m
 SURF was first presented by Herbert Bay et al. at the 2006 European Conference on Computer Vision. An application of the algorithm is patented in the US.
 \subsubsection{SIFT vs SURF}
 The recognition of images or objects, is one of the most important applications of computer vision, becomes a comparison of local descriptors SIFT (Scale Invariant Feature Transform) and SURF (Speeded-UP Feature transform). These two local descriptors detect structures or very significant points in an image for a discriminating description of these areas from its neighboring points, in order to compare them with other descriptors using similar measures.
-	\paragraph{}
-	SIFT Algorithm:
-	\begin{itemize}
-		\item Detection of edges on the scale: the first stage performs a search in different scales and dimensions of the image by identifying possible points of interest, invariant to changes in orientation and scaling. This procedure is carried out with the function (DoG (Difference-of-Gaussian) giving different values to the $\sigma$, in the following equation):
-\begin{equation}
-D(x,y,\sigma)=L(x,y,k_i\sigma)-L(x,y,k_j\sigma)
-\end{equation}
-where L(x,y,k$\sigma$) is the convolution of the original image I(x,y) with the Gaussian blur G(x,y,k$\sigma$) at scale k$\sigma$, i.e., L(x,y,k$\sigma$)= G(x,y,k$\sigma$)*I(x,y).
-		\item Location of the keypoints: key points are chosen on the basis of stability measures, removed the key points with low.
-
-		\item Contrast or are located in the margins-orientation assignment: invariance to rotation is achieved by assigning to each of the points of orientation based on the local properties of the image and which represents the descriptor for this orientation.
-
-		\item Descriptor keypoints: the local gradients of the image are measured in the region surrounding the key point. These are processed by means of a representation which allows distortion levels and changes in lighting locally.
-	\end{itemize}
-	\paragraph{}
-	SURF Algorithm:
-	\begin{itemize}
-		\item Detection of points of interest, keypoints.
-
-		\item Assignment guidance.
-
-		\item Extraction of those described.More information in the sections of features.
-	\end{itemize}
-	\paragraph{}
-	Differences between algorithms
 	
 	
-	The main differences between the algorithms SIFT and SURF are the speed of implementation of respect for one another, but with both points of interest of the image keep invariants, scale and orientation, and changes in the lighting. The main differences of data in multiple experiments are that SIFT is kept the position, scale and orientation, since it is possible that in a same position (x, and), we find several points of interest to different scale and / or orientation $\sigma$. But another side in the SURF in a position (x, and) appears only a single point of interest, by what is not saved the scale and orientation, however if that registers the matrix of second order and the sign of the Laplacian.
+		
 
 \subsubsection{Opponent SIFT}
 
