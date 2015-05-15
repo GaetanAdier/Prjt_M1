@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.11.21)  15 MAY 2015 12:42
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.11.21)  15 MAY 2015 15:48
 entering extended mode
 **state_of_art.tex
 ("C:\Users\Khalil\Documents\GitHub\Prjt_M1\Etat de l'art\state_of_art.tex"
@@ -299,41 +299,64 @@ Package pdftex.def Info: Dense_grid.png used on input line 63.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [2 <C:/Users/Khalil/Documents/GitHub/Prjt_M1/Etat de l'art/DoG.png>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 73.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 74.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 73.
- [3 <C:/Users/Khalil/Documents/GitHub/Prjt_M1/Etat de l'art/Dense_grid.png>] [4
-]
-Underfull \hbox (badness 10000) in paragraph at lines 135--141
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 74.
+
+<SIFT_histogram_construction.png, id=18, 441.65pt x 99.37125pt>
+File: SIFT_histogram_construction.png Graphic file (type png)
+
+<use SIFT_histogram_construction.png>
+Package pdftex.def Info: SIFT_histogram_construction.png used on input line 84.
+
+(pdftex.def)             Requested size: 441.64891pt x 99.371pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[3 <C:/Users/Khalil/Documents/GitHub/Prjt_M1/Etat de l'art/Dense_grid.png>]
+<SIFT_gradient_magnitude_and_orientation_computation.png, id=24, 331.2375pt x 1
+78.6675pt>
+File: SIFT_gradient_magnitude_and_orientation_computation.png Graphic file (typ
+e png)
+ <use SIFT_gradient_magnitude_and_orientation_computation.png>
+Package pdftex.def Info: SIFT_gradient_magnitude_and_orientation_computation.pn
+g used on input line 97.
+(pdftex.def)             Requested size: 248.4275pt x 134.00029pt.
+
+[4 <C:/Users/Khalil/Documents/GitHub/Prjt_M1/Etat de l'art/SIFT_histogram_const
+ruction.png> <C:/Users/Khalil/Documents/GitHub/Prjt_M1/Etat de l'art/SIFT_gradi
+ent_magnitude_and_orientation_computation.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 136--142
 
  []
 
 [5]
 Missing character: There is no é in font cmr12!
- <IllustrationMatriceC2O.png, id=29, 362.85562pt x 368.1253pt>
+ <IllustrationMatriceC2O.png, id=33, 362.85562pt x 368.1253pt>
 File: IllustrationMatriceC2O.png Graphic file (type png)
 
 <use IllustrationMatriceC2O.png>
-Package pdftex.def Info: IllustrationMatriceC2O.png used on input line 192.
+Package pdftex.def Info: IllustrationMatriceC2O.png used on input line 193.
 (pdftex.def)             Requested size: 163.28352pt x 165.65485pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 202--207
+Underfull \hbox (badness 10000) in paragraph at lines 203--208
 
  []
 
-[6] <QuantificationSpherique.png, id=35, 433.62pt x 309.40594pt>
+[6] <QuantificationSpherique.png, id=39, 433.62pt x 309.40594pt>
 File: QuantificationSpherique.png Graphic file (type png)
 
 <use QuantificationSpherique.png>
-Package pdftex.def Info: QuantificationSpherique.png used on input line 223.
+Package pdftex.def Info: QuantificationSpherique.png used on input line 224.
 (pdftex.def)             Requested size: 325.2142pt x 232.05388pt.
 
 
@@ -348,13 +371,13 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 3023 strings out of 493921
- 39749 string characters out of 3147278
- 112725 words of memory out of 3000000
- 6277 multiletter control sequences out of 15000+200000
+ 3035 strings out of 493921
+ 40307 string characters out of 3147278
+ 111741 words of memory out of 3000000
+ 6287 multiletter control sequences out of 15000+200000
  9803 words of font info for 37 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 27i,14n,28p,687b,248s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,14n,28p,687b,317s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pr
 ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Fi
 les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKT
@@ -364,9 +387,9 @@ nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
 sfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
 cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pf
 b>
-Output written on state_of_art.pdf (8 pages, 454985 bytes).
+Output written on state_of_art.pdf (8 pages, 483398 bytes).
 PDF statistics:
- 72 PDF objects out of 1000 (max. 8388607)
+ 76 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

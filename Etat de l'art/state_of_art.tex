@@ -70,27 +70,33 @@ The detection of key-points in images is increasingly used because it helps to d
 SIFT (scale-invariant feature transform) is an algorithm used in sector of computer vision for detection and identification of similar elements between different numeric images.
 The principal method proposed by the author David Lowe is to calculate the SIFT descriptors on images studied. These descriptors are numeric information which derived of local analysis of the image and they characterize the visual content of this image so that this one is independent of the scale, the framing, the angle of observation and the luminosity.
 \begin{itemize}
-	\item Scale-space extrema detection: In this step the key-points detection is done in scale space with three dimensions: the Cartesian coordinates(x,y) and the scale factor $\sigma$. The Gradient with scale factor $\sigma$ is given by the following equation.
 	
- $$L(x,y,k\sigma)= G(x,y,k\sigma)*I(x,y)$$
-
-This convolution allows smoothing the original image in such a way that details which radius is smaller than $\sigma$ value are stomped. The detection of objects which dimensions are approximately equal to $\sigma$ is done by the difference of Gaussion (DoG).
- $$D(x,y,\sigma)=L(x,y,k_i\sigma)-L(x,y,k_j\sigma)$$
-Where k is the fixed factor of the algorithm and depends to the finesse of the scale space.
 	\item Orientation assignment: On the base of local image gradient detections each key-point detected is assigned to one or many orientations. Insofar as descriptors are calculated from these orientations, it is important to safeguard the invariance of these descriptors to the rotation because whatever the orientation we must obtain the same descriptors using the same image.
 
 For example with a key-point ($x_0$,$y_0$,$\sigma_0$), the calculation is done on the Gradient of the pyramid L(x,y,$\sigma_0$) which factor is nearest the scale factor of the point. In this way the calculation is also independent to the scale variance. With the symmetric finite difference, the gradient and the amplitude are calculated for each position around the key-point.
 The calculation of these two factors is given by the following relations:
 $$m(x,y)=\sqrt{(L(x+1,y)-L(x-1,y))^2+(L(x,y+1)-L(x,y-1))^2}$$
 $$\theta(x,y)=atan2(L(x,y+1)-L(x,y-1),L(x+1,y)-L(x-1,y))$$
-A histogram with 36 intervals is realized on the vicinity and each interval covering an angle of 10 degrees. On one hand, the histogram is moderated by a Gaussian window circular with a factor equal to 1.5 times of the scale factor of the key-point . On the other hand by the amplitude of each point. The peaks in this histogram correspond to the dominant orientations. All dominant orientations allow to have at least 80\% of the maximum value are taking in consideration and other additional key-points are detected. These new key-points detected are only different by the principal orientation.
+A histogram with 36 intervals is realized on the vicinity and each interval covering an angle of 10 degrees.
 
-	\item Key-point descriptor:Key-point descriptor: In this stage, a descriptor vector is created for each key-point detected such the descriptor is distinctive and invariant to the remaining variations like illumination, 3D viewing, etc. This stage is made on image which is more near the scale of the key-point scale.
+\begin{figure}[h]
+    \center
+    \includegraphics[scale=1]{SIFT_histogram_construction.png}
+    \caption{SIFT histogram construction}\label{fig:SIFT_histogram_construction}
+\end{figure} 
+
+On one hand, the histogram is moderated by a Gaussian window circular with a factor equal to 1.5 times of the scale factor of the key-point . On the other hand by the amplitude of each point. The peaks in this histogram correspond to the dominant orientations. All dominant orientations allow to have at least 80\% of the maximum value are taking in consideration and other additional key-points are detected. These new key-points detected are only different by the principal orientation.
+
+	\item key-point descriptor: In this stage, a descriptor vector is created for each key-point detected such the descriptor is distinctive and invariant to the remaining variations like illumination, 3D viewing, etc. This stage is made on image which is more near the scale of the key-point scale.
 
 The local system coordinates is modified for guarantee the invariance to the rotation by using an angle rotation equal to the orientation of the key-point in reverse direction.  Then, an area of 16x16 pixels is taken around the key-point; subdivide in 4x4 zones of 4x4 pixels each one. A histogram including 8 intervals is calculated on each zone. At each point of the zone, the orientation and the amplitude are calculated like previously. The orientation determines the interval to increment in the histogram which done by double weighted by the amplitude and by a center window Gaussian on the key-point of parameter 1.5 times of the scale factor of the key-point.
 
 After that, the 16 histograms with 8 intervals each one, are concatenated and normalized. In object to reduce the sensibility of the descriptor to the changes of the luminosity, the values are fixed to 0.2 and the histogram is calculated again for finally give the descriptor of the key-point of 128 dimension.
-
+\begin{figure}[h]
+    \center
+    \includegraphics[scale=0.75]{SIFT_gradient_magnitude_and_orientation_computation.png}
+    \caption{SIFT gradient magnitude and orientation computation}\label{fig:SIFT_gradient_magnitude_and_orientation_computation}
+\end{figure} 
 
 
 \end{itemize}
@@ -98,16 +104,11 @@ After that, the 16 histograms with 8 intervals each one, are concatenated and no
 
 \subsubsection{SURF}
 
-In computer vision, Speeded Up Robust Features (SURF) is a local feature detector that can be used for tasks such as object recognition or 3D reconstruction. It is partly inspired by the scale-invariant feature transform (SIFT) descriptor. The standard version of SURF is several times faster than SIFT and claimed by its authors to be more robust against different image transformations than SIFT.
+SURF for Speeded Up Robust Features is an descriptor and algorithm of feature detection. It also used in the sector of computer vision and image understanding for objects detection or 3D reconstruction.
 
-SURF uses an integer approximation of the determinant of Hessian blob detector, which can be computed with 3 integer operations using an integral image. For features, it uses the sum of the Haar wavelet response around the point of interest. These can also be computed with the aid of the integral image.
+SURF is in part inspired by the SIFT descriptor but it is more fast from a time calculation point of view. According to the authors, it is also more robust for different image transformations. 
 
-SURF descriptors can be used to locate and recognize objects, people or faces, make 3D scenes, track objects and extract points of interest.
-
-SURF was first presented by Herbert Bay et al. at the 2006 European Conference on Computer Vision. An application of the algorithm is patented in the US.
-\subsubsection{SIFT vs SURF}
-The recognition of images or objects, is one of the most important applications of computer vision, becomes a comparison of local descriptors SIFT (Scale Invariant Feature Transform) and SURF (Speeded-UP Feature transform). These two local descriptors detect structures or very significant points in an image for a discriminating description of these areas from its neighboring points, in order to compare them with other descriptors using similar measures.
-	
+SURF is based on sums of Haar 2D wavelets responses and uses efficiently the integrals images.
 	
 		
 
