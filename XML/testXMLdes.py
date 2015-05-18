@@ -22,16 +22,38 @@ def prettify(elem):
 nbKP=8
 
 #
-top = Element('root')
+top = Element('top')
 
 keypoints = [
-    Element('keypoint',number=str(i))
+    Element('kp')
     for i in xrange(nbKP-1)
     ]
 
 top.extend(keypoints)
 
-for i in range(nbKP-1):
-    keypoint
+
+#--------------essais-------------------------------
+#for kp0 in top.iter('kp0'):
+#    kp0.text='0'
+
+#for i in range(nbKP):
+#    kp="kp"+str(i)
+#    for kp in top.iter('kp'):
+#        kp.text=0
+
+#for k in root.iter('rank'):
+#    rank.text = str(new_rank)
+#tree.write('output.xml')
+#
+
+#for elem in top.iter():
+#    elem.text=0
+
+
+k=0
+for kp in top:
+    kp.tag=k
+    kp.text=str(k)
+    k+=1
 
 print prettify(top)
