@@ -8,6 +8,7 @@ Created on Wed May 13 10:50:51 2015
 import os
 import glob
 import cv2
+import numpy as np
 
 from sphinx_doc import genere_doc
 from sphinx_doc import configure_doc
