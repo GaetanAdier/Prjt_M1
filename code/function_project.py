@@ -38,8 +38,18 @@ def descript(path_work, name_desc, path_images, nb_images = "ALL", start_img = 1
     list_path_img = glob.glob(temp)   
     nb_img = len(list_path_img)
     
+    #permet de parcourir toutes ou un nombre d'image définis par l'utilisateur de manière automatique    
+    if(nb_images == "ALL"):
+        end_img = nb_img - start_img
+    else : 
+        end_img = nb_images + start_img
+        
+    #application du descripteur choisit sur les images
+    for i in range(start_img, (end_img + 1)): 
+        SIFT(list_path_img[i-1])
+        
     
-
+    
 def SIFT(img):
     
     """
