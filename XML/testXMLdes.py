@@ -52,7 +52,7 @@ top.extend(keypoints)
 
 k=0
 for kp in top:
-    kp.tag=k
+#à changer pour que kp.text récupère 
     kp.text=str(k)
     k+=1
 
