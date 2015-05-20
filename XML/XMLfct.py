@@ -22,10 +22,16 @@ def prettify(elem):
     Return a pretty-printed XML string for the Element.
     
     :param elem: matrice contenant les vecteurs keypoints obtenus par le descripteur
-    :type elem: string
+    :type elem: Element (structure importé d'xml.etree.ElementTree)
     
     :return: l'arbre XML mis en page
     :rtype: string
+    
+    :Example:
+        
+        
+    >>>tree=prettify(top) 
+    >>>print tree 
     """
     
     rough_string = ElementTree.tostring(elem, 'utf-8')
@@ -45,6 +51,12 @@ def XMltree(des,name_desc):
     
     :return: l'arbre XML 
     :rtype: string
+    
+    :Example:
+        
+        
+    >>> arbre=XMLtree(a,sift)
+    >>> 
     """    
     
     
@@ -88,6 +100,12 @@ def XMLfile(tree,imgpath,path_desc):
     :type denominateur: string
     :param : chemin du dossier du descripteur utilisé
     :type denominateur: string
+    
+    :Example:
+        
+        
+    >>>arbre=XMLtree(a,sift)
+    >>>XMLfile(arbre, C:\Projet\test.jpeg, C:\Projet\SIFT\)
    
     """
     

@@ -19,11 +19,22 @@ def descript(path_work, name_desc, path_images, nb_images = "ALL", start_img = 1
     
     Cette fonction principale appelée dans le main qui permettra de créer les paths directory en fonction des différents descripteurs que l'utilisateur utilisera. Dans cette fonction nous retrouverons les paramètres suivant \:
     
-     * **path_work** : Chemin où l'utlisateur souhaite créer ses dossiers pour les différents descripteurs.
-     * **name_desc** : Nom du descripteur choisi.
-     * **path_images** : Chemin où se trouve les images surlesquelles on vas travailler.
-     * **nb_images** : Nombre d'images à traiter. Par défaut : ALL
-     * **start_img** : Numéro de l'image de départ . Par défaut : 1
+    :param path_work: Chemin où l'utlisateur souhaite créer ses dossiers pour les différents descripteurs.
+    :type path_work: string
+    :param name_desc: Nom du descripteur choisi.
+    :type name_desc: string
+    :param path_images: Chemin où se trouve les images surlesquelles on vas travailler.
+    :type path_images: string
+    :param nb_images: Nombre d'images à traiter. Par défaut : ALL
+    :type nb_images: int
+    :param start_img: Numéro de l'image de départ . Par défaut : 1
+    :type start_img: int
+     
+    :Example:
+        
+        
+    >>> 
+    >>> 
      
     """
     
@@ -56,9 +67,19 @@ def SIFT(img):
     
     Cette fonction a pour but d'appliquer le calcul d'un descripteur SIFT à une image \:
     
-     * **img** : Chemin de l'image que l'on souhaite traiter.
-     * **des** : Valeurs retourner il s'agit d'une liste contenant les valeurs décrivant l'image
+    :param img: Chemin de l'image que l'on souhaite traiter.
+    :type img: string
+    :param des: Valeurs retourner il s'agit d'une liste contenant les valeurs décrivant l'image
+    :type des: array
+    
+    :return: 
+    :rtype:
      
+    :Example:
+        
+        
+    >>> 
+    >>>
     """
     
     img_trait=cv2.imread(img)
