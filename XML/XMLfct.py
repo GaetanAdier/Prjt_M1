@@ -120,7 +120,7 @@ def XMLfile(tree,imgpath,path_desc):
     
     # creation fichier xml
     fo = open(filename+".xml", "wb")
-    fo.write(tree);
+    fo.write(tree)
 
     # Close opened file
     fo.close()

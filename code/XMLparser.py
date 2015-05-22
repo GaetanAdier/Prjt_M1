@@ -4,8 +4,9 @@ Created on Wed May 20 16:08:40 2015
 
 @author: Projet
 """
-
+import os.path
 import xml.etree.ElementTree as ET
+from xml.etree.ElementTree import Element
 
 def XMLparser(filename):
    
@@ -34,3 +35,55 @@ def XMLparser(filename):
     observationId=root[1][0].text
     
     return user, observationId
+    
+    
+def XMLmodif(author,plantID):
+    
+    
+    """
+    
+    Cete fonction permet de stocker dans un fichier xml les données nécessaires à
+    
+    :param author: nom de l'auteur de l'image
+    :type author: string
+    :param plantID: ID de la plante
+    :type plantID: string
+    :param img: nom de l'image associée aux donnée:
+    :type img: string
+    
+    
+     
+    :Example:
+        
+        
+    >>> 
+    >>>
+    
+    """
+    
+    if not os.path.isfile('metrics.xml'):
+        fo = open("metrics.xml", "wb")
+        top = Element('authors')
+    
+    tree = ET.parse('metrics.xml')
+    top = tree.getroot()
+    
+    #creation si non existence des elements
+    if not top.find(str(author)):
+        aut=Element(str(author)) 
+        top.extend(aut)
+    
+    if not aut.find(str(plantID)):
+        ID=Element(str(plantID))
+        aut.extend(ID)
+    
+    if not ID.find('count'):
+        count=Element(('count'))
+        ID.extend(count)
+    
+    count.text+=1
+    
+    fo.write(tree)
+    fo.close()
+    
+    

@@ -4,6 +4,7 @@ Created on Wed May 20 14:46:42 2015
 
 @author: Projet
 """
+import XMLmodif
 import XMLparser
 import os
 
@@ -62,27 +63,51 @@ def MetricsArgs(IBPath):
     
     machin=zeros() 
     
+    #creation xml pour stocker auteurs et nombre d'images puis calculer ?
+    #something like 
+#    <top>
+#        <Auteur1>
+#            <IDplant1>
+#                <img1>
+#                <img2>
+#                ...
+#            <IDplant2>
+#                <img1>
+#                <img2>                
+#                ...
+#        <Auteur2>
+#            ...
     
+#à faire tourner sur la banque d'image une fois
+#puis plus qu'à compter, peut être réutilisé
+#compatibilité avec runs partiels ?
     #iteration sur tous les fichiers XML de la banque d'images
     for i in os.listdir(IBPath):
         if i.endswith(".xml"): 
             
             [user, ObsID]=XMLparser(i+'.xml')
-            
-            while i<len(machin):
-                
-                if user==machin[i][j]:
-                    
-                    machin[i][j]+=1
-                    
-                else:
-                    
-            
-            
-            
+            XMLmodif(user, ObsID)            
+#            while i<len(machin):
+#               
+#                if user==machin[i][j]:
+#                    
+#                    machin[i][j]+=1
+#                    #recup l'auteur et l'id de la plante
+#                    #incrementer le nombre d'image de l'auteur
+#                    #incrementer le nombre d'image de ce l'id de cette plante
+#                    #incrementer le nombre d'image de l'id de cette plante par cet auteur
+#                    #stocker l'id ?
+#                    #stocker l'auteur s'il n'est pas déjà enregistrer
+#                    #stocker auteur et id et compter plus tard
+#                    #a voir 
+#                    #penser à recup le rank
+#                    #passer par le module xml en c pour meilleures perfs ?         
+#                else:            
             continue
+    
+    
+    fo=open("run.txt","wb")
         
-        else:
-            continue
+        
     
     
