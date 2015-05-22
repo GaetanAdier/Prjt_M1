@@ -91,5 +91,27 @@ def SIFT(img):
     kp,des = sift.detectAndCompute(grayimage,None)
     
     return des
+    
+def K_means():
+
+    #création des vecteurs de manières aléatoires
+    val_dist = np.zeros((3,100))
+    vectors_test = np.zeros((100, 128))
+    centroid_vectors = np.zeros((3, 128))
+    vectors_test = [np.random.rand(1, 128)*255 for i in range(100)]
+    centroid_vectors = [np.random.rand(1, 128)*255 for i in range(3)]
+    vectors_test = np.asarray(vectors_test)
+    vectors_test = vectors_test.reshape(100, 128)
+    centroid_vectors = np.asarray(centroid_vectors)
+    centroid_vectors = centroid_vectors.reshape(3, 128)
+    
+    
+    for k in range(3):
+        val_dist[k,:] = (np.sqrt(sum((centroid_vectors[k, :]- vectors_test[np.arange(0,99), :])**2)))
+        
+    
+    
+            
+    
 
 #genere_doc()
