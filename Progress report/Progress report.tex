@@ -1,0 +1,72 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage{amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+\usepackage{lscape}
+\usepackage[top=2.5cm,bottom=2.5cm,right=2.5cm,left=2.5cm]{geometry}
+\usepackage{titlesec}
+\setcounter{secnumdepth}{5}
+
+% ----------------------------------------------------------------
+\begin{document}
+
+\section*{Progress Report}
+
+\subsection*{Introduction}
+%overview of the project (goals and objectives of the project)
+%identify the project , any method or necessary materials and the date by which the project is to be completed
+Color image processing has become a major issue since a few years, most of the colour texture discrimination having been explored using the marginal colours way. The issue is that we are now able to do colour image recognition on digital images but the results on nature pictures are rather mediocre.
+
+The CLEF contest has been created as an answer to that problematic, making universities' and laboratories' own solutions compete against each other in order to find the best colour texture feature.
+
+In this document we will introduce key-points and their use in the various descriptors. We will go first with the standard ones which are SIFT SURF and opponent SIFT. The last one being the descriptor used by FINKI, the laboratory from the last year contest we chose as reference to compare our results. We will then use a new descriptor offered by Noel Richard, the C$_2$O.
+
+\subsection*{Activities and Results}
+%Describe the project current status including schedules
+%Discuss about the current problems
+%EX: Our project has been delayed by approximately one week because of two problems:Z and Y. The Z problem was resolved rather easily but the Y problem was more severe and we are still working on it.
+On our first week we achieved all of what we had expected to do (mainly the state of the art and getting into the project).
+The second week has been less efficient in terms of tasks completed, we had to several several uncompleted tasks into the next week.
+
+\subsubsection*{Work completed}
+\begin{itemize}
+  \item XML generation programmed : Since we decided on using the XML file format to stock the key-points calculated for each image we programmed a function doing that for each descriptor we have to test
+  \item State of Art completed : we used the reports from the previous years CLEF challenge to define the most used descriptors and .
+  \item Programming of SIFT : using the openCV library in python we proceeded to test the
+  \item Data Base constitution : After registering for the contest we retrieved the image Data Base.
+  \item Process Flow programming : we wrote what will be the skeleton of our final product
+  \item Classification analysis :
+\end{itemize}
+
+\subsubsection*{Work in progress}
+\begin{itemize}
+  \item Bag of Words programming : this is part of the classification
+  \item C$_2$O programming : new descriptor from Noel RICHARD
+  \item Evaluation Metrics programming : we are programming the official method of the contest to
+  \item SIFT Tests : See above
+\end{itemize}
+
+\subsubsection*{Work remaining}
+\begin{itemize}
+  \item Learning how to use HULK mesocenter : this is the calculating server we will use to process the descriptors on all the images of the database (which amount to more than 90k)
+  \item Extend the automatic process to the whole CLEF database (once every descriptor is programmed correctly we will have to extend the computing to the whole database
+  \item Programming of SIFT variants : mainly opponent SIFT descriptor
+  \item Writing of the final report : will be done
+  \item Documenting of the HULK usage : Can only be done once we get the access
+  \item Various tasks yet to be defined
+\end{itemize}
+
+\subsection*{Work Schedule}
+%Outline the project schedule for the upcoming weeks or months
+%A table detailing the individual phases and each phase completion date is a good idea
+The organisation method we use to schedule our work is the SCRUM method. Basically before every week of work we decide of a number of tasks we have to prioritize and then we allocate a a number of hour from the tasked member's pool. At the end of the week we then sum up what's done what remains to be done and follow up on the schedule of the next week. We call that a sprint (the period can be more than a week).
+We described all the expected tasks to be done in a table called back log.
+
+
+\subsection*{Conclusion}
+%end with an overall appraisal of the project : you should assess whether you will meet the objectives in the proposed schedule and budget
+As far as we are confident that we can deliver something at the defined date but we probably won't be able to meet the objectives at the limit date for the LifeCLEF challenge. Objectively we were a bit short on time to meet the contest requirements from the start. It was to be expected so we had already defined the contest participation  as an optional objective.
+% ----------------------------------------------------------------
+\end{document} 
