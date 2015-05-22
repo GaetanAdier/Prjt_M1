@@ -23,7 +23,7 @@ Here we will see the different steps that we have to follow to compute the C$_2$
 
 First of all, we need to pass our image in the L$^*$a$^*$b$^*$ space to get directly a representation of our image in a space which split the luminance and the chromatic information.
 
-For doing that, we first need to pass the image in the XYZ space and choose the correct standard illuminant A. 
+For doing that, we first need to pass the image in the XYZ space and choose the correct standard illuminant A.
 \vspace{0.5cm}
 $$A=\begin{pmatrix}
 	X_r&X_g&X_b\\
@@ -73,7 +73,7 @@ To do that, the program will calculate the equivalent of the translation in hori
 
 \begin{figure}[h]
     \center
-    \includegraphics[scale=0.65]{illustrationVecteur.png}
+    \includegraphics[scale=0.85]{illustrationVecteur.png}
     \caption{Vector to pixel distance}\label{fig:Vector to pixel distance}
 \end{figure}
 
@@ -82,7 +82,7 @@ To do that, the program will calculate the equivalent of the translation in hori
 &\sin\theta=dY/\|\Delta\| \\
 &dY = \sin\theta * \|\Delta\| \\
 &\cos\theta=dX/\|\Delta\| \\
-&dX = \cos\theta * \|\Delta\| 
+&dX = \cos\theta * \|\Delta\|
 \end{split}
 \end{equation}
 
@@ -98,11 +98,11 @@ This computation gives us the C$_2$O matrix which corresponds to the cloud of po
 
 \begin{figure}[h]
     \center
-    \includegraphics[scale=0.65]{BL_LAB.png}
+    \includegraphics[scale=0.95]{BL_LAB.png}
     \caption{Lab space illustration}\label{fig:Lab space illustration}
 \end{figure}
-
-We define two test images :
+\newpage
+We define two test images composed by a succession of line a different colors.
 
 So if we are testing our program on images like the two one shown below which are containing the two same colors opposed on the same component of the  L$^*$a$^*$b$^*$ space, the result on the difference must show that :
 
@@ -144,7 +144,7 @@ So if we are testing our program on images like the two one shown below which ar
 
 With this step validate by the theory, we will have to test with more colors to verify that we obtain the right number of points on the coocurence matrix for the corresponding number of colors. (Test to add once the will be done (Appendix ?))
 
-
+\newpage
 \subsection{The signature computing}
 
 After doing that, we have to compute the spherical quantization of the probability matrix. For that, we have to transform our difference image for Carthesian coordinates to Spheric coordinates (from these one, the spherical quantization will be easier to compute). So we consider our Lab space like a 3 dimensional repository and for each points, it's calculate the norm of the vector formed by the distance between it and the point (0,0,0), the orientation $\alpha$ formed by the angle between the vector and the a plan and finally the orientation $\beta$ formed by the angle between the vector and the b plan.
@@ -156,6 +156,15 @@ After doing that, we have to compute the spherical quantization of the probabili
     \caption{Spherical coordinates}\label{fig:Spherical coordinates}
 \end{figure}
 
+To calculate these coordinates, we have to use the following equations :
+
+\begin{equation}
+\begin{split}
+&r = \sqrt{x^2+y^2+z^2} \\
+&\phi = \arctan(y/x) \\
+&\theta = \arccos(z/r)
+\end{split}
+\end{equation}
 
 So for each pixel we obtain :
 \begin{itemize}
@@ -174,7 +183,7 @@ There will we 4 interval of radius for the sphere :
 
 \begin{equation}
 \begin{split}
-&0 \leq \Delta E < 3 
+&0 \leq \Delta E < 3
 \\&3 \leq \Delta E < 6
 \\&6 \leq \Delta E < 9
 \\&9 \leq \Delta E < infinite
@@ -187,22 +196,22 @@ Each $\alpha$ interval will measure $\Delta\alpha=360/6$
 
 This quantization has to be done for each value of $\beta$ interval which will measure $\Delta\beta=180/3$.
 
-\begin{figure}[h]
+\begin{figure}[!h]
     \center
     \includegraphics[scale=0.42]{QuantificationSpherique.png}
-    \caption{Spheric
+    \caption{Spherical
      quantizaton}\label{fig:Qantification sphérique}
 \end{figure}
 
 
-Once this quantization is done, the signature can be constituted by concatenate the values in a vector following a spiral for each value of $\beta$. The histograms obtained for each interval of $\beta$ will be concatenate to obtain the whole signature. 
+Once this quantization is done, the signature can be constituted by concatenate the values in a vector following a spiral for each value of $\beta$. The histograms obtained for each interval of $\beta$ will be concatenate to obtain the whole signature.
 
 
 
-\begin{figure}[h]
+\begin{figure}[!h]
     \center
     \includegraphics[scale=0.40]{QuantificationSphericToHist.png}
-    \caption{Spheric quantizaton to signature}\label{fig:Qantification sphérique}
+    \caption{Spherical quantizaton to signature}\label{fig:Qantification sphérique}
 \end{figure}
 
 
