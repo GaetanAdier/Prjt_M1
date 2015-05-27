@@ -1,0 +1,87 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage{amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{indentfirst}
+\usepackage{lscape}
+\usepackage[top=2.5cm,bottom=2.5cm,right=2.5cm,left=2.5cm]{geometry}
+\usepackage{titlesec}
+\setcounter{secnumdepth}{5}
+
+% ----------------------------------------------------------------
+\begin{document}
+
+\section{Color difference calculation}
+
+
+
+Normalized Yellow : $(0,1,1)$ in BGR space
+
+\begin{equation}
+\begin{split}
+&X = 0.412453*1 + 0.377580 * 1 = 0.790033 \\
+&Y = 0.212671*1 + 0.715160 * 1 = 0.927831 \\
+&Z = 0.019334*1 + 0.119193 * 1 = 0.138527 \\
+&X=X/X_n = 0.790033/0.950456 = 0.831214 \\
+&Z=Z/Z_n = 0.138527/1.088754 = 0.127234
+\end{split}
+\end{equation}
+
+
+\begin{equation}
+\begin{split}
+&L = 116*(0.927831)^{1/3}-16 = 97.139507 \\
+&a^* = 500*[0.790033^{1/3}-0.927831^{1/3}]= -25.447079\\
+&b^* = 200*[0.927831^{1/3}-0.138527^{1/3}] = 97.583734
+\end{split}
+\end{equation}
+
+Normalized Blue : $(1,0,0)$ in BGR space
+
+\begin{equation}
+\begin{split}
+&X = 0.180423*1 = 0.180423 \\
+&Y = 0.072169*1 = 0.072169 \\
+&Z = 0.950227*1 = 0.950227 \\
+&X=X/X_n = 0.180423/0.950456 = 0.189827 \\
+&Z=Z/Z_n = 0.950227/1.088754 = 0.872765
+\end{split}
+\end{equation}
+
+
+\begin{equation}
+\begin{split}
+&L = 116*(0.072169)^{1/3}-16 = 32.295672 \\
+&a^* = 500*[0.189827^{1/3}-0.072169)^{1/3}]= 79.185829\\
+&b^* = 200*[0.072169^{1/3}-0.872765)^{1/3}] = -107.8617
+\end{split}
+\end{equation}
+
+
+Yellow - Blue
+
+\begin{equation}
+\begin{split}
+&\Delta L = 97.139507 - 32.295672 = 64.843834 \\
+&\Delta a^* = -25.447079 - 79.185829 = -104.632908 \\
+&\Delta b^* = 91.583734 -(-107.8617) = 205.4447
+\end{split}
+\end{equation}
+
+
+Blue - Yellow
+
+\begin{equation}
+\begin{split}
+&\Delta L = 32.295672 - 97.139507 = -64.843834 \\
+&\Delta a^* = 79.185829 + 25.447079 = 104.632908\\
+&\Delta b^* = -107.8617 - 97.583734 = -205.4447
+\end{split}
+\end{equation}
+
+% ----------------------------------------------------------------
+\end{document} 
