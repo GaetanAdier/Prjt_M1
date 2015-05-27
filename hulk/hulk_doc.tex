@@ -16,30 +16,30 @@
 \section*{Hulk presentation}
 
 
-Hulk is a powerful machine destined to the researchers of the XLIM-SIC Laboratory of University of Poitiers. It used for doing big calcul mainly for interactive visualisation of data via opengl distant(virtualgl).
+Hulk is a powerful machine destined to the researchers of the XLIM-SIC Laboratory of University of Poitiers. It used for doing big calcul mainly for interactive visualisation of datas via opengl distant(virtualgl).
 
-\section{Hulk Characteristics}
+\subsection*{Hulk Characteristics}
 \begin{itemize}
 	\item	 46 processors Xeon E5 4650 (in total 368 processors)
 	\item	1.427 To of RAM
 	\item	20 To of stockage scratch
 \end{itemize}
 	
-The different compasants are interconnected via a bus Numalink6. Hulk has also two NVIDIA(kepler K20)  cards for the visualisation and GPGPU calcul.
+The different components are interconnected via a bus Numalink6. Hulk has also two NVIDIA(kepler K20)  cards for the visualisation and GPGPU calcul.
 
-\section{Usage and connection }
+\subsubsection*{Usage and connexion }
 The codes must be submitted via an PBS script format.
-SFTP and Filezilla are two possilities of connection for to put or get files on Hulk server. 
-SSH is the connection mode used for doing calcul on the server.
+SFTP and Filezilla are two possilities of connexion for to put or get files on Hulk server. 
+SSH is the connexion mode used for doing calcul on the server.
 \begin{itemize}
-	\item	 Host :hulk.sp2mi.univ-poitiers.fr
+	\item	 Host : hulk.sp2mi.univ-poitiers.fr
 	\item	IP : 194.167.50.23 
 	\item	Port : 86
 \end{itemize}
 
-\subsection{connexion to hulk via SFTP}
+\subsubsection*{connexion to hulk via SFTP}
 
-The command line alowing to connect on the server is :
+The command line allowing to connect on the server is :
  
 sftp votre\_login\_de\_compte\_mail\_univ@hulk.sp2mi.univ-poitiers.fr -P 86
 
@@ -47,28 +47,28 @@ cd and ls are used for navigation and moving on the server.
 
 get and put are used for to get or put files  on the server.
 
-\subsection{connexion to hulk via FileZilla}
+\subsubsection*{connexion to hulk via FileZilla}
 
 \begin{itemize}
-	\item	 Host :hulk.sp2mi.univ-poitiers.fr
+	\item	 Host : hulk.sp2mi.univ-poitiers.fr
 	\item	User ID : votre\_login\_de\_compte\_mail\_univ 
 	\item	Port : 86
 	\item	Password : which created on Hulk 
 	\item	Port : 86
 \end{itemize}
 
-\subsection{connexion to hulk via SSH}
-The ssh connexion is satarted by the following command line:
+\subsubsection*{connexion to hulk via SSH}
+The ssh connexion is satarted by using the following command line:
   
 ssh votre\_login\_de\_compte\_mail\_univ@hulk.sp2mi.univ-poitiers.fr -P 86
 
 After, for start the computation, all scripts must be submitted via PBS.
 
-\subsection{Where write your datat on Hulk}
+\subsubsection*{Where write your datas on Hulk}
 
-All big datas (images, videos, results of calcul... ) must be droped in the \lq\lq{}scrastch\rq\rq{} of your principal directory on Hulk
+All big datas (images, videos, results of calcul...) must be droped in the \lq\lq{}scrastch\rq\rq{} of your principal directory on Hulk.
 
-It\rq{}s necessary to indicate the  patch of this directory in your code for generating your results files which usually require a big memory space. 
+It\rq{}s necessary to indicate the  patch of this directory in your codes for generating your results files which usually require a big memory space.\\ 
 
 If you need to transfert a file, you must archive your results directory  by the following command line:
 
