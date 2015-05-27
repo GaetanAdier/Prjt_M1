@@ -87,6 +87,7 @@ def SIFT(img):
     grayimage=cv2.cvtColor(img_trait, cv2.COLOR_BGR2GRAY)
     cv2.imwrite("grayimage.jpg",grayimage)
     
+   #parameters cv2.SIFT(0,3,0.04,10,1.6)
     sift = cv2.SIFT()
     kp,des = sift.detectAndCompute(grayimage,None)
     
