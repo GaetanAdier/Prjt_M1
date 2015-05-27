@@ -37,7 +37,7 @@ def XMLparser(filename):
     return user, observationId
     
     
-def XMLmodif(author,plantID):
+def XMLmodif(author,plantID,filename):
     
     
     """
@@ -78,12 +78,22 @@ def XMLmodif(author,plantID):
         aut.extend(ID)
     
     if not ID.find('count'):
-        count=Element(('count'))
+        count=Element('count')
         ID.extend(count)
     
+
+    
+    pictureID=Element(('pictureID'))
+    ID.extend(pictureID)
+    pictureID.text=filename
     count.text+=1
+        
     
     fo.write(tree)
     fo.close()
     
+    
+    #solution alternative
+    #author.set('name=', str(author))
+    #plantID.set('name=', str(plantID))
     

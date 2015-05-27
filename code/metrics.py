@@ -4,9 +4,15 @@ Created on Wed May 20 14:46:42 2015
 
 @author: Projet
 """
+import xml.etree.ElementTree as ET
 import XMLmodif
 import XMLparser
 import os
+import TXTparser.py
+
+def invlist(x):
+    return 1./x
+     
 
 def metrics(p):
     
@@ -30,15 +36,45 @@ def metrics(p):
     >>> 
      
     """
+    #recup des données contenu dans le résultat du run
+    #<test_image_name.jpg;ClassId;rank;score>    
+    ranks=TXTparser()
     
-    #Primary metric
+    Sc=map(invlist,ranks)
+    
+    
+    #recuperer les donnees precalculees
+    metx = open("metrics.xml", "r")    
+    
+    tree = ET.parse('metrics.xml')
+    top = tree.getroot()
+    
+    k=0
+    #revoir la structure du metrics.xml, preshot
+    for authors in top.findall('author'):
+        k+=1    
+        users = author.find('count').text
+        P[k] = author.find('plantID').text
+        N[k] = author.find('nbpictures').text
+
+    
+     #Primary metric
     #Average classification score
-    S1=1/Users * sum(1/P[u] * sum(Sc[u][p],1),1)
+    S1=1/users * sum(1/P[u] * sum(Sc[u][p],1),1)
     
     #Secondary metric
-    S2=S=1/Users * sum(1/P[u] * sum(1/N * sum(Sc[u][p],1),1),1)
+    S2=1/users * sum(1/P[u] * sum(1/N * sum(Sc[u][p],1),1),1)
     
-
+    #enregistrement des scores
+    sc=open("score.txt","wb")
+    
+    sc.write("primary metrics :"+S1+"  secondary metrics :"+S2)
+    sc.close()
+    metx.close()
+    
+    
+    
+    
 def MetricsArgs(IBPath):
     
    
