@@ -13,6 +13,40 @@ import numpy as np
 from sphinx_doc import genere_doc
 from sphinx_doc import configure_doc
 
+def SIFT(img):
+    
+    """
+    
+    Cette fonction a pour but d'appliquer le calcul d'un descripteur SIFT à une image \:
+    
+    :param img: Chemin de l'image que l'on souhaite traiter.
+    :type img: string
+    :param des: Valeurs retourner il s'agit d'une liste contenant les valeurs décrivant l'image
+    :type des: array
+    
+    :return: 
+    :rtype:
+     
+    :Example:
+        
+        
+    >>> 
+    >>>
+    """
+    
+    img_trait=cv2.imread(img)
+    
+    grayimage=cv2.cvtColor(img_trait, cv2.COLOR_BGR2GRAY)
+    cv2.imwrite("grayimage.jpg",grayimage)
+    
+    sift = cv2.SIFT(0,3,0.04,10,1.6)
+#    sift = cv2.SIFT()
+    kp,des = sift.detectAndCompute(grayimage,None)
+    
+    return des
+    
+
+
 def descript(path_work, name_desc, path_images, nb_images = "ALL", start_img = 1):
     
     """
@@ -54,65 +88,51 @@ def descript(path_work, name_desc, path_images, nb_images = "ALL", start_img = 1
         end_img = nb_img - start_img
     else : 
         end_img = nb_images + start_img
-        
+    
     #application du descripteur choisit sur les images
     for i in range(start_img, (end_img + 1)): 
-        SIFT(list_path_img[i-1])
+        desc = SIFT(list_path_img[i-1])
         
+    return K_means(desc, 10, 5)
     
     
-def SIFT(img):
-    
-    """
-    
-    Cette fonction a pour but d'appliquer le calcul d'un descripteur SIFT à une image \:
-    
-    :param img: Chemin de l'image que l'on souhaite traiter.
-    :type img: string
-    :param des: Valeurs retourner il s'agit d'une liste contenant les valeurs décrivant l'image
-    :type des: array
-    
-    :return: 
-    :rtype:
-     
-    :Example:
-        
-        
-    >>> 
-    >>>
-    """
-    
-    img_trait=cv2.imread(img)
-    
-    grayimage=cv2.cvtColor(img_trait, cv2.COLOR_BGR2GRAY)
-    cv2.imwrite("grayimage.jpg",grayimage)
-    
-   #parameters cv2.SIFT(0,3,0.04,10,1.6)
-    sift = cv2.SIFT()
-    kp,des = sift.detectAndCompute(grayimage,None)
-    
-    return des
-    
-def K_means():
+def K_means(Vectors, nb_centroid, iterat):
 
     #création des vecteurs de manières aléatoires
-    val_dist = np.zeros((3,100))
-    vectors_test = np.zeros((100, 128))
-    centroid_vectors = np.zeros((3, 128))
-    vectors_test = [np.random.rand(1, 128)*255 for i in range(100)]
-    centroid_vectors = [np.random.rand(1, 128)*255 for i in range(3)]
-    vectors_test = np.asarray(vectors_test)
-    vectors_test = vectors_test.reshape(100, 128)
+    rows, cols = Vectors.shape
+    val_dist = np.zeros((nb_centroid,rows))
+    val_min = np.zeros(rows)
+    centroid_vectors = np.zeros((nb_centroid, cols))
+    centroid_vectors = [np.random.rand(1, cols)*255 for i in range(nb_centroid)]
     centroid_vectors = np.asarray(centroid_vectors)
-    centroid_vectors = centroid_vectors.reshape(3, 128)
+    centroid_vectors = centroid_vectors.reshape(nb_centroid, cols)
     
-    
-    for k in range(3):
-        val_dist[k,:] = (np.sqrt(sum((centroid_vectors[k, :]- vectors_test[np.arange(0,99), :])**2)))
-        
-    
-    
+
+    for it in range(iterat):
+        for k in range(nb_centroid):
+            for j in range(rows):
+                val_dist[k,j] = (np.sqrt(sum((centroid_vectors[k, :]- Vectors[j, :])**2)))
+                
+                #dernière boucle 
+                if k == nb_centroid-1:
+                    val_min[j] = val_dist[k,j]
+                    for i in range(nb_centroid):
+                        if val_dist[i,j] <= val_min[j]:
+                            val_min[j] = i
+                
+        for k in range(nb_centroid):
+            nb = 1
+            for j in range(rows):
+                if val_min[j] == k :
+                    centroid_vectors[k, :] = centroid_vectors[k, :] + Vectors[j, :]
+                    nb = nb + 1
+            centroid_vectors[k, :] = centroid_vectors[k, :]/nb
             
+        return centroid_vectors
+
+def Signature_img(Vectors, k_means):
     
+    
+
 
 #genere_doc()
