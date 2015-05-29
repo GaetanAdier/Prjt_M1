@@ -19,8 +19,7 @@ from sphinx_doc import configure_doc
 path_images = "D:\\MASTER\\Projet\\traintest"   
 path_work = "D:\\MASTER\\Projet\\directory"
 descriptor = "SIFT"
-
-
+nb_word = 5
 if not(os.path.isdir(path_work)):
     os.mkdir(path_work)
     
@@ -28,7 +27,7 @@ if not(os.path.isdir(path_images)):
     print("path for work on images doesn't exist")
     exit(0)
 
-test = fc.descript(path_work, descriptor, path_images)
+test = fc.descript(path_work, descriptor, path_images, nb_word)
 
 
 

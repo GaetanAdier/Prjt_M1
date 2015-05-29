@@ -49,7 +49,7 @@ def SIFT(img):
     
 
 
-def descript(path_work, name_desc, path_images, nb_images = "ALL", start_img = 1):
+def descript(path_work, name_desc, path_images, nb_word, nb_images = "ALL", start_img = 1):
     
     """
     
@@ -100,9 +100,9 @@ def descript(path_work, name_desc, path_images, nb_images = "ALL", start_img = 1
         nb_kp_per_desc = np.append(nb_kp_per_desc, rows)
         all_desc = np.concatenate((all_desc, desc))
     
-    [centroid_vec, val_dist] = K_means(all_desc, 5, 5)
+    [centroid_vec, val_dist] = K_means(all_desc, nb_word, 5)
   #  return K_means(all_desc, 10, 5)
-    plt.hist(val_dist, np.arange(5))
+    plt.hist(val_dist, np.arange(nb_word+1))
     plt.show()
     return val_dist 
     

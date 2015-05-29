@@ -118,16 +118,29 @@
 %%-----------------------------------------------------------------------------------------
   \vspace{0.2cm}
     \begin{itemize}
-
+        \item Fonction permettant la gestion complete de tout les autres fonctions
+    \end{itemize}
+    \begin{block}{Prototype de la fonction}
+        def descript (path_work, name_desc, path_images, nb_class, nb_images = "ALL", start_img = 1):
+    \end{block}
+    \begin{itemize}
+        \item Permet la creation de l'arborescence.
+        \item modification d'une boucle pour passer d'un descripteur a un autre.
     \end{itemize}
 \end{frame}
+
+
 %%-----------------------------------------------------------------------------------------
 
 \begin{frame} \frametitle{Arborescence}
 %%-----------------------------------------------------------------------------------------
-   \begin{itemize}
-
-   \end{itemize}
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[scale=0.35]{arborescence.png}
+        \caption{Arborescence issue par le programme}
+        \label{fig:img_arbo}
+    \end{figure}
+   
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
@@ -154,16 +167,26 @@
 \begin{frame} \frametitle{Principe}
 %%-----------------------------------------------------------------------------------------
    \begin{itemize}
-
+        \item Definir l'ensemble des descripteur pour toutes les images.
+        \item Calcul du K-Means.
+        \item Creation de la signature pour toutes les images.
+        \item Calcul de distance entre les différentes signature ($\chi^2$, Euclidienne).
    \end{itemize}
+   \begin{block}{Equation K-Means}
+        \centering
+        \sum\sum\parallel x_j - u_i \parallel ^2
+    \end{block}
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
 \begin{frame} \frametitle{Resultats}
 %%-----------------------------------------------------------------------------------------
-   \begin{itemize}
-
-   \end{itemize}
+   \begin{figure}[ht]
+        \centering
+        \includegraphics[scale=0.35]{histo1.png}
+        \caption{Histogramme représentant l'ensemble des images}
+        \label{fig:img_arbo}
+    \end{figure}
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
