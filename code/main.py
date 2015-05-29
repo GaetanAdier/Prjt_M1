@@ -7,6 +7,7 @@ Created on Mon May 04 15:51:37 2015
 
 import os
 import function_project as fc
+import matplotlib.pyplot as plt
 from sphinx_doc import genere_doc
 from sphinx_doc import configure_doc
 
@@ -26,9 +27,8 @@ if not(os.path.isdir(path_work)):
 if not(os.path.isdir(path_images)):
     print("path for work on images doesn't exist")
     exit(0)
-    
+
 test = fc.descript(path_work, descriptor, path_images)
-    
 
 
 

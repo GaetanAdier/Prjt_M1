@@ -9,9 +9,11 @@ import os
 import glob
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
 
 from sphinx_doc import genere_doc
 from sphinx_doc import configure_doc
+
 
 def SIFT(img):
     
@@ -85,15 +87,24 @@ def descript(path_work, name_desc, path_images, nb_images = "ALL", start_img = 1
     
     #permet de parcourir toutes ou un nombre d'image définis par l'utilisateur de manière automatique    
     if(nb_images == "ALL"):
-        end_img = nb_img - start_img
+        end_img = nb_img - start_img + 1
     else : 
         end_img = nb_images + start_img
     
+    all_desc = np.zeros((0,128))
+    nb_kp_per_desc = np.zeros((0,1))
     #application du descripteur choisit sur les images
     for i in range(start_img, (end_img + 1)): 
         desc = SIFT(list_path_img[i-1])
-        
-    return K_means(desc, 10, 5)
+        rows, cols = desc.shape
+        nb_kp_per_desc = np.append(nb_kp_per_desc, rows)
+        all_desc = np.concatenate((all_desc, desc))
+    
+    [centroid_vec, val_dist] = K_means(all_desc, 5, 5)
+  #  return K_means(all_desc, 10, 5)
+    plt.hist(val_dist, np.arange(5))
+    plt.show()
+    return val_dist 
     
     
 def K_means(Vectors, nb_centroid, iterat):
@@ -128,11 +139,10 @@ def K_means(Vectors, nb_centroid, iterat):
                     nb = nb + 1
             centroid_vectors[k, :] = centroid_vectors[k, :]/nb
             
-        return centroid_vectors
+        return centroid_vectors, val_min
 
-def Signature_img(Vectors, k_means):
+#def Signature_img(Vectors, k_means):
     
     
-
 
 #genere_doc()
