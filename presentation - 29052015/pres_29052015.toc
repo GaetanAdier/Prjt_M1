@@ -2,8 +2,8 @@
 \select@language {french}
 \beamer@sectionintoc {1}{Process flow}{2}{0}{1}
 \beamer@sectionintoc {2}{Descripteurs}{5}{0}{2}
-\beamer@sectionintoc {3}{Classification}{8}{0}{3}
-\beamer@sectionintoc {4}{XML/TXT}{11}{0}{4}
-\beamer@sectionintoc {5}{Parallelisation}{13}{0}{5}
-\beamer@sectionintoc {6}{HULK}{16}{0}{6}
-\beamer@sectionintoc {7}{Working Paper}{18}{0}{7}
+\beamer@sectionintoc {3}{Classification}{13}{0}{3}
+\beamer@sectionintoc {4}{XML/TXT}{16}{0}{4}
+\beamer@sectionintoc {5}{Parallelisation}{18}{0}{5}
+\beamer@sectionintoc {6}{HULK}{21}{0}{6}
+\beamer@sectionintoc {7}{Working Paper}{23}{0}{7}

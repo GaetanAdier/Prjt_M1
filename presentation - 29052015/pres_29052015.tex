@@ -154,13 +154,119 @@
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
-\begin{frame} \frametitle{C$_2$O (1/?)}
+\begin{frame} \frametitle{C$_2$O (1/6)}
 %%-----------------------------------------------------------------------------------------
    \begin{itemize}
-
+   \item Passage dans l'espace L$^*$a$^*$b$^*$
+   \item Calcul de la difference de couleur (obtention de la matrice C$_2$O)
+   \item Passage en coordonnes cylindriques
+   \item Quantification spherique (obtention de la signature de l'image)
    \end{itemize}
 \end{frame}
 %%-----------------------------------------------------------------------------------------
+
+
+\begin{frame} \frametitle{C$_2$O (2/6)}
+%%-----------------------------------------------------------------------------------------
+   \begin{figure}[htbp]
+    \begin{minipage}[c]{.45\linewidth}
+      \begin{center}
+	\includegraphics[scale=0.30]{MatriceC2O_ImgBleuJaune.png}
+	\caption{Matrice C2O image test bleu jaune}
+	\label{fig:image4}
+      \end{center}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{.45\linewidth}
+      \begin{center}
+	\includegraphics[scale=0.30]{SignatureImgBJ.png}
+	\caption{Signature image test bleu jaune}
+	\label{fig:image5}
+      \end{center}
+    \end{minipage}
+  \end{figure}
+\end{frame}
+%%-----------------------------------------------------------------------------------------
+\begin{frame} \frametitle{C$_2$O (3/6)}
+%%-----------------------------------------------------------------------------------------
+   \begin{figure}[htbp]
+    \begin{minipage}[c]{.45\linewidth}
+      \begin{center}
+	\includegraphics[scale=0.30]{MatriceC2O_ImgRougeVerte.png}
+	\caption{Matrice C2O image test rouge vert}
+	\label{fig:image4}
+      \end{center}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{.45\linewidth}
+      \begin{center}
+	\includegraphics[scale=0.30]{SignatureImgRV.png}
+	\caption{Signature image test rouge vert}
+	\label{fig:image5}
+      \end{center}
+    \end{minipage}
+  \end{figure}
+\end{frame}
+%%-----------------------------------------------------------------------------------------
+\begin{frame} \frametitle{C$_2$O (4/6)}
+%%-----------------------------------------------------------------------------------------
+   \begin{figure}[htbp]
+    \begin{minipage}[c]{.45\linewidth}
+      \begin{center}
+	\includegraphics[scale=0.30]{MatriceC20ImageNvGris.png}
+	\caption{Matrice C2O image en niveau de gris}
+	\label{fig:image4}
+      \end{center}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{.45\linewidth}
+      \begin{center}
+	\includegraphics[scale=0.30]{SignatureImgNvGris.png}
+	\caption{Signature image en niveau de gris}
+	\label{fig:image5}
+      \end{center}
+    \end{minipage}
+  \end{figure}
+
+
+\end{frame}
+%%-----------------------------------------------------------------------------------------
+
+\begin{frame} \frametitle{C$_2$O (5/6)}
+%%-----------------------------------------------------------------------------------------
+   \begin{itemize}
+   \item Image Food.0006 de la base VISTEX
+   \end{itemize}
+   \begin{figure}[h]
+    \center
+    \includegraphics[scale=0.75]{CapFood.png}
+    \caption{VISTEX : Food.0006.ppm}\label{fig:VISTEX : Food.0006.ppm}
+\end{figure}
+\end{frame}
+%%-----------------------------------------------------------------------------------------
+
+\begin{frame} \frametitle{C$_2$O (6/6)}
+%%-----------------------------------------------------------------------------------------
+   \begin{figure}[htbp]
+    \begin{minipage}[c]{.45\linewidth}
+      \begin{center}
+	\includegraphics[scale=0.30]{MatriceC2O_ImgFoodVISTEX.png}
+	\caption{Matrice C2O image Food.0006}
+	\label{fig:image4}
+      \end{center}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{.45\linewidth}
+      \begin{center}
+	\includegraphics[scale=0.30]{SignatureIngFoodVISTEX.png}
+	\caption{Signature image Food.0006}
+	\label{fig:image5}
+      \end{center}
+    \end{minipage}
+  \end{figure}
+\end{frame}
+%%-----------------------------------------------------------------------------------------
+
 
 \section{Classification}
 %%-----------------------------------------------------------------------------------------
@@ -206,10 +312,14 @@
 
 \section{Parallelisation}
 %%-----------------------------------------------------------------------------------------
+%%-----------------------------------------------------------------------------------------
 \begin{frame} \frametitle{Justification du choix}
 %%-----------------------------------------------------------------------------------------
    \begin{itemize}
-
+   \item Utilisation du package multiprocessing
+   \item Permet d'apeller plusieurs fonctions dans le meme temps
+   \item Simple d'utilisation
+   \item Peu d'impact sur le code original => rapide a mettre en place aux vues des delais
    \end{itemize}
 \end{frame}
 %%-----------------------------------------------------------------------------------------
@@ -217,10 +327,25 @@
 \begin{frame} \frametitle{Application}
 %%-----------------------------------------------------------------------------------------
    \begin{itemize}
-
+   \item Exemple pour 4 descripteur C$_2$O :
+   \item Calcules dans une boucle :
    \end{itemize}
+   \begin{figure}[h]
+    \center
+    \includegraphics[scale=0.75]{Temps_sans_parralelisation.png}
+    \caption{Temps sans parralelisation}\label{Temps sans parralelisation}
+   \end{figure}
+   \begin{itemize}
+   \item Calcules en parraleles :
+   \end{itemize}
+   \begin{figure}[h]
+    \center
+    \includegraphics[scale=0.75]{Temps_avec_parralelisation.png}
+    \caption{Temps avec parralelisation}\label{Temps avec parralelisation}
+   \end{figure}
 \end{frame}
 %%-----------------------------------------------------------------------------------------
+
 
 
 \section{HULK}
