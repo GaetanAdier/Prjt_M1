@@ -10,6 +10,12 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D 
 from multiprocessing import Process, Queue
 import time  
+import Constant as c
+from sphinx_doc import genere_doc
+from sphinx_doc import configure_doc
+
+from docutils.core import publish_parts 
+from PIL import Image
 
 
 
@@ -34,18 +40,29 @@ class Timer(object):
 
 def diff(img,dX,dY):
     """
-    Fonction de calcul de la difference d'image par rapport a une version decalee d'elle meme.
-    Cette fonction est apellee par la fonction de calcul du descripteur C2O, le parametre dX et dY 
-    y sont egalement calcules en fonction de l'orientation et de la norme du vecteur de deplacement.
     
-    :param img: A matrix containing the image on which you need the C2O feature calculation.
-    :type img: np.ndarray    
-    :param dX: Number of pixel to shift on the X axis.
-    :type dX: float   
-    :param dY: Number of pixel to shift on the X axis.
-    :type dY: float 
+    
+    Function for the calculation of a difference of color on the whole image, following the Delta vector
+    
+    caracterized here by dX and dY (calculate from the radix and the norm of the vector).
+    
+    The diffenrence between the image and it's shifted copy is computed as shown below 
     
     """
+#    .. image:: arbo.png 
+#       :align: center
+#        
+#    :param img: A N-dimensions matrix containing the image on which you need the C2O feature calculation.
+#    :type img: np.ndarray    
+#    :param dX: Number of pixel to shift on the X axis.
+#    :type dX: float   
+#    :param dY: Number of pixel to shift on the Y axis.
+#    :type dY: float 
+#    
+#    :return: The difference of color image 
+#    :rtype: ndarray
+    
+    
     
         
     
@@ -59,12 +76,12 @@ def diff(img,dX,dY):
     
 
     
-#    reMatdst=np.zeros([rows-dY,cols-dX,plans])
-#    reMatdst=dst[dY:rows,0:cols-dX,:]
+    cv2.imshow('Image dorigine decalee',dst)
+    cv2.waitKey(0)
 #    
 #    
-#    reMatimg=np.zeros([rows-dY,cols-dX,plans])
-#    reMatimg=img[dY:rows,0:cols-dX,:]
+    reMatimg=np.zeros([rows-dY,cols-dX,plans])
+    reMatimg=img[dY:rows,0:cols-dX,:]
     
     # Gestion of negative shifting
     if dY<0:
@@ -80,37 +97,40 @@ def diff(img,dX,dY):
     dX=np.abs(dX)
     dY=np.abs(dY)
     
+    
+    
     #Image resizing
+#    reMatdst=np.zeros([rows-dY,cols-dX,plans])
+#    reMatdst=dst[dY-NegY:rows-NegY,NegX:cols-dX+NegX,:]
     reMatdst=np.zeros([rows-dY,cols-dX,plans])
-    reMatdst=dst[dY-NegY:rows-NegY,NegX:cols-dX+NegX,:]
+    reMatdst=dst[dY:rows,0:cols-dX,:]
     
+    print dY-NegY, rows-NegY, NegX ,cols-dX+NegX
     
+    cv2.imshow('Image de destination decale resizee',reMatdst)
+    cv2.waitKey(0)
+    
+#    reMatimg=np.zeros([rows-dY,cols-dX,plans])
+#    reMatimg=img[dY+NegY:rows+NegY,NegX:cols+dX+NegX,:] 
     reMatimg=np.zeros([rows-dY,cols-dX,plans])
-    reMatimg=img[dY-NegY:rows-NegY,NegX:cols-dX+NegX,:]    
+    reMatimg=img[dY:rows,0:cols-dX,:]
     
+    cv2.imshow('image non decalee resizee',reMatimg)
+    cv2.waitKey(0)
     
     Res = np.zeros([rows-dY,cols-dX,plans])
 
+    # Difference computing
+    Res= reMatimg-reMatdst
     
-    Res = reMatimg-reMatdst
+
+    
+    cv2.imshow('b',Res)
+    cv2.waitKey(0)    
     
     # Uncomment to display the coocurence matrix
     
-#    fig = plt.figure()
-#
-#    ax = fig.add_subplot(111, projection='3d')
-#    
-#    ax.scatter3D(Res[:,:,1], Res[:,:,2], Res[:,:,0],zdir='z')
-#    ax.set_xlim([-60, 60])
-#    ax.set_ylim([-60, 60])
-#    ax.set_zlim([-80, 80])
-#    ##ax.contourf(Res[:,:,1], Res[:,:,2], Res[:,:,0], zdir='z',offset=np.min(LabDiff[:,:,0]), cmap='coolwarm')
-#    ##ax.contourf(Res[:,:,1], Res[:,:,2], Res[:,:,0], zdir='y',offset=np.min(LabDiff[:,:,2]), cmap='coolwarm')
-#    ##ax.contourf(Res[:,:,1], Res[:,:,2], Res[:,:,0], zdir='x',offset=-np.min(LabDiff[:,:,1]), cmap='coolwarm')
-#    #cv2.destroyAllWindows()
-#    ax.set_xlabel('a')
-#    ax.set_ylabel('b')
-#    ax.set_zlabel('L')
+
  
 
     return Res
@@ -123,19 +143,40 @@ def diff(img,dX,dY):
 def RGBtoLAB(imag, MatPass, stdIllum):
     
     """
-    Fonction de BGR à l'espace L*a*b*. Cette fonction utilise le passage par l'espace XYZ. La matrice de passage est speifiee en interne
     
-    :param imag: A matrix containing the image on which you need the C2O feature calculation.
-    :type imag: np.ndarray
-    :param MatPass: The transition matrix for the BGR to XYZ transformation
-    :type MatPass: np.ndarray
-    :param stdIllum: The standard illuminant choosen for the BGR to XYZ transformation.
-    :type stdIllum: np.ndarray
     
-    :return: The coocurence matrix in spherical coordinates.
-    :rtype: np.ndarray    
+    Function for computing the transformation from RGB to L*b*a* space.
+    
+    
     
     """
+#    :param imag: A matrix containing the image on which you need the C2O feature calculation.
+#    :type imag: np.ndarray
+#    :param MatPass: The transition matrix for the BGR to XYZ transformation (set at '0' to have the default value)
+#    :type MatPass: np.ndarray
+#    :param stdIllum: The standard illuminant choosen for the BGR to XYZ transformation (set at '0' to have the default value).
+#    :type stdIllum: np.ndarray
+#    
+#    :return: The coocurence matrix in spherical coordinates.
+#    :rtype: np.ndarray    
+#    
+#    
+#    If no transition matrix is choosen,the following one will be use:
+    
+        
+#    .. math::
+#        $$A=\begin{pmatrix}X_r&X_g&X_b\\Y_r&Y_g&Y_b\\ Z_r&Z_g&Z_b\end{pmatrix}$$
+#       
+#       
+#    .. math::
+#        \begin{pmatrix}X\\Y\\Z\end{pmatrix}=A*\begin{pmatrix}R\\G\\B\end{pmatrix}
+#    
+#    If no transition matrix is choosen, RGBtoLAB will use the following one : 
+#    
+#    .. math::
+#        \begin{pmatrix}X\\Y\\Z\end{pmatrix}
+    
+
     
     rows,cols, plans = imag.shape
 
@@ -144,6 +185,7 @@ def RGBtoLAB(imag, MatPass, stdIllum):
     
     # Set values in the range [0,1]
     imag = imag/np.max(imag)
+    
     
     XYZ=np.zeros((rows,cols,3))
     XBIN=np.zeros((rows,cols))
@@ -167,14 +209,40 @@ def RGBtoLAB(imag, MatPass, stdIllum):
     ZBIN[XYZ[:,:,2]>0.008856]=1
      
     
-   
     
-    #L
-    Lab[:,:,0] = (116*( (XYZ[:,:,1])*YBIN)**(1.0/3.0))-16 -903.3*( (XYZ[:,:,1])* (YBIN-1))
-    #A
-    Lab[:,:,1] = 500*((XBIN*(XYZ[:,:,0])**(1.0/3.0))-(YBIN*(XYZ[:,:,1])**(1.0/3.0))+((YBIN-1)*(XYZ[:,:,1])*(7.787)+(16.0/116.0))-((XBIN-1)*(XYZ[:,:,0])*(7.787)+(16.0/116.0)))
-    #B
-    Lab[:,:,2] = 200*((YBIN*(XYZ[:,:,1])**(1.0/3.0))-(ZBIN*(XYZ[:,:,2])**(1.0/3.0))+((ZBIN-1)*(XYZ[:,:,2])*(7.787)+(16.0/116.0))-((YBIN-1)*(XYZ[:,:,1])*(7.787)+(16.0/116.0)))
+    
+    for i in np.arange(0,rows):
+        for j in np.arange(0,cols):
+            if  XYZ[i,j,1] > 0.008856:
+                Lab[i,j,0]=(116*(XYZ[i,j,1])**(1.0/3.0))-16
+            else:
+                Lab[i,j,0]=903.3*(XYZ[i,j,1])
+                
+            if  XYZ[i,j,0] > 0.008856:
+                XYZ[i,j,0] = (XYZ[i,j,0]**(1.0/3.0))
+            else:
+                XYZ[i,j,0] = (XYZ[i,j,0]*(7.787))
+                
+                
+            if  XYZ[i,j,1] > 0.008856:
+                XYZ[i,j,1] = (XYZ[i,j,1]**(1.0/3.0))
+            else:
+                XYZ[i,j,1] = (XYZ[i,j,1]*(7.787))
+            
+            if XYZ[i,j,2] > 0.008856:
+                XYZ[i,j,2] = (XYZ[i,j,2]**(1.0/3.0))
+            else:
+                XYZ[i,j,2] = (XYZ[i,j,2]*(7.787))
+            
+            Lab[i,j,1] = 500*(XYZ[i,j,0]-XYZ[i,j,1])
+            Lab[i,j,2] = 200*(XYZ[i,j,1]-XYZ[i,j,2])
+#    
+#    #L
+#    Lab[:,:,0] = (116*( (XYZ[:,:,1])*YBIN)**(1.0/3.0))-16 -903.3*( (XYZ[:,:,1])* (YBIN-1))
+#    #A
+#    Lab[:,:,1] = 500*((XBIN*(XYZ[:,:,0])**(1.0/3.0))-(YBIN*(XYZ[:,:,1])**(1.0/3.0))+((YBIN-1)*(XYZ[:,:,1])*(7.787)+(16.0/116.0))-((XBIN-1)*(XYZ[:,:,0])*(7.787)+(16.0/116.0)))
+#    #B
+#    Lab[:,:,2] = 200*((YBIN*(XYZ[:,:,1])**(1.0/3.0))-(ZBIN*(XYZ[:,:,2])**(1.0/3.0))+((ZBIN-1)*(XYZ[:,:,2])*(7.787)+(16.0/116.0))-((YBIN-1)*(XYZ[:,:,1])*(7.787)+(16.0/116.0)))
 
 
     
@@ -185,15 +253,27 @@ def RGBtoLAB(imag, MatPass, stdIllum):
 
 def CarthesianToSpheric(Lab):
     """
+    
+    
+    
     Function for computing spherical coordinates from carthesian ones.
     
-    :param Lab: The coocurence matrix in carthesian coordinates.
-    :type Lab: np.ndarray
     
-    :return: The coocurence matrix in spherical coordinates.
-    :rtype: np.ndarray
     
     """
+#    :param Lab: The coocurence matrix in carthesian coordinates.
+#    :type Lab: np.ndarray
+#    
+#    :return: The coocurence matrix in spherical coordinates.
+#    :rtype: np.ndarray
+#    
+#    This function computes this transformation following the formulas shown below : 
+    
+    
+#    .. math::
+#       r = \sqrt{x^2+y^2+z^2} \\ \phi = \arctan(y/x) \\ \theta = \arccos(z/r)
+    
+    
     
     rows,cols, plans = Lab.shape
     Spheric=np.zeros((rows,cols,plans))
@@ -212,12 +292,22 @@ def CarthesianToSpheric(Lab):
 
 def SphericToCartesian(Spheric):
     """
+    
+    
     Function for computing carthesian coordinates from spherical ones.
     
-    :param Spheric: The coocurence matrix in spherical coordinates.
-    :type Spheric: np.ndarray
+    
     
     """
+#    :param Spheric: The coocurence matrix in spherical coordinates.
+#    :type Spheric: np.ndarray
+#    
+#    :return: The coocurence matrix in carthesian coordinates.
+#    :rtype: np.ndarray
+#    
+#    (Mettre les formules)
+    
+    
     rows,cols, plans = Spheric.shape
     Cartesian=np.zeros((rows,cols,plans))
     
@@ -233,20 +323,35 @@ def SphericToCartesian(Spheric):
 def SphericQuantif(C2OMat, NE, Nalpha, Nbeta):
     """
     
-    Function for computing the spherical quantization for the C2O signature.
     
-    :param C2OMat: The coocurence matrix in spherical coordinates.
-    :type C2OMat: np.ndarray
-    :param Nalpha: Number of intervals considered for the signature calculation on the \alpha component.
-    :type Nalpha: float
-    :param Nbeta: Number of intervals considered for the signature calculation on the \beta component.
-    :type Nbeta: float
+    Function for computing the spherical quantization for the C2O
+    
+    signature.
+    
+    
+    """
+#    :param C2OMat: The coocurence matrix in spherical coordinates.
+#    :type C2OMat: np.ndarray
+#    :param Nalpha: Number of intervals considered for the signature calculation on the \alpha component.
+#    :type Nalpha: float
+#    :param Nbeta: Number of intervals considered for the signature calculation on the \beta component.
+#    :type Nbeta: float
+#    
+#    
+#    :return: The signature of the image 
+#    :rtype: A vector of 4*Nalpha*Nbeta float64
+#    
+#    
+#    The C2O coocurence matrix is really large in term of the number of values and it is not really easy to compare with each other
+#    because of the 3-dimensions. So to solve it, the matrix is quantisize by computing this sphérical quantization to obtain a vector in 1-D.
+    
+    
+#    .. image:: QuantificationSpherique.png 
+#       :align: center
+    
+    
     
 
-    
-    :return: The signature of the image 
-    :rtype: A vector of 4*Nalpha*Nbeta float64
-    """
 
     rows,cols, plans = C2OMat.shape
 
@@ -282,25 +387,34 @@ def SphericQuantif(C2OMat, NE, Nalpha, Nbeta):
     
 def C2O(image, NormLambda, RadLambda, NE, Nalpha, Nbeta, SigC2Ot):
     """
-    Function for the C2O feature calculation
     
-    :param image: Path directory of the image on which you need the C2O feature calculation.
-    :type image: string
-    :param NormLambda: Norm of \Delta vector for the image color diference.
-    :type NormLambda: float
-    :param RadLambda: Radix of \Delta vector for the image color diference.
-    :type RadLambda: float
-    :param Nalpha: Number of intervals considered for the signature calculation on the \alpha component.
-    :type Nalpha: float
-    :param Nbeta: Number of intervals considered for the signature calculation on the \beta component.
-    :type Nbeta: float
-    :param SigC2Ot: Return parameter for the parralelise version.
-    :type SigC2Ot: queue
     
-    :return: The signature of the image in the RadLambda orientation and at the NormLambda distance for color difference
-    :rtype: A vector of NE*Nalpha*Nbeta float64
+    Function for the C2O feature calculation.
+    
+    
     
     """
+    
+#    :param image: Path directory of the image on which you need the C2O feature calculation.
+#    :type image: string
+#    :param NormLambda: Norm of \Delta vector for the image color diference.
+#    :type NormLambda: float
+#    :param RadLambda: Radix of \Delta vector for the image color diference.
+#    :type RadLambda: float
+#    :param Nalpha: Number of intervals considered for the signature calculation on the \alpha component.
+#    :type Nalpha: float
+#    :param Nbeta: Number of intervals considered for the signature calculation on the \beta component.
+#    :type Nbeta: float
+#    :param SigC2Ot: Return parameter for the parralelise version.
+#    :type SigC2Ot: queue
+#    
+#    :return: The signature of the image in the RadLambda orientation and at the NormLambda distance for color difference
+#    :rtype: A vector of NE*Nalpha*Nbeta float64
+#    
+#    The aim of this function is to compute a description feature of a color image which includes the color and texture information. 
+#    The attempted result is to obtain on unique vector for the whole image which characterize the best its content.
+#    
+    
     dX = 0
     dY = 0    
     
@@ -316,37 +430,69 @@ def C2O(image, NormLambda, RadLambda, NE, Nalpha, Nbeta, SigC2Ot):
     MatPass[2,2]=0.950227
     
     # Blanc de reference (F7)
-    stdIllum = np.zeros(3)  
-    stdIllum[0]= 0.95041  
-    stdIllum[1]= 1.00000
-    stdIllum[2]= 1.08747
+#    stdIllum = np.zeros(3)  
+#    stdIllum[0]= 0.95041  
+#    stdIllum[1]= 1.00000
+#    stdIllum[2]= 1.08747
     
-    imag = cv2.imread(image,1)
+#    stdIllum = [0.95041, 1.00000, 1.08747]
     
+    
+    
+
+    
+    imag = Image.open(image)
+    
+    imag=np.array(imag)
+    
+    
+    Lab = np.zeros(np.shape(imag))
+#    imag=imag.astype(np.float32)
     #Transformation throught the Lab space
-    Lab=RGBtoLAB(imag,MatPass, stdIllum)
+#    Lab=cv2.cvtColor(imag, cv2.COLOR_BGR2LAB) 
+#    Lab=RGBtoLAB(imag,MatPass, stdIllum)
+    
+    Lab=RGBtoLAB(imag,MatPass, c.stdIlluminant.F7)
     
     LabDiff=0
     # Calculation of the shifting parameter
     dX = np.round(np.cos(RadLambda)*NormLambda)
     dY = np.round(np.sin(RadLambda)*NormLambda)
     
-
+    print Lab.shape , imag.shape
     
-    # Calculation of the difference of color
+    print dX , dY
+    
+#    Calculation of the difference of color
     LabDiff = diff(Lab,dX,dY)
-    
+    rows,cols, plans = LabDiff.shape
     # Transformation in spherical coordinates
     SphereCoord=CarthesianToSpheric(LabDiff)
+    
 
+    fig = plt.figure()
 
+    ax = fig.add_subplot(111, projection='3d')
+    
+    ax.scatter3D(LabDiff[:,0:cols,2], LabDiff[:,0:cols,1], LabDiff[:,0:cols,0],zdir='z')
+    ax.set_xlim([-60, 60])
+    ax.set_ylim([-60, 60])
+    ax.set_zlim([-80, 80])
+    ax.set_title('Matrice C2O pour image test bleu/Jaune')
+    ax.contourf(LabDiff[:,:,2], LabDiff[:,:,1], LabDiff[:,:,0], zdir='z',offset=-80, cmap='coolwarm')
+    ax.contourf(LabDiff[:,:,2], LabDiff[:,:,1], LabDiff[:,:,0], zdir='y',offset=60, cmap='coolwarm')
+    ax.contourf(LabDiff[:,:,2], LabDiff[:,:,1], LabDiff[:,:,0], zdir='x',offset=-60, cmap='coolwarm')
+    cv2.destroyAllWindows()
+    ax.set_xlabel('a')
+    ax.set_ylabel('b')
+    ax.set_zlabel('L')
     # Calculation of the signature by the spherical quantization
     SigC2O = SphericQuantif(SphereCoord,NE ,Nalpha,Nbeta)
     
-    # Assignation of te result on the queue for the parralelized version
+    # Assignation of the result on the queue for the parralelized version
     SigC2Ot.put(SigC2O)
     
-    return SigC2O
+    return SigC2O 
 
 
 #######################################################################################################################
@@ -374,15 +520,15 @@ stdIllum[2]= 1.08747
 #################################
 ## Definition de l'image de test#
 #################################
-#V =255.0
+V =255.0
 ##BGR
 ##Test Bleu Jaune
-#mat2 = [[0.0,V,V]]
-#mat1= [[V,0.0,0.0]]
-#
-##Test Rouge Vert
-#mat3 = [[0.0,V,0.0]]
-#mat4= [[0.0,0.0,V]]
+mat2 = [[0.0,V,V]]
+mat1= [[V,0.0,0.0]]
+
+#Test Rouge Vert
+mat2 = [[0.0,V,0.0]]
+mat1= [[0.0,0.0,V]]
 #
 ##imgtest = np.zeros((100,300,3))
 ##imgtest[0:100,0:30]= mat1
@@ -398,29 +544,32 @@ stdIllum[2]= 1.08747
 #
 #
 #
-#imgtest = np.zeros((100,300,3))
-#imgtest[0:50,0:30]= mat1
-#imgtest[0:50,30:60]= mat2
-#imgtest[0:50,60:90]= mat1
-#imgtest[0:50,90:120]= mat2
-#imgtest[0:50,120:150]= mat1
-#imgtest[0:50,150:180]= mat2
-#imgtest[0:50,180:210]= mat1
-#imgtest[0:50,210:240]= mat2
-#imgtest[0:50,240:270]= mat1
-#imgtest[0:50,270:300]= mat2
+imgtest = np.zeros((100,300,3))
+imgtest[0:50,0:30]= mat1
+imgtest[0:50,30:60]= mat2
+imgtest[0:50,60:90]= mat1
+imgtest[0:50,90:120]= mat2
+imgtest[0:50,120:150]= mat1
+imgtest[0:50,150:180]= mat2
+imgtest[0:50,180:210]= mat1
+imgtest[0:50,210:240]= mat2
+imgtest[0:50,240:270]= mat1
+imgtest[0:50,270:300]= mat2
+
+imgtest[50:100,0:30]= mat1
+imgtest[50:100,30:60]= mat2
+imgtest[50:100,60:90]= mat1
+imgtest[50:100,90:120]= mat2
+imgtest[50:100,120:150]= mat1
+imgtest[50:100,150:180]= mat2
+imgtest[50:100,180:210]= mat1
+imgtest[50:100,210:240]= mat2
+imgtest[50:100,240:270]= mat1
+imgtest[50:100,270:300]= mat2
 #
-#imgtest[50:100,0:30]= mat1
-#imgtest[50:100,30:60]= mat2
-#imgtest[50:100,60:90]= mat1
-#imgtest[50:100,90:120]= mat2
-#imgtest[50:100,120:150]= mat1
-#imgtest[50:100,150:180]= mat2
-#imgtest[50:100,180:210]= mat1
-#imgtest[50:100,210:240]= mat2
-#imgtest[50:100,240:270]= mat1
-#imgtest[50:100,270:300]= mat2
-#
+
+#cv2.imwrite('ImgTestRV.png',imgtest)
+
 ###################################################################
 ####Ouverture de l'image et conrversion en 32bit#######
 ###################################################################()
@@ -474,18 +623,38 @@ stdIllum[2]= 1.08747
 #L=SphereCoord[:,:,0]
 #a=SphereCoord[:,:,1]
 #b=SphereCoord[:,:,2]
+
+#genere_doc()
+
+#publish_parts(diff.__doc__) 
+
+
 a = Queue()
-timer = Timer()  
-timer.start()  
-for i in np.arange(0,4):
-    print i , ((2*np.pi)/4)*i
-    Test = C2O("Food.0006.ppm", 1, ((2*np.pi)/4)*i, 4, 10, 5,a)
-    plt.figure()
-    plt.plot(Test)
-timer.stop()  
-print 'Temps sans parralelisation:', timer.interval  
-Test = np.zeros((200,4))
-Test1 = np.zeros(200)
+#timer = Timer()  
+#timer.start()  
+#for i in np.arange(0,4):
+#    print i , ((2*np.pi)/4)*i
+#    Test = C2O("grayimage.jpg", 1, ((2*np.pi)/4)*i, 4, 10, 5,a)
+#    plt.figure()
+#    plt.plot(Test)
+#timer.stop()  
+#print 'Temps sans parralelisation:', timer.interval  
+#Test = np.zeros((200,4))
+#Test1 = np.zeros(200)
+
+Test = C2O("000066.bmp", 1, 0, 4, 20, 10,a)
+
+plt.figure()
+plt.plot(Test)
+
+
+
+#
+#
+#plt.figure()
+#plt.plot(Test)
+#plt.title('Signature de image test bleu/Jaune')
+
 #timer.start() 
 #if __name__ == '__main__':
 ##    freeze_support()
@@ -507,9 +676,9 @@ Test1 = np.zeros(200)
 #    Test[:,2] = q3.get()
 #    Test[:,3] = q4.get()
 #    plt.figure()
-#    for i in np.arange(0,200):
-#        Test1[i] = np.mean(Test[i,:])
-#    plt.plot(Test1)
+##    for i in np.arange(0,200):
+##        Test1[i] = np.mean(Test[i,:])
+##    plt.plot(Test1)
 #
 #timer.stop()  
 #print 'Temps avec parralelisation:', timer.interval 

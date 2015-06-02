@@ -1,0 +1,723 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>C2O &mdash; EC 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="EC 1 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">EC 1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for C2O</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Mon May 18 17:08:26 2015</span>
+
+<span class="sd">@author: etienne</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span> 
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Queue</span>
+<span class="kn">import</span> <span class="nn">time</span>  
+<span class="kn">from</span> <span class="nn">sphinx_doc</span> <span class="kn">import</span> <span class="n">genere_doc</span>
+<span class="kn">from</span> <span class="nn">sphinx_doc</span> <span class="kn">import</span> <span class="n">configure_doc</span>
+
+<span class="kn">from</span> <span class="nn">docutils.core</span> <span class="kn">import</span> <span class="n">publish_parts</span> 
+
+
+
+<span class="c">#######################################################################################################################</span>
+<span class="c">####################################################Class timer########################################################</span>
+<span class="c">#######################################################################################################################</span>
+<div class="viewcode-block" id="Timer"><a class="viewcode-back" href="../generated/C2O.html#C2O.Timer">[docs]</a><span class="k">class</span> <span class="nc">Timer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
+<div class="viewcode-block" id="Timer.start"><a class="viewcode-back" href="../generated/C2O.html#C2O.Timer.start">[docs]</a>    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;interval&#39;</span><span class="p">):</span>  
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">interval</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>  
+  </div>
+<div class="viewcode-block" id="Timer.stop"><a class="viewcode-back" href="../generated/C2O.html#C2O.Timer.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;start_time&#39;</span><span class="p">):</span>  
+            <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span>  
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span> <span class="c"># Force timer reinit  </span>
+
+
+<span class="c">#######################################################################################################################</span>
+<span class="c">#####################################################Fonctions#########################################################</span>
+<span class="c">#######################################################################################################################</span>
+</div></div>
+<div class="viewcode-block" id="diff"><a class="viewcode-back" href="../generated/C2O.html#C2O.diff">[docs]</a><span class="k">def</span> <span class="nf">diff</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">dX</span><span class="p">,</span><span class="n">dY</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    Function for the calculation of a difference of color on the whole image, following the Delta vector</span>
+<span class="sd">    </span>
+<span class="sd">    caracterized here by dX and dY (calculate from the radix and the norm of the vector).</span>
+<span class="sd">    </span>
+<span class="sd">    The diffenrence between the image and it&#39;s shifted copy is computed as shown below </span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<span class="c">#    .. image:: arbo.png </span>
+<span class="c">#       :align: center</span>
+<span class="c">#        </span>
+<span class="c">#    :param img: A N-dimensions matrix containing the image on which you need the C2O feature calculation.</span>
+<span class="c">#    :type img: np.ndarray    </span>
+<span class="c">#    :param dX: Number of pixel to shift on the X axis.</span>
+<span class="c">#    :type dX: float   </span>
+<span class="c">#    :param dY: Number of pixel to shift on the Y axis.</span>
+<span class="c">#    :type dY: float </span>
+<span class="c">#    </span>
+<span class="c">#    :return: The difference of color image </span>
+<span class="c">#    :rtype: ndarray</span>
+    
+    
+    
+        
+    
+    <span class="n">rows</span><span class="p">,</span><span class="n">cols</span> <span class="p">,</span> <span class="n">plans</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span>
+    
+    <span class="c">#Image shifting</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="n">dX</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">dY</span><span class="p">]])</span>
+    <span class="n">dst</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">warpAffine</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">M</span><span class="p">,(</span><span class="n">cols</span><span class="p">,</span><span class="n">rows</span><span class="p">))</span>
+    <span class="n">NegY</span><span class="o">=</span><span class="mi">0</span> 
+    <span class="n">NegX</span><span class="o">=</span><span class="mi">0</span>
+    
+
+    
+<span class="c">#    reMatdst=np.zeros([rows-dY,cols-dX,plans])</span>
+<span class="c">#    reMatdst=dst[dY:rows,0:cols-dX,:]</span>
+<span class="c">#    </span>
+<span class="c">#    </span>
+<span class="c">#    reMatimg=np.zeros([rows-dY,cols-dX,plans])</span>
+<span class="c">#    reMatimg=img[dY:rows,0:cols-dX,:]</span>
+    
+    <span class="c"># Gestion of negative shifting</span>
+    <span class="k">if</span> <span class="n">dY</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">NegY</span><span class="o">=-</span><span class="n">dY</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">NegY</span><span class="o">=</span><span class="mi">0</span>
+        
+    <span class="k">if</span> <span class="n">dX</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">NegX</span><span class="o">=-</span><span class="n">dX</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">NegX</span><span class="o">=</span><span class="mi">0</span>
+    
+    <span class="n">dX</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dX</span><span class="p">)</span>
+    <span class="n">dY</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dY</span><span class="p">)</span>
+    
+    <span class="c">#Image resizing</span>
+    <span class="n">reMatdst</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="o">-</span><span class="n">dY</span><span class="p">,</span><span class="n">cols</span><span class="o">-</span><span class="n">dX</span><span class="p">,</span><span class="n">plans</span><span class="p">])</span>
+    <span class="n">reMatdst</span><span class="o">=</span><span class="n">dst</span><span class="p">[</span><span class="n">dY</span><span class="o">-</span><span class="n">NegY</span><span class="p">:</span><span class="n">rows</span><span class="o">-</span><span class="n">NegY</span><span class="p">,</span><span class="n">NegX</span><span class="p">:</span><span class="n">cols</span><span class="o">-</span><span class="n">dX</span><span class="o">+</span><span class="n">NegX</span><span class="p">,:]</span>
+    
+    
+    <span class="n">reMatimg</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="o">-</span><span class="n">dY</span><span class="p">,</span><span class="n">cols</span><span class="o">-</span><span class="n">dX</span><span class="p">,</span><span class="n">plans</span><span class="p">])</span>
+    <span class="n">reMatimg</span><span class="o">=</span><span class="n">img</span><span class="p">[</span><span class="n">dY</span><span class="o">-</span><span class="n">NegY</span><span class="p">:</span><span class="n">rows</span><span class="o">-</span><span class="n">NegY</span><span class="p">,</span><span class="n">NegX</span><span class="p">:</span><span class="n">cols</span><span class="o">-</span><span class="n">dX</span><span class="o">+</span><span class="n">NegX</span><span class="p">,:]</span>    
+    
+    
+    <span class="n">Res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="o">-</span><span class="n">dY</span><span class="p">,</span><span class="n">cols</span><span class="o">-</span><span class="n">dX</span><span class="p">,</span><span class="n">plans</span><span class="p">])</span>
+
+    <span class="c"># Difference computing</span>
+    <span class="n">Res</span> <span class="o">=</span> <span class="n">reMatimg</span><span class="o">-</span><span class="n">reMatdst</span>
+    
+    <span class="c"># Uncomment to display the coocurence matrix</span>
+    
+<span class="c">#    fig = plt.figure()</span>
+<span class="c">#</span>
+<span class="c">#    ax = fig.add_subplot(111, projection=&#39;3d&#39;)</span>
+<span class="c">#    </span>
+<span class="c">#    ax.scatter3D(Res[:,:,1], Res[:,:,2], Res[:,:,0],zdir=&#39;z&#39;)</span>
+<span class="c">##    ax.set_xlim([-60, 60])</span>
+<span class="c">##    ax.set_ylim([-60, 60])</span>
+<span class="c">##    ax.set_zlim([-80, 80])</span>
+<span class="c">#    ax.set_title(&#39;Matrice C2O pour image test bleu/Jaune&#39;)</span>
+<span class="c">#    ##ax.contourf(Res[:,:,1], Res[:,:,2], Res[:,:,0], zdir=&#39;z&#39;,offset=np.min(LabDiff[:,:,0]), cmap=&#39;coolwarm&#39;)</span>
+<span class="c">#    ##ax.contourf(Res[:,:,1], Res[:,:,2], Res[:,:,0], zdir=&#39;y&#39;,offset=np.min(LabDiff[:,:,2]), cmap=&#39;coolwarm&#39;)</span>
+<span class="c">#    ##ax.contourf(Res[:,:,1], Res[:,:,2], Res[:,:,0], zdir=&#39;x&#39;,offset=-np.min(LabDiff[:,:,1]), cmap=&#39;coolwarm&#39;)</span>
+<span class="c">#    #cv2.destroyAllWindows()</span>
+<span class="c">#    ax.set_xlabel(&#39;a&#39;)</span>
+<span class="c">#    ax.set_ylabel(&#39;b&#39;)</span>
+<span class="c">#    ax.set_zlabel(&#39;L&#39;)</span>
+ 
+
+    <span class="k">return</span> <span class="n">Res</span>
+    
+    
+    
+
+
+</div>
+<div class="viewcode-block" id="RGBtoLAB"><a class="viewcode-back" href="../generated/C2O.html#C2O.RGBtoLAB">[docs]</a><span class="k">def</span> <span class="nf">RGBtoLAB</span><span class="p">(</span><span class="n">imag</span><span class="p">,</span> <span class="n">MatPass</span><span class="p">,</span> <span class="n">stdIllum</span><span class="p">):</span>
+    
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    Function for computing the transformation from RGB to L*b*a* space.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<span class="c">#    :param imag: A matrix containing the image on which you need the C2O feature calculation.</span>
+<span class="c">#    :type imag: np.ndarray</span>
+<span class="c">#    :param MatPass: The transition matrix for the BGR to XYZ transformation (set at &#39;0&#39; to have the default value)</span>
+<span class="c">#    :type MatPass: np.ndarray</span>
+<span class="c">#    :param stdIllum: The standard illuminant choosen for the BGR to XYZ transformation (set at &#39;0&#39; to have the default value).</span>
+<span class="c">#    :type stdIllum: np.ndarray</span>
+<span class="c">#    </span>
+<span class="c">#    :return: The coocurence matrix in spherical coordinates.</span>
+<span class="c">#    :rtype: np.ndarray    </span>
+<span class="c">#    </span>
+<span class="c">#    </span>
+<span class="c">#    If no transition matrix is choosen,the following one will be use:</span>
+    
+        
+<span class="c">#    .. math::</span>
+<span class="c">#        $$A=\begin{pmatrix}X_r&amp;X_g&amp;X_b\\Y_r&amp;Y_g&amp;Y_b\\ Z_r&amp;Z_g&amp;Z_b\end{pmatrix}$$</span>
+<span class="c">#       </span>
+<span class="c">#       </span>
+<span class="c">#    .. math::</span>
+<span class="c">#        \begin{pmatrix}X\\Y\\Z\end{pmatrix}=A*\begin{pmatrix}R\\G\\B\end{pmatrix}</span>
+<span class="c">#    </span>
+<span class="c">#    If no transition matrix is choosen, RGBtoLAB will use the following one : </span>
+<span class="c">#    </span>
+<span class="c">#    .. math::</span>
+<span class="c">#        \begin{pmatrix}X\\Y\\Z\end{pmatrix}</span>
+    
+
+    
+    <span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">,</span> <span class="n">plans</span> <span class="o">=</span> <span class="n">imag</span><span class="o">.</span><span class="n">shape</span>
+
+ 
+    <span class="n">imag</span><span class="o">=</span><span class="n">imag</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    
+    <span class="c"># Set values in the range [0,1]</span>
+    <span class="n">imag</span> <span class="o">=</span> <span class="n">imag</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">imag</span><span class="p">)</span>
+    
+    <span class="n">XYZ</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+    <span class="n">XBIN</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">))</span>
+    <span class="n">YBIN</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">))</span>
+    <span class="n">ZBIN</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">))</span>
+    <span class="n">Lab</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+    
+    
+
+
+    <span class="c"># Transformation throught the XYZ space</span>
+    <span class="n">XYZ</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">imag</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">MatPass</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">imag</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">MatPass</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">imag</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">MatPass</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">stdIllum</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">XYZ</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">imag</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">MatPass</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">imag</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">MatPass</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">imag</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">MatPass</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">stdIllum</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">XYZ</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">imag</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">MatPass</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">imag</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">MatPass</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">imag</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">MatPass</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="n">stdIllum</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    
+
+    
+    <span class="c"># Thresholding matrix</span>
+    <span class="n">XBIN</span><span class="p">[</span><span class="n">XYZ</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.008856</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">YBIN</span><span class="p">[</span><span class="n">XYZ</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.008856</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">ZBIN</span><span class="p">[</span><span class="n">XYZ</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.008856</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+     
+    
+   
+    
+    <span class="c">#L</span>
+    <span class="n">Lab</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">116</span><span class="o">*</span><span class="p">(</span> <span class="p">(</span><span class="n">XYZ</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">YBIN</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="mf">3.0</span><span class="p">))</span><span class="o">-</span><span class="mi">16</span> <span class="o">-</span><span class="mf">903.3</span><span class="o">*</span><span class="p">(</span> <span class="p">(</span><span class="n">XYZ</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span> <span class="p">(</span><span class="n">YBIN</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="c">#A</span>
+    <span class="n">Lab</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">500</span><span class="o">*</span><span class="p">((</span><span class="n">XBIN</span><span class="o">*</span><span class="p">(</span><span class="n">XYZ</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="mf">3.0</span><span class="p">))</span><span class="o">-</span><span class="p">(</span><span class="n">YBIN</span><span class="o">*</span><span class="p">(</span><span class="n">XYZ</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="mf">3.0</span><span class="p">))</span><span class="o">+</span><span class="p">((</span><span class="n">YBIN</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">XYZ</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mf">7.787</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mf">16.0</span><span class="o">/</span><span class="mf">116.0</span><span class="p">))</span><span class="o">-</span><span class="p">((</span><span class="n">XBIN</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">XYZ</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mf">7.787</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mf">16.0</span><span class="o">/</span><span class="mf">116.0</span><span class="p">)))</span>
+    <span class="c">#B</span>
+    <span class="n">Lab</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">200</span><span class="o">*</span><span class="p">((</span><span class="n">YBIN</span><span class="o">*</span><span class="p">(</span><span class="n">XYZ</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="mf">3.0</span><span class="p">))</span><span class="o">-</span><span class="p">(</span><span class="n">ZBIN</span><span class="o">*</span><span class="p">(</span><span class="n">XYZ</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">])</span><span class="o">**</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="mf">3.0</span><span class="p">))</span><span class="o">+</span><span class="p">((</span><span class="n">ZBIN</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">XYZ</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mf">7.787</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mf">16.0</span><span class="o">/</span><span class="mf">116.0</span><span class="p">))</span><span class="o">-</span><span class="p">((</span><span class="n">YBIN</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">XYZ</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mf">7.787</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mf">16.0</span><span class="o">/</span><span class="mf">116.0</span><span class="p">)))</span>
+
+
+    
+
+    <span class="k">return</span> <span class="n">Lab</span>
+    
+    
+</div>
+<div class="viewcode-block" id="CarthesianToSpheric"><a class="viewcode-back" href="../generated/C2O.html#C2O.CarthesianToSpheric">[docs]</a><span class="k">def</span> <span class="nf">CarthesianToSpheric</span><span class="p">(</span><span class="n">Lab</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    Function for computing spherical coordinates from carthesian ones.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<span class="c">#    :param Lab: The coocurence matrix in carthesian coordinates.</span>
+<span class="c">#    :type Lab: np.ndarray</span>
+<span class="c">#    </span>
+<span class="c">#    :return: The coocurence matrix in spherical coordinates.</span>
+<span class="c">#    :rtype: np.ndarray</span>
+<span class="c">#    </span>
+<span class="c">#    This function computes this transformation following the formulas shown below : </span>
+    
+    
+<span class="c">#    .. math::</span>
+<span class="c">#       r = \sqrt{x^2+y^2+z^2} \\ \phi = \arctan(y/x) \\ \theta = \arccos(z/r)</span>
+    
+    
+    
+    <span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">,</span> <span class="n">plans</span> <span class="o">=</span> <span class="n">Lab</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">Spheric</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">,</span><span class="n">plans</span><span class="p">))</span>
+    
+    <span class="n">Spheric</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">Lab</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">Lab</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">Lab</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">Spheric</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">Lab</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">],</span><span class="n">Lab</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">Spheric</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">Lab</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">Lab</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)),</span><span class="n">Lab</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">])</span>
+    
+    <span class="c"># Remise a l&#39;echelle des valeurs d&#39;angles </span>
+    <span class="n">Spheric</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">][</span><span class="n">Spheric</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">Spheric</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">][</span><span class="n">Spheric</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+    <span class="n">Spheric</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span>  <span class="n">Spheric</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">Spheric</span>
+
+
+
+</div>
+<div class="viewcode-block" id="SphericToCartesian"><a class="viewcode-back" href="../generated/C2O.html#C2O.SphericToCartesian">[docs]</a><span class="k">def</span> <span class="nf">SphericToCartesian</span><span class="p">(</span><span class="n">Spheric</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    Function for computing carthesian coordinates from spherical ones.</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<span class="c">#    :param Spheric: The coocurence matrix in spherical coordinates.</span>
+<span class="c">#    :type Spheric: np.ndarray</span>
+<span class="c">#    </span>
+<span class="c">#    :return: The coocurence matrix in carthesian coordinates.</span>
+<span class="c">#    :rtype: np.ndarray</span>
+<span class="c">#    </span>
+<span class="c">#    (Mettre les formules)</span>
+    
+    
+    <span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">,</span> <span class="n">plans</span> <span class="o">=</span> <span class="n">Spheric</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">Cartesian</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">,</span><span class="n">plans</span><span class="p">))</span>
+    
+    <span class="n">Cartesian</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">Spheric</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">Spheric</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span>  <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">Spheric</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">Cartesian</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Spheric</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">Spheric</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span>  <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">Spheric</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">Cartesian</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">Spheric</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">Spheric</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">])</span>
+    
+    
+    <span class="k">return</span> <span class="n">Cartesian</span>
+ 
+
+</div>
+<div class="viewcode-block" id="SphericQuantif"><a class="viewcode-back" href="../generated/C2O.html#C2O.SphericQuantif">[docs]</a><span class="k">def</span> <span class="nf">SphericQuantif</span><span class="p">(</span><span class="n">C2OMat</span><span class="p">,</span> <span class="n">NE</span><span class="p">,</span> <span class="n">Nalpha</span><span class="p">,</span> <span class="n">Nbeta</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    Function for computing the spherical quantization for the C2O</span>
+<span class="sd">    </span>
+<span class="sd">    signature.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<span class="c">#    :param C2OMat: The coocurence matrix in spherical coordinates.</span>
+<span class="c">#    :type C2OMat: np.ndarray</span>
+<span class="c">#    :param Nalpha: Number of intervals considered for the signature calculation on the \alpha component.</span>
+<span class="c">#    :type Nalpha: float</span>
+<span class="c">#    :param Nbeta: Number of intervals considered for the signature calculation on the \beta component.</span>
+<span class="c">#    :type Nbeta: float</span>
+<span class="c">#    </span>
+<span class="c">#    </span>
+<span class="c">#    :return: The signature of the image </span>
+<span class="c">#    :rtype: A vector of 4*Nalpha*Nbeta float64</span>
+<span class="c">#    </span>
+<span class="c">#    </span>
+<span class="c">#    The C2O coocurence matrix is really large in term of the number of values and it is not really easy to compare with each other</span>
+<span class="c">#    because of the 3-dimensions. So to solve it, the matrix is quantisize by computing this sphérical quantization to obtain a vector in 1-D.</span>
+    
+    
+<span class="c">#    .. image:: QuantificationSpherique.png </span>
+<span class="c">#       :align: center</span>
+    
+    
+    
+
+
+    <span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">,</span> <span class="n">plans</span> <span class="o">=</span> <span class="n">C2OMat</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="n">BinE</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">))</span>
+    <span class="n">BinAlpha</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">))</span>
+    <span class="n">BinBeta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">))</span>
+    <span class="n">SigC2O</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Nalpha</span><span class="o">*</span><span class="n">Nbeta</span><span class="o">*</span><span class="n">NE</span><span class="p">)</span>
+    <span class="n">n</span><span class="o">=</span><span class="mi">0</span>
+
+    
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">NE</span><span class="p">):</span>
+        <span class="n">BinE</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">))</span>
+        <span class="n">BinE</span><span class="p">[(</span><span class="n">C2OMat</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;=</span><span class="p">(</span><span class="mf">9.0</span><span class="o">/</span><span class="p">(</span><span class="n">NE</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">i</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">C2OMat</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;=</span><span class="p">(</span><span class="mf">9.0</span><span class="o">/</span><span class="p">(</span><span class="n">NE</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))]</span><span class="o">=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">NE</span><span class="o">-</span><span class="mi">2</span> <span class="p">:</span>
+            <span class="n">BinE</span><span class="p">[(</span><span class="n">C2OMat</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;=</span><span class="p">(</span><span class="mf">9.0</span><span class="o">/</span><span class="p">(</span><span class="n">NE</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">i</span><span class="p">)]</span><span class="o">=</span><span class="mi">1</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">Nbeta</span><span class="p">):</span>
+            <span class="n">BinBeta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">))</span>
+            <span class="n">BinBeta</span><span class="p">[(</span><span class="n">BinE</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">C2OMat</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span><span class="o">&gt;=</span><span class="p">((</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">Nbeta</span><span class="p">)</span><span class="o">*</span><span class="n">j</span><span class="p">)))</span><span class="o">&amp;</span><span class="p">(</span><span class="n">C2OMat</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span><span class="o">&lt;=</span><span class="p">((</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">Nbeta</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">))))]</span><span class="o">=</span><span class="mi">1</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">Nalpha</span><span class="p">):</span>
+                <span class="n">BinAlpha</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">))</span>
+                <span class="n">BinAlpha</span><span class="p">[(</span><span class="n">BinBeta</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">C2OMat</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;=</span><span class="p">(((</span><span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">Nalpha</span><span class="p">)</span><span class="o">*</span><span class="n">k</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">Nalpha</span><span class="p">))))</span><span class="o">&amp;</span><span class="p">(</span><span class="n">C2OMat</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;=</span><span class="p">(((</span><span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">Nalpha</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">Nalpha</span><span class="p">))))]</span><span class="o">=</span><span class="mi">1</span>
+                
+                
+
+                <span class="n">SigC2O</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">BinAlpha</span><span class="p">)</span>
+                
+                <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span>
+                
+    <span class="k">return</span> <span class="n">SigC2O</span>
+    
+    
+    </div>
+<div class="viewcode-block" id="C2O"><a class="viewcode-back" href="../generated/C2O.html#C2O.C2O">[docs]</a><span class="k">def</span> <span class="nf">C2O</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">NormLambda</span><span class="p">,</span> <span class="n">RadLambda</span><span class="p">,</span> <span class="n">NE</span><span class="p">,</span> <span class="n">Nalpha</span><span class="p">,</span> <span class="n">Nbeta</span><span class="p">,</span> <span class="n">SigC2Ot</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    Function for the C2O feature calculation.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+<span class="c">#    :param image: Path directory of the image on which you need the C2O feature calculation.</span>
+<span class="c">#    :type image: string</span>
+<span class="c">#    :param NormLambda: Norm of \Delta vector for the image color diference.</span>
+<span class="c">#    :type NormLambda: float</span>
+<span class="c">#    :param RadLambda: Radix of \Delta vector for the image color diference.</span>
+<span class="c">#    :type RadLambda: float</span>
+<span class="c">#    :param Nalpha: Number of intervals considered for the signature calculation on the \alpha component.</span>
+<span class="c">#    :type Nalpha: float</span>
+<span class="c">#    :param Nbeta: Number of intervals considered for the signature calculation on the \beta component.</span>
+<span class="c">#    :type Nbeta: float</span>
+<span class="c">#    :param SigC2Ot: Return parameter for the parralelise version.</span>
+<span class="c">#    :type SigC2Ot: queue</span>
+<span class="c">#    </span>
+<span class="c">#    :return: The signature of the image in the RadLambda orientation and at the NormLambda distance for color difference</span>
+<span class="c">#    :rtype: A vector of NE*Nalpha*Nbeta float64</span>
+<span class="c">#    </span>
+<span class="c">#    The aim of this function is to compute a description feature of a color image which includes the color and texture information. </span>
+<span class="c">#    The attempted result is to obtain on unique vector for the whole image which characterize the best its content.</span>
+<span class="c">#    </span>
+    
+    <span class="n">dX</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">dY</span> <span class="o">=</span> <span class="mi">0</span>    
+    
+    <span class="c">#Matrice de passage RGB-&gt;XYZ (OpenCV)</span>
+    <span class="n">MatPass</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span>  <span class="mf">0.412453</span>
+    <span class="n">MatPass</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span> <span class="mf">0.357580</span>
+    <span class="n">MatPass</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span> <span class="mf">0.180423</span>
+    <span class="n">MatPass</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span> <span class="mf">0.212671</span>
+    <span class="n">MatPass</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mf">0.715160</span>
+    <span class="n">MatPass</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span> <span class="mf">0.072169</span>
+    <span class="n">MatPass</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span> <span class="mf">0.019334</span>
+    <span class="n">MatPass</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span> <span class="mf">0.119193</span>
+    <span class="n">MatPass</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.950227</span>
+    
+    <span class="c"># Blanc de reference (F7)</span>
+    <span class="n">stdIllum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  
+    <span class="n">stdIllum</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span> <span class="mf">0.95041</span>  
+    <span class="n">stdIllum</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span> <span class="mf">1.00000</span>
+    <span class="n">stdIllum</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span> <span class="mf">1.08747</span>
+    
+    <span class="n">imag</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c">#Transformation throught the Lab space</span>
+    <span class="n">Lab</span><span class="o">=</span><span class="n">RGBtoLAB</span><span class="p">(</span><span class="n">imag</span><span class="p">,</span><span class="n">MatPass</span><span class="p">,</span> <span class="n">stdIllum</span><span class="p">)</span>
+    
+    <span class="n">LabDiff</span><span class="o">=</span><span class="mi">0</span>
+    <span class="c"># Calculation of the shifting parameter</span>
+    <span class="n">dX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">RadLambda</span><span class="p">)</span><span class="o">*</span><span class="n">NormLambda</span><span class="p">)</span>
+    <span class="n">dY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">RadLambda</span><span class="p">)</span><span class="o">*</span><span class="n">NormLambda</span><span class="p">)</span>
+    
+
+    
+    <span class="c"># Calculation of the difference of color</span>
+    <span class="n">LabDiff</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">Lab</span><span class="p">,</span><span class="n">dX</span><span class="p">,</span><span class="n">dY</span><span class="p">)</span>
+    
+    <span class="c"># Transformation in spherical coordinates</span>
+    <span class="n">SphereCoord</span><span class="o">=</span><span class="n">CarthesianToSpheric</span><span class="p">(</span><span class="n">LabDiff</span><span class="p">)</span>
+
+
+    <span class="c"># Calculation of the signature by the spherical quantization</span>
+    <span class="n">SigC2O</span> <span class="o">=</span> <span class="n">SphericQuantif</span><span class="p">(</span><span class="n">SphereCoord</span><span class="p">,</span><span class="n">NE</span> <span class="p">,</span><span class="n">Nalpha</span><span class="p">,</span><span class="n">Nbeta</span><span class="p">)</span>
+    
+    <span class="c"># Assignation of te result on the queue for the parralelized version</span>
+    <span class="n">SigC2Ot</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">SigC2O</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">SigC2O</span>
+
+
+<span class="c">#######################################################################################################################</span>
+<span class="c">#######################################################Main############################################################</span>
+<span class="c">#######################################################################################################################</span>
+</div>
+<span class="n">MatPass</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="c">#Matrice de passage RGB-&gt;XYZ (OpenCV)</span>
+<span class="n">MatPass</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span>  <span class="mf">0.412453</span>
+<span class="n">MatPass</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span> <span class="mf">0.357580</span>
+<span class="n">MatPass</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span> <span class="mf">0.180423</span>
+<span class="n">MatPass</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span> <span class="mf">0.212671</span>
+<span class="n">MatPass</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mf">0.715160</span>
+<span class="n">MatPass</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span> <span class="mf">0.072169</span>
+<span class="n">MatPass</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span> <span class="mf">0.019334</span>
+<span class="n">MatPass</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span> <span class="mf">0.119193</span>
+<span class="n">MatPass</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="mf">0.950227</span>
+
+<span class="c"># Blanc de reference (F7)</span>
+<span class="n">stdIllum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  
+<span class="n">stdIllum</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span> <span class="mf">0.95041</span>  
+<span class="n">stdIllum</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span> <span class="mf">1.00000</span>
+<span class="n">stdIllum</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span> <span class="mf">1.08747</span>
+
+<span class="c">#################################</span>
+<span class="c">## Definition de l&#39;image de test#</span>
+<span class="c">#################################</span>
+<span class="n">V</span> <span class="o">=</span><span class="mf">255.0</span>
+<span class="c">##BGR</span>
+<span class="c">##Test Bleu Jaune</span>
+<span class="n">mat2</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">V</span><span class="p">]]</span>
+<span class="n">mat1</span><span class="o">=</span> <span class="p">[[</span><span class="n">V</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">]]</span>
+
+<span class="c">#Test Rouge Vert</span>
+<span class="n">mat2</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="mf">0.0</span><span class="p">]]</span>
+<span class="n">mat1</span><span class="o">=</span> <span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="n">V</span><span class="p">]]</span>
+<span class="c">#</span>
+<span class="c">##imgtest = np.zeros((100,300,3))</span>
+<span class="c">##imgtest[0:100,0:30]= mat1</span>
+<span class="c">##imgtest[0:100,30:60]= mat2</span>
+<span class="c">##imgtest[0:100,60:90]= mat1</span>
+<span class="c">##imgtest[0:100,90:120]= mat2</span>
+<span class="c">##imgtest[0:100,120:150]= mat1</span>
+<span class="c">##imgtest[0:100,150:180]= mat2</span>
+<span class="c">##imgtest[0:100,180:210]= mat1</span>
+<span class="c">##imgtest[0:100,210:240]= mat2</span>
+<span class="c">##imgtest[0:100,240:270]= mat1</span>
+<span class="c">##imgtest[0:100,270:300]= mat2</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="n">imgtest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">30</span><span class="p">]</span><span class="o">=</span> <span class="n">mat1</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span><span class="mi">30</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span><span class="o">=</span> <span class="n">mat2</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span><span class="mi">60</span><span class="p">:</span><span class="mi">90</span><span class="p">]</span><span class="o">=</span> <span class="n">mat1</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span><span class="mi">90</span><span class="p">:</span><span class="mi">120</span><span class="p">]</span><span class="o">=</span> <span class="n">mat2</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span><span class="mi">120</span><span class="p">:</span><span class="mi">150</span><span class="p">]</span><span class="o">=</span> <span class="n">mat1</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span><span class="mi">150</span><span class="p">:</span><span class="mi">180</span><span class="p">]</span><span class="o">=</span> <span class="n">mat2</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span><span class="mi">180</span><span class="p">:</span><span class="mi">210</span><span class="p">]</span><span class="o">=</span> <span class="n">mat1</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span><span class="mi">210</span><span class="p">:</span><span class="mi">240</span><span class="p">]</span><span class="o">=</span> <span class="n">mat2</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span><span class="mi">240</span><span class="p">:</span><span class="mi">270</span><span class="p">]</span><span class="o">=</span> <span class="n">mat1</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span><span class="mi">270</span><span class="p">:</span><span class="mi">300</span><span class="p">]</span><span class="o">=</span> <span class="n">mat2</span>
+
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">50</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">30</span><span class="p">]</span><span class="o">=</span> <span class="n">mat1</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">50</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="mi">30</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span><span class="o">=</span> <span class="n">mat2</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">50</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="mi">60</span><span class="p">:</span><span class="mi">90</span><span class="p">]</span><span class="o">=</span> <span class="n">mat1</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">50</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="mi">90</span><span class="p">:</span><span class="mi">120</span><span class="p">]</span><span class="o">=</span> <span class="n">mat2</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">50</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="mi">120</span><span class="p">:</span><span class="mi">150</span><span class="p">]</span><span class="o">=</span> <span class="n">mat1</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">50</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="mi">150</span><span class="p">:</span><span class="mi">180</span><span class="p">]</span><span class="o">=</span> <span class="n">mat2</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">50</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="mi">180</span><span class="p">:</span><span class="mi">210</span><span class="p">]</span><span class="o">=</span> <span class="n">mat1</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">50</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="mi">210</span><span class="p">:</span><span class="mi">240</span><span class="p">]</span><span class="o">=</span> <span class="n">mat2</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">50</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="mi">240</span><span class="p">:</span><span class="mi">270</span><span class="p">]</span><span class="o">=</span> <span class="n">mat1</span>
+<span class="n">imgtest</span><span class="p">[</span><span class="mi">50</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="mi">270</span><span class="p">:</span><span class="mi">300</span><span class="p">]</span><span class="o">=</span> <span class="n">mat2</span>
+<span class="c">#</span>
+
+<span class="c">#cv2.imwrite(&#39;ImgTestRV.png&#39;,imgtest)</span>
+
+<span class="c">###################################################################</span>
+<span class="c">####Ouverture de l&#39;image et conrversion en 32bit#######</span>
+<span class="c">###################################################################()</span>
+<span class="c">#</span>
+<span class="c">##imag = cv2.imread(&quot;Food.0006.ppm&quot;,1)</span>
+<span class="c">#imag = cv2.imread(&quot;Flowers.0002.ppm&quot;,1)</span>
+<span class="c">##imag = cv2.imread(&quot;CapFood.png&quot;,1)</span>
+<span class="c">##imag = cv2.imread(&quot;test2.jpg&quot;,1)</span>
+<span class="c">#cv2.imshow(&#39;imgtest&#39;,imgtest)</span>
+<span class="c">#cv2.waitKey(0)</span>
+<span class="c">#imgtest=imgtest.astype(np.float32)</span>
+<span class="c">#imag=imag.astype(np.float32)</span>
+<span class="c">#</span>
+<span class="c">##Lab=RGBtoLAB(imgtest)</span>
+<span class="c">#Lab=RGBtoLAB(imag,MatPass, stdIllum)</span>
+<span class="c">#</span>
+<span class="c">###################################################################</span>
+<span class="c">########Passage de l&#39;image dans l&#39;espace Lab#######################</span>
+<span class="c">###################################################################</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="c">#cv2.imshow(&#39;L&#39;,Lab[:,:,0])</span>
+<span class="c">#cv2.waitKey(0)</span>
+<span class="c">#cv2.imshow(&#39;a&#39;,Lab[:,:,1])</span>
+<span class="c">#cv2.waitKey(0)</span>
+<span class="c">#cv2.imshow(&#39;b&#39;,Lab[:,:,2])</span>
+<span class="c">#cv2.waitKey(0)</span>
+<span class="c">#</span>
+<span class="c">###################################################################</span>
+<span class="c">###### Fonction de calcul de la difference#########################</span>
+<span class="c">###################################################################</span>
+<span class="c">#LabDiff=0</span>
+<span class="c">#LabDiff = diff(Lab,1,0)</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="c">#SphereCoord=CarthesianToSpheric(LabDiff)</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="c">#Test = SphericQuantif(SphereCoord,20,10)</span>
+<span class="c">#plt.figure()</span>
+<span class="c">#plt.plot(Test)</span>
+<span class="c">#</span>
+<span class="c">#L=SphereCoord[:,:,0]</span>
+<span class="c">#a=SphereCoord[:,:,1]</span>
+<span class="c">#b=SphereCoord[:,:,2]</span>
+
+<span class="n">genere_doc</span><span class="p">()</span>
+
+<span class="c">#publish_parts(diff.__doc__) </span>
+
+
+<span class="c">#a = Queue()</span>
+<span class="c">#timer = Timer()  </span>
+<span class="c">#timer.start()  </span>
+<span class="c">#for i in np.arange(0,4):</span>
+<span class="c">#    print i , ((2*np.pi)/4)*i</span>
+<span class="c">#    Test = C2O(&quot;grayimage.jpg&quot;, 1, ((2*np.pi)/4)*i, 4, 10, 5,a)</span>
+<span class="c">#    plt.figure()</span>
+<span class="c">#    plt.plot(Test)</span>
+<span class="c">#timer.stop()  </span>
+<span class="c">#print &#39;Temps sans parralelisation:&#39;, timer.interval  </span>
+<span class="c">#Test = np.zeros((200,4))</span>
+<span class="c">#Test1 = np.zeros(200)</span>
+
+<span class="c">#Test = C2O(&quot;ImgTestBJ.png&quot;, 1, 0, 4, 20, 10,a)</span>
+<span class="c">#</span>
+<span class="c">#</span>
+<span class="c">#plt.figure()</span>
+<span class="c">#plt.plot(Test)</span>
+<span class="c">#plt.title(&#39;Signature de image test bleu/Jaune&#39;)</span>
+
+<span class="c">#timer.start() </span>
+<span class="c">#if __name__ == &#39;__main__&#39;:</span>
+<span class="c">##    freeze_support()</span>
+<span class="c">#    q1 = Queue()</span>
+<span class="c">#    q2 = Queue()</span>
+<span class="c">#    q3 = Queue()</span>
+<span class="c">#    q4 = Queue()</span>
+<span class="c">#    p1 = Process(target=C2O,args=(&quot;Food.0006.ppm&quot;, 1, ((2*np.pi)/4)*0, 4, 10, 5,q1))</span>
+<span class="c">#    p2 = Process(target=C2O,args=(&quot;Food.0006.ppm&quot;, 1, ((2*np.pi)/4)*1, 4, 10, 5,q2))</span>
+<span class="c">#    p3 = Process(target=C2O,args=(&quot;Food.0006.ppm&quot;, 1, ((2*np.pi)/4)*2, 4, 10, 5,q3))</span>
+<span class="c">#    p4 = Process(target=C2O,args=(&quot;Food.0006.ppm&quot;, 1, ((2*np.pi)/4)*3, 4, 10, 5,q4))</span>
+<span class="c">#    </span>
+<span class="c">#    p1.start()</span>
+<span class="c">#    p2.start()</span>
+<span class="c">#    p3.start()</span>
+<span class="c">#    p4.start()</span>
+<span class="c">#    Test[:,0] = q1.get()</span>
+<span class="c">#    Test[:,1] = q2.get()</span>
+<span class="c">#    Test[:,2] = q3.get()</span>
+<span class="c">#    Test[:,3] = q4.get()</span>
+<span class="c">#    plt.figure()</span>
+<span class="c">##    for i in np.arange(0,200):</span>
+<span class="c">##        Test1[i] = np.mean(Test[i,:])</span>
+<span class="c">##    plt.plot(Test1)</span>
+<span class="c">#</span>
+<span class="c">#timer.stop()  </span>
+<span class="c">#print &#39;Temps avec parralelisation:&#39;, timer.interval </span>
+
+<span class="c">#######################################################################################################################</span>
+<span class="c">#####################################################Affichage#########################################################</span>
+<span class="c">#######################################################################################################################</span>
+<span class="c">#fig = plt.figure()</span>
+<span class="c">#</span>
+<span class="c">#ax = fig.add_subplot(111, projection=&#39;3d&#39;)</span>
+<span class="c">##</span>
+<span class="c">##</span>
+<span class="c">#del SphericQuantif</span>
+<span class="c">#del SphereCoord</span>
+<span class="c">#del Lab</span>
+<span class="c">##</span>
+<span class="c">##</span>
+<span class="c">#ax.scatter3D(LabDiff[:,:,1], LabDiff[:,:,2], LabDiff[:,:,0],zdir=&#39;z&#39;)</span>
+<span class="c">#ax.set_xlim([-60, 60])</span>
+<span class="c">#ax.set_ylim([-60, 60])</span>
+<span class="c">#ax.set_zlim([-80, 80])</span>
+<span class="c">##ax.contourf(LabDiff[:,:,1], LabDiff[:,:,2], LabDiff[:,:,0], zdir=&#39;z&#39;,offset=np.min(LabDiff[:,:,0]), cmap=&#39;coolwarm&#39;)</span>
+<span class="c">##ax.contourf(LabDiff[:,:,1], LabDiff[:,:,2], LabDiff[:,:,0], zdir=&#39;y&#39;,offset=np.min(LabDiff[:,:,2]), cmap=&#39;coolwarm&#39;)</span>
+<span class="c">##ax.contourf(LabDiff[:,:,1], LabDiff[:,:,2], LabDiff[:,:,0], zdir=&#39;x&#39;,offset=-np.min(LabDiff[:,:,1]), cmap=&#39;coolwarm&#39;)</span>
+<span class="c">#cv2.destroyAllWindows()</span>
+<span class="c">#ax.set_xlabel(&#39;a&#39;)</span>
+<span class="c">#ax.set_ylabel(&#39;b&#39;)</span>
+<span class="c">#ax.set_zlabel(&#39;L&#39;)</span>
+
+<span class="c">#plt.show()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, EC.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.3</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
