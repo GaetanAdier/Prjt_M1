@@ -11,7 +11,7 @@ from PIL import Image
 import numpy as np
 from skimage.color import rgb2lab
 
-from C2O import RGBtoLAB
+from C2O import SphericQuantif
 
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -83,6 +83,15 @@ if __name__ == "__main__":
       
         graph(imate)
         
+        test = SphericQuantif(imate, 4, 20, 10)
+        
+        
+
+        
+        plt.figure()
+        
+        plt.plot(test)
+        plt.title('Test')
         
 
 

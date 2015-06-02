@@ -16,7 +16,7 @@ from sphinx_doc import configure_doc
 
 from docutils.core import publish_parts 
 from PIL import Image
-
+from skimage.color import rgb2lab
 
 
 #######################################################################################################################
@@ -211,38 +211,38 @@ def RGBtoLAB(imag, MatPass, stdIllum):
     
     
     
-    for i in np.arange(0,rows):
-        for j in np.arange(0,cols):
-            if  XYZ[i,j,1] > 0.008856:
-                Lab[i,j,0]=(116*(XYZ[i,j,1])**(1.0/3.0))-16
-            else:
-                Lab[i,j,0]=903.3*(XYZ[i,j,1])
-                
-            if  XYZ[i,j,0] > 0.008856:
-                XYZ[i,j,0] = (XYZ[i,j,0]**(1.0/3.0))
-            else:
-                XYZ[i,j,0] = (XYZ[i,j,0]*(7.787))
-                
-                
-            if  XYZ[i,j,1] > 0.008856:
-                XYZ[i,j,1] = (XYZ[i,j,1]**(1.0/3.0))
-            else:
-                XYZ[i,j,1] = (XYZ[i,j,1]*(7.787))
-            
-            if XYZ[i,j,2] > 0.008856:
-                XYZ[i,j,2] = (XYZ[i,j,2]**(1.0/3.0))
-            else:
-                XYZ[i,j,2] = (XYZ[i,j,2]*(7.787))
-            
-            Lab[i,j,1] = 500*(XYZ[i,j,0]-XYZ[i,j,1])
-            Lab[i,j,2] = 200*(XYZ[i,j,1]-XYZ[i,j,2])
+#    for i in np.arange(0,rows):
+#        for j in np.arange(0,cols):
+#            if  XYZ[i,j,1] > 0.008856:
+#                Lab[i,j,0]=(116*(XYZ[i,j,1])**(1.0/3.0))-16
+#            else:
+#                Lab[i,j,0]=903.3*(XYZ[i,j,1])
+#                
+#            if  XYZ[i,j,0] > 0.008856:
+#                XYZ[i,j,0] = (XYZ[i,j,0]**(1.0/3.0))
+#            else:
+#                XYZ[i,j,0] = (XYZ[i,j,0]*(7.787)) + 16.0/116.0
+#                
+#                
+#            if  XYZ[i,j,1] > 0.008856:
+#                XYZ[i,j,1] = (XYZ[i,j,1]**(1.0/3.0))
+#            else:
+#                XYZ[i,j,1] = (XYZ[i,j,1]*(7.787)) + 16.0/116.0
+#            
+#            if XYZ[i,j,2] > 0.008856:
+#                XYZ[i,j,2] = (XYZ[i,j,2]**(1.0/3.0))
+#            else:
+#                XYZ[i,j,2] = (XYZ[i,j,2]*(7.787)) + 16.0/116.0
+#            
+#            Lab[i,j,1] = 500*(XYZ[i,j,0]-XYZ[i,j,1])
+#            Lab[i,j,2] = 200*(XYZ[i,j,1]-XYZ[i,j,2])
 #    
 #    #L
-#    Lab[:,:,0] = (116*( (XYZ[:,:,1])*YBIN)**(1.0/3.0))-16 -903.3*( (XYZ[:,:,1])* (YBIN-1))
+    Lab[:,:,0] = (116*( (XYZ[:,:,1])*YBIN)**(1.0/3.0))-16 -903.3*( (XYZ[:,:,1])* (YBIN-1))
 #    #A
-#    Lab[:,:,1] = 500*((XBIN*(XYZ[:,:,0])**(1.0/3.0))-(YBIN*(XYZ[:,:,1])**(1.0/3.0))+((YBIN-1)*(XYZ[:,:,1])*(7.787)+(16.0/116.0))-((XBIN-1)*(XYZ[:,:,0])*(7.787)+(16.0/116.0)))
+    Lab[:,:,1] = 500*((XBIN*(XYZ[:,:,0])**(1.0/3.0))-(YBIN*(XYZ[:,:,1])**(1.0/3.0))+((YBIN-1)*(XYZ[:,:,1])*(7.787)+(16.0/116.0))-((XBIN-1)*(XYZ[:,:,0])*(7.787)+(16.0/116.0)))
 #    #B
-#    Lab[:,:,2] = 200*((YBIN*(XYZ[:,:,1])**(1.0/3.0))-(ZBIN*(XYZ[:,:,2])**(1.0/3.0))+((ZBIN-1)*(XYZ[:,:,2])*(7.787)+(16.0/116.0))-((YBIN-1)*(XYZ[:,:,1])*(7.787)+(16.0/116.0)))
+    Lab[:,:,2] = 200*((YBIN*(XYZ[:,:,1])**(1.0/3.0))-(ZBIN*(XYZ[:,:,2])**(1.0/3.0))+((ZBIN-1)*(XYZ[:,:,2])*(7.787)+(16.0/116.0))-((YBIN-1)*(XYZ[:,:,1])*(7.787)+(16.0/116.0)))
 
 
     
@@ -429,6 +429,8 @@ def C2O(image, NormLambda, RadLambda, NE, Nalpha, Nbeta, SigC2Ot):
     MatPass[2,1]= 0.119193
     MatPass[2,2]=0.950227
     
+    print MatPass
+    
     # Blanc de reference (F7)
 #    stdIllum = np.zeros(3)  
 #    stdIllum[0]= 0.95041  
@@ -452,7 +454,11 @@ def C2O(image, NormLambda, RadLambda, NE, Nalpha, Nbeta, SigC2Ot):
 #    Lab=cv2.cvtColor(imag, cv2.COLOR_BGR2LAB) 
 #    Lab=RGBtoLAB(imag,MatPass, stdIllum)
     
-    Lab=RGBtoLAB(imag,MatPass, c.stdIlluminant.F7)
+    print c.MatPass.Scikit
+    
+    Lab=RGBtoLAB(imag,c.MatPass.WGRGB, c.stdIlluminant.D50)
+    
+#    Lab = rgb2lab(imag)
     
     LabDiff=0
     # Calculation of the shifting parameter
