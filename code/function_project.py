@@ -10,6 +10,7 @@ import glob
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+import ntpath
 
 from sphinx_doc import genere_doc
 from sphinx_doc import configure_doc
@@ -45,7 +46,7 @@ def SIFT(img):
 #    sift = cv2.SIFT()
     kp,des = sift.detectAndCompute(grayimage,None)
     
-    return des
+    return kp,des
     
 
 
@@ -95,7 +96,20 @@ def descript(path_work, name_desc, path_images, nb_word, nb_images = "ALL", star
     nb_kp_per_desc = np.zeros((0,1))
     #application du descripteur choisit sur les images
     for i in range(start_img, (end_img + 1)): 
-        desc = SIFT(list_path_img[i-1])
+        kp,desc = SIFT(list_path_img[i-1])
+        
+    #Enregistrement des descripteurs dans fichiers txt
+        filename=ntpath.basename(list_path_img[i-1])
+        
+        mat_kp=np.zeros([len(kp),130])  
+        for i in range(len(kp)):
+            mat_kp[i][0]=kp[i].pt[0]
+        for j in range(len(kp)):
+            mat_kp[j][1]=kp[j].pt[1]
+        mat_kp[:,2:130]=desc
+        
+        np.savetxt(os.path.join(path_desc,filename+'.txt'),mat_kp,fmt='%f')
+    
         rows, cols = desc.shape
         nb_kp_per_desc = np.append(nb_kp_per_desc, rows)
         all_desc = np.concatenate((all_desc, desc))
