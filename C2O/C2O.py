@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon May 18 17:08:26 2015
-
-@author: etienne
-"""
+#"""
+#Created on Mon May 18 17:08:26 2015
+#
+#@author: etienne
+#"""
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -16,7 +16,7 @@ from sphinx_doc import configure_doc
 
 from docutils.core import publish_parts 
 from PIL import Image
-from skimage.color import rgb2lab
+from skimage.color import rgb2xyz
 
 
 #######################################################################################################################
@@ -43,9 +43,7 @@ def diff(img,dX,dY):
     
     
     Function for the calculation of a difference of color on the whole image, following the Delta vector
-    
     caracterized here by dX and dY (calculate from the radix and the norm of the vector).
-    
     The diffenrence between the image and it's shifted copy is computed as shown below 
     
     """
@@ -176,7 +174,7 @@ def RGBtoLAB(imag, MatPass, stdIllum):
 #    .. math::
 #        \begin{pmatrix}X\\Y\\Z\end{pmatrix}
     
-
+    gamma = 2.2
     
     rows,cols, plans = imag.shape
 
@@ -184,7 +182,10 @@ def RGBtoLAB(imag, MatPass, stdIllum):
     imag=imag.astype(np.float32)
     
     # Set values in the range [0,1]
-    imag = imag/np.max(imag)
+    imag = imag/255.0
+    
+    #Inverse companding on the RGB channel
+    imag = imag**gamma
     
     
     XYZ=np.zeros((rows,cols,3))
@@ -192,62 +193,66 @@ def RGBtoLAB(imag, MatPass, stdIllum):
     YBIN=np.zeros((rows,cols))
     ZBIN=np.zeros((rows,cols))
     Lab=np.zeros((rows,cols,3))
-    
+    Lab1=np.zeros((rows,cols,3))
+
     
 
 
-    # Transformation throught the XYZ space
+#     Transformation throught the XYZ space
     XYZ[:,:,0] = (imag[:,:,2]*MatPass[0,0] + imag[:,:,1]*MatPass[0,1] + imag[:,:,0]*MatPass[0,2])/stdIllum[0]
     XYZ[:,:,1] = (imag[:,:,2]*MatPass[1,0] + imag[:,:,1]*MatPass[1,1] + imag[:,:,0]*MatPass[1,2])/stdIllum[1]
     XYZ[:,:,2] = (imag[:,:,2]*MatPass[2,0] + imag[:,:,1]*MatPass[2,1] + imag[:,:,0]*MatPass[2,2])/stdIllum[2]
     
-
+#    XYZ = rgb2xyz(imag)
+    
+    XYZ1 = XYZ
     
     # Thresholding matrix
-    XBIN[XYZ[:,:,0]>0.008856]=1
-    YBIN[XYZ[:,:,1]>0.008856]=1
-    ZBIN[XYZ[:,:,2]>0.008856]=1
+    XBIN[XYZ[:,:,0]>0.008856]=1.0
+    YBIN[XYZ[:,:,1]>0.008856]=1.0
+    ZBIN[XYZ[:,:,2]>0.008856]=1.0
      
     
     
-    
+#    
 #    for i in np.arange(0,rows):
 #        for j in np.arange(0,cols):
-#            if  XYZ[i,j,1] > 0.008856:
-#                Lab[i,j,0]=(116*(XYZ[i,j,1])**(1.0/3.0))-16
+#            if  XYZ1[i,j,1] > 0.008856:
+#                Lab[i,j,0]=(116*(XYZ1[i,j,1])**(1.0/3.0))-16
 #            else:
-#                Lab[i,j,0]=903.3*(XYZ[i,j,1])
+#                Lab[i,j,0]=903.3*(XYZ1[i,j,1])
 #                
-#            if  XYZ[i,j,0] > 0.008856:
-#                XYZ[i,j,0] = (XYZ[i,j,0]**(1.0/3.0))
+#            if  XYZ1[i,j,0] > 0.008856:
+#                XYZ1[i,j,0] = (XYZ1[i,j,0]**(1.0/3.0))
 #            else:
-#                XYZ[i,j,0] = (XYZ[i,j,0]*(7.787)) + 16.0/116.0
+#                XYZ1[i,j,0] = (XYZ1[i,j,0]*(7.787)) + 16.0/116.0
 #                
 #                
-#            if  XYZ[i,j,1] > 0.008856:
-#                XYZ[i,j,1] = (XYZ[i,j,1]**(1.0/3.0))
+#            if  XYZ1[i,j,1] > 0.008856:
+#                XYZ1[i,j,1] = (XYZ1[i,j,1]**(1.0/3.0))
 #            else:
-#                XYZ[i,j,1] = (XYZ[i,j,1]*(7.787)) + 16.0/116.0
+#                XYZ1[i,j,1] = (XYZ1[i,j,1]*(7.787)) + 16.0/116.0
 #            
-#            if XYZ[i,j,2] > 0.008856:
-#                XYZ[i,j,2] = (XYZ[i,j,2]**(1.0/3.0))
+#            if XYZ1[i,j,2] > 0.008856:
+#                XYZ1[i,j,2] = (XYZ1[i,j,2]**(1.0/3.0))
 #            else:
-#                XYZ[i,j,2] = (XYZ[i,j,2]*(7.787)) + 16.0/116.0
+#                XYZ1[i,j,2] = (XYZ1[i,j,2]*(7.787)) + 16.0/116.0
 #            
-#            Lab[i,j,1] = 500*(XYZ[i,j,0]-XYZ[i,j,1])
-#            Lab[i,j,2] = 200*(XYZ[i,j,1]-XYZ[i,j,2])
-#    
-#    #L
-    Lab[:,:,0] = (116*( (XYZ[:,:,1])*YBIN)**(1.0/3.0))-16 -903.3*( (XYZ[:,:,1])* (YBIN-1))
-#    #A
-    Lab[:,:,1] = 500*((XBIN*(XYZ[:,:,0])**(1.0/3.0))-(YBIN*(XYZ[:,:,1])**(1.0/3.0))+((YBIN-1)*(XYZ[:,:,1])*(7.787)+(16.0/116.0))-((XBIN-1)*(XYZ[:,:,0])*(7.787)+(16.0/116.0)))
-#    #B
-    Lab[:,:,2] = 200*((YBIN*(XYZ[:,:,1])**(1.0/3.0))-(ZBIN*(XYZ[:,:,2])**(1.0/3.0))+((ZBIN-1)*(XYZ[:,:,2])*(7.787)+(16.0/116.0))-((YBIN-1)*(XYZ[:,:,1])*(7.787)+(16.0/116.0)))
+#            Lab[i,j,1] = 500*(XYZ1[i,j,0]-XYZ1[i,j,1])
+#            Lab[i,j,2] = 200*(XYZ1[i,j,1]-XYZ1[i,j,2])
+            
+#    print np.sum(XBIN+np.abs(XBIN-1))
+#   #L               Cas ou Y>0.008856                                      Cas ou Y<0.008856
+    Lab1[:,:,0] = ((116*((XYZ[:,:,1])*YBIN)**(1.0/3.0))-16)             +(903.3*((XYZ[:,:,1])* np.abs(YBIN-1)))
+#   #A                      X>0.008656                      Y>0.008856                                      X<0.008856                                          Y<0.008856
+    Lab1[:,:,1] = 500*(((XBIN*(XYZ[:,:,0])**(1.0/3.0))-(YBIN*(XYZ[:,:,1])**(1.0/3.0)))            +(((np.abs(XBIN-1)*(XYZ[:,:,0])*(7.787))+(16.0/116.0))-((np.abs(YBIN-1)*(XYZ[:,:,1])*(7.787))+(16.0/116.0))))
+#   #B                      Y>0.008656                      Z>0.008856                                      Y<0.008856                                          Z<0.008856
+    Lab1[:,:,2] = 200*(((YBIN*(XYZ[:,:,1])**(1.0/3.0))-(ZBIN*(XYZ[:,:,2])**(1.0/3.0)))            +(((np.abs(YBIN-1)*(XYZ[:,:,1])*(7.787))+(16.0/116.0))-((np.abs(ZBIN-1)*(XYZ[:,:,2])*(7.787))+(16.0/116.0))))
+#
+#
+#    print np.mean(Lab[:,:,0]-Lab1[:,:,0]) , np.mean(Lab[:,:,1]-Lab1[:,:,1]) , np.mean(Lab[:,:,2]-Lab1[:,:,2])
 
-
-    
-
-    return Lab
+    return Lab1
     
     
 
@@ -321,15 +326,15 @@ def SphericToCartesian(Spheric):
 
 
 def SphericQuantif(C2OMat, NE, Nalpha, Nbeta):
-    """
-    
-    
-    Function for computing the spherical quantization for the C2O
-    
-    signature.
-    
-    
-    """
+#    """
+#    
+#    
+#    Function for computing the spherical quantization for the C2O
+#    
+#    signature.
+#    
+#    
+#    """
 #    :param C2OMat: The coocurence matrix in spherical coordinates.
 #    :type C2OMat: np.ndarray
 #    :param Nalpha: Number of intervals considered for the signature calculation on the \alpha component.
@@ -361,21 +366,22 @@ def SphericQuantif(C2OMat, NE, Nalpha, Nbeta):
     SigC2O = np.zeros(Nalpha*Nbeta*NE)
     n=0
 
-    
+    print 9.0/(NE-1)
     
     for i in np.arange(0,NE):
         BinE=np.zeros((rows,cols))
         BinE[(C2OMat[:,:,0]>=(9.0/(NE-1))*i)&(C2OMat[:,:,0]<=(9.0/(NE-1))*(i+1))]=1
         if i > NE-2 :
             BinE[(C2OMat[:,:,0]>=(9.0/(NE-1))*i)]=1
+   
         for j in np.arange(0,Nbeta):
-            BinBeta=np.zeros((rows,cols))
+            BinBeta=np.zeros((rows,cols)) #Beta va de - pi/2 a pi/2 et pas de 8 a pi
             BinBeta[(BinE==1)&(C2OMat[:,:,2]>=((-np.pi/2)+((np.pi/Nbeta)*j)))&(C2OMat[:,:,2]<=((-np.pi/2)+((np.pi/Nbeta)*(j+1))))]=1
+            
+          
             for k in np.arange(0,Nalpha):
                 BinAlpha=np.zeros((rows,cols))
-                BinAlpha[(BinBeta==1)&(C2OMat[:,:,1]>=(((2.0*np.pi/Nalpha)*k)-(np.pi/(2*Nalpha))))&(C2OMat[:,:,1]<=(((2.0*np.pi/Nalpha)*(k+1))-(np.pi/(2*Nalpha))))]=1
-                
-                
+                BinAlpha[(BinBeta==1)&(C2OMat[:,:,1]>=(((2.0*np.pi/Nalpha)*k)-(np.pi/(Nalpha))))&(C2OMat[:,:,1]<=(((2.0*np.pi/Nalpha)*(k+1))-(np.pi/(Nalpha))))]=1
 
                 SigC2O[n]=np.sum(BinAlpha)
                 
@@ -429,6 +435,8 @@ def C2O(image, NormLambda, RadLambda, NE, Nalpha, Nbeta, SigC2Ot):
     MatPass[2,1]= 0.119193
     MatPass[2,2]=0.950227
     
+    
+    
     print MatPass
     
     # Blanc de reference (F7)
@@ -449,14 +457,14 @@ def C2O(image, NormLambda, RadLambda, NE, Nalpha, Nbeta, SigC2Ot):
     
     
     Lab = np.zeros(np.shape(imag))
-#    imag=imag.astype(np.float32)
+    imag=imag.astype(np.float32)
     #Transformation throught the Lab space
 #    Lab=cv2.cvtColor(imag, cv2.COLOR_BGR2LAB) 
 #    Lab=RGBtoLAB(imag,MatPass, stdIllum)
     
-    print c.MatPass.Scikit
+#    print c.MatPass.Scikit
     
-    Lab=RGBtoLAB(imag,c.MatPass.WGRGB, c.stdIlluminant.D50)
+    Lab=RGBtoLAB(imag,c.MatPass.AdobRGB, c.stdIlluminant.D65)
     
 #    Lab = rgb2lab(imag)
     
@@ -465,13 +473,16 @@ def C2O(image, NormLambda, RadLambda, NE, Nalpha, Nbeta, SigC2Ot):
     dX = np.round(np.cos(RadLambda)*NormLambda)
     dY = np.round(np.sin(RadLambda)*NormLambda)
     
-    print Lab.shape , imag.shape
+    
     
     print dX , dY
     
 #    Calculation of the difference of color
     LabDiff = diff(Lab,dX,dY)
     rows,cols, plans = LabDiff.shape
+    print np.max(Lab[:,:,0]) , np.min(Lab[:,:,0])
+    print np.max(Lab[:,:,1]) , np.min(Lab[:,:,1])
+    print np.max(Lab[:,:,2]) , np.min(Lab[:,:,2])
     # Transformation in spherical coordinates
     SphereCoord=CarthesianToSpheric(LabDiff)
     
@@ -481,17 +492,17 @@ def C2O(image, NormLambda, RadLambda, NE, Nalpha, Nbeta, SigC2Ot):
     ax = fig.add_subplot(111, projection='3d')
     
     ax.scatter3D(LabDiff[:,0:cols,2], LabDiff[:,0:cols,1], LabDiff[:,0:cols,0],zdir='z')
-    ax.set_xlim([-60, 60])
-    ax.set_ylim([-60, 60])
-    ax.set_zlim([-80, 80])
-    ax.set_title('Matrice C2O pour image test bleu/Jaune')
+#    ax.set_xlim([-80, 80])
+#    ax.set_ylim([-80, 80])
+#    ax.set_zlim([-80, 80])
+#    ax.set_title('Matrice C2O')
     ax.contourf(LabDiff[:,:,2], LabDiff[:,:,1], LabDiff[:,:,0], zdir='z',offset=-80, cmap='coolwarm')
-    ax.contourf(LabDiff[:,:,2], LabDiff[:,:,1], LabDiff[:,:,0], zdir='y',offset=60, cmap='coolwarm')
+    ax.contourf(LabDiff[:,:,2], LabDiff[:,:,1], LabDiff[:,:,0], zdir='y',offset= 60, cmap='coolwarm')
     ax.contourf(LabDiff[:,:,2], LabDiff[:,:,1], LabDiff[:,:,0], zdir='x',offset=-60, cmap='coolwarm')
-    cv2.destroyAllWindows()
-    ax.set_xlabel('a')
-    ax.set_ylabel('b')
-    ax.set_zlabel('L')
+#    cv2.destroyAllWindows()
+    ax.set_xlabel(ur"$\Delta$"+"b")
+    ax.set_ylabel(ur"$\Delta$"+"a")
+    ax.set_zlabel(ur"$\Delta$"+"L")
     # Calculation of the signature by the spherical quantization
     SigC2O = SphericQuantif(SphereCoord,NE ,Nalpha,Nbeta)
     
@@ -529,12 +540,12 @@ stdIllum[2]= 1.08747
 V =255.0
 ##BGR
 ##Test Bleu Jaune
-mat2 = [[0.0,V,V]]
-mat1= [[V,0.0,0.0]]
+mat2 = [[V,V,0.0]]
+mat1= [[0.0,0.0,V]]
 
 #Test Rouge Vert
-mat2 = [[0.0,V,0.0]]
-mat1= [[0.0,0.0,V]]
+#mat2 = [[V,0.0,0.0]]
+#mat1= [[0.0,V,0.0]]
 #
 ##imgtest = np.zeros((100,300,3))
 ##imgtest[0:100,0:30]= mat1
@@ -574,7 +585,7 @@ imgtest[50:100,240:270]= mat1
 imgtest[50:100,270:300]= mat2
 #
 
-#cv2.imwrite('ImgTestRV.png',imgtest)
+#cv2.imwrite('ImgTestBJRGB.png',imgtest)
 
 ###################################################################
 ####Ouverture de l'image et conrversion en 32bit#######
@@ -630,7 +641,8 @@ imgtest[50:100,270:300]= mat2
 #a=SphereCoord[:,:,1]
 #b=SphereCoord[:,:,2]
 
-#genere_doc()
+#configure_doc()
+genere_doc()
 
 #publish_parts(diff.__doc__) 
 
@@ -648,17 +660,42 @@ a = Queue()
 #Test = np.zeros((200,4))
 #Test1 = np.zeros(200)
 
-Test = C2O("000066.bmp", 1, 0, 4, 20, 10,a)
-
-plt.figure()
-plt.plot(Test)
-
-
-
-#
+#Test = C2O("000066.bmp", 1, 0, 4, 8, 8,a)
 #
 #plt.figure()
 #plt.plot(Test)
+
+
+
+########################################################################
+#########Validation quantif spherique###################################
+########################################################################
+NumIntervE = 0.0
+NumIntervAlpha = 4.0
+NumIntervBeta = 2.0
+
+
+E =  np.abs(np.random.randn(30,30))*(3.0/4.0)
+E = E + (3*NumIntervE)
+alpha = np.random.randn(30,30)*(np.pi/(8*4))
+alpha = alpha + ((NumIntervAlpha*2.0*np.pi/8.0))
+beta = np.abs(np.random.randn(30,30))*(np.pi/(8*4))
+beta = beta - ((4.0-NumIntervBeta)*np.pi/8.0)
+
+SphereCoord = np.zeros((30,30,3))
+SphereCoord[:,:,0]= E
+SphereCoord[:,:,1]= alpha
+SphereCoord[:,:,2]= beta
+Test = SphericQuantif(SphereCoord,4,8,8)
+#
+##
+##
+plt.figure()
+plt.plot(Test)
+plt.title("C2O Signature")
+
+Mat = SphericToCartesian(SphereCoord)
+
 #plt.title('Signature de image test bleu/Jaune')
 
 #timer.start() 
@@ -692,26 +729,37 @@ plt.plot(Test)
 #######################################################################################################################
 #####################################################Affichage#########################################################
 #######################################################################################################################
-#fig = plt.figure()
+fig = plt.figure()
+
+ax = fig.add_subplot(111, projection='3d')
 #
-#ax = fig.add_subplot(111, projection='3d')
-##
-##
+#
 #del SphericQuantif
 #del SphereCoord
 #del Lab
-##
-##
-#ax.scatter3D(LabDiff[:,:,1], LabDiff[:,:,2], LabDiff[:,:,0],zdir='z')
+#
+#
+ax.scatter3D(Mat[:,:,1], Mat[:,:,2], Mat[:,:,0],zdir='z')
 #ax.set_xlim([-60, 60])
 #ax.set_ylim([-60, 60])
 #ax.set_zlim([-80, 80])
-##ax.contourf(LabDiff[:,:,1], LabDiff[:,:,2], LabDiff[:,:,0], zdir='z',offset=np.min(LabDiff[:,:,0]), cmap='coolwarm')
-##ax.contourf(LabDiff[:,:,1], LabDiff[:,:,2], LabDiff[:,:,0], zdir='y',offset=np.min(LabDiff[:,:,2]), cmap='coolwarm')
-##ax.contourf(LabDiff[:,:,1], LabDiff[:,:,2], LabDiff[:,:,0], zdir='x',offset=-np.min(LabDiff[:,:,1]), cmap='coolwarm')
-#cv2.destroyAllWindows()
-#ax.set_xlabel('a')
-#ax.set_ylabel('b')
-#ax.set_zlabel('L')
+ax.set_xlim([-2, 2])
+ax.set_ylim([-2, 2])
+ax.set_zlim([-2, 2])
+ax.set_title('C2O matrix')
+ax.set_xlabel(ur"$\Delta$"+"b")
+ax.set_ylabel(ur"$\Delta$"+"a")
+ax.set_zlabel(ur"$\Delta$"+"L")
+ax.contourf(Mat[:,:,1], Mat[:,:,2], Mat[:,:,0], zdir='z',offset=-2, cmap='coolwarm')
+ax.contourf(Mat[:,:,1], Mat[:,:,2], Mat[:,:,0], zdir='y',offset= 2, cmap='coolwarm')
+ax.contourf(Mat[:,:,1], Mat[:,:,2], Mat[:,:,0], zdir='x',offset=-2, cmap='coolwarm')
+#ax.plot([-60,60], [0,0], [0,0])
+#ax.plot([0,0], [-60,60], [0,0])
+#ax.plot([0,0], [0,0], [-80,80])
+ax.plot([-1,1], [0,0], [0,0])
+ax.plot([0,0], [-1,1], [0,0])
+ax.plot([0,0], [0,0], [-1,1])
+cv2.destroyAllWindows()
+
 
 #plt.show()

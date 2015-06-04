@@ -25,14 +25,14 @@ def graph (imat):
         ax = fig.add_subplot(111, projection='3d')
           
         ax.scatter3D(imat[:,:,2],imat[:,:,1],imat[:,:,0])# plot the 3D graph
-       
-        ax.set_xlim([-60, 60])
+        ax.set_title('Matrice C2O fonction Armando')
         ax.set_ylim([-60, 60])
         ax.set_zlim([-80, 80])
-         #plot de proyection in each axe
-        ax.contourf(imat[:,:,2],imat[:,:,1],imat[:,:,0], zdir='x',offset=-60,cmap=cm.coolwarm)
-        ax.contourf(imat[:,:,2],imat[:,:,1],imat[:,:,0], zdir='y',offset=60,cmap=cm.coolwarm)
-        ax.contourf(imat[:,:,2],imat[:,:,1],imat[:,:,0], zdir='z',offset=-80,cmap=cm.coolwarm)                                                               
+        ax.set_xlim([-60, 60])
+#         #plot de proyection in each axe
+#        ax.contourf(imat[:,:,2],imat[:,:,1],imat[:,:,0], zdir='x',offset=-60,cmap=cm.coolwarm)
+#        ax.contourf(imat[:,:,2],imat[:,:,1],imat[:,:,0], zdir='y',offset=60,cmap=cm.coolwarm)
+#        ax.contourf(imat[:,:,2],imat[:,:,1],imat[:,:,0], zdir='z',offset=-80,cmap=cm.coolwarm)                                                               
                 
         plt.show()
 ###########################################################################
@@ -44,28 +44,13 @@ def graph (imat):
 ##        The call main
 ##===============================================================================
 
-#Matrice de passage RGB->XYZ (OpenCV)
-MatPass[0,0]=  0.412453
-MatPass[0,1]= 0.357580
-MatPass[0,2]= 0.180423
-MatPass[1,0]= 0.212671
-MatPass[1,1]=0.715160
-MatPass[1,2]= 0.072169
-MatPass[2,0]= 0.019334
-MatPass[2,1]= 0.119193
-MatPass[2,2]=0.950227
 
-# Blanc de reference (F7)
-stdIllum = np.zeros(3)  
-stdIllum[0]= 0.95041  
-stdIllum[1]= 1.00000
-stdIllum[2]= 1.08747
 
 if __name__ == "__main__":
         
         #waynom="C:/data/ima/Outex_TC_00014/images/000020" # way of image file   
-        waynom="000066"
-        wayext=".bmp" #write the extension of file
+        waynom="5"
+        wayext=".jpg" #write the extension of file
         way1=waynom+wayext # the way and their extention
         imat=Image.open(way1)  #image way
         [fil,col]=imat.size
@@ -83,15 +68,7 @@ if __name__ == "__main__":
       
         graph(imate)
         
-        test = SphericQuantif(imate, 4, 20, 10)
-        
-        
 
-        
-        plt.figure()
-        
-        plt.plot(test)
-        plt.title('Test')
         
 
 

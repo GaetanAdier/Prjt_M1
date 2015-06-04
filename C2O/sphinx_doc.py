@@ -80,3 +80,8 @@ def genere_doc():
     sphinx.apidoc.main(['sphinx-apidoc', '-f', '--output-dir=doc/generated', './'])
     sphinx.main(['sphinx-build', '-b', 'html', 'doc', 'doc/_build/html'])
 #    sphinx.main(['sphinx-build', '-b', 'latex', 'doc', 'doc/_build/latex'])
+    
+    
+
+
+genere_doc()

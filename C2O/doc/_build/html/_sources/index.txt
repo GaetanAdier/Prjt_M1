@@ -1,10 +1,10 @@
-.. EC documentation master file, created by
-   sphinx-quickstart on Mon Jun 01 10:26:58 2015.
+.. C2O documentation master file, created by
+   sphinx-quickstart on Thu Jun 04 11:34:32 2015.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to EC's documentation!
-==============================
+Welcome to C2O's documentation!
+===============================
 
 Contents:
 
