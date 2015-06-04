@@ -4,6 +4,7 @@ Created on Tue May 26 16:24:13 2015
 
 @author: Projet
 """
+#import numpy as np
 
 def TXTparser():
     
@@ -20,6 +21,10 @@ def TXTparser():
         #i+=1
         
     #print rank
+    
+    #autre solution :
+    #recupérer tout dans un array    
+    #data=np.loadtxt('fakerun.txt',delimiter=';')
     
     
     return rank

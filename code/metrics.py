@@ -18,7 +18,8 @@ def metrics(p):
     
     """
     
-    Cete fonction permet d'évaluer le score de la solution
+    Cette fonction permet d'évaluer le score de la solution selon la méthode du CLEF.
+    
     
     :param Users: number of users who have at least one image in the test data
     :type Users:
@@ -40,6 +41,7 @@ def metrics(p):
     #<test_image_name.jpg;ClassId;rank;score>    
     ranks=TXTparser()
     
+    #inversion de chaque élément de ranks pour obtenir Sc
     Sc=map(invlist,ranks)
     
     
@@ -57,13 +59,31 @@ def metrics(p):
         P[k] = author.find('plantID').text
         N[k] = author.find('nbpictures').text
 
-    
+    S1=0
+    temp1=0
      #Primary metric
     #Average classification score
-    S1=1/users * sum(1/P[u] * sum(Sc[u][p],1),1)
+    for u in xrange(users):
+        for p in xrange(len(P)):
+            temp1+=Sc[u][p]
+            
+        S1+=temp1/P[u]
+            #S1=1/users * sum(1/P[u] * sum(Sc[u][p],1),1)
+    S1=S1/users
     
+    temp1=0
+    temp2=0
+    S2=0
     #Secondary metric
-    S2=1/users * sum(1/P[u] * sum(1/N * sum(Sc[u][p],1),1),1)
+    for u in xrange(users):
+        for p in xrange(len(P)):
+            for n in range(len(N)):
+                temp1+=Sc[u][p][n]
+            temp2+=temp1/N[u][p]
+        S2+=temp2/P[u]
+    S2=S2/users
+                #S2+=1/P[u]+Sc[u][p]
+                #S2=1/users * sum(1/P[u] * sum(1/N * sum(Sc[u][p],1),1),1)
     
     #enregistrement des scores
     sc=open("score.txt","wb")

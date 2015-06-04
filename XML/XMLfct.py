@@ -42,7 +42,8 @@ def prettify(elem):
 def XMltree(des,name_desc):
     
     """
-    Creation de l'arbre du XML à partir des
+    Creation de l'arbre du XML à partir des descripteurs.
+    Solution abandonnée.
 
     :param des: matrice contenant les vecteurs keypoints obtenus par le descripteur
     :type des: array
