@@ -8,8 +8,9 @@
     
     <title>C2O module &mdash; C2O 1 documentation</title>
     
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/scrolls.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -23,79 +24,277 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="C2O 1 documentation" href="../index.html" />
-   
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
-
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="top" title="C2O 1 documentation" href="../index.html" /> 
   </head>
-  <body role="document">
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">C2O 1 documentation</a> &raquo;</li> 
-      </ul>
-    </div>  
+  <body>
+    <div id="content">
+      <div class="header">
+        <h1 class="heading"><a href="../index.html"
+          title="back to the documentation overview"><span>C2O module</span></a></h1>
+      </div>
+      <div class="relnav">
+        <a href="#">C2O module</a>
+      </div>
+      <div id="contentwrapper">
+        
+  <div class="section" id="module-C2O">
+<span id="c2o-module"></span><h1>C2O module<a class="headerlink" href="#module-C2O" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="C2O.C2O">
+<tt class="descclassname">C2O.</tt><tt class="descname">C2O</tt><big>(</big><em>image</em>, <em>NormDelta</em>, <em>RadDelta</em>, <em>NE</em>, <em>Nalpha</em>, <em>Nbeta</em>, <em>SigC2Ot</em><big>)</big><a class="headerlink" href="#C2O.C2O" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function for the <img class="math" src="../_images/math/cf2737ac4ae28360bf714bb75c6437b60914486a.png" alt="C_2O"/> feature calculation.</p>
+<p>The aim of this function is to compute a description feature of a color image which includes the color and texture information. 
+The attempted result is to obtain on unique vector for the whole image which characterize the best its content.</p>
+<p>This function uses the following formulas to calculate the number of pixel to shift on the image for the difference of color (dX and dY)</p>
+<div class="math">
+<p><img src="../_images/math/4ba6fe8fc82d6b7c0c49d65e022398e47908fdc9.png" alt="\sin\theta=dY/\|\Delta\|"/></p>
+</div><div class="math">
+<p><img src="../_images/math/c4d0775a8bcc5ad0a257d1a9cbdf1a40c428b18e.png" alt="dY = \sin\theta * \|\Delta\|"/></p>
+</div><div class="math">
+<p><img src="../_images/math/a28ae8851be2bd6b68b593fc080f69eebd5003be.png" alt="\cos\theta=dX/\|\Delta\|"/></p>
+</div><div class="math">
+<p><img src="../_images/math/ce4a76257fa0806437136ba21933e340909e23c1.png" alt="dX = \cos\theta * \|\Delta\|"/></p>
+</div><p>After the difference computing, the result obtained is the <img class="math" src="../_images/math/cf2737ac4ae28360bf714bb75c6437b60914486a.png" alt="C_2O"/> coocurence matrix :</p>
+<a class="reference internal image-reference" href="../_images/C2OMatrix.png"><img alt="../_images/C2OMatrix.png" class="align-center" src="../_images/C2OMatrix.png" style="width: 400pt;" /></a>
+<p>(Matrix computed from a 128*128 pixel sample of the Food0006.ppm image from VISTEX database)</p>
+<p>From this matrix, the function extract the <img class="math" src="../_images/math/cf2737ac4ae28360bf714bb75c6437b60914486a.png" alt="C_2O"/> signature descriptor by a spherical quantization (see:SphereQuantif()). The result obtained from the previous exemple is :</p>
+<a class="reference internal image-reference" href="../_images/C2OSig.png"><img alt="../_images/C2OSig.png" class="align-center" src="../_images/C2OSig.png" style="width: 400pt;" /></a>
+<p>This function is called as shown below :</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">SigC2O</span> <span class="o">=</span> <span class="n">C2O</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">NormDelta</span><span class="p">,</span> <span class="n">RadDelta</span><span class="p">,</span> <span class="n">NE</span><span class="p">,</span> <span class="n">Nalpha</span><span class="p">,</span> <span class="n">Nbeta</span><span class="p">,</span> <span class="n">SigC2Ot</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> (<em>string</em>) &#8211; Path directory of the image on which you need the <img class="math" src="../_images/math/cf2737ac4ae28360bf714bb75c6437b60914486a.png" alt="C_2O"/> feature calculation.</li>
+<li><strong>NormDelta</strong> (<em>float</em>) &#8211; Norm of <img class="math" src="../_images/math/296ab33356160c5a5d59477d3e898f58888f0bdb.png" alt="\Delta"/> vector for the image color diference.</li>
+<li><strong>RadDelta</strong> (<em>float</em>) &#8211; Radix of <img class="math" src="../_images/math/296ab33356160c5a5d59477d3e898f58888f0bdb.png" alt="\Delta"/> vector for the image color diference.</li>
+<li><strong>Nalpha</strong> (<em>float</em>) &#8211; Number of intervals considered for the signature calculation on the <img class="math" src="../_images/math/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha"/> component.</li>
+<li><strong>Nbeta</strong> (<em>float</em>) &#8211; Number of intervals considered for the signature calculation on the <img class="math" src="../_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> component.</li>
+<li><strong>SigC2Ot</strong> (<em>queue</em>) &#8211; Return parameter for the parralelise version.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The signature of the image in the RadLambda orientation and at the NormLambda distance for color difference in a vector of NE*Nalpha*Nbeta</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">np.ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This function use <a class="reference internal" href="#C2O.SphericQuantif" title="C2O.SphericQuantif"><tt class="xref py py-func docutils literal"><span class="pre">SphericQuantif()</span></tt></a></p>
+</dd></dl>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="c2o-module">
-<h1>C2O module<a class="headerlink" href="#c2o-module" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="C2O.CarthesianToSpheric">
+<tt class="descclassname">C2O.</tt><tt class="descname">CarthesianToSpheric</tt><big>(</big><em>xyz</em><big>)</big><a class="headerlink" href="#C2O.CarthesianToSpheric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function for computing spherical coordinates from carthesian ones.</p>
+<p>This function computes this transformation following the formulas shown below :</p>
+<div class="math">
+<p><img src="../_images/math/506d9ab214d609ea4999e1921d0d9c0f032dcb8e.png" alt="r = \sqrt{x^2+y^2+z^2}"/></p>
+</div><div class="math">
+<p><img src="../_images/math/38e9efac20e11fafb3585754f64b322fc74c55b2.png" alt="\phi=\arctan(\frac{y}{x})"/></p>
+</div><div class="math">
+<p><img src="../_images/math/7b860f70af295e9ab42c17aafdcf6ec83005e667.png" alt="\theta = \arccos(\frac{z}{r})"/></p>
+</div><p>These parameters are corresponding to :</p>
+<blockquote>
+<div><ul class="simple">
+<li>r : The norm of the vector formed by the point to convert in spherical coordinate and the origin point.</li>
+<li><img class="math" src="../_images/math/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha"/>: The radix between the <img class="math" src="../_images/math/d08f36cffb2f1f4d0e2acb0e7f199b4e8a47e7a4.png" alt="(L^*b^*)"/> plan and the vector.</li>
+<li><img class="math" src="../_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/>: The radix between the <img class="math" src="../_images/math/fd102420b462dd2c0218e6912e1d9b8590b188bd.png" alt="(L^*a^*)"/> plan and the vector.</li>
+</ul>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<img alt="../_images/Spherical_Coordinates.png" class="align-center" src="../_images/Spherical_Coordinates.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>This function is called as shown below :</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">SphereCoords</span><span class="o">=</span><span class="n">CarthesianToSpheric</span><span class="p">(</span><span class="n">xyz</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>xyz</strong> (<em>np.ndarray</em>) &#8211; The 3-D matrix in carthesian coordinates.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The 3-D matrix in spherical coordinates.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">np.ndarray</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The fonction return the radix values <img class="math" src="../_images/math/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha"/> in range <img class="math" src="../_images/math/76beacc924c127b619820b86fb7455e3d8c60c04.png" alt="[0,2 \pi]"/> and <img class="math" src="../_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> in range <img class="math" src="../_images/math/695bfa130dac92e51866ccf23944644b8a5d2eb0.png" alt="[-\frac{\pi}{2}, \frac{\pi}{2}]"/></p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="C2O.RGBtoLAB">
+<tt class="descclassname">C2O.</tt><tt class="descname">RGBtoLAB</tt><big>(</big><em>imag</em>, <em>MatPass</em>, <em>stdIllum</em>, <em>gamma</em><big>)</big><a class="headerlink" href="#C2O.RGBtoLAB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function for computing the transformation from RGB to <img class="math" src="../_images/math/516b6902235c1294a4375de59a44f731f3e93693.png" alt="L^*a^*b^*"/> space. This function use the transition RGB to XYZ space to compute the <img class="math" src="../_images/math/516b6902235c1294a4375de59a44f731f3e93693.png" alt="L^*a^*b^*"/> space.</p>
+<p>This transformation is computed as show below :</p>
+<div class="math">
+<p><img src="../_images/math/b2e2cae5f3b43cc3bb1ff75abe2d4c1e47285455.png" alt="A=\begin{pmatrix}X_r&amp;X_g&amp;X_b\\Y_r&amp;Y_g&amp;Y_b\\ Z_r&amp;Z_g&amp;Z_b\end{pmatrix}"/></p>
+</div><div class="math">
+<p><img src="../_images/math/c3f1c8fdb134c356b0184de096e5ad4869e6b2f8.png" alt="\begin{pmatrix}X\\Y\\Z\end{pmatrix}=A*\begin{pmatrix}R\\G\\B\end{pmatrix}"/></p>
+</div><p>With <img class="math" src="../_images/math/0acafa529182e79b4f56165ec677554fba7fcf98.png" alt="A"/> depending on the RGB space considered for the image (all possible matrix are available in <a class="reference internal" href="Constant.html#Constant.MatPass" title="Constant.MatPass"><tt class="xref py py-class docutils literal"><span class="pre">Constant.MatPass</span></tt></a>).</p>
+<p>After this transformation, the <img class="math" src="../_images/math/516b6902235c1294a4375de59a44f731f3e93693.png" alt="L^*a^*b^*"/> is computed following these formulas :</p>
+<div class="math">
+<p><img src="../_images/math/8248bb2b924b2d9be16affed9c5a1731fe1ec325.png" alt="L^*=  \left \{\begin{array}{l}116*(\frac{Y}{Y_0})^\frac{1}{3}-16~~~~if \frac{Y}{Y_0}&gt;0.008856\\903.3*(\frac{Y}{Y_0})~~~~~~~~~~if \frac{Y}{Y_0}&lt;0.008856\\\end{array}\right ."/></p>
+</div><div class="math">
+<p><img src="../_images/math/591b332f54a1cfbd292cd7d4cf77ca417c0f3cf6.png" alt="a^*=500*\begin{bmatrix}f(\frac{X}{X_0})-f(\frac{Y}{Y_0})\end{bmatrix}"/></p>
+</div><div class="math">
+<p><img src="../_images/math/50b50e50cd0eb4a03e4f560de557c546fdb8ae03.png" alt="b^*=200*\begin{bmatrix}f(\frac{Y}{Y_0})-f(\frac{Z}{Z_0})\end{bmatrix}"/></p>
+</div><p>To make proper the RGB to XYZ transformation, it&#8217;s make an inverse companding to counteract the non-linearity of the RGB.</p>
+<p>The <img class="math" src="../_images/math/0ebb67342b546ca42a1c634b1ef03c893c4cdedb.png" alt="\gamma"/> parameter associate with each RGB space is specified in the <a class="reference internal" href="Constant.html#module-Constant" title="Constant"><tt class="xref py py-mod docutils literal"><span class="pre">Constant</span></tt></a> module documentation (Associated with the transformation matrix).</p>
+<p>This function is called as shown below :</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Lab</span> <span class="o">=</span> <span class="n">RGBtoLAB</span><span class="p">(</span><span class="n">imag</span><span class="p">,</span> <span class="n">MatPass</span><span class="p">,</span> <span class="n">stdIllum</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>gamma</strong> (<em>float</em>) &#8211; Inverse companding parameter <img class="math" src="../_images/math/0ebb67342b546ca42a1c634b1ef03c893c4cdedb.png" alt="\gamma"/>.</li>
+<li><strong>imag</strong> (<em>np.ndarray</em>) &#8211; A matrix containing the image on which you need the C2O feature calculation.</li>
+<li><strong>MatPass</strong> (<em>np.ndarray</em>) &#8211; The transition matrix for the BGR to XYZ transformation (set at &#8216;0&#8217; to have the default value)</li>
+<li><strong>stdIllum</strong> (<em>np.ndarray</em>) &#8211; The standard illuminant choosen for the BGR to XYZ transformation (set at &#8216;0&#8217; to have the default value).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The coocurence matrix in spherical coordinates.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">np.ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="C2O.SphericQuantif">
+<tt class="descclassname">C2O.</tt><tt class="descname">SphericQuantif</tt><big>(</big><em>C2OMat</em>, <em>NE</em>, <em>Nalpha</em>, <em>Nbeta</em><big>)</big><a class="headerlink" href="#C2O.SphericQuantif" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function for computing the spherical quantization for the C2O signature.</p>
+<p>The C2O coocurence matrix is really large in term of the number of values and it is not really easy to compare with each other
+because of the 3-dimensions. So to solve it, the matrix is quantisize by computing this sphérical quantization to obtain a vector in 1-D.</p>
+<img alt="../_images/QuantificationSpherique.png" class="align-center" src="../_images/QuantificationSpherique.png" />
+<p>This function is called as shown below :</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">SigC2O</span> <span class="o">=</span> <span class="n">SphericQuantif</span><span class="p">(</span><span class="n">C2OMat</span><span class="p">,</span> <span class="n">NE</span><span class="p">,</span> <span class="n">Nalpha</span><span class="p">,</span> <span class="n">Nbeta</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>C2OMat</strong> (<em>np.ndarray</em>) &#8211; The coocurence matrix in spherical coordinates.</li>
+<li><strong>Nalpha</strong> (<em>float</em>) &#8211; Number of intervals considered for the signature calculation on the <img class="math" src="../_images/math/ad59b6e24a4a00ac621801f8d7513d68be654ab5.png" alt="\alpha"/> component.</li>
+<li><strong>Nbeta</strong> (<em>float</em>) &#8211; Number of intervals considered for the signature calculation on the <img class="math" src="../_images/math/8ce03f78ed945f2ef3dac87c8799b55b393527e7.png" alt="\beta"/> component.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The signature of the image</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">A vector of 4*Nalpha*Nbeta float64</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="C2O.SphericToCartesian">
+<tt class="descclassname">C2O.</tt><tt class="descname">SphericToCartesian</tt><big>(</big><em>Spheric</em><big>)</big><a class="headerlink" href="#C2O.SphericToCartesian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function for computing carthesian coordinates from spherical ones.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>Spheric</strong> (<em>np.ndarray</em>) &#8211; The coocurence matrix in spherical coordinates.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The coocurence matrix in carthesian coordinates.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">np.ndarray</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="C2O.Timer">
+<em class="property">class </em><tt class="descclassname">C2O.</tt><tt class="descname">Timer</tt><a class="headerlink" href="#C2O.Timer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="C2O.Timer.start">
+<tt class="descname">start</tt><big>(</big><big>)</big><a class="headerlink" href="#C2O.Timer.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="C2O.Timer.stop">
+<tt class="descname">stop</tt><big>(</big><big>)</big><a class="headerlink" href="#C2O.Timer.stop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="C2O.diff">
+<tt class="descclassname">C2O.</tt><tt class="descname">diff</tt><big>(</big><em>img</em>, <em>dX</em>, <em>dY</em><big>)</big><a class="headerlink" href="#C2O.diff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function for the calculation of a difference of color on the whole image, following the <img class="math" src="../_images/math/296ab33356160c5a5d59477d3e898f58888f0bdb.png" alt="\Delta"/> vector
+caracterized here by dX and dY (calculate from the radix and the norm of the vector).
+The diffenrence between the image and it&#8217;s shifted copy is computed as shown below</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="../_images/ColorDiff.png"><img alt="../_images/ColorDiff.png" class="align-center" src="../_images/ColorDiff.png" style="width: 400pt;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>This function is called as shown below :</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">imgDiff</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">dX</span><span class="p">,</span><span class="n">dY</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>img</strong> (<em>np.ndarray</em>) &#8211; A N-dimensions matrix containing the image on which you need the C2O feature calculation.</li>
+<li><strong>dX</strong> (<em>float</em>) &#8211; Number of pixel to shift on the X axis.</li>
+<li><strong>dY</strong> (<em>float</em>) &#8211; Number of pixel to shift on the Y axis.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The difference of color image</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 
 
-          </div>
-        </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/generated/C2O.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
     </div>
+
     <div class="footer">
-      &copy;2015, EC.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.4</a>
-      
-      |
-      <a href="../_sources/generated/C2O.txt"
-          rel="nofollow">Page source</a></li>
+        &copy; Copyright 2015, EC.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
-
-    
-
-    
   </body>
 </html>

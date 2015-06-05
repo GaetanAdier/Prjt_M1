@@ -1,13 +1,24 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Jun 01 16:56:55 2015
-http://www.easyrgb.com/index.php?X=MATH&H=15#text15
 @author: etienne
 """
 import numpy as np
 
 class stdIlluminant:
-#    F7 = np.zeros(3) 
+    """This class contains the standard illuminant referenced in the :py:class:`Constant.MatPass`.    
+    
+    :ivar A: CIE standard illuminant A (domestic tungsten filament lighting)
+    :ivar C: CIE standard illuminant C (daylight simulator: average day light) -DEPRECATED
+    :ivar D50: CIE standard illuminant D50 (horizon light)
+    :ivar D55: CIE standard illuminant D55 (Mid-morning/afternoon daylight)
+    :ivar D65: CIE standard illuminant D65 (Noon daylight)
+    :ivar D75: CIE standard illuminant D75 (North sky daylight)
+    :ivar E: CIE standard illuminant E (equal energy radiator)
+    :ivar F2: CIE standard illuminant F2 (Cool white fluorescent)
+    :ivar F7: CIE standard illuminant F7 (D65 simulator)
+    :ivar F11: CIE standard illuminant F11 (Philips TL84, Ultralume 40)
+    """
     A =   [1.09850, 1.00000, 0.35585]
     C =   [0.98074, 1.00000, 1.18232]
     D50 = [0.96422, 1.00000, 0.92149]
@@ -22,10 +33,32 @@ class stdIlluminant:
     
     
 class MatPass:
-    #Adobe RGB (D65)
-    AdobRGB =  [[0.5767309 , 0.1855540 , 0.1881852],[0.2973769 , 0.6273491 , 0.0752741],[0.0270343 , 0.0706872 , 0.9911085]]
-    AdobRGB=np.array(AdobRGB)
-    #Apple RGB (D65)
+    """ 
+    
+    This class contains all the transition matrix from RGB to XYZ space 
+    
+    :ivar AdobRGB: Adobe RGB, use with D65 standard illuminant and :math:`\gamma` = 2.2
+    :ivar AppleRGB: Apple RGB, use with D65 standard illuminant and :math:`\gamma` = 1.8
+    :ivar BestRGB: Best RGB, use with D50 standard illuminant and :math:`\gamma` = 2.2
+    :ivar BetaRGB: Beta RGB, use with D50 standard illuminant and :math:`\gamma` = 2.2
+    :ivar BruceRGB: Bruce RGB, use with D65 standard illuminant and :math:`\gamma` = 2.2
+    :ivar CIERGB: CIE RGB, use with E standard illuminant and :math:`\gamma` = 2.2
+    :ivar CmatchRGB: ColorMatch RGB, use with D50 standard illuminant and :math:`\gamma` = 1.8
+    :ivar DonRGB4: Don RGB4, use with D50 standard illuminant and :math:`\gamma` = 2.2
+    :ivar ECIRGB: ECI RGB, use with D50 standard illuminant and :math:`\gamma` = L
+    :ivar ESPS5: Ekta Space PS5, use with D50 standard illuminant and :math:`\gamma` = 2.2
+    :ivar NTSCRGB: NTSC RGB, use with C standard illuminant and :math:`\gamma` = 2.2
+    :ivar PSRGB: Pal/secam RGB, use with D65 standard illuminant and :math:`\gamma` = 2.2
+    :ivar PPRGB: Prophoto RGB, use with D50 standard illuminant and :math:`\gamma` = 1.8
+    :ivar SMPT_CRGB: SMPTE-C RGB, use with D65 standard illuminant and :math:`\gamma` = 2.2
+    :ivar sRGB: sRGB, use with D65 standard illuminant and :math:`\gamma` = 2.2
+    :ivar WGRGB: Wide Gamut RGB, use with D50 standard illuminant and :math:`\gamma` = 2.2
+    
+    """
+    
+    AdobRGB =  [[0.5767309 , 0.1855540 , 0.1881852],[0.2973769 , 0.6273491 , 0.0752741],[0.0270343 , 0.0706872 , 0.9911085]] #: Adobe RGB (D65)
+    AdobRGB=np.array(AdobRGB) #: Adobe RGB (D65)
+    #: Apple RGB (D65)
     AppleRGB = [[0.4497288 , 0.3162486 , 0.1844926],[0.2446525 , 0.6720283 , 0.0833192],[0.0251848 , 0.1411824 , 0.9224628]]
     AppleRGB=np.array(AppleRGB)
     #Best RGB (D50)
