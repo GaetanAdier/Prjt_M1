@@ -8,14 +8,17 @@ Created on Mon Jun 08 16:48:24 2015
 import numpy as np
 from collections import Counter
 
-def KNN(matSig, classId ,k,Sig):
+def KNN(matSig, classId ,k,Sig, dType):
     
         
     
     matDiff = np.zeros(np.shape(matSig))    
     
-    matDiff = np.mean(matSig**2 - Sig**2)
+    matDiff = np.sum(np.sqrt((matSig - Sig)**2))
     
+         
+    matDiff = np.sum((matSig-Sig)**2/(matSig+Sig+0.0000001)**2)
+        
     
     index = np.argsort(matDiff, axis=-1, kind='quicksort', order=None)
     
