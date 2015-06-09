@@ -9,7 +9,7 @@ import operator
 import numpy as np
 from collections import Counter
 
-def KNN(matSig, classId ,k,Sig, dType):
+def KNN(matSig, classId, k, Sig, dType):
     
     matSig = np.array(matSig)
     Sig = np.array(Sig)

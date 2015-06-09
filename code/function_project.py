@@ -11,6 +11,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 import ntpath
+import random
 
 from sphinx_doc import genere_doc
 from sphinx_doc import configure_doc
@@ -93,7 +94,7 @@ def descript(path_work, name_desc, path_images, nb_word, nb_images = "ALL", star
         end_img = nb_images + start_img
     
     all_desc = np.zeros((0,128))
-    nb_kp_per_desc = np.zeros((0,1))
+    nb_kp_per_img = np.zeros((0,1))
     #application du descripteur choisit sur les images
     for i in range(start_img, (end_img + 1)): 
         kp,desc = SIFT(list_path_img[i-1])
@@ -111,13 +112,13 @@ def descript(path_work, name_desc, path_images, nb_word, nb_images = "ALL", star
         np.savetxt(os.path.join(path_desc,filename+'.txt'),mat_kp,fmt='%f')
     
         rows, cols = desc.shape
-        nb_kp_per_desc = np.append(nb_kp_per_desc, rows)
+        nb_kp_per_img = np.append(nb_kp_per_img, rows)
         all_desc = np.concatenate((all_desc, desc))
     
     [centroid_vec, val_dist] = K_means(all_desc, nb_word, 5)
   #  return K_means(all_desc, 10, 5)
-    plt.hist(val_dist, np.arange(nb_word+1))
-    plt.show()
+    Signature_img(all_desc, val_dist, nb_kp_per_img, nb_img, nb_word)
+    
     return val_dist 
     
     
@@ -127,10 +128,11 @@ def K_means(Vectors, nb_centroid, iterat):
     rows, cols = Vectors.shape
     val_dist = np.zeros((nb_centroid,rows))
     val_min = np.zeros(rows)
+    ind_min = np.zeros(rows)
     centroid_vectors = np.zeros((nb_centroid, cols))
-    centroid_vectors = [np.random.rand(1, cols)*255 for i in range(nb_centroid)]
-    centroid_vectors = np.asarray(centroid_vectors)
-    centroid_vectors = centroid_vectors.reshape(nb_centroid, cols)
+    
+    for i in range(nb_centroid):
+        centroid_vectors[i, :] = Vectors[random.randint(0, rows), :]
     
 
     for it in range(iterat):
@@ -143,7 +145,9 @@ def K_means(Vectors, nb_centroid, iterat):
                     val_min[j] = val_dist[k,j]
                     for i in range(nb_centroid):
                         if val_dist[i,j] <= val_min[j]:
-                            val_min[j] = i
+                            val_min[j] = val_dist[i,j]
+                            ind_min[j] = i
+                            
                 
         for k in range(nb_centroid):
             nb = 1
@@ -153,9 +157,22 @@ def K_means(Vectors, nb_centroid, iterat):
                     nb = nb + 1
             centroid_vectors[k, :] = centroid_vectors[k, :]/nb
             
-        return centroid_vectors, val_min
+        return centroid_vectors, ind_min
 
-#def Signature_img(Vectors, k_means):
+def Signature_img(Vectors, val_dist, nb_kp_per_img, nb_img, nb_word):
+    
+    start = 0
+    end = 0
+    for i in range(nb_img): 
+        end = end + nb_kp_per_img[i]
+        print start
+        print end
+        plt.figure()
+        plt.hist(np.array(val_dist[start:end]), nb_word-1)
+        plt.show()
+        start = end
+    
+    
     
     
 

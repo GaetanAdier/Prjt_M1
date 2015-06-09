@@ -9,6 +9,8 @@ Created on Tue Jun 09 09:16:50 2015
 import os.path
 import xml.etree.ElementTree as ET
 
+
+
 def limitDB(ID,DBpath,category='species'):
    
     """
@@ -47,17 +49,22 @@ def limitDB(ID,DBpath,category='species'):
     
     for i in os.listdir(DBpath):
         if i.endswith(".xml"):
-            tree = ET.parse()
+            tree = ET.parse(DBpath + "\\" + i)
             root = tree.getroot()
             
             
-            if root[1][indice].text == ID:
+            if root[indice].text == ID:
                 if not fileList:
                     fileList=[i+"jpg"]
                 else:
-                    fileList += i+".jpg"
+                    fileList += [i+".jpg"]
+        
+        print i
                 
                 
              
     
     return fileList
+    
+test = limitDB("Picris hieracioides L.", "D:\\MASTER\\Projet\\train")
+print test

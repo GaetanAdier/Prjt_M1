@@ -16,10 +16,10 @@ from sphinx_doc import configure_doc
 ################################Main##########################################
 ##############################################################################    
 
-path_images = "C:\\Users\RTMA\\Desktop\\Nouveau dossier\\khalil"#"D:\\MASTER\\Projet\\traintest"   
-path_work = "C:\\Users\RTMA\\Desktop\\Nouveau dossier"#"D:\\MASTER\\Projet\\directory"
+path_images = "D:\\MASTER\\Projet\\traintest2"   
+path_work = "D:\\MASTER\\Projet\\directory"
 descriptor = "SIFT"
-nb_word = 5
+nb_word = 100
 if not(os.path.isdir(path_work)):
     os.mkdir(path_work)
     
