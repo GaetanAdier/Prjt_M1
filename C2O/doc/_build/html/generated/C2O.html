@@ -90,6 +90,36 @@ The attempted result is to obtain on unique vector for the whole image which cha
 </dd></dl>
 
 <dl class="function">
+<dt id="C2O.C2OPatch">
+<tt class="descclassname">C2O.</tt><tt class="descname">C2OPatch</tt><big>(</big><em>image</em>, <em>kp</em><big>)</big><a class="headerlink" href="#C2O.C2OPatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function for the <img class="math" src="../_images/math/cf2737ac4ae28360bf714bb75c6437b60914486a.png" alt="C_2O"/> feature calculation relative to keypoint detection (from openCV&#8217;s SIFT).</p>
+<p>This function uses the <a class="reference internal" href="#module-C2O" title="C2O"><tt class="xref py py-func docutils literal"><span class="pre">C2O()</span></tt></a> function on patch of 64*64 pixel around each keypoint.</p>
+<p>This function is called as shown below :</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">MatSigC2O</span> <span class="o">=</span> <span class="n">C2OPatch</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">kp</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>image</strong> (<em>string</em>) &#8211; Path directory of the image on which you need the <img class="math" src="../_images/math/cf2737ac4ae28360bf714bb75c6437b60914486a.png" alt="C_2O"/> feature calculation.</li>
+<li><strong>kp</strong> (<em>OpenCV keypoint structure array</em>) &#8211; Keypoints matrix from OpenCv&#8217;s SIFT keypoint detection.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The C2O signatures for each keypoint in an array.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">np.ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This function use <a class="reference internal" href="#module-C2O" title="C2O"><tt class="xref py py-func docutils literal"><span class="pre">C2O()</span></tt></a></p>
+</dd></dl>
+
+<dl class="function">
 <dt id="C2O.CarthesianToSpheric">
 <tt class="descclassname">C2O.</tt><tt class="descname">CarthesianToSpheric</tt><big>(</big><em>xyz</em><big>)</big><a class="headerlink" href="#C2O.CarthesianToSpheric" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function for computing spherical coordinates from carthesian ones.</p>
@@ -188,7 +218,7 @@ The attempted result is to obtain on unique vector for the whole image which cha
 <dd><p>Function for computing the spherical quantization for the C2O signature.</p>
 <p>The C2O coocurence matrix is really large in term of the number of values and it is not really easy to compare with each other
 because of the 3-dimensions. So to solve it, the matrix is quantisize by computing this sphérical quantization to obtain a vector in 1-D.</p>
-<img alt="../_images/QuantificationSpherique.png" class="align-center" src="../_images/QuantificationSpherique.png" />
+<a class="reference internal image-reference" href="../_images/QuantificationSphericToHistCorrige.png"><img alt="../_images/QuantificationSphericToHistCorrige.png" class="align-center" src="../_images/QuantificationSphericToHistCorrige.png" style="width: 500pt;" /></a>
 <p>This function is called as shown below :</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">SigC2O</span> <span class="o">=</span> <span class="n">SphericQuantif</span><span class="p">(</span><span class="n">C2OMat</span><span class="p">,</span> <span class="n">NE</span><span class="p">,</span> <span class="n">Nalpha</span><span class="p">,</span> <span class="n">Nbeta</span><span class="p">)</span>
 </pre></div>
@@ -235,7 +265,7 @@ because of the 3-dimensions. So to solve it, the matrix is quantisize by computi
 <dl class="class">
 <dt id="C2O.Timer">
 <em class="property">class </em><tt class="descclassname">C2O.</tt><tt class="descname">Timer</tt><a class="headerlink" href="#C2O.Timer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dd><p>Bases: <a href="#id1"><span class="problematic" id="id2">:class:`object`</span></a></p>
 <dl class="method">
 <dt id="C2O.Timer.start">
 <tt class="descname">start</tt><big>(</big><big>)</big><a class="headerlink" href="#C2O.Timer.start" title="Permalink to this definition">¶</a></dt>
