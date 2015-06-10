@@ -50,7 +50,7 @@ Where k is the fixed parameter of the algorithm and depend to the fineness of th
 	\item Orientation assignment\\
 	 On the base of local image gradient detections each key-point detected is assigned to one or many orientations. 
 
-For example with a key-point ($x_0$,$y_0$,$\sigma_0$), the calculation is done on the Gradient of the pyramid L(x,y,$\sigma_0$) which factor is nearest the scale factor of the point. In this way the calculation is also independent to the scale variance. With the symmetric finite difference, the gradient and the amplitude are calculated for each position around the key-point.
+  With the symmetric finite difference, the gradient and the amplitude are calculated for each position around the key-point.
 The calculation of these two factors is given by the following relations:
 $$m(x,y)=\sqrt{(L(x+1,y)-L(x-1,y))^2+(L(x,y+1)-L(x,y-1))^2}$$
 $$\theta(x,y)=atan2(L(x,y+1)-L(x,y-1),L(x+1,y)-L(x-1,y))$$
@@ -68,9 +68,9 @@ After that, the 16 histograms with 8 intervals each one, are concatenated and no
 
 In our project we used the SIFT  of  Opencv library in python. This function allow to detect key-points  on images and compute descriptors for each one.   
 The script is adapted to our program in order to caculate  descriptors in whole database of images.
-Before integreting the script in the process flow, a tests step was done in order to verify if the results obtain with the program are satisfied.
+Before integreting the script in the process flow, test steps were done in order to verify if the results obtained with the program are satisfied.
 
-Tests consist to apply the sift function on image according to different configurations to notice the invariance to the configurations.
+Tests consist to apply the sift on image according to different configurations to notice the invariance of the function to the configurations.
 In a first phase, the tests were done on a basic image design on paint. 
 Here we have the illustration images  of the results
 
@@ -81,13 +81,13 @@ Here we have the illustration images  of the results
 \caption{Illustration 1}
 \end{figure}
 
-\begin{figure}[!h]
-    \center
-    \includegraphics[scale=0.2]{scal1.jpg}
-    \caption{Key-points detected after scale change}
-    \label{figure:Illustration }
-   \end{figure}
-   \clearpage
+%\begin{figure}[!h]
+   % \center
+   % \includegraphics[scale=0.2]{scal1.jpg}
+  %  \caption{Key-points detected after scale change}
+   % \label{figure:Illustration }
+  % \end{figure}
+   
 
 \begin{figure}[!h]
     \center
@@ -95,6 +95,7 @@ Here we have the illustration images  of the results
     \caption{Key-points detected after rotation}
     \label{figure:Illustration }
 \end{figure}
+\clearpage
 
 After that, the test was also done on three images of the database. Three  images which look alike are taken in the database and key-points are calculated on each one. 
 These images are matched two by two with the key-points in order to find similarity between images.
@@ -109,10 +110,10 @@ These images are matched two by two with the key-points in order to find similar
  
  According to our relsults obtained through the images above, we concluded that the SIFT descriptor is satisfied and it can be used to compute all descriptors in whole the database. 
  
- \section{ Parallel test}
+ \section{ Parallelism test}
  
 This test consist to use multiple processors to make a computation faster. It will permit multiple tasks to proceed without waiting for each other.
-The algorithme consist to decomposition the complete task into independent subtasks and the data flow between them and distribut the subtasks over the processors.
+The algorithme consist to decompose the complete task into independent subtasks and the data flow between them and distribut the subtasks over the processors.
 In python we have different posibilities to do this. The test was done by using the module multiprocessing because it was the only avaible in our python version.
 We can see on the following images the time computation before and after using the parallelism.
 
