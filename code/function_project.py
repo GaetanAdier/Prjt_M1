@@ -15,6 +15,7 @@ import random
 from collections import Counter
 
 import getClassID as gtID
+import C2O as CO
 
 from sphinx_doc import genere_doc
 from sphinx_doc import configure_doc
@@ -105,7 +106,8 @@ def descript(path_work, name_desc, path_images, nb_word, sizeDesc, nb_images = "
     ID = np.zeros(0)
     #application du descripteur choisit sur les images
     for i in range(start_img, (end_img + 1)): 
-        kp,desc = SIFT(list_path_img[i-1])
+        #kp,desc = SIFT(list_path_img[i-1])
+        mat_kp, desc = CO.C2OPatch(list_path_img[i-1], 4, 6, 3)
     
         temp =  gtID.GetClassID(list_path_img2[i-1])
         ID = np.append(ID, temp)
@@ -115,12 +117,12 @@ def descript(path_work, name_desc, path_images, nb_word, sizeDesc, nb_images = "
     #Enregistrement des descripteurs dans fichiers txt
         filename=ntpath.basename(list_path_img[i-1])
         
-        mat_kp=np.zeros([len(kp),(sizeDesc+2)])  
-        for i in range(len(kp)):
-            mat_kp[i][0]=kp[i].pt[0]
-        for j in range(len(kp)):
-            mat_kp[j][1]=kp[j].pt[1]
-        mat_kp[:,2:(sizeDesc+2)]=desc
+#        mat_kp=np.zeros([len(kp),(sizeDesc+2)])  
+#        for i in range(len(kp)):
+#            mat_kp[i][0]=kp[i].pt[0]
+#        for j in range(len(kp)):
+#            mat_kp[j][1]=kp[j].pt[1]
+#        mat_kp[:,2:(sizeDesc+2)]=desc
         
         np.savetxt(os.path.join(path_desc,filename+'.txt'),mat_kp,fmt='%f')
     

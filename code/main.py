@@ -18,9 +18,9 @@ from sphinx_doc import configure_doc
 
 path_images = "D:\\MASTER\\Projet\\analyse_res"   
 path_work = "D:\\MASTER\\Projet\\directory"
-descriptor = "SIFT"
+descriptor = "C2O"
 nb_word = 100
-sizeDesc = 128
+sizeDesc = 72
 if not(os.path.isdir(path_work)):
     os.mkdir(path_work)
     
