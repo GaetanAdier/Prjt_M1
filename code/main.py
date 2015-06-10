@@ -16,10 +16,11 @@ from sphinx_doc import configure_doc
 ################################Main##########################################
 ##############################################################################    
 
-path_images = "D:\\MASTER\\Projet\\traintest2"   
+path_images = "D:\\MASTER\\Projet\\analyse_res"   
 path_work = "D:\\MASTER\\Projet\\directory"
 descriptor = "SIFT"
 nb_word = 100
+sizeDesc = 128
 if not(os.path.isdir(path_work)):
     os.mkdir(path_work)
     
@@ -27,7 +28,7 @@ if not(os.path.isdir(path_images)):
     print("path for work on images doesn't exist")
     exit(0)
 
-test = fc.descript(path_work, descriptor, path_images, nb_word)
+test, test2 = fc.descript(path_work, descriptor, path_images, nb_word, sizeDesc)
 
 
 

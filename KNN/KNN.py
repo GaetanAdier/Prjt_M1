@@ -11,7 +11,7 @@ from collections import Counter
 
 def KNN(matSig, classId, k, Sig, dType):
     
-    ur"""
+    """
     
     
     Function for computing the K-nn method.

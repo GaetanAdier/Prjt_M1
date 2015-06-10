@@ -28,7 +28,7 @@ def GetClassID(filename):
     tree = ET.parse(filename)
     root = tree.getroot()    
     
-    return root[4]     
+    return root[4].text     
 
     
 

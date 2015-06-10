@@ -12,6 +12,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import ntpath
 import random
+from collections import Counter
+
+import getClassID as gtID
 
 from sphinx_doc import genere_doc
 from sphinx_doc import configure_doc
@@ -51,7 +54,7 @@ def SIFT(img):
     
 
 
-def descript(path_work, name_desc, path_images, nb_word, nb_images = "ALL", start_img = 1):
+def descript(path_work, name_desc, path_images, nb_word, sizeDesc, nb_images = "ALL", start_img = 1):
     
     """
     
@@ -84,7 +87,9 @@ def descript(path_work, name_desc, path_images, nb_word, nb_images = "ALL", star
 
     #creation d'une variable contenant les chemins de toutes les images contenues dans le dossier des images à traiter
     temp =  "%s\\*.jpg" % (path_images)
+    temp2 =  "%s\\*.xml" % (path_images)
     list_path_img = glob.glob(temp)   
+    list_path_img2 = glob.glob(temp2)   
     nb_img = len(list_path_img)
     
     #permet de parcourir toutes ou un nombre d'image définis par l'utilisateur de manière automatique    
@@ -93,33 +98,49 @@ def descript(path_work, name_desc, path_images, nb_word, nb_images = "ALL", star
     else : 
         end_img = nb_images + start_img
     
-    all_desc = np.zeros((0,128))
+    all_desc = np.zeros((0,sizeDesc))
     nb_kp_per_img = np.zeros((0,1))
+    sig = np.zeros((0,nb_word)) 
+    
+    ID = np.zeros(0)
     #application du descripteur choisit sur les images
     for i in range(start_img, (end_img + 1)): 
         kp,desc = SIFT(list_path_img[i-1])
+    
+        temp =  gtID.GetClassID(list_path_img2[i-1])
+        ID = np.append(ID, temp)
+        print ID
+        
         
     #Enregistrement des descripteurs dans fichiers txt
         filename=ntpath.basename(list_path_img[i-1])
         
-        mat_kp=np.zeros([len(kp),130])  
+        mat_kp=np.zeros([len(kp),(sizeDesc+2)])  
         for i in range(len(kp)):
             mat_kp[i][0]=kp[i].pt[0]
         for j in range(len(kp)):
             mat_kp[j][1]=kp[j].pt[1]
-        mat_kp[:,2:130]=desc
+        mat_kp[:,2:(sizeDesc+2)]=desc
         
         np.savetxt(os.path.join(path_desc,filename+'.txt'),mat_kp,fmt='%f')
     
         rows, cols = desc.shape
         nb_kp_per_img = np.append(nb_kp_per_img, rows)
         all_desc = np.concatenate((all_desc, desc))
+
     
     [centroid_vec, val_dist] = K_means(all_desc, nb_word, 5)
-  #  return K_means(all_desc, 10, 5)
-    Signature_img(all_desc, val_dist, nb_kp_per_img, nb_img, nb_word)
+    sig = Signature_img(all_desc, val_dist, nb_kp_per_img, nb_img, nb_word)
     
-    return val_dist 
+    sigTrain = sig[0:69]  
+    sigTest = sig[70:99]
+    res = np.zeros(0)
+    
+    for i in range(len(sigTest)):
+        test = KNN(sigTrain, ID, 3, sigTest[i], 0)
+        res = np.append(res, test)
+    
+    return res, ID[70:99]
     
     
 def K_means(Vectors, nb_centroid, iterat):
@@ -163,16 +184,85 @@ def Signature_img(Vectors, val_dist, nb_kp_per_img, nb_img, nb_word):
     
     start = 0
     end = 0
+    sig = np.zeros((0,nb_word))
+    test = np.zeros((0,nb_word))
     for i in range(nb_img): 
         end = end + nb_kp_per_img[i]
-        print start
-        print end
-        plt.figure()
-        plt.hist(np.array(val_dist[start:end]), nb_word-1)
-        plt.show()
+        [test, bins, patches] = plt.hist(np.array(val_dist[start:end]), nb_word)
+        test = np.resize(test, (1, nb_word))
+        sig = np.concatenate((sig, test))
         start = end
     
+    return sig
     
+def KNN(matSig, classId, k, Sig, dType):
+    
+    """
+    
+    
+    Function for computing the K-nn method.
+    
+    This function takes as argument the dictionarry of know signatures associate with their classID, and the signature of the image to classify
+    
+
+    
+    This function is called as shown below :
+    
+    .. code-block:: python
+       :emphasize-lines: 3,5
+    
+       ClassId = KNN(matSig, classId ,k,Sig, dType)
+    
+    :param matSig: The matrix which contains the dictionnary of know signature.
+    :type matSig: np.ndarray
+    :param classId: The array containing the class ids which corresponds to the signatures in matSig.
+    :type classId: np.ndarray
+    :param k: Number of nearest neightbor to keep for the class attribution.
+    :type k: int
+    :param Sig: The array which contains the signature of the image to classify.
+    :type Sig: np.ndarray
+    :param dType: The type of difference to compute, if = 0 => Euclidian distance, if = 1 => :math:`\khi^2`.
+    :type dType: int    
+    
+    :return: The classID to attribute for the image to classify
+    :rtype: float
+    
+
+    """
+    
+    matSig = np.array(matSig)
+    Sig = np.array(Sig)
+    
+    matDiff = np.zeros(np.shape(matSig))    
+    
+    
+    if dType == 0:     
+        matDiff = np.sqrt((matSig - Sig)**2)
+        matDiff = np.sum(matDiff,axis=1)
+    else:
+        matDiff = np.sum((matSig-Sig)**2/(matSig+Sig+0.0000001)**2,axis=1)
+
+        
+    
+    index = np.argsort(matDiff, axis=-1, kind='quicksort', order=None)
+    
+
+    classIdn = list(np.zeros(k))
+    
+    
+    for i in np.arange(0,k):
+        classIdn[i] = classId[index[i]]
+        
+    
+    
+    Occurence = Counter(classIdn)
+    
+    Classe = Occurence.most_common(1)
+
+
+    ClassToAffect = Classe[0][0]
+    
+    return ClassToAffect    
     
     
 
