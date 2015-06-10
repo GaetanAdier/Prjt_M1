@@ -11,6 +11,39 @@ from collections import Counter
 
 def KNN(matSig, classId, k, Sig, dType):
     
+    ur"""
+    
+    
+    Function for computing the K-nn method.
+    
+    This function takes as argument the dictionarry of know signatures associate with their classID, and the signature of the image to classify
+    
+
+    
+    This function is called as shown below :
+    
+    .. code-block:: python
+       :emphasize-lines: 3,5
+    
+       ClassId = KNN(matSig, classId ,k,Sig, dType)
+    
+    :param matSig: The matrix which contains the dictionnary of know signature.
+    :type matSig: np.ndarray
+    :param classId: The array containing the class ids which corresponds to the signatures in matSig.
+    :type classId: np.ndarray
+    :param k: Number of nearest neightbor to keep for the class attribution.
+    :type k: int
+    :param Sig: The array which contains the signature of the image to classify.
+    :type Sig: np.ndarray
+    :param dType: The type of difference to compute, if = 0 => Euclidian distance, if = 1 => :math:`\khi^2`.
+    :type dType: int    
+    
+    :return: The classID to attribute for the image to classify
+    :rtype: float
+    
+
+    """
+    
     matSig = np.array(matSig)
     Sig = np.array(Sig)
     
@@ -46,7 +79,7 @@ def KNN(matSig, classId, k, Sig, dType):
     return ClassToAffect
         
 test = [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],[2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],[6,6,6,6,6,6,6,6,6,6,6,6,6,6,6],[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],[9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]]
-sig = [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
+sig = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 
 classIds = [173, 173,173,6969,6969,6969,6969]
 
