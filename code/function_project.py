@@ -139,10 +139,10 @@ def descript(path_work, name_desc, path_images, nb_word, sizeDesc, nb_images = "
     res = np.zeros(0)
     
     for i in range(len(sigTest)):
-        test = KNN(sigTrain, ID, 3, sigTest[i], 0)
+        test = KNN(sigTrain, ID, 5, sigTest[i], 0)
         res = np.append(res, test)
     
-    return res, ID[70:99]
+    return res, ID[70:99], list_path_img
     
     
 def K_means(Vectors, nb_centroid, iterat):

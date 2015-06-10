@@ -28,7 +28,7 @@ if not(os.path.isdir(path_images)):
     print("path for work on images doesn't exist")
     exit(0)
 
-test, test2 = fc.descript(path_work, descriptor, path_images, nb_word, sizeDesc)
+ID_classif, ID_connue, img = fc.descript(path_work, descriptor, path_images, nb_word, sizeDesc)
 
 
 
