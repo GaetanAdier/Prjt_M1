@@ -53,4 +53,4 @@
 \contentsline {section}{\numberline {7}Project management}{47}
 \contentsline {subsection}{\numberline {7.1}The Scrum method}{47}
 \contentsline {subsection}{\numberline {7.2}Task repartition for the project}{48}
-\contentsline {section}{\numberline {8}Conclusion}{50}
+\contentsline {section}{\numberline {8}Conclusion}{51}
