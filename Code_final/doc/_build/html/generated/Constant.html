@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Constant module &mdash; M1 RTMA Project 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/scrolls.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="top" title="M1 RTMA Project 1.0 documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div id="content">
+      <div class="header">
+        <h1 class="heading"><a href="../index.html"
+          title="back to the documentation overview"><span>Constant module</span></a></h1>
+      </div>
+      <div class="relnav">
+        <a href="#">Constant module</a>
+      </div>
+      <div id="contentwrapper">
+        
+  <div class="section" id="module-Constant">
+<span id="constant-module"></span><h1>Constant module<a class="headerlink" href="#module-Constant" title="Permalink to this headline">¶</a></h1>
+<p>Created on Mon Jun 01 16:56:55 2015
+&#64;author: etienne</p>
+<dl class="class">
+<dt id="Constant.MatPass">
+<em class="property">class </em><tt class="descclassname">Constant.</tt><tt class="descname">MatPass</tt><a class="reference internal" href="../_modules/Constant.html#MatPass"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Constant.MatPass" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class contains all the transition matrix from RGB to XYZ space</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>AdobRGB</strong> &#8211; Adobe RGB, use with D65 standard illuminant and <img class="math" src="../_images/math/0ebb67342b546ca42a1c634b1ef03c893c4cdedb.png" alt="\gamma"/> = 2.2</li>
+<li><strong>AppleRGB</strong> &#8211; Apple RGB, use with D65 standard illuminant and <img class="math" src="../_images/math/0ebb67342b546ca42a1c634b1ef03c893c4cdedb.png" alt="\gamma"/> = 1.8</li>
+<li><strong>BestRGB</strong> &#8211; Best RGB, use with D50 standard illuminant and <img class="math" src="../_images/math/0ebb67342b546ca42a1c634b1ef03c893c4cdedb.png" alt="\gamma"/> = 2.2</li>
+<li><strong>BetaRGB</strong> &#8211; Beta RGB, use with D50 standard illuminant and <img class="math" src="../_images/math/0ebb67342b546ca42a1c634b1ef03c893c4cdedb.png" alt="\gamma"/> = 2.2</li>
+<li><strong>BruceRGB</strong> &#8211; Bruce RGB, use with D65 standard illuminant and <img class="math" src="../_images/math/0ebb67342b546ca42a1c634b1ef03c893c4cdedb.png" alt="\gamma"/> = 2.2</li>
+<li><strong>CIERGB</strong> &#8211; CIE RGB, use with E standard illuminant and <img class="math" src="../_images/math/0ebb67342b546ca42a1c634b1ef03c893c4cdedb.png" alt="\gamma"/> = 2.2</li>
+<li><strong>CmatchRGB</strong> &#8211; ColorMatch RGB, use with D50 standard illuminant and <img class="math" src="../_images/math/0ebb67342b546ca42a1c634b1ef03c893c4cdedb.png" alt="\gamma"/> = 1.8</li>
+<li><strong>DonRGB4</strong> &#8211; Don RGB4, use with D50 standard illuminant and <img class="math" src="../_images/math/0ebb67342b546ca42a1c634b1ef03c893c4cdedb.png" alt="\gamma"/> = 2.2</li>
+<li><strong>ECIRGB</strong> &#8211; ECI RGB, use with D50 standard illuminant and <img class="math" src="../_images/math/0ebb67342b546ca42a1c634b1ef03c893c4cdedb.png" alt="\gamma"/> = L</li>
+<li><strong>ESPS5</strong> &#8211; Ekta Space PS5, use with D50 standard illuminant and <img class="math" src="../_images/math/0ebb67342b546ca42a1c634b1ef03c893c4cdedb.png" alt="\gamma"/> = 2.2</li>
+<li><strong>NTSCRGB</strong> &#8211; NTSC RGB, use with C standard illuminant and <img class="math" src="../_images/math/0ebb67342b546ca42a1c634b1ef03c893c4cdedb.png" alt="\gamma"/> = 2.2</li>
+<li><strong>PSRGB</strong> &#8211; Pal/secam RGB, use with D65 standard illuminant and <img class="math" src="../_images/math/0ebb67342b546ca42a1c634b1ef03c893c4cdedb.png" alt="\gamma"/> = 2.2</li>
+<li><strong>PPRGB</strong> &#8211; Prophoto RGB, use with D50 standard illuminant and <img class="math" src="../_images/math/0ebb67342b546ca42a1c634b1ef03c893c4cdedb.png" alt="\gamma"/> = 1.8</li>
+<li><strong>SMPT_CRGB</strong> &#8211; SMPTE-C RGB, use with D65 standard illuminant and <img class="math" src="../_images/math/0ebb67342b546ca42a1c634b1ef03c893c4cdedb.png" alt="\gamma"/> = 2.2</li>
+<li><strong>sRGB</strong> &#8211; sRGB, use with D65 standard illuminant and <img class="math" src="../_images/math/0ebb67342b546ca42a1c634b1ef03c893c4cdedb.png" alt="\gamma"/> = 2.2</li>
+<li><strong>WGRGB</strong> &#8211; Wide Gamut RGB, use with D50 standard illuminant and <img class="math" src="../_images/math/0ebb67342b546ca42a1c634b1ef03c893c4cdedb.png" alt="\gamma"/> = 2.2</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="Constant.MatPass.AdobRGB">
+<tt class="descname">AdobRGB</tt><em class="property"> = array([[ 0.5767309,  0.185554 ,  0.1881852],        [ 0.2973769,  0.6273491,  0.0752741],        [ 0.0270343,  0.0706872,  0.9911085]])</em><a class="headerlink" href="#Constant.MatPass.AdobRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adobe RGB (D65)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.MatPass.AppleRGB">
+<tt class="descname">AppleRGB</tt><em class="property"> = array([[ 0.4497288,  0.3162486,  0.1844926],        [ 0.2446525,  0.6720283,  0.0833192],        [ 0.0251848,  0.1411824,  0.9224628]])</em><a class="headerlink" href="#Constant.MatPass.AppleRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apple RGB (D65)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.MatPass.BestRGB">
+<tt class="descname">BestRGB</tt><em class="property"> = array([[ 0.6326696,  0.2045558,  0.1269946],        [ 0.2284569,  0.7373523,  0.0341908],        [ 0.       ,  0.0095142,  0.8156958]])</em><a class="headerlink" href="#Constant.MatPass.BestRGB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.MatPass.BetaRGB">
+<tt class="descname">BetaRGB</tt><em class="property"> = array([[ 0.6712537,  0.1745834,  0.1183829],        [ 0.3032726,  0.6637861,  0.0329413],        [ 0.       ,  0.040701 ,  0.784509 ]])</em><a class="headerlink" href="#Constant.MatPass.BetaRGB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.MatPass.BruceRGB">
+<tt class="descname">BruceRGB</tt><em class="property"> = array([[ 0.4674162,  0.2944512,  0.1886026],        [ 0.2410115,  0.6835475,  0.075441 ],        [ 0.0219101,  0.0736128,  0.9933071]])</em><a class="headerlink" href="#Constant.MatPass.BruceRGB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.MatPass.CIERGB">
+<tt class="descname">CIERGB</tt><em class="property"> = array([[ 0.488718 ,  0.3106803,  0.2006017],        [ 0.1762044,  0.8129847,  0.0108109],        [ 0.       ,  0.0102048,  0.9897952]])</em><a class="headerlink" href="#Constant.MatPass.CIERGB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.MatPass.CmatchRGB">
+<tt class="descname">CmatchRGB</tt><em class="property"> = array([[ 0.5093439,  0.3209071,  0.1339691],        [ 0.274884 ,  0.6581315,  0.0669845],        [ 0.0242545,  0.1087821,  0.6921735]])</em><a class="headerlink" href="#Constant.MatPass.CmatchRGB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.MatPass.DonRGB4">
+<tt class="descname">DonRGB4</tt><em class="property"> = array([[ 0.6457711,  0.1933511,  0.1250978],        [ 0.2783496,  0.6879702,  0.0336802],        [ 0.0037113,  0.0179861,  0.8035125]])</em><a class="headerlink" href="#Constant.MatPass.DonRGB4" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.MatPass.ECIRGB">
+<tt class="descname">ECIRGB</tt><em class="property"> = array([[ 0.6502043,  0.1780774,  0.1359384],        [ 0.3202499,  0.6020711,  0.0776791],        [ 0.       ,  0.067839 ,  0.757371 ]])</em><a class="headerlink" href="#Constant.MatPass.ECIRGB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.MatPass.ESPS5">
+<tt class="descname">ESPS5</tt><em class="property"> = array([[ 0.5938914,  0.2729801,  0.0973485],        [ 0.2606286,  0.7349465,  0.0044249],        [ 0.       ,  0.0419969,  0.7832131]])</em><a class="headerlink" href="#Constant.MatPass.ESPS5" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.MatPass.NTSCRGB">
+<tt class="descname">NTSCRGB</tt><em class="property"> = array([[ 0.6068909,  0.1735011,  0.200348 ],        [ 0.2989164,  0.586599 ,  0.1144845],        [ 0.       ,  0.0660957,  1.1162243]])</em><a class="headerlink" href="#Constant.MatPass.NTSCRGB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.MatPass.PPRGB">
+<tt class="descname">PPRGB</tt><em class="property"> = array([[  7.97674900e-01,   1.35191700e-01,   3.13534000e-02],        [  2.88040200e-01,   7.11874100e-01,   8.57000000e-05],        [  0.00000000e+00,   0.00000000e+00,   8.25210000e-01]])</em><a class="headerlink" href="#Constant.MatPass.PPRGB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.MatPass.PSRGB">
+<tt class="descname">PSRGB</tt><em class="property"> = array([[ 0.430619 ,  0.3415419,  0.1783091],        [ 0.2220379,  0.7066384,  0.0713236],        [ 0.0201853,  0.1295504,  0.9390944]])</em><a class="headerlink" href="#Constant.MatPass.PSRGB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.MatPass.SMPT_CRGB">
+<tt class="descname">SMPT_CRGB</tt><em class="property"> = array([[ 0.3935891,  0.3652497,  0.1916313],        [ 0.2124132,  0.7010437,  0.0865432],        [ 0.0187423,  0.1119313,  0.9581563]])</em><a class="headerlink" href="#Constant.MatPass.SMPT_CRGB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.MatPass.WGRGB">
+<tt class="descname">WGRGB</tt><em class="property"> = array([[ 0.7161046,  0.1009296,  0.1471858],        [ 0.2581874,  0.7249378,  0.0168748],        [ 0.       ,  0.0517813,  0.7734287]])</em><a class="headerlink" href="#Constant.MatPass.WGRGB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.MatPass.sRGB">
+<tt class="descname">sRGB</tt><em class="property"> = array([[ 0.412453,  0.35758 ,  0.180423],        [ 0.212671,  0.71516 ,  0.072169],        [ 0.019334,  0.119193,  0.950227]])</em><a class="headerlink" href="#Constant.MatPass.sRGB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="Constant.stdIlluminant">
+<em class="property">class </em><tt class="descclassname">Constant.</tt><tt class="descname">stdIlluminant</tt><a class="reference internal" href="../_modules/Constant.html#stdIlluminant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Constant.stdIlluminant" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class contains the standard illuminant referenced in the <a class="reference internal" href="#Constant.MatPass" title="Constant.MatPass"><tt class="xref py py-class docutils literal"><span class="pre">Constant.MatPass</span></tt></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>A</strong> &#8211; CIE standard illuminant A (domestic tungsten filament lighting)</li>
+<li><strong>C</strong> &#8211; CIE standard illuminant C (daylight simulator: average day light) -DEPRECATED</li>
+<li><strong>D50</strong> &#8211; CIE standard illuminant D50 (horizon light)</li>
+<li><strong>D55</strong> &#8211; CIE standard illuminant D55 (Mid-morning/afternoon daylight)</li>
+<li><strong>D65</strong> &#8211; CIE standard illuminant D65 (Noon daylight)</li>
+<li><strong>D75</strong> &#8211; CIE standard illuminant D75 (North sky daylight)</li>
+<li><strong>E</strong> &#8211; CIE standard illuminant E (equal energy radiator)</li>
+<li><strong>F2</strong> &#8211; CIE standard illuminant F2 (Cool white fluorescent)</li>
+<li><strong>F7</strong> &#8211; CIE standard illuminant F7 (D65 simulator)</li>
+<li><strong>F11</strong> &#8211; CIE standard illuminant F11 (Philips TL84, Ultralume 40)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="Constant.stdIlluminant.A">
+<tt class="descname">A</tt><em class="property"> = [1.0985, 1.0, 0.35585]</em><a class="headerlink" href="#Constant.stdIlluminant.A" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.stdIlluminant.C">
+<tt class="descname">C</tt><em class="property"> = [0.98074, 1.0, 1.18232]</em><a class="headerlink" href="#Constant.stdIlluminant.C" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.stdIlluminant.D50">
+<tt class="descname">D50</tt><em class="property"> = [0.96422, 1.0, 0.92149]</em><a class="headerlink" href="#Constant.stdIlluminant.D50" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.stdIlluminant.D55">
+<tt class="descname">D55</tt><em class="property"> = [0.95682, 1.0, 0.35585]</em><a class="headerlink" href="#Constant.stdIlluminant.D55" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.stdIlluminant.D65">
+<tt class="descname">D65</tt><em class="property"> = [0.95047, 1.0, 1.08883]</em><a class="headerlink" href="#Constant.stdIlluminant.D65" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.stdIlluminant.D75">
+<tt class="descname">D75</tt><em class="property"> = [0.94972, 1.0, 1.22638]</em><a class="headerlink" href="#Constant.stdIlluminant.D75" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.stdIlluminant.E">
+<tt class="descname">E</tt><em class="property"> = [0.3291, 0.33333, 0.33333]</em><a class="headerlink" href="#Constant.stdIlluminant.E" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.stdIlluminant.F11">
+<tt class="descname">F11</tt><em class="property"> = [1.00966, 1.0, 0.6437]</em><a class="headerlink" href="#Constant.stdIlluminant.F11" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.stdIlluminant.F2">
+<tt class="descname">F2</tt><em class="property"> = [0.99187, 1.0, 0.67395]</em><a class="headerlink" href="#Constant.stdIlluminant.F2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="Constant.stdIlluminant.F7">
+<tt class="descname">F7</tt><em class="property"> = [0.95041, 1.0, 1.08747]</em><a class="headerlink" href="#Constant.stdIlluminant.F7" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Groupe 1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

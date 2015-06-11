@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Classif &mdash; M1 RTMA Project 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/scrolls.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="top" title="M1 RTMA Project 1.0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div id="content">
+      <div class="header">
+        <h1 class="heading"><a href="../index.html"
+          title="back to the documentation overview"><span>Classif</span></a></h1>
+      </div>
+      <div class="relnav">
+        <a href="#">Classif</a>
+      </div>
+      <div id="contentwrapper">
+        
+  <h1>Source code for Classif</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Thu Jun 11 17:26:06 2015</span>
+
+<span class="sd">@author: gaetan</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+    
+<div class="viewcode-block" id="K_means"><a class="viewcode-back" href="../generated/Classif.html#Classif.K_means">[docs]</a><span class="k">def</span> <span class="nf">K_means</span><span class="p">(</span><span class="n">Vectors</span><span class="p">,</span> <span class="n">nb_centroid</span><span class="p">,</span> <span class="n">iterat</span><span class="p">):</span>
+    
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    Function for computing the K-means method.</span>
+<span class="sd">    </span>
+<span class="sd">    This function find center of vectors and groups input samples</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    This function is called as shown below :</span>
+<span class="sd">    </span>
+<span class="sd">    .. code-block:: python</span>
+<span class="sd">       :emphasize-lines: 3,5</span>
+<span class="sd">    </span>
+<span class="sd">       [centroid_vec, val_dist] = K_means(all_desc, nb_word, 5)</span>
+<span class="sd">    </span>
+<span class="sd">    :param Vectors: The matrix which contains the whole descriptors of the database.</span>
+<span class="sd">    :type Vectors: np.ndarray</span>
+<span class="sd">    :param nb_centroid: Number of words you want.</span>
+<span class="sd">    :type nb_centroid: int</span>
+<span class="sd">    :param iterat: Number of iteration you want to find your centers.</span>
+<span class="sd">    :type iterat: int </span>
+<span class="sd">    </span>
+<span class="sd">    :return centroid_vec: centers of vectors </span>
+<span class="sd">    :rtype: nd.array</span>
+<span class="sd">    :return val_dist: indices attribute to the vectors</span>
+<span class="sd">    :rtype: nd.array</span>
+<span class="sd">    </span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c">#création des vecteurs de manières aléatoires</span>
+    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">Vectors</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">val_dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nb_centroid</span><span class="p">,</span><span class="n">rows</span><span class="p">))</span>
+    <span class="n">val_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+    <span class="n">ind_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+    <span class="n">centroid_vectors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nb_centroid</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_centroid</span><span class="p">):</span>
+        <span class="n">centroid_vectors</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">Vectors</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">rows</span><span class="p">),</span> <span class="p">:]</span>
+    
+
+    <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterat</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_centroid</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+                <span class="n">val_dist</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">sum</span><span class="p">((</span><span class="n">centroid_vectors</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="p">:]</span><span class="o">-</span> <span class="n">Vectors</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:])</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+                
+                <span class="c">#dernière boucle </span>
+                <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">nb_centroid</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">val_min</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">val_dist</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_centroid</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">val_dist</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">val_min</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                            <span class="n">val_min</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">val_dist</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+                            <span class="n">ind_min</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+                            
+                
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_centroid</span><span class="p">):</span>
+            <span class="n">nb</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">val_min</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">k</span> <span class="p">:</span>
+                    <span class="n">centroid_vectors</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">centroid_vectors</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">Vectors</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:]</span>
+                    <span class="n">nb</span> <span class="o">=</span> <span class="n">nb</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">centroid_vectors</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">centroid_vectors</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="p">:]</span><span class="o">/</span><span class="n">nb</span>
+            
+        <span class="k">return</span> <span class="n">centroid_vectors</span><span class="p">,</span> <span class="n">ind_min</span>
+</div>
+<div class="viewcode-block" id="Signature_img"><a class="viewcode-back" href="../generated/Classif.html#Classif.Signature_img">[docs]</a><span class="k">def</span> <span class="nf">Signature_img</span><span class="p">(</span><span class="n">Vectors</span><span class="p">,</span> <span class="n">val_dist</span><span class="p">,</span> <span class="n">nb_kp_per_img</span><span class="p">,</span> <span class="n">nb_img</span><span class="p">,</span> <span class="n">nb_word</span><span class="p">):</span>
+    
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    Function for computing the Signature of the images.</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    This function is called as shown below :</span>
+<span class="sd">    </span>
+<span class="sd">    .. code-block:: python</span>
+<span class="sd">       :emphasize-lines: 3,5</span>
+<span class="sd">    </span>
+<span class="sd">       sig = Signature_img(all_desc, val_dist, nb_kp_per_img, nb_img, nb_word)</span>
+<span class="sd">    </span>
+<span class="sd">    :param Vectors: The matrix which contains the whole descriptors of the database.</span>
+<span class="sd">    :type Vectors: np.ndarray</span>
+<span class="sd">    :param val_dist: Matrix which contains the indices attribute to the vectors.</span>
+<span class="sd">    :type val_dist: np.ndarray</span>
+<span class="sd">    :param nb_kp_per_img: Number of Key-points per images.</span>
+<span class="sd">    :type nb_kp_per_img: np.ndarray</span>
+<span class="sd">    :param nb_img: Number of images in the database.</span>
+<span class="sd">    :type nb_img: int</span>
+<span class="sd">    :param nb_word: Number of words in the Bag of Words.</span>
+<span class="sd">    :type nb_word: int </span>
+<span class="sd">    </span>
+<span class="sd">    :return sig: Matric which contains all the signature of the database</span>
+<span class="sd">    :rtype: np.ndarray</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="n">nb_word</span><span class="p">))</span>
+    <span class="n">test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="n">nb_word</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_img</span><span class="p">):</span> 
+        <span class="n">end</span> <span class="o">=</span> <span class="n">end</span> <span class="o">+</span> <span class="n">nb_kp_per_img</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="p">[</span><span class="n">test</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">val_dist</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]),</span> <span class="n">nb_word</span><span class="p">)</span>
+        <span class="n">test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nb_word</span><span class="p">))</span>
+        <span class="n">sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">sig</span><span class="p">,</span> <span class="n">test</span><span class="p">))</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">end</span>
+    
+    <span class="k">return</span> <span class="n">sig</span>
+    </div>
+<div class="viewcode-block" id="KNN"><a class="viewcode-back" href="../generated/Classif.html#Classif.KNN">[docs]</a><span class="k">def</span> <span class="nf">KNN</span><span class="p">(</span><span class="n">matSig</span><span class="p">,</span> <span class="n">classId</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">Sig</span><span class="p">,</span> <span class="n">dType</span><span class="p">):</span>
+    
+    <span class="sd">ur&quot;&quot;&quot;</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    Function for computing the K-nn method.</span>
+<span class="sd">    </span>
+<span class="sd">    This function takes as argument the dictionarry of know signatures associate with their classID, and the signature of the image to classify</span>
+<span class="sd">    </span>
+
+<span class="sd">    </span>
+<span class="sd">    This function is called as shown below :</span>
+<span class="sd">    </span>
+<span class="sd">    .. code-block:: python</span>
+<span class="sd">       :emphasize-lines: 3,5</span>
+<span class="sd">    </span>
+<span class="sd">       ClassId = KNN(matSig, classId ,k,Sig, dType)</span>
+<span class="sd">    </span>
+<span class="sd">    :param matSig: The matrix which contains the dictionnary of know signature.</span>
+<span class="sd">    :type matSig: np.ndarray</span>
+<span class="sd">    :param classId: The array containing the class ids which corresponds to the signatures in matSig.</span>
+<span class="sd">    :type classId: np.ndarray</span>
+<span class="sd">    :param k: Number of nearest neightbor to keep for the class attribution.</span>
+<span class="sd">    :type k: int</span>
+<span class="sd">    :param Sig: The array which contains the signature of the image to classify.</span>
+<span class="sd">    :type Sig: np.ndarray</span>
+<span class="sd">    :param dType: The type of difference to compute, if = 0 =&gt; Euclidian distance, if = 1 =&gt; :math:`\chi^2`.</span>
+<span class="sd">    :type dType: int    </span>
+<span class="sd">    </span>
+<span class="sd">    :return: The classID to attribute for the image to classify</span>
+<span class="sd">    :rtype: float</span>
+<span class="sd">    </span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">matSig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">matSig</span><span class="p">)</span>
+    <span class="n">Sig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Sig</span><span class="p">)</span>
+    
+    <span class="n">matDiff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">matSig</span><span class="p">))</span>    
+    
+    
+    <span class="k">if</span> <span class="n">dType</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>     
+        <span class="n">matDiff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">matSig</span> <span class="o">-</span> <span class="n">Sig</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">matDiff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">matDiff</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">matDiff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">matSig</span><span class="o">-</span><span class="n">Sig</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">matSig</span><span class="o">+</span><span class="n">Sig</span><span class="o">+</span><span class="mf">0.0000001</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        
+    
+    <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">matDiff</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s">&#39;quicksort&#39;</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
+    
+
+    <span class="n">classIdn</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+    
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+        <span class="n">classIdn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">classId</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+        
+    
+    
+    <span class="n">Occurence</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">classIdn</span><span class="p">)</span>
+    
+    <span class="n">Classe</span> <span class="o">=</span> <span class="n">Occurence</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+    <span class="n">ClassToAffect</span> <span class="o">=</span> <span class="n">Classe</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">ClassToAffect</span>    
+    
+    </div>
+</pre></div>
+
+      </div>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2015, Groupe 1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
