@@ -25,21 +25,23 @@
 \contentsline {subsubsection}{\numberline {5.4.1}Transformation through a perceptual space}{17}
 \contentsline {subsubsection}{\numberline {5.4.2}The coocurence matrix}{18}
 \contentsline {subsubsection}{\numberline {5.4.3}The signature computing}{21}
-\contentsline {subsubsection}{\numberline {5.4.4}Validation step}{23}
-\contentsline {paragraph}{\numberline {5.4.4.1}Validation of the transformation through L$^*$a$^*$b$^*$ space and color difference}{23}
-\contentsline {paragraph}{\numberline {5.4.4.2}Validation of the spherical quantization}{24}
-\contentsline {subsection}{\numberline {5.5}metadata}{28}
-\contentsline {subsection}{\numberline {5.6}Quantization}{29}
-\contentsline {subsubsection}{\numberline {5.6.1}Bag of words}{29}
-\contentsline {paragraph}{\numberline {5.6.1.1}K-means}{29}
-\contentsline {paragraph}{\numberline {5.6.1.2}Signature}{29}
-\contentsline {subsubsection}{\numberline {5.6.2}K-nn}{29}
-\contentsline {subsection}{\numberline {5.7}Metrics}{30}
-\contentsline {subsection}{\numberline {5.8}Results}{31}
-\contentsline {subsubsection}{\numberline {5.8.1}Procedure}{31}
-\contentsline {paragraph}{\numberline {5.8.1.1}For one image}{31}
-\contentsline {paragraph}{\numberline {5.8.1.2}For a database}{31}
-\contentsline {subsubsection}{\numberline {5.8.2}Analysis of result}{32}
-\contentsline {section}{\numberline {6}User manual}{33}
-\contentsline {section}{\numberline {7}Project management}{34}
-\contentsline {section}{\numberline {8}Conclusion}{35}
+\contentsline {subsubsection}{\numberline {5.4.4}Validation step}{24}
+\contentsline {paragraph}{\numberline {5.4.4.1}Validation of the transformation through L$^*$a$^*$b$^*$ space and color difference}{24}
+\contentsline {paragraph}{\numberline {5.4.4.2}Validation of the spherical quantization}{25}
+\contentsline {subsection}{\numberline {5.5}metadata}{29}
+\contentsline {subsection}{\numberline {5.6}Quantization}{30}
+\contentsline {subsubsection}{\numberline {5.6.1}Bag of words}{30}
+\contentsline {paragraph}{\numberline {5.6.1.1}K-means}{30}
+\contentsline {paragraph}{\numberline {5.6.1.2}Signature}{30}
+\contentsline {subsubsection}{\numberline {5.6.2}K-nn}{30}
+\contentsline {paragraph}{\numberline {5.6.2.1}The K-nn method}{30}
+\contentsline {paragraph}{\numberline {5.6.2.2}Validation step}{32}
+\contentsline {subsection}{\numberline {5.7}Metrics}{33}
+\contentsline {subsection}{\numberline {5.8}Results}{34}
+\contentsline {subsubsection}{\numberline {5.8.1}Procedure}{34}
+\contentsline {paragraph}{\numberline {5.8.1.1}For one image}{34}
+\contentsline {paragraph}{\numberline {5.8.1.2}For a database}{35}
+\contentsline {subsubsection}{\numberline {5.8.2}Analysis of result}{36}
+\contentsline {section}{\numberline {6}User manual}{37}
+\contentsline {section}{\numberline {7}Project management}{38}
+\contentsline {section}{\numberline {8}Conclusion}{39}

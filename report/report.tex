@@ -6,7 +6,7 @@
 \usepackage{amsmath,amsthm}
 \usepackage{graphicx}
 \usepackage{caption}
-\usepackage{subfigure}
+
 \usepackage{subcaption}
 \usepackage{amsfonts}
 \usepackage{float}
@@ -160,8 +160,8 @@ The strength of this method is that it uses a color space, and we can see direct
 \subsubsection{C$_2$O}
 
 C$_2$O feature is a color descriptor which aim is to characterize an image by its color and texture characteristics. Indeed, the descriptors previously presented are satisfying to characterize images in gray or color levels but are pretty weak for highly textured images like nature pictures.
-That's why the university of Poitiers has worked on a descriptor named C$_2$O (Color Contrast Occurrence), based on a vector including texture and color informations separately.
-To compute it, there is two steps to follow : the calculation of the Color Contrast Occurrence Matrix and the feature (descriptor) from the matrix.
+That's why the university of Poitiers has worked on a descriptor named C$_2$O (Color Contrast Occurrence), based on a vector including texture and color information.
+To compute it, there is two steps to follow : the calculation of the Color Contrast Occurrence Matrix and the extraction of the feature (descriptor) from the matrix.
 
 
 
@@ -203,7 +203,7 @@ a^*=500*\begin{bmatrix}f(\frac{X}{X_0})-f(\frac{Y}{Y_0})\end{bmatrix}
 \end{equation}
 \vspace{0.5cm}
 \begin{equation}
-b^*=300*\begin{bmatrix}f(\frac{Y}{Y_0})-f(\frac{Z}{Z_0})\end{bmatrix}
+b^*=200*\begin{bmatrix}f(\frac{Y}{Y_0})-f(\frac{Z}{Z_0})\end{bmatrix}
 \end{equation}
 After that, we can calculate the descriptor. The principle is simple : for each key-point, we have to calculate the probability to have a specific color difference between two pixels separated by a spatial vector (a voir si le dit vecteur est vecteur type). The color difference is calculated by considering the angles created by the L* a* b* representation and a perceptual distance (probablement sur la luminance mais a vérifier).
 
@@ -230,7 +230,7 @@ This computation gives us a cloud of point which characterizes the key-point by 
 On the figure shown above, we can see an example of the cloud of points that we expect to obtain. There are two thing which characterize the image :
 \begin{itemize}
 \item the size and the form of the cloud characterizing the texture around the key-point.
-\item the projections on the three plans of the representation which characterize the color information around the key-point.
+\item the projections on the three plans of the representation which characterize the density of the cloud of points.
 \end{itemize}
 \paragraph{The Color Contrast Occurrence feature}
 ~~\\
@@ -282,7 +282,7 @@ The aim of the Process flow function is to allow at the user to choose his works
 
  Indeed we can see that we create a folder descriptor, if he is not create yet, in this folder we create as much folders as the user wants. For this he just has to enter the name he wants in the parameter \textit{name\_desc}. We can also see, the user can choose the work folder he wants.
 
-\subsubsection{processing}
+\subsubsection{Processing}
 
 The second goal of this function is to compile the whole processing, so if the user wants to compile one particular function in the software he should not use the function \textit{Process\_flow}. In this function we will found this line-up:
 
@@ -298,12 +298,12 @@ The second goal of this function is to compile the whole processing, so if the u
 The schedule project does not allow us to optimize all the function, so we can see that the K-means function take long time. To solve this problem, and if you want to test the same signature (same descriptor, and same number of words), we have made an option for use the last dictionary you calculate before.
 
 \newpage
-\subsection{ SIFT(scale-invariant feature transform)}
+\subsection{ SIFT(Scale-Invariant Feature Transform)}
 SIFT  is an algorithm used in sector of computer vision for detection and identification of similar elements between different numeric images.
 The principal method proposed by the author David Lowe is to calculate the SIFT descriptors on images studied. These descriptors are numeric information which derived of local analysis of the image and they characterize the visual content of this image so that this one is independent of the scale, the framing, the angle of observation and the luminosity.
 
 \subsubsection{Stages of the SIFT algorithm}
-The first stage is to detect key-points on the image. Each key-point is characterize by coordonates  x,y on the image and a scale factor $\sigma$. After that it's necessary to ameliorate the precision of the key-point localisation.
+The first stage is to detect key-points on the image. Each key-point is characterize by coordinates  x,y on the image and a scale factor $\sigma$. After that it's necessary to ameliorate the precision of the key-point localization.
 \begin{itemize}
 \item Scale-space extrema detection\\
 The gradient scale factor is calculated for smooth the original image. This operation allow to delete details which radius are inferior at $\sigma$.
@@ -343,7 +343,7 @@ A histogram with 36 intervals is realized on the vicinity and each interval cove
 
  The peaks in this histogram correspond to the dominant orientations. All dominant orientations allow to have at least 80\% of the maximum value are taking in consideration and other additional key-points are detected. These new key-points detected are only different by the principal orientation.
 
-	\item key-point descriptor \\
+	\item Key-point descriptor \\
 An area of 16x16 pixels is taken around the key-point; subdivide in 4x4 zones of 4x4 pixels each one. A histogram including 8 intervals is calculated on each zone.
 
 After that, the 16 histograms with 8 intervals each one, are concatenated and normalized. In object to reduce the sensibility of the descriptor to the changes of the luminosity, the values are fixed to 0.2 and the histogram is calculated again for finally give the descriptor of the key-point of 128 dimension.
@@ -351,20 +351,36 @@ After that, the 16 histograms with 8 intervals each one, are concatenated and no
 
 \subsubsection{ SIFT test and results}
 
-In our project we used the SIFT  of  Opencv library in python. This function allow to detect key-points  on images and compute descriptors for each one.
-The script is adapted to our program in order to caculate  descriptors in whole database of images.
-Before integreting the script in the process flow, test steps were done in order to verify if the results obtained with the program are satisfied.
+In our project we used the SIFT  of  OpenCV library in python. This function allow to detect key-points  on images and compute descriptors for each one.
+The script is adapted to our program in order to calculate  descriptors in whole database of images.
+Before integrating the script in the process flow, test steps were done in order to verify if the results obtained with the program are satisfied.
 
 Tests consist to apply the sift on image according to different configurations to notice the invariance of the function to the configurations.
 In a first phase, the tests were done on a basic image design on paint.
 Here we have the illustration images  of the results
 
-\begin{figure}[!h]
-\centering     %%% not \center
-\subfigure[Key-points detected ]{\includegraphics[width=70mm]{test1.jpg}}
-\subfigure[Key-points detected after luminosity change]{\includegraphics[width=70mm]{lum1.jpg}}
-\caption{Illustration 1}
+\begin{figure}[h]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=70mm]{test1.jpg}
+        \end{subfigure}%
+%        \caption{Key-points detected}
+        \hfill
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=70mm]{lum1.jpg}
+        \end{subfigure}
+        \caption{Key-points detected before/after luminosity change}
+        \label{fig:signature1}
 \end{figure}
+
+%\begin{figure}[!h]
+%\centering     %%% not \center
+%\subfigure[Key-points detected ]{\includegraphics[width=70mm]{test1.jpg}}
+%\subfigure[Key-points detected after luminosity change]{\includegraphics[width=70mm]{lum1.jpg}}
+%\caption{Illustration 1}
+%\end{figure}
 
 %\begin{figure}[!h]
    % \center
@@ -385,28 +401,67 @@ Here we have the illustration images  of the results
 After that, the test was also done on three images of the database. Three  images which look alike are taken in the database and key-points are calculated on each one.
 These images are matched two by two with the key-points in order to find similarity between images.
 
-\begin{figure}[!h]
-\centering     %%% not \center
-\subfigure[Illustration 1 ]{\includegraphics[width=50mm]{Capture2.png}}
-\subfigure[Illustration 3]{\includegraphics[width=50mm]{Capture1.png}}
-\subfigure[Illustration 3]{\includegraphics[width=50mm]{Capture.png}}
-
+\begin{figure}[h]
+        \centering
+        \begin{subfigure}[b]{0.3\textwidth}
+                \centering
+                \includegraphics[width=50mm]{Capture2.png}
+        \end{subfigure}%
+  %      \caption{Key-points detected}
+        \hfill
+        \begin{subfigure}[b]{0.3\textwidth}
+                \centering
+                \includegraphics[width=50mm]{Capture1.png}
+        \end{subfigure}
+    %    \caption{Key-points detected after luminosity change
+        \begin{subfigure}[b]{0.3\textwidth}
+                \centering
+                \includegraphics[width=50mm]{Capture.png}
+        \end{subfigure}
+        \caption{Key-points detected after luminosity change}
+        \label{fig:signature1}
 \end{figure}
 
- According to our relsults obtained through the images above, we concluded that the SIFT descriptor is satisfied and it can be used to compute all descriptors in whole the database.
+%\begin{figure}[!h]
+%\centering     %%% not \center
+%\subfigure[Illustration 1 ]{\includegraphics[width=50mm]{Capture2.png}}
+%\subfigure[Illustration 3]{\includegraphics[width=50mm]{Capture1.png}}
+%\subfigure[Illustration 3]{\includegraphics[width=50mm]{Capture.png}}
+
+%\end{figure}
+
+ According to our results obtained through the images above, we concluded that the SIFT descriptor is satisfied and it can be used to compute all descriptors in whole the database.
 
 \subsection{ Parallelism test}
 
 This test consist to use multiple processors to make a computation faster. It will permit multiple tasks to proceed without waiting for each other.
-The algorithme consist to decompose the complete task into independent subtasks and the data flow between them and distribut the subtasks over the processors.
-In python we have different posibilities to do this. The test was done by using the module multiprocessing because it was the only avaible in our python version.
+The algorithm consist to decompose the complete task into independent subtasks and the data flow between them and distribute the subtasks over the processors.
+In python we have different possibilities to do this. The test was done by using the module multiprocessing because it was the only available in our python version.
 We can see on the following images the time computation before and after using the parallelism.
 
-\begin{figure}[!h]
-\centering     %%% not \center
-\subfigure[Illustration with parallelism ]{\includegraphics[width=100mm]{multi.png}}
-\subfigure[Illustration without  parallelism]{\includegraphics[width=100mm]{mult2.png}}
+
+
+\begin{figure}[h]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=100mm]{multi.png}
+        \end{subfigure}%
+  %      \caption{Key-points detected}
+        \hfill
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=100mm]{mult2.png}
+        \end{subfigure}
+        \caption{Key-points detected after luminosity change}
+        \label{fig:signature1}
 \end{figure}
+
+%\begin{figure}[!h]
+%\centering     %%% not \center
+%\subfigure[Illustration with parallelism ]{\includegraphics[width=100mm]{multi.png}}
+%\subfigure[Illustration without  parallelism]{\includegraphics[width=100mm]{mult2.png}}
+%\end{figure}
 
 \newpage
 \subsection{Color Constrast Occurence}
@@ -426,7 +481,7 @@ $$A=\begin{pmatrix}
 \end{pmatrix}$$
 
 
-That parameter depends on the characteristics of the device used to take the picture: it represents how the device interpret the real colors. In our case, there are many different devices that have been used to take the different pictures so we will have to make a choice. Some standard illuminant are defined by the illumination of the scene like D50 which corresponds to an "horizon light" contrary to D65 which correspond to a "noon light". Ideally, we will have to make the choice for each image but in front of the huge quantity of images, we had to make a choice. This choice has been to take the Adobe RGB as initial space because it's one of the most use and to associate it with a D65 standard illuminant.
+That parameter depends on the characteristics of the device used to take the picture: it represents how the device interpret real colors. In our case, there are many different devices that have been used to take the different pictures so we will have to make a choice. Some standard illuminant are defined by the illumination of the scene like D50 which corresponds to an "horizon light" contrary to D65 which correspond to a "noon light". Ideally, we will have to make the choice for each image but in front of the huge quantity of images, we had to make a choice. This choice has been to take the Adobe RGB as initial space because it's one of the most used, and to associate it with a D65 standard illuminant.
 
 \vspace{0.5cm}
 \begin{equation}
@@ -541,7 +596,7 @@ With this step validate by the theory, we will have to test with more colors to 
 \newpage
 \subsubsection{The signature computing}
 
-After doing that, we have to compute the spherical quantization of the probability matrix. For that, we have to transform our difference image from Carthesian coordinates to Spherical coordinates (from these one, the spherical quantization will be easier to compute). So we consider our Lab space like a 3 dimensional repository and for each points, it's calculate E the norm of the vector formed by the distance between it and the point (0,0,0), the orientation $\alpha$ formed by the angle between the vector and the a plan and finally the orientation $\beta$ formed by the angle between the vector and the b plan.
+After doing that, we have to compute the spherical quantization of the probability matrix. For that, we have to transform our difference image from Cartesian coordinates to Spherical coordinates (from these one, the spherical quantization will be easier to compute). So we consider our $L^*a^*b^*$ space like a 3 dimensional repository and for each points, it's calculate E the norm of the vector formed by the distance between it and the point (0,0,0), the orientation $\alpha$ formed by the angle between the vector and the $a^*$ plan and finally the orientation $\beta$ formed by the angle between the vector and the $b^*$ plan.
 
 
 \begin{figure}[h]
@@ -573,7 +628,7 @@ In that way, we obtain our cloud of points in a spherical repository. Once we ge
 
 It's computed in three times :
 
-There will we 4 interval of radius for the sphere :
+There will be 4 interval of radius for the sphere :
 
 \begin{equation}
 \begin{split}
@@ -627,7 +682,7 @@ In this way, we obtain one unique vector of 256 values to describe the image.
 \newpage
 \subsubsection{Validation step}
 
-Once these function are computed, the most important step is to validate the good operation of all the parts. So in this part we will firstly demonstrate the functioning of the transformation through the L$^*$a$^*$b$^*$ space, an after we will talk about the spherical quantization.
+Once these functions are computed, the most important step is to validate the good operation of all the parts. So in this part we will firstly demonstrate the functioning of the transformation through the L$^*$a$^*$b$^*$ space, an after we will talk about the spherical quantization.
 The functioning of the transformation in spherical coordinates will not been covered here because of the test to validate it is just making the inverse operation and verify is we get th same data..
 
 \paragraph{Validation of the transformation through L$^*$a$^*$b$^*$ space and color difference}
@@ -646,8 +701,8 @@ Here we will make a first test with only 2 colors, the red and the green.
 
 \begin{equation}
 \begin{split}
-RGB =& [255 ,0 ,0] ~~/~~ L =61.4272~~  a=89.5619~~   b=75.1487
-\\RGB =& [0 ,255 ,0] ~~/~~ L =83.3027~~  a=-137.9737~~   b=90.8299
+RGB =& [255 ,0 ,0] ~~/~~ L$^*$ =61.4272~~  a$^*$=89.5619~~   b$^*$=75.1487
+\\RGB =& [0 ,255 ,0] ~~/~~ L$^*$ =83.3027~~  a$^*$=-137.9737~~   b$^*$=90.8299
 \end{split}
 \end{equation}
 
@@ -690,7 +745,7 @@ $\Delta a_2$ = 102,8838
 $\Delta b_2$ = -214,6879
 \vspace*{7mm}
 
-These results are the same obtained with our program so we can consider that our Lab transformation and our color difference computation are valid.
+These results are exactly the same obtained with our software program so we can consider that our L$^*$a$^*$b$^*$ transformation and our color difference computation are valid.
 
 
 \paragraph{Validation of the spherical quantization}
@@ -781,7 +836,7 @@ All the values are on the $43^{th}$ interval.
 Considering these results, we can validate operation of our spherical quantization.
 
 \newpage
-\subsection{metadata}
+\subsection{Metadata}
 
 \newpage
 \subsection{Quantization}
@@ -843,6 +898,50 @@ The creation of the signature is the last step of the bag of words method, they 
 \end{figure}
 
 \subsubsection{K-nn}
+
+\paragraph{The K-nn method}
+~~\\
+~~\\
+The K-nn method is one of the most simple technique in the classification field. This method consist in associating the data to classify with the class that correspond the best to it.
+It is a supervised learning method : it means that the k-nn has to have a dictionary which contains all the training data sorted by class. To classify a new data, the k-nn calculates the distance between each training data and the new data. After doing that, it will simply takes the 'k' smallest ones, and determine in which class t have to attribute the new data by taking the one which is the most occurrent in the 'k' smallest distances.
+
+For our project, the data to classify are images and the classification is made by the signature vector extracted by the K-means method. The principle is exactly the but the distances are calculated on the signature vector.
+We had choose two possibilities for the distance calculation : the Euclidian distance and the $\chi^2$ distance which are described below.
+\begin{itemize}
+\item Euclidian distance
+\vspace{0.5cm}
+\begin{equation}
+D_{Euc}(v_1,v_2) = \sum{(v_1(i)-v_2(i))^2}
+\end{equation}
+
+\item $\chi^2$ distance
+\vspace{0.5cm}
+\begin{equation}
+D_{\chi^2}(v_1,v_2) =  \sum{\frac{(v_1(i)-v_2(i))^2}{(v_1(i)+v_2(i))^2}}
+\end{equation}
+
+\end{itemize}
+
+The choice of the type of distance calculation depends on the type of descriptor chosen for the classification. For SIFT descriptor,the Euclidian distance is appropriate but each descriptor must have one distance which work better than others.
+That's why the $\chi^2$ distance has been integrate in the program.
+
+\paragraph{Validation step}
+~~\\
+~~\\
+To validate this classification method, the most simple way is to test it on artificial signatures with different constant values.
+The test to validate is to take as our initial dictionary 7 vectors which we consider to be in 2 different classes. These vectors are full of constant values, they are shown as lines blow :
+
+\begin{figure}[h]
+    \center
+    \includegraphics[scale=0.65]{knnTestVec.png}
+    \caption{Dictionary of vector for k-nn tests}\label{fig:Color Difference by image shifting illustration}
+\end{figure}
+
+The lowest one (from 0 to 3) are attributed to the first class and the others are attributed to the second one.
+After that, we simply have to test to classify a signature which is constructed on the same model. When the signature vector is closer of 3 than of 6, he has to be attributed to the first class, and to the second when he is closer of 6.
+
+The result obtained by our K-nn function is the same that the one we expected so we can say that the functioning of it is valid.
+
 
 \newpage
 \subsection{Metrics}
@@ -942,4 +1041,4 @@ In scope of respecting our project schedule we have to present results so we wil
 \appendix
 
 % ----------------------------------------------------------------
-\end{document}
+\end{document} 
