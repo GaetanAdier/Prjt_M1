@@ -30,7 +30,7 @@
 \numberwithin{equation}{section}
 % ----------------------------------------------------------------
 \begin{document}
-\title{Project of first year master degree}%
+\title{Indexing big colored image bank : Texture 3.0}%
 \author{Etienne Caillaud, Thomas Le Bris, Ibrahima Gueye, Gaetan Adier}%
 \maketitle
 \newpage
@@ -42,24 +42,37 @@
 \section{Introduction}
 
 \section{Team presentation}
+The project took place in the XLIM-SIC laboratory of the University of Poitiers.
+
+
+This Laboratory works on fields of research of Graphic Informatique, Color images and Communication systems.
+
+
+We worked on indexation images in a big database whith the team composed by :
+
+
+Nöel Richard ( Researcher in Color images ) : Supervisor
+David Helbert ( Researcher in Signal-Image-Communications ) : Supervisor
+Thierry Urruty ( Researcher in Color images ) : Client
+
 
 \section{User requirement}
 
 \newpage
 \section{State of art}
 
-Color image processing has become a major issue since a few years, most of the colour texture discrimination having been explored using the marginal colours way. The issue is that we are now able to do colour image recognition on digital images but the results on nature pictures are rather mediocre.
+Color image processing has become a major issue since a few years, most of the colour texture discrimination having been explored using the marginal colours method. The issue is that we are now able to do colour image recognition on digital pictures but the results on nature pictures are rather mediocre.
 
 The CLEF contest has been created as an answer to that problematic, making universities' and laboratories' own solutions compete against each other in order to find the best colour texture feature.
 
-In this document we will introduce key-points and their use in the various descriptors. We will go first with the standard ones which are SIFT SURF and opponent SIFT. The last one being the descriptor used by FINKI, the laboratory from the last year contest we chose as reference to compare our results. We will then use a new descriptor offered by Noel Richard, the C$_2$O.
+In this document we will introduce key-points and their use in the various descriptors. We will go first with the standard ones which are SIFT SURF and opponent SIFT. The last one being the descriptor used by FINKI, the laboratory from the last year contest we chose as reference to compare our results. We will then use a new descriptor provided by Noel Richard, the C$_2$O.
 
 
 \subsection{Key-points}
 
 \subsubsection{Scale-space extrema detection}
 
-For this type of key-point detection, the aim is to only retrieve the useful key-points (which are characterizing the image the best) without taking an "abstract" of the whole image as the dense grid method.
+For this type of key-point detection, the aim is to only retrieve the useful key-points (which are characterizing the image the best) without taking an "abstract" of the whole image as the dense grid method does.
 To do it, the first thing that is done is to create a pyramidal tree containing some copies of the image at different resolutions. These copies will be blurred by different Gaussian filters.
 \begin{equation}
 L(x,y,k\sigma)=G(x,y,k\sigma)*I(x,y)
@@ -83,9 +96,9 @@ With all these difference calculated, the algorithm will take the maxima of each
     \includegraphics[scale=0.6]{DoG.png}
     \caption{Difference of Gaussians illustration (example from wikipedia)}\label{fig:Difference of Gaussians}
 \end{figure}
-After doing that, the algorithm must discriminate and precise the coordinate of a part of the key-point. Indeed, using different resolutions give some imprecise coordinate so it's necessary to make an interpolation to obtain the coordinate corresponding to the original image for key-point extracted from the most reduced resolutions images.  It is necessary to remove some kind of point too. The points that have not enough contrast comparing to the other are removed as the points that are on ridges (these points are really unstable and could move or disappear for many reasons so it's better to remove them).
+After doing that, the algorithm must discriminate and specify the coordinate of a part of the key-point. Indeed, using different resolutions give some inaccurate coordinate so it's necessary to make an interpolation to obtain the coordinate corresponding to the original image for key-point extracted from the most reduced resolutions images.  It is necessary to remove some points too. The points which have not enough contrast in comparison to the others are removed, same thing for the points that are on ridges (these points are really unstable and could move or disappear for many reasons so it's better to remove them).
 
-When these operations have been computed, we obtain a set of key-points that characterize the image. This method allows to obtain the key-points to characterize an image without taking a predefined set of point. So the set of points obtained is potentially lighter than the one obtained by the dense grid method and it is more accurate because only important points wherever they are are conserved.
+When these operations have been computed, we obtain a set of key-points that characterize the image. This method allows to obtain the key-points to characterize an image without taking a predefined set of points. So the set of points obtained is potentially lighter than the one obtained by the dense grid method and it is more accurate because only important points are saved, whichever their location.
 
 
 \subsubsection{Dense Grid}
@@ -99,16 +112,16 @@ The image has first to be divided into k sub-images and the intersections of the
 \end{figure}
 
 \subsection{Descriptors}
-The detection of key-points in images is increasingly used because it helps to do many tasks for example recognition, images assembly, 3D modeling, image indexation, video tracking etc. The key-points extraction in one image allows characterizing this image. Comparing the key-points of two images we can deduce if they have common information or not.
+The detection of key-points in images is increasingly used because it helps to do many tasks for example recognition, images assembly, 3D modeling, image indexing, video tracking etc. The key-points extraction in one image allows characterizing this image. By comparing the key-points of two images we can deduce if they have common information or not.
 \subsubsection{SIFT}
-SIFT (scale-invariant feature transform) is an algorithm used in sector of computer vision for detection and identification of similar elements between different numeric images.
-The principal method proposed by the author David Lowe is to calculate the SIFT descriptors on images studied. These descriptors are numeric information which derived of local analysis of the image and they characterize the visual content of this image so that this one is independent of the scale, the framing, the angle of observation and the luminosity.
+SIFT (scale-invariant feature transform) is an algorithm used in computer vision for detection and identification of similar elements between different digital images.
+The principal method proposed by the author David Lowe is to calculate the SIFT descriptors on studied pictures. These descriptors are numeric information which derived of local analysis of the image and they characterize the visual content of this image so that this one is independent of the scale, the framing, the angle of observation and the luminosity.
 \begin{itemize}
 	
 	\item Orientation assignment: On the base of local image gradient detections each key-point detected is assigned to one or many orientations. Insofar as descriptors are calculated from these orientations, it is important to safeguard the invariance of these descriptors to the rotation because whatever the orientation we must obtain the same descriptors using the same image.
 
 For example with a key-point ($x_0$,$y_0$,$\sigma_0$), the calculation is done on the Gradient of the pyramid L(x,y,$\sigma_0$) which factor is nearest the scale factor of the point. In this way the calculation is also independent to the scale variance. With the symmetric finite difference, the gradient and the amplitude are calculated for each position around the key-point.
-The calculation of these two factors is given by the following relations:
+The calculation of these two factors is given by the following equations:
 $$m(x,y)=\sqrt{(L(x+1,y)-L(x-1,y))^2+(L(x,y+1)-L(x,y-1))^2}$$
 $$\theta(x,y)=atan2(L(x,y+1)-L(x,y-1),L(x+1,y)-L(x-1,y))$$
 A histogram with 36 intervals is realized on the vicinity and each interval covering an angle of 10 degrees.
@@ -119,7 +132,7 @@ A histogram with 36 intervals is realized on the vicinity and each interval cove
     \caption{SIFT histogram construction}\label{fig:SIFT_histogram_construction}
 \end{figure}
 
-On one hand, the histogram is moderated by a Gaussian window circular with a factor equal to 1.5 times of the scale factor of the key-point . On the other hand by the amplitude of each point. The peaks in this histogram correspond to the dominant orientations. All dominant orientations allow to have at least 80\% of the maximum value are taking in consideration and other additional key-points are detected. These new key-points detected are only different by the principal orientation.
+On one hand, the histogram is moderated by a circular Gaussian window with a factor equal to 1.5 times of the scale factor of the key-point. On the other hand by the amplitude of each point. The peaks in this histogram correspond to the dominant orientations. All dominant orientations allow to have at least 80\% of the maximum value are taking in consideration and other additional key-points are detected. These new key-points detected are only different by the principal orientation.
 
 	\item key-point descriptor: In this stage, a descriptor vector is created for each key-point detected such the descriptor is distinctive and invariant to the remaining variations like illumination, 3D viewing, etc. This stage is made on image which is more near the scale of the key-point scale.
 
@@ -138,11 +151,11 @@ After that, the 16 histograms with 8 intervals each one, are concatenated and no
 
 \subsubsection{SURF}
 
-SURF for Speeded Up Robust Features is an descriptor and algorithm of feature detection. It also used in the sector of computer vision and image understanding for objects detection or 3D reconstruction.
+SURF for Speeded Up Robust Features is a descriptor and algorithm of feature detection. It is also used in the sector of computer vision and image understanding for objects detection or 3D reconstruction.
 
-SURF is in part inspired by the SIFT descriptor but it is more fast from a time calculation point of view. According to the authors, it is also more robust for different image transformations.
+SURF is partially inspired by the SIFT descriptor but is faster to process. According to the authors, it is also more robust for different image transformations.
 
-SURF is based on sums of Haar 2D wavelets responses and uses efficiently the integrals images.
+SURF is based on sums of 2D Haar wavelets responses and uses efficiently the whole images.
 	
 		
 
@@ -186,8 +199,8 @@ $$A=\begin{pmatrix}
 \begin{pmatrix}X\\Y\\Z\end{pmatrix}=A*\begin{pmatrix}R\\G\\B\end{pmatrix}
 \end{equation}
 
-With A a matrix which coefficients are depending on the chosen standard illuminant.
-When this XYZ space has been computed, we have to compute the following transformation to get our image in the L* a* b* space.
+With A a matrix which coefficients are depending on the chosen standard illuminance.
+ Once this XYZ space has been computed, we have to compute the following transformation to get our image in the L* a* b* space.
 
 \vspace{0.5cm}
 \begin{equation}
@@ -206,7 +219,8 @@ a^*=500*\begin{bmatrix}f(\frac{X}{X_0})-f(\frac{Y}{Y_0})\end{bmatrix}
 \begin{equation}
 b^*=200*\begin{bmatrix}f(\frac{Y}{Y_0})-f(\frac{Z}{Z_0})\end{bmatrix}
 \end{equation}
-After that, we can calculate the descriptor. The principle is simple : for each key-point, we have to calculate the probability to have a specific color difference between two pixels separated by a spatial vector (a voir si le dit vecteur est vecteur type). The color difference is calculated by considering the angles created by the L* a* b* representation and a perceptual distance (probablement sur la luminance mais a vérifier).
+
+After that, we can calculate the descriptor. The principle is simple : for each key-point, we have to calculate the probability to have a specific color difference between two pixels separated by a spatial vector. The color difference is calculated by considering the angles created by the L* a* b* representation and a perceptual distance.
 
 
 So we define the color contrast occurrence value as : $\overrightarrow{\Lambda(C_i,C_j)}$
@@ -228,15 +242,15 @@ This computation gives us a cloud of point which characterizes the key-point by 
     \caption{Color Contrast Occurrence Matrix}\label{fig:Color Contrast Occurence Matrix}
 \end{figure}
 
-On the figure shown above, we can see an example of the cloud of points that we expect to obtain. There are two thing which characterize the image :
+On the figure shown above, we can see an example of the cloud of points we expect to obtain. There are two things which characterize the image :
 \begin{itemize}
-\item the size and the form of the cloud characterizing the texture around the key-point.
+\item the size and the shape of the cloud characterizing the texture around the key-point.
 \item the projections on the three plans of the representation which characterize the density of the cloud of points.
 \end{itemize}
 \paragraph{The Color Contrast Occurrence feature}
 ~~\\
 ~~\\
-With the cloud of point obtained by the computation of the Color Contrast Occurrence matrix, we have a 3 dimensional representation of our key-point. To reduce the quantity of data to store and to facilitate the distance calculation, we have to represent this matrix by at least a 2-dimensional feature.
+With the cloud of points obtained by the computation of the Color Contrast Occurrence matrix, we have a 3 dimensional representation of our key-point. To reduce the quantity of data to store and to facilitate the distance calculation, we have to represent this matrix by at least a 2-dimensional feature.
 To do that, the solution used is to realize a spherical quantization on the cloud of point to have a histogram which will represent our key-point on two dimensions.
 Mathematically, this quantization is expressed as follows :
 
@@ -264,24 +278,24 @@ Each sphere will include a number of points of the cloud, but to have a better d
 Here we can see a sectional view of our spherical quantization. Each sphere is divided by n parts as shown above, and the number of points in each part are concatenated one by one in the description vector (quarter after quarter and sphere after sphere).
 \newpage
 
-\section{Work done}
+\section{Work achieved}
 
 \subsection{Process flow}
 
 What we call process flow in this project is the main function of the project. Indeed in that function we have to manage almost all the others function, and more precisely features function, classification function, test and validation function, or create or manage the directory files.
-This program is make that we can change the different descriptors (SIFT C$_2$O) as we want.
-In this part we will present how works the sub-functions inside the process flow.
+This program is gives the possibility to switch between the different descriptors (SIFT C$_2$O) as we want.
+In this part we will present how the sub-functions inside the process flow work.
 
 \subsubsection{Workspace}
 
-The aim of the Process flow function is to allow at the user to choose his workspace, and choose where he want to write the results obtained by the software. Here we can see how the folder will be organize by using this function:
+The aim of the Process flow function is to allow the user to specify his workspace, and choose where he wants to write the results obtained by the software. Here we can see how the folder will be organized by using this function:
 
 \begin{figure}[h]
     \includegraphics[scale=0.7]{arborescence.png}
     \caption{Organization of the workspace}\label{fig:process1}
 \end{figure}
 
- Indeed we can see that we create a folder descriptor, if he is not create yet, in this folder we create as much folders as the user wants. For this he just has to enter the name he wants in the parameter \textit{name\_desc}. We can also see, the user can choose the work folder he wants.
+     To sum up : we create a folder named after the descriptor, if he doesn't exist already, in this folder we create as much folders as the user wants. For this he only has to enter the name he wants in the parameter \textit{name\_desc}.
 
 \subsubsection{Processing}
 
@@ -296,18 +310,18 @@ The second goal of this function is to compile the whole processing, so if the u
 \item Classification of the test database using the K-nn method.
 \end{itemize}
 
-The schedule project does not allow us to optimize all the function, so we can see that the K-means function take long time. To solve this problem, and if you want to test the same signature (same descriptor, and same number of words), we have made an option for use the last dictionary you calculate before.
+The schedule of the project did not allow us to optimize all the functions, as it can be seen with the K-means function which takes quite long to process. In order to solve this issue, and if you want to test the same signature (same descriptor, and same number of words), we added an option that allows to re-use the last dictionary you calculated.
 
 \newpage
 \subsection{ SIFT(Scale-Invariant Feature Transform)}
-SIFT  is an algorithm used in sector of computer vision for detection and identification of similar elements between different numeric images.
-The principal method proposed by the author David Lowe is to calculate the SIFT descriptors on images studied. These descriptors are numeric information which derived of local analysis of the image and they characterize the visual content of this image so that this one is independent of the scale, the framing, the angle of observation and the luminosity.
+SIFT  is an algorithm used in the computer vision department for detection and identification of similar elements between different digital images.
+The main method proposed by the author David Lowe is to calculate the SIFT descriptors on the images to be analyzed. These descriptors are numeric information which derived from the local analysis of the image and they characterize the visual content of this image which results in a descriptor independent of the scale, the framing, the angle of observation and the luminosity.
 
 \subsubsection{Stages of the SIFT algorithm}
-The first stage is to detect key-points on the image. Each key-point is characterize by coordinates  x,y on the image and a scale factor $\sigma$. After that it's necessary to ameliorate the precision of the key-point localization.
+The first stage is to detect key-points on the image. Each key-point is characterized by coordinates  x,y on the image and a scale factor $\sigma$. After that it's necessary to improve the precision of the key-point localization.
 \begin{itemize}
 \item Scale-space extrema detection\\
-The gradient scale factor is calculated for smooth the original image. This operation allow to delete details which radius are inferior at $\sigma$.
+The gradient scale factor is calculated to smooth the original image. This operation allows to remove details with radius inferior to $\sigma$.
 \begin{equation}
 L(x,y,\sigma)=G(x,y,\sigma)*I(x,y)
 \end{equation}
@@ -321,7 +335,7 @@ After that, the key-points which have dimension approximately equal to $\sigma$ 
 \begin{equation}
 D(x,y,\sigma)=L(x,y,k\sigma)-L(x,y,k\sigma)
 \end{equation}
-Where k is the fixed parameter of the algorithm and depend to the fineness of the scale desired.
+Where k is the fixed parameter of the algorithm and depends on the precision of the scale desired.
 \begin{figure}[h]
     \center
     \includegraphics[scale=0.3]{DoG.jpg}
@@ -345,18 +359,18 @@ A histogram with 36 intervals is realized on the vicinity and each interval cove
  The peaks in this histogram correspond to the dominant orientations. All dominant orientations allow to have at least 80\% of the maximum value are taking in consideration and other additional key-points are detected. These new key-points detected are only different by the principal orientation.
 
 	\item Key-point descriptor \\
-An area of 16x16 pixels is taken around the key-point; subdivide in 4x4 zones of 4x4 pixels each one. A histogram including 8 intervals is calculated on each zone.
+An area of 16x16 pixels is taken around the key-point; subdivided in 4x4 zones of 4x4 pixels each one. A histogram including 8 intervals is calculated on each zone.
 
-After that, the 16 histograms with 8 intervals each one, are concatenated and normalized. In object to reduce the sensibility of the descriptor to the changes of the luminosity, the values are fixed to 0.2 and the histogram is calculated again for finally give the descriptor of the key-point of 128 dimension.
+After that, the 16 histograms with 8 intervals each one, are concatenated and normalized. In object to reduce the sensibility of the descriptor to the changes of the luminosity, the values are fixed to 0.2 and the histogram is calculated again to finally give the descriptor of the key-point of 128 dimension.
 \end{itemize}
 
 \subsubsection{ SIFT test and results}
 
-In our project we used the SIFT  of  OpenCV library in python. This function allow to detect key-points  on images and compute descriptors for each one.
-The script is adapted to our program in order to calculate  descriptors in whole database of images.
-Before integrating the script in the process flow, test steps were done in order to verify if the results obtained with the program are satisfied.
+In our project we used the SIFT from the OpenCV library in python. This function allows to detect key-points  on images and compute descriptors for each one.
+The script is adapted to our program in order to calculate  descriptors in the whole database of images.
+Before integrating the script in the process flow, test steps were done in order to verify if the results obtained with the program are satisfying.
 
-Tests consist to apply the sift on image according to different configurations to notice the invariance of the function to the configurations.
+Tests consist in applying the sift on image according to different configurations to notice the invariance of the function to the configurations.
 In a first phase, the tests were done on a basic image design on paint.
 Here we have the illustration images  of the results
 
@@ -431,14 +445,14 @@ These images are matched two by two with the key-points in order to find similar
 
 %\end{figure}
 
- According to our results obtained through the images above, we concluded that the SIFT descriptor is satisfied and it can be used to compute all descriptors in whole the database.
+ According to our results obtained through the images above, we concluded that the SIFT descriptor is satisfying and it can be used to compute all descriptors in the whole the database.
 
 \subsection{ Parallelism test}
 
-This test consist to use multiple processors to make a computation faster. It will permit multiple tasks to proceed without waiting for each other.
-The algorithm consist to decompose the complete task into independent subtasks and the data flow between them and distribute the subtasks over the processors.
-In python we have different possibilities to do this. The test was done by using the module multiprocessing because it was the only available in our python version.
-We can see on the following images the time computation before and after using the parallelism.
+This test consist in using multiple processors to make the computation faster. It will permit multiple tasks to proceed without waiting for each other.
+The algorithm consists in decomposing the complete task into independent subtasks and the data flow between them and distributing the subtasks over the processors.
+ With python we have several possibilities to do this. The test was done by using the module multiprocessing because it was the only one available in our version of python.
+We can see on the following images the elapsed time for the computation before and after using the parallelism.
 
 
 
@@ -511,7 +525,7 @@ b^*=200*\begin{bmatrix}f(\frac{Y}{Y_0})-f(\frac{Z}{Z_0})\end{bmatrix}
 
 \subsubsection{The coocurence matrix}
 
-To obtain the concurrence matrix, we have to calculate an image of the difference of color. For that, the program will take the difference between each point of the image and the point which is at a distance following a $\Delta$ vector from it. This calculation will has the same result if we compute the difference between the original image and a copy of it translated following $\Delta$.
+To obtain the coocurrence matrix, we have to calculate an image of the difference of color. For that, the program will take the difference between each point of the image and the point which is at a distance following a $\Delta$ vector from it. This calculation will have the same result if we compute the difference between the original image and a copy of it translated following $\Delta$.
 
 \begin{figure}[h]
     \center
@@ -519,7 +533,7 @@ To obtain the concurrence matrix, we have to calculate an image of the differenc
     \caption{Color Difference illustration}\label{fig:Color Difference by image shifting illustration}
 \end{figure}
 
-To do that, the program will calculate the equivalent of the translation in horizontal and vertical pixel translation as show below .
+To do that, the program will calculate the equivalence of the translation in horizontal and vertical pixel translation as shown below .
 
 \begin{figure}[h]
     \center
@@ -541,8 +555,8 @@ The values of $\|\Delta\|$ and $\theta$ have to being choose in the aim of get a
 This computation gives us the C$_2$O matrix which corresponds to the cloud of point described in the State of art. To validate this part, we have to compare our results with theory. It's known that the L$^*$a$^*$b$^*$ space has different component :
 \begin{itemize}
 \item L$^*$ which is an achromatic component
-\item a$^*$ which express the opposition between the red and the green
-\item b$^*$ which express the opposition between the blue and the yellow
+\item a$^*$ which expresses the opposition between the red and the green
+\item b$^*$ which expresses the opposition between the blue and the yellow
 \end{itemize}
 
 
@@ -552,9 +566,9 @@ This computation gives us the C$_2$O matrix which corresponds to the cloud of po
     \caption{Lab space illustration}\label{fig:Lab space illustration}
 \end{figure}
 \newpage
-We define two test images composed by a succession of line at different colors levels.
+We define two test images composed by a succession of lines at different color levels.
 
-So if we are testing our program on images like the two one shown below which are containing the two same colors opposed on the same component of the  L$^*$a$^*$b$^*$ space, the result on the difference must show that :
+So if we are testing our program on images like the two shown below which are containing the two same colors opposed on the same component of the  L$^*$a$^*$b$^*$ space, the result on the difference must show that :
 
 \begin{itemize}
 \item For the first one which is in green and red, there will be two points spaced on the a$^*$ component but at constant levels on the L$^*$ and the b$^*$ component.
@@ -588,16 +602,16 @@ So if we are testing our program on images like the two one shown below which ar
                 \centering
                 \includegraphics[height=220px]{MatriceC2O_ImgRougeVerte.png}
         \end{subfigure}
-        \caption{Coorcurence matrix obtained from test images}
+        \caption{Coocurence matrix obtained from test images}
         \label{fig:Coorcurence matrix obtained from test images}
 \end{figure}
 
-With this step validate by the theory, we will have to test with more colors to verify that we obtain the right number of points on the coocurence matrix for the corresponding number of colors. For each test image, there will be more points as the number of colors on the image is growing because the number of difference of color will grow too.
+With this step validated by the theory, we will have to test with more colors to verify that we obtain the right number of points on the coocurence matrix for the corresponding number of colors. For each test image, there will be more points as the number of colors on the image is growing because the number of difference of color will grow too.
 
 \newpage
 \subsubsection{The signature computing}
 
-After doing that, we have to compute the spherical quantization of the probability matrix. For that, we have to transform our difference image from Cartesian coordinates to Spherical coordinates (from these one, the spherical quantization will be easier to compute). So we consider our $L^*a^*b^*$ space like a 3 dimensional repository and for each points, it's calculate E the norm of the vector formed by the distance between it and the point (0,0,0), the orientation $\alpha$ formed by the angle between the vector and the $a^*$ plan and finally the orientation $\beta$ formed by the angle between the vector and the $b^*$ plan.
+After doing that, we have to compute the spherical quantization of the probability matrix. For that, we have to transform our difference image from Cartesian coordinates to Spherical coordinates (from these one, the spherical quantization will be easier to compute). So we consider our $L^*a^*b^*$ space like a 3 dimensional repository and for each point, we calculate E the norm of the vector formed by the distance between it and the point (0,0,0), the orientation $\alpha$ formed by the angle between the vector and the $a^*$ plan and finally the orientation $\beta$ formed by the angle between the vector and the $b^*$ plan.
 
 
 \begin{figure}[h]
@@ -641,7 +655,7 @@ There will be 4 interval of radius for the sphere :
 \end{equation}
 
 
-Each sphere will be split by $\alpha$ interval to concentrate the information as show below in the sectional view following the $(a^*,b^*)$ plan.
+Each sphere will be split by $\alpha$ interval to concentrate the information as shown below in the sectional view following the $(a^*,b^*)$ plan.
 Each $\alpha$ interval will measure $\Delta\alpha=360/8$
 
 This quantization has to be done for each value of $\beta$ interval which will measure $\Delta\beta=180/8$.
@@ -662,7 +676,7 @@ Once this quantization is done, the signature can be constituted by concatenate 
 \end{figure}
 
 \newpage
-The histograms obtained for each interval of $\beta$ will be concatenate to obtain the whole signature.
+The histograms obtained for each interval of $\beta$ will be concatenated to obtain the whole signature.
 
 \begin{figure}[ht]
     \center
@@ -683,18 +697,18 @@ In this way, we obtain one unique vector of 256 values to describe the image.
 \newpage
 \subsubsection{Validation step}
 
-Once these functions are computed, the most important step is to validate the good operation of all the parts. So in this part we will firstly demonstrate the functioning of the transformation through the L$^*$a$^*$b$^*$ space, an after we will talk about the spherical quantization.
-The functioning of the transformation in spherical coordinates will not been covered here because of the test to validate it is just making the inverse operation and verify is we get th same data..
+Once these functions are computed, the most important step is to validate the good operation of all the parts. So in this part we will firstly demonstrate the functioning of the transformation through the L$^*$a$^*$b$^*$ space, and after we will talk about the spherical quantization.
+The functioning of the transformation in spherical coordinates will not be covered here because the test to validate it is just about making the inverse operation and verify is we get the same data..
 
 \paragraph{Validation of the transformation through L$^*$a$^*$b$^*$ space and color difference}
 ~~\\
 ~~\\
-First of, we have to choose a reference to compare our results with. The solution choose is to compare the result of our function with those of the Bruce Lindbloom website's calculator which is a well know reference in image processing.
+First, we have to choose a reference to compare our results with. The solution chosen is to compare the results of our function with those of the Bruce Lindbloom website's calculator which is a well know reference in image processing.
 
-We has choose to work from the AdobeRGB space because it's one of the most used.
-To compute correctly the L$^*$a$^*$b$^*$ space, we have to apply a $\gamma$ factor to make the operation called « inverse companding ». This correction is made because we consider that the RGB space as it is capture by actual sensors is non linear because of the inequality of energy between low and hight luminosity levels.
+We have chosen to work with the AdobeRGB space because it's one of the most used.
+To compute correctly the L$^*$a$^*$b$^*$ space, we have to apply a $\gamma$ factor to make the operation called « inverse companding ». This correction is made because we consider that the RGB space, since it is captured by actual sensors, is non linear because of the inequality of energy between low and high luminosity levels.
 The $\gamma$ inverse companding factor to apply is 2,2 and the standard illuminant is D65.
-We can compare our results  with the Bruce Lindbloom website's calculator to verify that we obtain the good results.
+We can compare our results  with the Bruce Lindbloom website's calculator to verify that we obtain the right results.
 
 Here we will make a first test with only 2 colors, the red and the green.
 \vspace*{2mm}
@@ -709,7 +723,7 @@ RGB =& [255 ,0 ,0] ~~/~~ L^* =61.4272~~  a^*=89.5619~~   b^*=75.1487
 
 \vspace*{2mm}
 
-Because of the construction of the image on which we are testing our program, there will be only to different values of color difference on each component so by calculate and compare it with the theoretical values, we could validate our color difference computation:
+Because of the construction of the image on which we are testing our program, there will be only two different values of color difference on each component, so by calculating and comparing it with the theoretical values, we could validate our color difference computation:
 \vspace*{7mm}
 
 $\Delta L_1$ = -21,8755
@@ -734,7 +748,7 @@ RGB& = [255 ,255 ,0] ~~/~~ L =97.0132~~  a=-22.5787 ~~  b=105.3055
 \end{equation}
 
 \vspace*{2mm}
-As it has been done for the first test, we will compare our result of color difference with the theoretical ones.
+The same way it has been done for the first test, we will compare our result of color difference with the theoretical ones.
 \vspace*{7mm}
 
 $\Delta L_1$ = 64,0346
@@ -754,8 +768,8 @@ These results are exactly the same obtained with our software program so we can 
 ~~\\
 Once we could be sure that our $C_2O$ matrix is the good one, we have to validate the operating of the spherical quantization which must extract the signature of the image from the $C_2O$ matrix.
 
-For these tests, we will fix the number of intervals choose on each component : there are 4 intervals on $\Delta E$, 8 intervals on $\Delta \alpha$ and 8 intervals on $\Delta \beta$.
-So we will obtain a signature of 256 values to describe the image. To validate our spherical quantization, we have to create a matrix in spherical coordinates in which we will fix all the values. The first test we will do is to fix our values to have all the points of our matrix in one only interval of $\alpha$. By doing that, we will be sure that the quantization is good because we will produce the values especially to be in one only interval of the final signature/histogram.
+For these tests, we will set the number of intervals chosen on each component : there are 4 intervals on $\Delta E$, 8 intervals on $\Delta \alpha$ and 8 intervals on $\Delta \beta$.
+So we will obtain a signature of 256 values to describe the image. To validate our spherical quantization, we have to create a matrix in spherical coordinates in which we will fix all the values. The first test we will do is to fix our values to have all the points of our matrix in only one interval of $\alpha$. By doing that, we will be sure that the quantization is good because we will produce the values especially to be in one only interval of the final signature/histogram.
 
 For example here we want to have all the values in the first interval of the histogram.
 
@@ -834,7 +848,7 @@ So we obtain the following signature :
 
 All the values are on the $43^{th}$ interval.
 
-Considering these results, we can validate operation of our spherical quantization.
+Considering these results, we can validate the operation of our spherical quantization.
 
 \newpage
 \subsection{Metadata}
@@ -907,23 +921,23 @@ The idea was discarded later as it turned out there was no benefit with this and
 \newpage
 \subsection{Quantization}
 
-The Quantization is the step we will use for determine which images correspond to which species. For that we will use the bag of words in a first place to simplify the signature of whole images. And after use the K-nn method for the classification.
+The Quantization is the step we will use to determine which image correspond to which species. For that we will first use the bag of words model to simplify the signature of whole images and then we will use the K-nn method for the classification.
 
 \subsubsection{Bag of words}
 
-In the bag of words method we found two different step, the calculation of K-means and the design of a signature for the images.
+In the bag of words method we found two different steps, the calculation of K-means and the design of a signature for the images.
 
 \paragraph{K-means}
 ~~\\
 ~~\\
-The K-means is a simply method which consist to reduce the number of points or vectors in our case. The first step is to determinate randomly k centroid vectors, after with an Euclidean distance \eqref{euclid} we attribute the descriptors to whole images to the nearest centroid vectors.
+The K-means is a simple method which consists in reducing the number of points, or vectors in our case. The first step is to determinate randomly k centroid vectors and then,  with an Euclidean distance \eqref{euclid}, we attribute the descriptors to whole images to the nearest centroid vectors.
 
 \begin{equation}
 \sum_{k=0}^{centroid}\sum_{i=0}^{desc}\parallel x_k - u_i \parallel ^2
 \label{euclid}
 \end{equation}
 
-The last stage is an update step, for each centroid vectors we calculate the means of whole the descriptors associate to, so we obtain a new centroid vectors. And we applicate this algorithm for x iteration choose by the user.
+The last stage is an update step, for each centroid vectors we calculate the means of all the descriptors associated to, so we obtain a new centroid vectors. And we applicate this algorithm for x iteration, as defined by the user.
 
 For an application on a cloud of points we obtain this kind of result:
 
@@ -931,7 +945,7 @@ For an application on a cloud of points we obtain this kind of result:
 \paragraph{Signature}
 ~~\\
 ~~\\
-The creation of the signature is the last step of the bag of words method, they consist to assign to each images a signature in function of the number of word in the image. The graphic representation of this signature is a histogram:
+The creation of the signature is the last step of the bag of words method, they consist in assigning to each image a signature in function of the number of word in the image. The graphic representation of this signature is a histogram:
 
 \begin{figure}[H]
         \centering
@@ -967,11 +981,11 @@ The creation of the signature is the last step of the bag of words method, they 
 \paragraph{The K-nn method}
 ~~\\
 ~~\\
-The K-nn method is one of the most simple technique in the classification field. This method consist in associating the data to classify with the class that correspond the best to it.
-It is a supervised learning method : it means that the k-nn has to have a dictionary which contains all the training data sorted by class. To classify a new data, the k-nn calculates the distance between each training data and the new data. After doing that, it will simply takes the 'k' smallest ones, and determine in which class t have to attribute the new data by taking the one which is the most occurrent in the 'k' smallest distances.
+The K-nn method is one of the most simple technique in the classification field. This method consist in associating the data to be classified with the class that corresponds the best to it.
+It is a supervised learning method : it means that the k-nn has to have a dictionary which contains all the training data sorted by class. To classify a new data, the k-nn calculates the distance between each training data and the new data. After doing that, it will simply takes the 'k' smallest ones, and determine in which class to attribute the new data by taking the one which is the most occurrent in the 'k' smallest distances.
 
-For our project, the data to classify are images and the classification is made by the signature vector extracted by the K-means method. The principle is exactly the but the distances are calculated on the signature vector.
-We had choose two possibilities for the distance calculation : the Euclidian distance and the $\chi^2$ distance which are described below.
+For our project, the data to classify are images and the classification is made by the signature vector extracted by the K-means method. The principle is exactly the same but the distances are calculated on the signature vector.
+We had chosen two possibilities for the distance calculation : the Euclidian distance and the $\chi^2$ distance which are described below.
 \begin{itemize}
 \item Euclidian distance
 \vspace{0.5cm}
@@ -987,14 +1001,14 @@ D_{\chi^2}(v_1,v_2) =  \sum{\frac{(v_1(i)-v_2(i))^2}{(v_1(i)+v_2(i))^2}}
 
 \end{itemize}
 
-The choice of the type of distance calculation depends on the type of descriptor chosen for the classification. For SIFT descriptor,the Euclidian distance is appropriate but each descriptor must have one distance which work better than others.
-That's why the $\chi^2$ distance has been integrate in the program.
+The choice of the type of distance calculation depends on the type of descriptor chosen for the classification. For the SIFT descriptor,the Euclidian distance is appropriate but each descriptor must have one distance which works better than others.
+That's why the $\chi^2$ distance has been implemented in the program.
 
 \paragraph{Validation step}
 ~~\\
 ~~\\
 To validate this classification method, the most simple way is to test it on artificial signatures with different constant values.
-The test to validate is to take as our initial dictionary 7 vectors which we consider to be in 2 different classes. These vectors are full of constant values, they are shown as lines blow :
+The test to validate is to take as our initial dictionary 7 vectors which we consider to be in 2 different classes. These vectors are full of constant values, they are shown as lines below :
 
 \begin{figure}[h]
     \center
@@ -1003,9 +1017,9 @@ The test to validate is to take as our initial dictionary 7 vectors which we con
 \end{figure}
 
 The lowest one (from 0 to 3) are attributed to the first class and the others are attributed to the second one.
-After that, we simply have to test to classify a signature which is constructed on the same model. When the signature vector is closer of 3 than of 6, he has to be attributed to the first class, and to the second when he is closer of 6.
+After that, we simply have to test to classify a signature which is constructed on the same model. When the signature vector is closer to 3 than 6, it has to be attributed to the first class, and to the second when he is closer to 6.
 
-The result obtained by our K-nn function is the same that the one we expected so we can say that the functioning of it is valid.
+The result obtained by our K-nn function is the one we expected, the function is validated.
 
 
 \newpage
@@ -1099,14 +1113,14 @@ The right answers are then stored separately in order to be used for the metrics
 \newpage
 \subsection{Results}
 
-In this part, we will present the result we obtained in this project. We divide this section in two subsections, the first is the procedure we use for testing our descriptors. And the second is the presentation of the results and the comparison of the two descriptors.
+In this part, we will present the results we obtained in this project. We divide this section in two subsections, the first is the procedure we use for testing our descriptors. And the second is the presentation of the results and the comparison of the two descriptors.
 
 \subsubsection{Procedure}
 
 \paragraph{For one image}
 ~~\\
 ~~\\
-In a first place, we use the result of the K-means for classify one image taking training database as reference:
+First, we use the result of the K-means to classify one image using the training database as reference:
 
 \begin{figure}[h]
     \center
@@ -1133,7 +1147,7 @@ T_{\chi^2}(H^1,H^2) = \sum_{i=1}^{n} \frac{(h_{i}^{1} - h_{i}^{2})^2}{(h_{i}^{1}
 \paragraph{For a database}
 ~~\\
 ~~\\
-For a database we use the same method that we use for one image. For the treatment of a database we can use two different method:
+For a database we use the same method that we used for one image. For the treatment of a database we can use two different methods:
 
 \begin{itemize}
 \item cross-classification
@@ -1149,7 +1163,7 @@ For a database we use the same method that we use for one image. For the treatme
 \end{figure}
 
 \newpage
-\item let
+\item fixed classification
 
 \begin{figure}[h]
     \begin{minipage}{0.50\linewidth}
@@ -1157,7 +1171,7 @@ For a database we use the same method that we use for one image. For the treatme
         \caption{Classification for a database}\label{fig:proced3}
     \end{minipage}\hfill
     \begin{minipage}{0.55\linewidth}
-        In this second method, we choose the same training base (70\% of the database), and the same test base (30\% of the database). This method allows us to see the difference between two different distance, or between the SIFT and the C$_2$O.
+        In this second method, we choose the same training base (70\% of the database), and the same test base (30\% of the database). This method allows us to see the difference between two different distances, or between the SIFT and the C$_2$O.
     \end{minipage}
 \end{figure}
 
@@ -1166,6 +1180,148 @@ For a database we use the same method that we use for one image. For the treatme
 In scope of respecting our project schedule we have to present results so we will use the second method to have results to compare.
 
 \subsubsection{Analysis of result}
+
+In this part we will analyze and discuss about the results obtained by the software. In order to get quick results we will take a reduced data-base of 100 images and only 4 species. Here you can see 4 images which represent species:
+
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[height=180px]{63.jpg}
+        \end{subfigure}%
+        \hfill
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[height=160px]{4971.jpg}
+        \end{subfigure}
+        \caption{Campanula latifolia L. / Eryngium maritimum L.}
+        \label{fig:plants1}
+\end{figure}
+
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[height=180px]{2391.jpg}
+        \end{subfigure}%
+        \hfill
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[height=180px]{21604.jpg}
+        \end{subfigure}
+        \caption{Narcissus dubius Gouan / Picris hieracioides L.}
+        \label{fig:plants2}
+\end{figure}
+
+\paragraph{SIFT}
+~~\\
+~~\\
+For the descriptors SIFT we obtain that result:
+
+\begin{table}[H]
+\centering
+\caption{SIFT result}
+\label{tab1}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+ID & Training Base & Test Base & Correct & Accuracy \\ \hline
+173 & 17 & 8 &  &  \\ \hline
+1102 & 22 & 3 &  &  \\ \hline
+1889 & 16 & 9 &  &  \\ \hline
+2717 & 15 & 10 &  &  \\ \hline
+Total & 70 & 30 &  &  \\ \hline
+\end{tabular}
+\end{table}
+
+We can conclude on these results that the process we used is correct because the results obtained are mostly the same. The difference between our results and those of the previous CLEF challenge can be explained by the fact that, in the bag of words, we take into consideration a very small number of points (100 words) since we tried to minimize the processing time.
+
+\paragraph{C$_2$O}
+~~\\
+~~\\
+
+For the images we have seen before we obtain this kind of result. As we say before the software has a long processing so we will use parameters, for the C$_2$O, less accurate.
+
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[height=180px]{C2OSig_63.png}
+        \end{subfigure}%
+        \hfill
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[height=180px]{C2OSig_63_72pt.png}
+        \end{subfigure}
+        \caption{Signatures of Campanula latifolia L.}
+        \label{fig:plants3}
+\end{figure}
+
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[height=180px]{C2OSig_2391.png}
+        \end{subfigure}%
+        \hfill
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[height=180px]{C2OSig_2391_72pt.png}
+        \end{subfigure}
+        \caption{Signatures of Narcissus dubius Gouan}
+        \label{fig:plants4}
+\end{figure}
+
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[height=180px]{C2OSig_4971.png}
+        \end{subfigure}%
+        \hfill
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[height=180px]{C2OSig_4971_72pt.png}
+        \end{subfigure}
+        \caption{Signatures Eryngium maritimum L.}
+        \label{fig:plants5}
+\end{figure}
+
+\begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[height=180px]{C2OSig_21604.png}
+        \end{subfigure}%
+        \hfill
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[height=180px]{C2OSig_21604_72pt.png}
+        \end{subfigure}
+        \caption{Signatures of Picris hieracioides L.}
+        \label{fig:plants6}
+\end{figure}
+
+
+
+For the descriptors C$_2$O we obtain that result:
+
+\begin{table}[H]
+\centering
+\caption{C$_2$O result}
+\label{tab2}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+ID & Training Base & Test Base & Correct & Accuracy \\ \hline
+173 & 17 & 8 & 1 & 12.5\% \\ \hline
+1102 & 22 & 3 & 1 & 33\% \\ \hline
+1889 & 16 & 9 & 0 & 0\% \\ \hline
+2717 & 15 & 10 & 7 & 70\% \\ \hline
+Total & 70 & 30 & 9 & / \\ \hline
+\end{tabular}
+\end{table}
+
+We can explain the fact that the results of the C$_2$O are not as good by the fact that, to limit the processing time, we chose parameter less accurate parameters in the function C$_2$O's function. And as the descriptors SIFT we chose 100 words for the bag of words.
+An other explanation is that in the K-means function we used an Euclidean distance, however, after meetings with Noel Richard, the designer of the descriptor, we concluded that this kind of distance is not adapted to his descriptor.
 
 
 \newpage
