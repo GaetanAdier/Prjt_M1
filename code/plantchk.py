@@ -11,14 +11,21 @@ def plantCHK():
     """
     
     Cette fonction vérifie l'exactitude des plantes supposées et retourne seulement les réponses correctes.
-    
+    <user, observationId, classID, filename>
     
     :param :
     :type :
     """
-#à faire récupération des classID ordonnées dans le sens du run. plutot utiliser fichier run avec     
+    #à faire récupération des classID ordonnées dans le sens du run. plutot utiliser fichier run avec     
+    meta=np.loadtxt('meta.txt',delimiter=';')    
     
+    #meilleure solution pour chercher le fichier : ou pas
+#    with open('meta.txt', 'r') as inF:
+#    for line in inF:
+#        if 'classID' in line:
+#            # do_something
     
+    #meta:user, observationId, classID, filename
     #rappel format run :<ObservationId;ClassId;rank;score>    
     #données du run
     hyp=np.loadtxt('fakerun.txt',delimiter=';')
@@ -26,8 +33,8 @@ def plantCHK():
     chkd=np.empty() 
     #vérification des hypothèses
     for i in xrange(len(hyp)):
-        #conservation prédictions correctes         
-        if (hyp[i][3] == classID[i]):
+        #conservation prédictions correctes (meta[i][1]=classeID de l'image i)         
+        if (hyp[i][3] == meta[i][1]):
             try:
                 chkd=np.vstack(chkd,hyp[i][:])
             except NameError:

@@ -15,10 +15,11 @@ def KPoutput(xydes,path_desc,imgpath):
     Cette fonction permet de sauver les keypoints dans un fichier texte. Chaque
     ligne représente un keypoint sous la forme <x y des>
     
-    :param xydes: coordonnées xy des kp
+    :param xydes: coordonnées xy des kp + descripteur
     :type xydes: float
     :param path_desc: chemin descripteur
     :type desc: string
+    :param imgpath: 
     
 
      

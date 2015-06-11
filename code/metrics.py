@@ -4,11 +4,16 @@ Created on Wed May 20 14:46:42 2015
 
 @author: Projet
 """
+
+import matplotlib.pyplot as plt
+import numpy as np
 import xml.etree.ElementTree as ET
 import XMLmodif
 import XMLparser
 import os
 import TXTparser.py
+from sphinx_doc import genere_doc
+from sphinx_doc import configure_doc
 
 def invlist(x):
     return 1./x
@@ -16,11 +21,37 @@ def invlist(x):
 
 def metrics(p):
     
-    """
+    ur"""
     
-    Cette fonction permet d'évaluer le score de la solution selon la méthode du CLEF.
+    This function calculate the score that the run files would get at the CLEF challenge. It needs the text file containing
+    the observationID (the plant observation ID from which several pictures can be associated), the classID predicted (numerical taxonomical number used by Tela Botanica) and the
+    rank (which represent the occurence of the observationID).
     
     
+    The primary metric used to evaluate the submitted runs will be a score related to the rank of the correct species in the list of the retrieved species.
+    Each plant observation test will be attributed with a score between 0 and 1 : of 1 if the 
+    
+    1st metric (score observation):
+    .. math::
+      S1=\frac{1}{U}\sum_{u=1}^{U}\frac{1}{P_{u}} \sum_{p=1}^{P_u}S_{u,p}
+    
+    U : number of users (who have at least one image in the test data)
+    Pu : number of individual plants observed by the u-th user
+    Su,p : score between 1 and 0 equals to the inverse of the rank of the correct species (for the p-th plant observed by the u-th user)    
+    
+    2nd metric (score image):
+    
+    ..math::
+      S2=\frac{1}{U}\sum_{u=1}^{U}\frac{1}{P_{u}} \sum_{p=1}^{P_u}\frac{1}{N_{u,p}} \sum_{n=1}^{N_{n,p}}S_{u,p,n}
+    
+    
+    U : number of users (who have at least one image in the test data)
+    Pu : number of individual plants observed by the u-th user
+    Nu,p : number of pictures taken from the p-th plant observed by the u-th user
+    Su,p,n : score between 1 and 0 equals to the inverse of the rank of the correct species (for the n-th picture taken from the p-th plant observed by the u-th user)    
+    
+    
+    Variables locales :
     :param Users: number of users who have at least one image in the test data
     :type Users:
     :param plants: number of plants observed by the u-th user
@@ -33,7 +64,7 @@ def metrics(p):
     :Example:
         
         
-    >>> 
+    >>> metrics()
     >>> 
      
     """
@@ -163,7 +194,67 @@ def MetricsArgs(IBPath):
     
     
     fo=open("run.txt","wb")
+
+def metrxGraph (score1,score2):
+    
+   
+    """
+    
+    This function draw a comparison between the score obtained and the scores from the oarticipants of the contest;
+    
+    :param Users: number of users who have at least one image in the test data
+    :type Users:
+
+ 
+     
+    :Example:
         
+        
+    >>> 
+    >>> 
+     
+    """
+    
+
+    
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    
+    ## the data
+    N = 5
+    data=np.genfromtxt('CLEFresults2015')
+    
+    ## necessary variables
+    ind = np.arange(N)                # the x locations for the groups
+    width = 0.35                      # the width of the bars
+    
+    ## the bars
+    rects1 = ax.bar(ind, Score1, width,
+                    color='black')
+    
+    rects2 = ax.bar(ind+width, Score2, width,
+                        color='red')
+    
+    # axes and labels
+    ax.set_xlim(-width,len(ind)+width)
+    ax.set_ylim(0,45)
+    ax.set_ylabel('Scores')
+    ax.set_title('Scores by teams')
+    xTickMarks = [data[:][0]]
+    ax.set_xticks(ind+width)
+    xtickNames = ax.set_xticklabels(xTickMarks)
+    plt.setp(xtickNames, rotation=45, fontsize=10)
+    
+    ## add a legend
+    ax.legend( (rects1[0], rects2[0]), ('Score observation', 'Score image') )
+    
+    plt.show()    
         
     
+    
+    #other contestants scores :
+
+        
+        
+genere_doc()    
     

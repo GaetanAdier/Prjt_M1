@@ -12,7 +12,7 @@ def XMLparser(filename):
    
     """
     
-    Cete fonction permet de récupérer les données utiles à l'évaluation du score
+    Cette fonction permet de récupérer les données utiles à l'évaluation du score
     
     :param filename: 
     :type filename:
