@@ -401,7 +401,7 @@ These images are matched two by two with the key-points in order to find similar
 \subsection{ Parallelism test}
 
 This test consist to use multiple processors to make a computation faster. It will permit multiple tasks to proceed without waiting for each other.
-The algorithme consist to decompose the complete task into independent subtasks and the data flow between them and distribut the subtasks over the processors.
+The algorithm consists to decompose the complete task into independent subtasks and the data flow between them and distribut the subtasks over the processors.
 In python we have different posibilities to do this. The test was done by using the module multiprocessing because it was the only avaible in our python version.
 We can see on the following images the time computation before and after using the parallelism.
 
@@ -785,6 +785,7 @@ Considering these results, we can validate operation of our spherical quantizati
 
 \newpage
 \subsection{metadata}
+
     The image database come with xml files containing associated with every pictures respecting the format below :
 \begin{figure}[H]
   \centering
@@ -796,21 +797,35 @@ Considering these results, we can validate operation of our spherical quantizati
 Among those, only the following can be useful :
 \begin{itemize}
 
-\item ObservationId: the plant observation ID from which several pictures can be associated;
+\item ObservationId: the plant observation ID from which several pictures can be associated, represents a unique environment (same plant, same day, same author);
     \begin{figure}[H]
       \centering
       \includegraphics[width=10cm]{OnePrunus.png}
       \caption{\small\it{One observation of one individual-plant observed the same day by a same author involving several pictures with the same Observation ID}}
     \end{figure}
 
-\item content: what part of the plant it is : "Leaf", "Flower", "Fruit", "Stem", "Entire", "Branch";
-\item ClassId: the class number ID that must be used as ground-truth. It is a numerical taxonomical number used by Tela Botanica;
+\item content: part of the plant represented in the picture : "Leaf", "Flower", "Fruit", "Stem", "Entire", "Branch", can be used to in the prediction process;
+\item ClassId: the class number ID that must be used as ground-truth. It is a numerical taxonomical number used by Tela Botanica, unique to each species;
 \item Species: the species names (containing 3 parts: the Genus name, the Species name, the author(s) who discovered or revised the name of the species);
 \item Family: the name of the Family, two levels above the Species in the taxonomical hierarchy used by Tela Botanica;
-\item author: name of the author of the picture;
+\item author: name of the author of the picture, will be of use to balance the metrics ;
 \end{itemize}
 
+\subsubsection{metadata retrievers}
+    Every picture of the dataset is bundled with a XML file providing related data.
+    Retrieving relevant data from those files was necessary in order to associate the results of the descriptors with what they represent. Metadata can also be used to limit the database to a un unique family, to certain species or to a specified content(branch, fruit, etc).
+
+    For this purpose we created a function which look into those files to return the observationId, classId, author, etc.
+
+\subsubsection{relevant metadata storing}
+    At first we expected to recreate a single XML file containing only the relevant metadata so that we don't have to rescan the data bank each time we need something.
+    But the XML format didn't turn to be very practical to use since when reading the files it was not possible to retrieve the parent from the nodes. And without using a tree structure, the XML format loses some of its appeal.
+
+    We switched for a simple text file providing with each lines the observationID, the ClassID, the file related and the author.
+
+
 \subsubsection{XML handling}
+
  For some reasons, at the beginning we had decided to use XML files files to store the keypoints and their coordinates. The idea was to have something like that :
 
  \lstset{language=XML}
@@ -838,18 +853,6 @@ The idea was discarded later as it turned out there was no benefit with this and
 \quote{x y descriptor} was more than enough and easier to do.
 
 
-\subsubsection{metadata retrievers}
-    Every picture of the dataset was bundled with a XML file providing related data.
-    Retrieving relevant data from those files was necessary in order to build run files and in order to calculate the metrics of the challenge.
-
-
-    For this purpose we
-
-\subsubsection{relevant metadata storing}
-    At first we expected to recreate a single XML file containing only the relevant metadata so that we don't have to rescan the data bank each time we need something.
-    But the XML format didn't turn to be very practical to use since when reading the files it was not possible to retrieve the parent from the nodes. And without using a tree structure, the XML format loses some of its appeal.
-
-    We switched for a simple text file providing with each lines the observationID, the ClassID, the file related and the author.
 
 \newpage
 \subsection{Quantization}
