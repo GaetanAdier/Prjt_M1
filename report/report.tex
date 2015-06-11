@@ -13,6 +13,7 @@
 \usepackage{float}
 \usepackage{indentfirst}
 \usepackage{lscape}
+\usepackage{natbib}
 \usepackage[top=2.5cm,bottom=2.5cm,right=2.5cm,left=2.5cm]{geometry}
 \usepackage{titlesec}
 \setcounter{secnumdepth}{5}
@@ -60,9 +61,23 @@ We worked on indexation images in a big database whith the team composed by :
 \item Thierry Urruty ( Researcher in Color images ) : Client
 \end{itemize}
 
-
+\newpage
 \section{User requirement}
 
+We will have to design a software program which, by using the CLEF image learning Database, will be able to index the whole Database according to the different features which are specified in the CLEF rules.
+
+The aim of this project is to adapt the last up to date designed texture and color attributes to the current image classification and then to measure how they perform with photographies taken from nature in order to test their competitiveness through the CLEF challenge.
+
+The XLIM-SIC laboratory is currently working on the design of new image descriptors by integrating texture and color attributes more effectively. This project is a way for the researchers to see how they will behave in a real situation. Furthermore, the start of this project corresponds to the CLEF 2015 contest which is coincidentally about image recognition and automatic indexing of images taken from nature. If the results from this project are satisfying enough, they will be submitted to this international contest.
+
+A software program able to calculate a texture type descriptor suitable to nature images and which confirms the performances of this attribute via the CLEF contest results.
+
+Locally, we will have to create one directory for each descriptor which will contain one CSV file in which we will find the descriptors. One text file will be created too and will contain all
+the information about the image. To facilitate the indexing, one single text file will be created for the whole database and will contain all the information (image $\rightarrow$ descriptor 1
+/ descriptor 2 / …) as an table of contents. Descriptors must be interchangeable in the software.
+
+When this software program is finished to compute, we will have to compare our results with those of the other laboratories which have participated in the CLEF challenge. We will use the CLEF challenge metrics which are specified in the challenge rules.
+An abstract of these comparisons will be provided with the software program and the final technical report.
 \newpage
 \section{State of art}
 
@@ -963,9 +978,6 @@ The K-means is a simple method which consists in reducing the number of points, 
 
 The last stage is an update step, for each centroid vectors we calculate the means of all the descriptors associated to, so we obtain a new centroid vectors. And we applicate this algorithm for x iteration, as defined by the user.
 
-For an application on a cloud of points we obtain this kind of result:
-
-
 \paragraph{Signature}
 ~~\\
 ~~\\
@@ -1249,11 +1261,11 @@ For the descriptors SIFT we obtain that result:
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 ID & Training Base & Test Base & Correct & Accuracy \\ \hline
-173 & 17 & 8 &  &  \\ \hline
-1102 & 22 & 3 &  &  \\ \hline
-1889 & 16 & 9 &  &  \\ \hline
-2717 & 15 & 10 &  &  \\ \hline
-Total & 70 & 30 &  &  \\ \hline
+173 & 17 & 8 & 4 & 50\% \\ \hline
+1102 & 22 & 3 & 1 & 33\% \\ \hline
+1889 & 16 & 9 & 1 & 11\% \\ \hline
+2717 & 15 & 10 & 7 & 70\% \\ \hline
+Total & 70 & 30 & 9 & / \\ \hline
 \end{tabular}
 \end{table}
 
@@ -1364,7 +1376,7 @@ Every morning, there is a scrum meeting : the entire team meet for between 5 or 
 There are some tools which are coming with the scrum method, the most important is the product backlog :
 The product backlog is a table (usually realized on a spreadsheet) which contain all the tasks/subtasks of the project, their time affectation (the estimates time that the task will take), the priority (represented by a number from 0 to 100) and the person which is affected to the task.
 The backlog is not a fix file, it can be modified along the project to adapt the organization in case of unforeseen (absence, bad estimation of the duration of a task, ...).
-For each sprint beginning, the team look at the backlog and affect to the sprint the higher prioritized tasks which are remaining to do to the sprint. You could see below a sample of the backlog of our project: 
+For each sprint beginning, the team look at the backlog and affect to the sprint the higher prioritized tasks which are remaining to do to the sprint. You could see below a sample of the backlog of our project:
 
 \begin{figure}[H]
     \center
@@ -1384,7 +1396,7 @@ For each sprint, a useful tool that exist is Trello : it permit to make a visual
 \item Done
 \end{itemize}
 
-You can see below our Trello board for the sprint 5 : 
+You can see below our Trello board for the sprint 5 :
 
 \begin{figure}[H]
     \center
@@ -1477,10 +1489,11 @@ Description : Learning the attempt of the CLEF organization (formalization of re
 \section{Conclusion}
 
 
-
+\newpage
 %-------------------Bibliography----------------------------------
 \bibliographystyle{plain}
-\bibliography{User_requirements}
+\nocite{*}
+\bibliography{report}
 % ----------------------------------------------------------------
 
 
