@@ -6,7 +6,8 @@
 \usepackage{amsmath,amsthm}
 \usepackage{graphicx}
 \usepackage{caption}
-
+\usepackage{listings}
+\usepackage{color}
 \usepackage{subcaption}
 \usepackage{amsfonts}
 \usepackage{float}
@@ -701,8 +702,8 @@ Here we will make a first test with only 2 colors, the red and the green.
 
 \begin{equation}
 \begin{split}
-RGB =& [255 ,0 ,0] ~~/~~ L$^*$ =61.4272~~  a$^*$=89.5619~~   b$^*$=75.1487
-\\RGB =& [0 ,255 ,0] ~~/~~ L$^*$ =83.3027~~  a$^*$=-137.9737~~   b$^*$=90.8299
+RGB =& [255 ,0 ,0] ~~/~~ L^* =61.4272~~  a^*=89.5619~~   b^*=75.1487
+\\RGB =& [0 ,255 ,0] ~~/~~ L^* =83.3027~~  a^*=-137.9737~~   b^*=90.8299
 \end{split}
 \end{equation}
 
@@ -838,6 +839,71 @@ Considering these results, we can validate operation of our spherical quantizati
 \newpage
 \subsection{Metadata}
 
+    The image database come with xml files containing associated with every pictures respecting the format below :
+\begin{figure}[H]
+  \centering
+
+  \includegraphics[width=8cm]{captureXML.png}\\
+  \caption{\small \it {metadata of the picture number 2}}
+\end{figure}
+
+Among those, only the following can be useful :
+\begin{itemize}
+
+\item ObservationId: the plant observation ID from which several pictures can be associated, represents a unique environment (same plant, same day, same author);
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=10cm]{OnePrunus.png}
+      \caption{\small\it{One observation of one individual-plant observed the same day by a same author involving several pictures with the same Observation ID}}
+    \end{figure}
+
+\item content: part of the plant represented in the picture : "Leaf", "Flower", "Fruit", "Stem", "Entire", "Branch", can be used to in the prediction process;
+\item ClassId: the class number ID that must be used as ground-truth. It is a numerical taxonomical number used by Tela Botanica, unique to each species;
+\item Species: the species names (containing 3 parts: the Genus name, the Species name, the author(s) who discovered or revised the name of the species);
+\item Family: the name of the Family, two levels above the Species in the taxonomical hierarchy used by Tela Botanica;
+\item author: name of the author of the picture, will be of use to balance the metrics ;
+\end{itemize}
+
+\subsubsection{metadata retrievers}
+    Every picture of the dataset is bundled with a XML file providing related data.
+    Retrieving relevant data from those files was necessary in order to associate the results of the descriptors with what they represent. Metadata can also be used to limit the database to a un unique family, to certain species or to a specified content(branch, fruit, etc).
+
+    For this purpose we created a function which look into those files to return the observationId, classId, author, etc.
+
+\subsubsection{relevant metadata storing}
+    At first we expected to recreate a single XML file containing only the relevant metadata so that we don't have to rescan the data bank each time we need something.
+    But the XML format didn't turn to be very practical to use since when reading the files it was not possible to retrieve the parent from the nodes. And without using a tree structure, the XML format loses some of its appeal.
+
+    We switched for a simple text file providing with each lines the observationID, the ClassID, the file related and the author.
+
+
+\subsubsection{XML handling}
+
+ For some reasons, at the beginning we had decided to use XML files files to store the keypoints and their coordinates. The idea was to have something like that :
+
+ \lstset{language=XML}
+
+ \begin{lstlisting}
+<?xml version="1.0" encoding="utf-8"?\>
+ <keypoints>
+    <kp1>
+        <x></x>
+        <y></y>
+        <xs:descriptor></xs:descriptor>
+    </kp1></kp2>
+        <x></x>
+        <y></y>
+        <descriptor>
+        </descriptor>
+    </kp2>
+ </keypoints>
+\end{lstlisting}
+
+
+
+
+The idea was discarded later as it turned out there was no benefit with this and a simple text file containing at each line
+\quote{x y descriptor} was more than enough and easier to do.
 \newpage
 \subsection{Quantization}
 
@@ -867,7 +933,7 @@ For an application on a cloud of points we obtain this kind of result:
 ~~\\
 The creation of the signature is the last step of the bag of words method, they consist to assign to each images a signature in function of the number of word in the image. The graphic representation of this signature is a histogram:
 
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
         \begin{subfigure}[b]{0.5\textwidth}
                 \centering
@@ -881,8 +947,7 @@ The creation of the signature is the last step of the bag of words method, they 
         \caption{Signature de l'image 128}
         \label{fig:signature1}
 \end{figure}
-
-\begin{figure}[h]
+\begin{figure}[H]
         \centering
         \begin{subfigure}[b]{0.5\textwidth}
                 \centering
@@ -945,6 +1010,91 @@ The result obtained by our K-nn function is the same that the one we expected so
 
 \newpage
 \subsection{Metrics}
+
+    The first thing to do is to create a file with the results of the run and the related information.
+
+    The official run files to be submitted to the challenge have to follow a specified format :
+
+    \begin{quote}
+        ObservationId;ClassId;rank;score
+    \end{quote}
+
+    The ObservationID was explained previously and is here to represent the environment of the picture (being unique to a set of an author, a place, a date and a plant)
+    The ClassID represents the plant supposed to be on the picture by the classification
+    The rank represents the occurrence of the same ObservationID in order to
+    The score is a confidence score of a prediction item (the lower the score the lower the confidence).
+
+    Another optional run file, detailing species prediction at image level) could be submitted as below :
+
+    \begin{quote}
+      test\_image\_name.jpg;ClassId;rank;score
+    \end{quote}
+
+
+
+    Since we didn't produce any run we left the score aside.
+
+    Once those files produced we can now measure the performance of the run.
+
+    The first thing to do is to check if the predicted plants are right and then to retrieve only the correct guesses.
+
+    The CLEF challenge offers two metrics :
+
+    The primary metric used to evaluate the submitted runs will be a score related to the rank of the correct species in the list of the retrieved species.
+    Each plant observation test will be attributed with a score between 0 and 1 : of 1 if the first returned species is correct and will decrease quickly while the rank of the correct species increases. An average score will then be computed on all test individual plant. A simple mean on all observation test would however introduce some bias. Indeed since the PlantCLEF dataset was built in a collaborative manner, some contributors have provided much more observations pictures than the others. O in order to evaluate the ability of a system to provide correct answers to all users, the mean of the average classification rate per author is used.
+
+
+    1st metric (score observation):
+
+
+      $S1=\frac{1}{U}\sum_{u=1}^{U}\frac{1}{P_{u}} \sum_{p=1}^{P_u}S_{u,p}$
+
+
+    \begin{quote}
+        \begin{description}
+            \item[U :] number of photography authors with at least one image in the test data
+            \item[P$_u$ :] number of individual plants observed by the u-th user
+            \item[S$_{u,p}$ :] score between 1 and 0 equals to the inverse of the rank of the correct species (for the p-th plant observed by the u-th user)
+        \end{description}
+    \end{quote}
+
+The secondary metric is used with the optional run file providing species determination at the image level. Same as above, in order to avoid the bias brought with the fact that some authors provided many pictures of the same plant, the average classification rate on each plant is used.
+
+
+
+
+    2nd metric (score image):
+
+
+      $S2=\frac{1}{U}\sum_{u=1}^{U}\frac{1}{P_{u}} \sum_{p=1}^{P_u}\frac{1}{N_{u,p}} \sum_{n=1}^{N_{n,p}}S_{u,p,n}$
+
+
+\begin{quote}
+        \begin{description}
+            \item[U :] number of photography authors with at least one image in the test data
+            \item[P$_u$ :] number of individual plants observed by the u-th user
+            \item[N$_{u,p}$ :] number of individual plants observed by the u-th user
+            \item[S$_{u,p,n}$ :] score between 1 and 0 equals to the inverse of the rank of the correct species (for the n-th picture taken from the p-th plant observed by the u-th user)
+        \end{description}
+    \end{quote}
+
+\subsubsection{score results}
+We didn't manage to evaluate our own scores but the results from the challenge are available to check with.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=10cm]{results-image.png}
+  \caption{Score 2014}
+\end{figure}
+
+
+
+\subsubsection{checking the predictions}
+Once the predictions are done we still have to check whether they are correct or not. To handle this task we created a function storing the metadata and checking if the output classID linked with the filenames.
+
+The right answers are then stored separately in order to be used for the metrics.
+
+
 
 \newpage
 \subsection{Results}
