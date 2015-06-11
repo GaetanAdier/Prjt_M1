@@ -6,7 +6,7 @@
 Welcome to M1 RTMA Project's documentation!
 ===========================================
 
-Contents:
+This website corresponds to the documentation of our first year master project. You can get all the different modules documentation by going in the "Modules index" section.
 
 .. toctree::
    :maxdepth: 2

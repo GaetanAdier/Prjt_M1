@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jun 11 17:22:22 2015
-
-@author: gaetan
+This module gathering all the functions necessary to process the different descriptor computing.
 """
 
-import cv2
+#import cv2
 import numpy as np
 import time  
 import Constant as c
@@ -87,8 +85,7 @@ def diff(img,dX,dY):
     
 
 #    
-#    cv2.imshow('Image dorigine decalee',dst)
-#    cv2.waitKey(0)
+
 #    
 #    
     reMatimg=np.zeros([rows-dY,cols-dX,plans])
@@ -111,23 +108,14 @@ def diff(img,dX,dY):
     
     
     #Image resizing
-#    reMatdst=np.zeros([rows-dY,cols-dX,plans])
-#    reMatdst=dst[dY-NegY:rows-NegY,NegX:cols-dX+NegX,:]
+
     reMatdst=np.zeros([rows-dY,cols-dX,plans])
     reMatdst=dst[dY:rows,0:cols-dX,:]
     
-#    print dY-NegY, rows-NegY, NegX ,cols-dX+NegX
-#    
-#    cv2.imshow('Image de destination decale resizee',reMatdst)
-#    cv2.waitKey(0)
-    
-#    reMatimg=np.zeros([rows-dY,cols-dX,plans])
-#    reMatimg=img[dY+NegY:rows+NegY,NegX:cols+dX+NegX,:] 
+
     reMatimg=np.zeros([rows-dY,cols-dX,plans])
     reMatimg=img[dY:rows,0:cols-dX,:]
-    
-#    cv2.imshow('image non decalee resizee',reMatimg)
-#    cv2.waitKey(0)
+
     
     Res = np.zeros([rows-dY,cols-dX,plans])
 
@@ -135,9 +123,7 @@ def diff(img,dX,dY):
     Res= reMatimg-reMatdst
     
 
-#    
-#    cv2.imshow('b',Res)
-#    cv2.waitKey(0)    
+ 
     
     # Uncomment to display the coocurence matrix
     
@@ -416,40 +402,32 @@ def SphericQuantif(C2OMat, NE, Nalpha, Nbeta):
     SigC2O = np.zeros(Nalpha*Nbeta*NE)
     n=0
 
-#    print 9.0/(NE-1)
-    Zero = np.zeros((rows,cols))
     for i in np.arange(0,Nbeta):
-#         #Beta va de - pi/2 a pi/2 et pas de 8 a pi
         BinBeta=np.zeros((rows,cols))
         BinBeta[(C2OMat[:,:,2]>=((-np.pi/2)+((np.pi/Nbeta)*i)))&(C2OMat[:,:,2]<=((-np.pi/2)+((np.pi/Nbeta)*(i+1))))]=1
-        
-#        print i
-        
-#        BinE=np.zeros((rows,cols))
-   
+
         for j in np.arange(0,NE):
 
             BinE=np.zeros((rows,cols))
             BinE[(BinBeta==1)&((C2OMat[:,:,0]>=(9.0/(NE-1))*j)&(C2OMat[:,:,0]<=(9.0/(NE-1))*(j+1)))]=1
   
-            #Essayer de sortir sa de la boucle pour gagner du temps
+
             BinE[(j > NE-2)&(BinBeta==1)&(C2OMat[:,:,0]>=(9.0/(NE-1))*j)]=1
             BinAlpha=np.zeros((rows,cols))
             BinAlpha[(BinE==1)&(((C2OMat[:,:,1]>=((2.0*np.pi)-(np.pi/(Nalpha))))&(C2OMat[:,:,1]<=(2.0*np.pi)))|((C2OMat[:,:,1]<=(np.pi/(Nalpha)))&((C2OMat[:,:,1]>=0))))]=1
             SigC2O[n]=np.sum(BinAlpha)
             n = n+1
-#            for k in np.arange(0,Nalpha):
+
             for k in np.arange(1,Nalpha):
                 BinAlpha=np.zeros((rows,cols))
-#                BinAlpha[(k==0)&(BinE==1)&(((C2OMat[:,:,1]>=((2.0*np.pi)-(np.pi/(Nalpha))))&(C2OMat[:,:,1]<=(2.0*np.pi)))|((C2OMat[:,:,1]<=(np.pi/(Nalpha)))&((C2OMat[:,:,1]>=0))))]=1
-#                BinAlpha[(k>0)&(BinE==1)&(C2OMat[:,:,1]>=(((2.0*np.pi/Nalpha)*k)-(np.pi/(Nalpha))))&(C2OMat[:,:,1]<=(((2.0*np.pi/Nalpha)*(k+1))-(np.pi/(Nalpha))))]=1
+
                 
                 BinAlpha[(BinE==1)&(C2OMat[:,:,1]>=(((2.0*np.pi/Nalpha)*k)-(np.pi/(Nalpha))))&(C2OMat[:,:,1]<=(((2.0*np.pi/Nalpha)*(k+1))-(np.pi/(Nalpha))))]=1                
                 
                 
 #      
                 SigC2O[n]=np.sum(BinAlpha)
-#                test = test + np.sum(BinAlpha)
+
                 
                 n = n+1
 
@@ -530,21 +508,16 @@ def C2O(image, NormDelta, RadDelta, NE, Nalpha, Nbeta, SigC2Ot):
     
 
     
-#    imag = Image.open(image)
-#    
-#    imag=np.array(imag)
-    
+
     
     
     
     Lab = np.zeros(np.shape(image))
-#    imag=imag.astype(np.float32)
+
     #Transformation throught the Lab space    
-    
-#    timer.start() 
+ 
     Lab=RGBtoLAB(image,c.MatPass.AdobRGB, c.stdIlluminant.D65, 2.2)
-#    timer.stop()  
-#    print 'Temps RGB2LAB:', timer.interval 
+
     
     LabDiff=0
     # Calculation of the shifting parameter
@@ -553,52 +526,19 @@ def C2O(image, NormDelta, RadDelta, NE, Nalpha, Nbeta, SigC2Ot):
     
     
     
-#    print dX , dY
     
 #    Calculation of the difference of color
-#    timer.start() 
     LabDiff = diff(Lab,dX,dY)
-#    timer.stop()  
-#    print 'Temps difference:', timer.interval 
+
 
     rows,cols, plans = LabDiff.shape
     # Transformation in spherical coordinates
-    
-#    timer.start() 
+
     SphereCoord=CarthesianToSpheric(LabDiff)
-#    timer.stop()  
-#    print 'Temps coordonnes spheriques:', timer.interval 
-    
-#    print np.max(SphereCoord[:,:,0]) , np.min(SphereCoord[:,:,0])
-#    print np.max(SphereCoord[:,:,1]) , np.min(SphereCoord[:,:,1])
-#    print np.max(SphereCoord[:,:,2]) , np.min(SphereCoord[:,:,2])
-#
-#    fig = plt.figure()
-#
-#    ax = fig.add_subplot(111, projection='3d')
-#    
-#    ax.scatter3D(LabDiff[:,0:cols,2], LabDiff[:,0:cols,1], LabDiff[:,0:cols,0],zdir='z')
-#    ax.set_xlim([-80, 80])
-#    ax.set_ylim([-80, 80])
-#    ax.set_zlim([-80, 80])
-    
-#    ax.contourf(LabDiff[:,:,2], LabDiff[:,:,1], LabDiff[:,:,0], zdir='z',offset=-80, cmap='coolwarm')
-#    ax.contourf(LabDiff[:,:,2], LabDiff[:,:,1], LabDiff[:,:,0], zdir='y',offset= 80, cmap='coolwarm')
-#    ax.contourf(LabDiff[:,:,2], LabDiff[:,:,1], LabDiff[:,:,0], zdir='x',offset=-80, cmap='coolwarm')
-##    cv2.destroyAllWindows()
-#    ax.set_xlabel(ur"$\Delta$"+"b")
-#    ax.set_ylabel(ur"$\Delta$"+"a")
-#    ax.set_zlabel(ur"$\Delta$"+"L")
-#
-#    ax.set_title(ur"$C_2O$"+" matrix")
-    # Calculation of the signature by the spherical quantization
-    
-#    timer.start() 
+
+
     SigC2O = SphericQuantif(SphereCoord,NE ,Nalpha,Nbeta)
-#    timer.stop()  
-#    print 'Temps quantification:', timer.interval 
-#    print 'Nb de truc dans sig C2O'
-#    print np.sum(SigC2O)
+
     
     # Assignation of the result on the queue for the parralelized version
     SigC2Ot.put(SigC2O)
@@ -643,7 +583,6 @@ def C2OPatch(image,dE,dAlpha,dBeta):
     
     rows,cols, plans = imag.shape
     
-#    print rows, cols , plans
 
     gray= cv2.cvtColor(imag,cv2.COLOR_RGB2GRAY)
     
@@ -661,17 +600,13 @@ def C2OPatch(image,dE,dAlpha,dBeta):
         mat_kp[j][1]=np.round(kp[j].pt[1])
     matkpret = np.zeros(np.shape(mat_kp))
     n = 0
-#    print np.max(mat_kp[:,1]) , np.min(mat_kp[:,1]) 
     
     
 
     for i in np.arange(0,len(kp)-1):
-#        print i
-#        print mat_kp[i][0]-31 , mat_kp[i][0]+32 , mat_kp[i][1]-31 , mat_kp[i][1]+32, np.shape(imag)
-#        if (((mat_kp[i][0]-31)<0) | ((mat_kp[i][0]+32)>rows-1) | ((mat_kp[i][1]-31)<0) | ((mat_kp[i][1]+32)>cols-1)):
+
         if (((mat_kp[i][0]-31)>0) & ((mat_kp[i][0]+32)<rows-1) & ((mat_kp[i][1]-31)>0) & ((mat_kp[i][1]+32)<cols-1)):
-#            print i
-#        else:
+
             matkpret[n][0] = mat_kp[i][0]
             matkpret[n][1] = mat_kp[i][1]
             matC2OPatch[n,:]=C2O(imag[mat_kp[i][0]-31:mat_kp[i][0]+32,mat_kp[i][1]-31:mat_kp[i][1]+32], 1, 0, 4, 6, 3,a)

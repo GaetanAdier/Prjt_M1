@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jun 11 17:33:54 2015
-
-@author: gaetan
+This module provide the complete process flow function for the computation of an entiere classification.
 """
 
 import os
@@ -64,8 +62,7 @@ def Process_flow(path_work, name_desc, path_images, nb_word, sizeDesc, nb_images
     
        ID_classif, ID_know, img = fc.Process_flow(path_work, descriptor, path_images, nb_word, sizeDesc)
         
-    >>> 
-    >>> 
+
      
     """
     

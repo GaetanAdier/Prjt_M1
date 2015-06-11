@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jun 11 17:26:06 2015
-
-@author: gaetan
+This module is gathering all the fonctionnality conceived to process an image database classification.
 """
 
 import numpy as np

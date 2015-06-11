@@ -42,12 +42,10 @@
   <h1>Source code for Descripteur</h1><div class="highlight"><pre>
 <span class="c"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Created on Thu Jun 11 17:22:22 2015</span>
-
-<span class="sd">@author: gaetan</span>
+<span class="sd">This module gathering all the functions necessary to process the different descriptor computing.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="c">#import cv2</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">time</span>  
 <span class="kn">import</span> <span class="nn">Constant</span> <span class="kn">as</span> <span class="nn">c</span>
@@ -129,8 +127,7 @@
     
 
 <span class="c">#    </span>
-<span class="c">#    cv2.imshow(&#39;Image dorigine decalee&#39;,dst)</span>
-<span class="c">#    cv2.waitKey(0)</span>
+
 <span class="c">#    </span>
 <span class="c">#    </span>
     <span class="n">reMatimg</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="o">-</span><span class="n">dY</span><span class="p">,</span><span class="n">cols</span><span class="o">-</span><span class="n">dX</span><span class="p">,</span><span class="n">plans</span><span class="p">])</span>
@@ -153,23 +150,14 @@
     
     
     <span class="c">#Image resizing</span>
-<span class="c">#    reMatdst=np.zeros([rows-dY,cols-dX,plans])</span>
-<span class="c">#    reMatdst=dst[dY-NegY:rows-NegY,NegX:cols-dX+NegX,:]</span>
+
     <span class="n">reMatdst</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="o">-</span><span class="n">dY</span><span class="p">,</span><span class="n">cols</span><span class="o">-</span><span class="n">dX</span><span class="p">,</span><span class="n">plans</span><span class="p">])</span>
     <span class="n">reMatdst</span><span class="o">=</span><span class="n">dst</span><span class="p">[</span><span class="n">dY</span><span class="p">:</span><span class="n">rows</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="n">cols</span><span class="o">-</span><span class="n">dX</span><span class="p">,:]</span>
     
-<span class="c">#    print dY-NegY, rows-NegY, NegX ,cols-dX+NegX</span>
-<span class="c">#    </span>
-<span class="c">#    cv2.imshow(&#39;Image de destination decale resizee&#39;,reMatdst)</span>
-<span class="c">#    cv2.waitKey(0)</span>
-    
-<span class="c">#    reMatimg=np.zeros([rows-dY,cols-dX,plans])</span>
-<span class="c">#    reMatimg=img[dY+NegY:rows+NegY,NegX:cols+dX+NegX,:] </span>
+
     <span class="n">reMatimg</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="o">-</span><span class="n">dY</span><span class="p">,</span><span class="n">cols</span><span class="o">-</span><span class="n">dX</span><span class="p">,</span><span class="n">plans</span><span class="p">])</span>
     <span class="n">reMatimg</span><span class="o">=</span><span class="n">img</span><span class="p">[</span><span class="n">dY</span><span class="p">:</span><span class="n">rows</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="n">cols</span><span class="o">-</span><span class="n">dX</span><span class="p">,:]</span>
-    
-<span class="c">#    cv2.imshow(&#39;image non decalee resizee&#39;,reMatimg)</span>
-<span class="c">#    cv2.waitKey(0)</span>
+
     
     <span class="n">Res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">rows</span><span class="o">-</span><span class="n">dY</span><span class="p">,</span><span class="n">cols</span><span class="o">-</span><span class="n">dX</span><span class="p">,</span><span class="n">plans</span><span class="p">])</span>
 
@@ -177,9 +165,7 @@
     <span class="n">Res</span><span class="o">=</span> <span class="n">reMatimg</span><span class="o">-</span><span class="n">reMatdst</span>
     
 
-<span class="c">#    </span>
-<span class="c">#    cv2.imshow(&#39;b&#39;,Res)</span>
-<span class="c">#    cv2.waitKey(0)    </span>
+ 
     
     <span class="c"># Uncomment to display the coocurence matrix</span>
     
@@ -458,40 +444,32 @@
     <span class="n">SigC2O</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Nalpha</span><span class="o">*</span><span class="n">Nbeta</span><span class="o">*</span><span class="n">NE</span><span class="p">)</span>
     <span class="n">n</span><span class="o">=</span><span class="mi">0</span>
 
-<span class="c">#    print 9.0/(NE-1)</span>
-    <span class="n">Zero</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">Nbeta</span><span class="p">):</span>
-<span class="c">#         #Beta va de - pi/2 a pi/2 et pas de 8 a pi</span>
         <span class="n">BinBeta</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">))</span>
         <span class="n">BinBeta</span><span class="p">[(</span><span class="n">C2OMat</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span><span class="o">&gt;=</span><span class="p">((</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">Nbeta</span><span class="p">)</span><span class="o">*</span><span class="n">i</span><span class="p">)))</span><span class="o">&amp;</span><span class="p">(</span><span class="n">C2OMat</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">]</span><span class="o">&lt;=</span><span class="p">((</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">Nbeta</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))))]</span><span class="o">=</span><span class="mi">1</span>
-        
-<span class="c">#        print i</span>
-        
-<span class="c">#        BinE=np.zeros((rows,cols))</span>
-   
+
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">NE</span><span class="p">):</span>
 
             <span class="n">BinE</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">))</span>
             <span class="n">BinE</span><span class="p">[(</span><span class="n">BinBeta</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="p">((</span><span class="n">C2OMat</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;=</span><span class="p">(</span><span class="mf">9.0</span><span class="o">/</span><span class="p">(</span><span class="n">NE</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">j</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">C2OMat</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;=</span><span class="p">(</span><span class="mf">9.0</span><span class="o">/</span><span class="p">(</span><span class="n">NE</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)))]</span><span class="o">=</span><span class="mi">1</span>
   
-            <span class="c">#Essayer de sortir sa de la boucle pour gagner du temps</span>
+
             <span class="n">BinE</span><span class="p">[(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="n">NE</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">BinBeta</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">C2OMat</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;=</span><span class="p">(</span><span class="mf">9.0</span><span class="o">/</span><span class="p">(</span><span class="n">NE</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="n">j</span><span class="p">)]</span><span class="o">=</span><span class="mi">1</span>
             <span class="n">BinAlpha</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">))</span>
             <span class="n">BinAlpha</span><span class="p">[(</span><span class="n">BinE</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(((</span><span class="n">C2OMat</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;=</span><span class="p">((</span><span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">Nalpha</span><span class="p">))))</span><span class="o">&amp;</span><span class="p">(</span><span class="n">C2OMat</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;=</span><span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)))</span><span class="o">|</span><span class="p">((</span><span class="n">C2OMat</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">Nalpha</span><span class="p">)))</span><span class="o">&amp;</span><span class="p">((</span><span class="n">C2OMat</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">))))]</span><span class="o">=</span><span class="mi">1</span>
             <span class="n">SigC2O</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">BinAlpha</span><span class="p">)</span>
             <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span>
-<span class="c">#            for k in np.arange(0,Nalpha):</span>
+
             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">Nalpha</span><span class="p">):</span>
                 <span class="n">BinAlpha</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">))</span>
-<span class="c">#                BinAlpha[(k==0)&amp;(BinE==1)&amp;(((C2OMat[:,:,1]&gt;=((2.0*np.pi)-(np.pi/(Nalpha))))&amp;(C2OMat[:,:,1]&lt;=(2.0*np.pi)))|((C2OMat[:,:,1]&lt;=(np.pi/(Nalpha)))&amp;((C2OMat[:,:,1]&gt;=0))))]=1</span>
-<span class="c">#                BinAlpha[(k&gt;0)&amp;(BinE==1)&amp;(C2OMat[:,:,1]&gt;=(((2.0*np.pi/Nalpha)*k)-(np.pi/(Nalpha))))&amp;(C2OMat[:,:,1]&lt;=(((2.0*np.pi/Nalpha)*(k+1))-(np.pi/(Nalpha))))]=1</span>
+
                 
                 <span class="n">BinAlpha</span><span class="p">[(</span><span class="n">BinE</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">C2OMat</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">&gt;=</span><span class="p">(((</span><span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">Nalpha</span><span class="p">)</span><span class="o">*</span><span class="n">k</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">Nalpha</span><span class="p">))))</span><span class="o">&amp;</span><span class="p">(</span><span class="n">C2OMat</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span><span class="o">&lt;=</span><span class="p">(((</span><span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="n">Nalpha</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">Nalpha</span><span class="p">))))]</span><span class="o">=</span><span class="mi">1</span>                
                 
                 
 <span class="c">#      </span>
                 <span class="n">SigC2O</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">BinAlpha</span><span class="p">)</span>
-<span class="c">#                test = test + np.sum(BinAlpha)</span>
+
                 
                 <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span>
 
@@ -572,21 +550,16 @@
     
 
     
-<span class="c">#    imag = Image.open(image)</span>
-<span class="c">#    </span>
-<span class="c">#    imag=np.array(imag)</span>
-    
+
     
     
     
     <span class="n">Lab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
-<span class="c">#    imag=imag.astype(np.float32)</span>
+
     <span class="c">#Transformation throught the Lab space    </span>
-    
-<span class="c">#    timer.start() </span>
+ 
     <span class="n">Lab</span><span class="o">=</span><span class="n">RGBtoLAB</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">c</span><span class="o">.</span><span class="n">MatPass</span><span class="o">.</span><span class="n">AdobRGB</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">stdIlluminant</span><span class="o">.</span><span class="n">D65</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">)</span>
-<span class="c">#    timer.stop()  </span>
-<span class="c">#    print &#39;Temps RGB2LAB:&#39;, timer.interval </span>
+
     
     <span class="n">LabDiff</span><span class="o">=</span><span class="mi">0</span>
     <span class="c"># Calculation of the shifting parameter</span>
@@ -595,52 +568,19 @@
     
     
     
-<span class="c">#    print dX , dY</span>
     
 <span class="c">#    Calculation of the difference of color</span>
-<span class="c">#    timer.start() </span>
     <span class="n">LabDiff</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">Lab</span><span class="p">,</span><span class="n">dX</span><span class="p">,</span><span class="n">dY</span><span class="p">)</span>
-<span class="c">#    timer.stop()  </span>
-<span class="c">#    print &#39;Temps difference:&#39;, timer.interval </span>
+
 
     <span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">,</span> <span class="n">plans</span> <span class="o">=</span> <span class="n">LabDiff</span><span class="o">.</span><span class="n">shape</span>
     <span class="c"># Transformation in spherical coordinates</span>
-    
-<span class="c">#    timer.start() </span>
+
     <span class="n">SphereCoord</span><span class="o">=</span><span class="n">CarthesianToSpheric</span><span class="p">(</span><span class="n">LabDiff</span><span class="p">)</span>
-<span class="c">#    timer.stop()  </span>
-<span class="c">#    print &#39;Temps coordonnes spheriques:&#39;, timer.interval </span>
-    
-<span class="c">#    print np.max(SphereCoord[:,:,0]) , np.min(SphereCoord[:,:,0])</span>
-<span class="c">#    print np.max(SphereCoord[:,:,1]) , np.min(SphereCoord[:,:,1])</span>
-<span class="c">#    print np.max(SphereCoord[:,:,2]) , np.min(SphereCoord[:,:,2])</span>
-<span class="c">#</span>
-<span class="c">#    fig = plt.figure()</span>
-<span class="c">#</span>
-<span class="c">#    ax = fig.add_subplot(111, projection=&#39;3d&#39;)</span>
-<span class="c">#    </span>
-<span class="c">#    ax.scatter3D(LabDiff[:,0:cols,2], LabDiff[:,0:cols,1], LabDiff[:,0:cols,0],zdir=&#39;z&#39;)</span>
-<span class="c">#    ax.set_xlim([-80, 80])</span>
-<span class="c">#    ax.set_ylim([-80, 80])</span>
-<span class="c">#    ax.set_zlim([-80, 80])</span>
-    
-<span class="c">#    ax.contourf(LabDiff[:,:,2], LabDiff[:,:,1], LabDiff[:,:,0], zdir=&#39;z&#39;,offset=-80, cmap=&#39;coolwarm&#39;)</span>
-<span class="c">#    ax.contourf(LabDiff[:,:,2], LabDiff[:,:,1], LabDiff[:,:,0], zdir=&#39;y&#39;,offset= 80, cmap=&#39;coolwarm&#39;)</span>
-<span class="c">#    ax.contourf(LabDiff[:,:,2], LabDiff[:,:,1], LabDiff[:,:,0], zdir=&#39;x&#39;,offset=-80, cmap=&#39;coolwarm&#39;)</span>
-<span class="c">##    cv2.destroyAllWindows()</span>
-<span class="c">#    ax.set_xlabel(ur&quot;$\Delta$&quot;+&quot;b&quot;)</span>
-<span class="c">#    ax.set_ylabel(ur&quot;$\Delta$&quot;+&quot;a&quot;)</span>
-<span class="c">#    ax.set_zlabel(ur&quot;$\Delta$&quot;+&quot;L&quot;)</span>
-<span class="c">#</span>
-<span class="c">#    ax.set_title(ur&quot;$C_2O$&quot;+&quot; matrix&quot;)</span>
-    <span class="c"># Calculation of the signature by the spherical quantization</span>
-    
-<span class="c">#    timer.start() </span>
+
+
     <span class="n">SigC2O</span> <span class="o">=</span> <span class="n">SphericQuantif</span><span class="p">(</span><span class="n">SphereCoord</span><span class="p">,</span><span class="n">NE</span> <span class="p">,</span><span class="n">Nalpha</span><span class="p">,</span><span class="n">Nbeta</span><span class="p">)</span>
-<span class="c">#    timer.stop()  </span>
-<span class="c">#    print &#39;Temps quantification:&#39;, timer.interval </span>
-<span class="c">#    print &#39;Nb de truc dans sig C2O&#39;</span>
-<span class="c">#    print np.sum(SigC2O)</span>
+
     
     <span class="c"># Assignation of the result on the queue for the parralelized version</span>
     <span class="n">SigC2Ot</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">SigC2O</span><span class="p">)</span>
@@ -685,7 +625,6 @@
     
     <span class="n">rows</span><span class="p">,</span><span class="n">cols</span><span class="p">,</span> <span class="n">plans</span> <span class="o">=</span> <span class="n">imag</span><span class="o">.</span><span class="n">shape</span>
     
-<span class="c">#    print rows, cols , plans</span>
 
     <span class="n">gray</span><span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">imag</span><span class="p">,</span><span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2GRAY</span><span class="p">)</span>
     
@@ -703,17 +642,13 @@
         <span class="n">mat_kp</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">kp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">pt</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">matkpret</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">mat_kp</span><span class="p">))</span>
     <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="c">#    print np.max(mat_kp[:,1]) , np.min(mat_kp[:,1]) </span>
     
     
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">kp</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-<span class="c">#        print i</span>
-<span class="c">#        print mat_kp[i][0]-31 , mat_kp[i][0]+32 , mat_kp[i][1]-31 , mat_kp[i][1]+32, np.shape(imag)</span>
-<span class="c">#        if (((mat_kp[i][0]-31)&lt;0) | ((mat_kp[i][0]+32)&gt;rows-1) | ((mat_kp[i][1]-31)&lt;0) | ((mat_kp[i][1]+32)&gt;cols-1)):</span>
+
         <span class="k">if</span> <span class="p">(((</span><span class="n">mat_kp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">31</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">((</span><span class="n">mat_kp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">32</span><span class="p">)</span><span class="o">&lt;</span><span class="n">rows</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">((</span><span class="n">mat_kp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">31</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">((</span><span class="n">mat_kp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">32</span><span class="p">)</span><span class="o">&lt;</span><span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">)):</span>
-<span class="c">#            print i</span>
-<span class="c">#        else:</span>
+
             <span class="n">matkpret</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">mat_kp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">matkpret</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">mat_kp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">matC2OPatch</span><span class="p">[</span><span class="n">n</span><span class="p">,:]</span><span class="o">=</span><span class="n">C2O</span><span class="p">(</span><span class="n">imag</span><span class="p">[</span><span class="n">mat_kp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">31</span><span class="p">:</span><span class="n">mat_kp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">32</span><span class="p">,</span><span class="n">mat_kp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">31</span><span class="p">:</span><span class="n">mat_kp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">32</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span><span class="n">a</span><span class="p">)</span>

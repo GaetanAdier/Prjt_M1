@@ -42,9 +42,8 @@
   <h1>Source code for getClassID</h1><div class="highlight"><pre>
 <span class="c"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Created on Wed Jun 10 11:31:05 2015</span>
+<span class="sd">This module provide a function  to get the class ID from the CLEF metadatas files</span>
 
-<span class="sd">@author: Projet</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="kn">as</span> <span class="nn">ET</span>
 
@@ -55,16 +54,12 @@
 <span class="sd">    This function retrieves the ClassID from the metadata file.</span>
 <span class="sd">    </span>
 <span class="sd">    :param filename: nom du fichier XML</span>
-<span class="sd">    :type filename:string</span>
+<span class="sd">    :type filename: string</span>
 <span class="sd">    </span>
 <span class="sd">    :return: the category from the XML file</span>
 <span class="sd">    :rtype: string</span>
 <span class="sd">     </span>
-<span class="sd">    :Example:</span>
-<span class="sd">        </span>
-<span class="sd">        </span>
-<span class="sd">    &gt;&gt;&gt; </span>
-<span class="sd">    &gt;&gt;&gt; </span>
+
 <span class="sd">     </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>

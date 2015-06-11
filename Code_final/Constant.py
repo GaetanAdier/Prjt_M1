@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Jun 01 16:56:55 2015
-@author: etienne
+This module gathering all the class of constant which are necessary to the good functionning of many functions.
 """
 import numpy as np
 
