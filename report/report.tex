@@ -41,6 +41,10 @@
 
 \section{Introduction}
 
+    In this report, we will speaks about our first year master project which has last 5 weeks and has took place in the University of Poiters. The subject of this project was to create a software program which is able to classify a database of nature images using images descriptors.
+    So in this report, we will firstly make a little presentation of the team and of the professional structure in where the project have been realized, after we will make an abstract of the user requirement that have been established at the beginning of the projet, we will present the state of the art in the image descriptor field and finally we will talk about the work that have been done during the whole project.
+    At the end, our documentation method will be presented and we will talk about the method of project management that we have applied.
+
 \section{Team presentation}
 The project took place in the XLIM-SIC laboratory of the University of Poitiers.
 
@@ -609,6 +613,25 @@ So if we are testing our program on images like the two shown below which are co
 
 With this step validated by the theory, we will have to test with more colors to verify that we obtain the right number of points on the coocurence matrix for the corresponding number of colors. For each test image, there will be more points as the number of colors on the image is growing because the number of difference of color will grow too.
 
+Finally, we could show what we will obtain by calculating this matrix on an image from the VISTEX database. We have choose to test it on a sample of 128*128 pixel from the image Food.0006. This image represents candies of different color (see below). From it, we obtain the following result :
+
+\begin{figure}[h]
+        \centering
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[height=165px]{CapFood.png}
+        \end{subfigure}%
+        \hfill
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[height=220px]{C2OMatrix.png}
+        \end{subfigure}
+        \caption{Coocurence matrix from Food.0006}
+        \label{fig:Coorcurence matrix obtained from test images}
+\end{figure}
+
+We can see this cloud of point extracted from the image is as we can expect it is. It's more extended on the $a^*$ axis comparing to the $b^*$ axis a,d that is normal because of the color panel on the image. Indeed, there is a lot of red, green and yellow but not as much blue and that's why there is not as much occupation on the $b^*$ axis which express the opposition between the blue and the yellow.
+
 \newpage
 \subsubsection{The signature computing}
 
@@ -1104,7 +1127,7 @@ We didn't manage to evaluate our own scores but the results from the challenge a
 
 
 
-\subsubsection{checking the predictions}
+\subsubsection{Checking the predictions}
 Once the predictions are done we still have to check whether they are correct or not. To handle this task we created a function storing the metadata and checking if the output classID linked with the filenames.
 
 The right answers are then stored separately in order to be used for the metrics.
@@ -1327,9 +1350,114 @@ An other explanation is that in the K-means function we used an Euclidean distan
 
 \newpage
 \section{User manual}
-
+    For our user manual, we made the choose to compute an autodocumentation in the HTML format using the Sphinx module of Python. This solution allow to generate the documentation directly from the commentaries placed behind each function prototype. Theses commentaries have to respect an accurate syntax based on a language named reST (restructured Text). This solution allowed us (among other things) to directly add our formulas to the documentation using the LaTeX syntax or to insert images and sample of Python code to illustrate the functioning of each function.
+    So to access to the documentation, there will be a shortcut in the main directory of the project named "User Manual" which will directly return to the documentation web page.
 \newpage
 \section{Project management}
+In this part, we will talk about the project management methods that we have use during the whole project, and about the project management tools that we have use to have the most possible a proper organization for the project.
+\subsection{The Scrum method}
+
+The Scrum method is an agile project management method. This means that this method has been theorized to permit a faster reorganization of the schedule and of the task repartition in case of unforeseen.
+Its organization is simple : each week or each two weeks (depending on the number of task and the duration of the project), there is a Sprint. A sprint is a period for which the team attribute a number of tasks on each team member.
+Every morning, there is a scrum meeting : the entire team meet for between 5 or 10 minutes and speak about the day before work's and about the present day schedule for each team member By using this organization, it permit for every member of the team to know what each member is doing and what he will do during the day.
+
+There are some tools which are coming with the scrum method, the most important is the product backlog :
+The product backlog is a table (usually realized on a spreadsheet) which contain all the tasks/subtasks of the project, their time affectation (the estimates time that the task will take), the priority (represented by a number from 0 to 100) and the person which is affected to the task.
+The backlog is not a fix file, it can be modified along the project to adapt the organization in case of unforeseen (absence, bad estimation of the duration of a task, ...).
+For each sprint beginning, the team look at the backlog and affect to the sprint the higher prioritized tasks which are remaining to do to the sprint. You could see below a sample of the backlog of our project: (BACKLOG SCREENSHOT)
+
+For each sprint, a useful tool that exist is Trello : it permit to make a visual representation of the work and its progress. For our project, we made five steps of progress :
+
+\begin{itemize}
+\item To do
+\item Analyze
+\item In progress
+\item Validation step
+\item Done
+\end{itemize}
+
+You can see below our Trello board for the sprint 4 : (TRELLO SCREENSHOT)
+
+\subsection{Task repartition for the project}
+
+In this part, we will present you the organization and the task repartition that we have follow along our project. There was many important task that we had to split into subtask to get a better organization. Here we will present all the main tasks, the time we last on it and the member of the team that were affected to it.
+
+\begin{itemize}
+\item \underline{\textbf{Writing the state of the art}} :
+~~\\
+\underline{Members affected} :
+Ibrahima, Thomas, Ga\"etan, Etienne
+~~\\
+\underline{Description}: Each member of the team has work on the state of art. This part was about the studying and the redaction of an abstract about all the method which already exists on image classification.
+~~\\
+\underline{Duration} : 1 week
+
+\item \underline{\textbf{Preparing the database}} :
+~~\\
+\underline{Members affected} : Ga\"etan
+~~\\
+\underline{Description} : A function for computing an automatic creation of folders and text files linked to descriptors and images has been created. Writing of the technical documentation.
+~~\\
+\underline{Duration} : 2 days
+
+\item \underline{\textbf{Programming the SIFT descriptors calculation}} :
+~~\\
+\underline{Members affected} : Ibrahima
+~~\\
+\underline{Description} : Learning of the functioning of SIFT algorithm and the creation of a method to use the OpenCV SIFT function. Creation and validation of test procedure to validate the good functioning of this part.Writing of the technical documentation.
+~~\\
+\underline{Duration} : 3 weeks
+
+\item \underline{\textbf{Programming the C$_2$O descriptors calculation}} :
+~~\\
+\underline{Members affected} : Etienne
+~~\\
+\underline{Description} : Learning of the functioning of C$_2$O algorithm and creation of all the necessary function to compute the descriptor.  Creation and validation of test procedure to validate the good functioning of this part.Writing of the technical documentation.
+~~\\
+\underline{Duration} : 3.5 weeks
+
+\item \underline{\textbf{CLEF contest features}} :
+~~\\
+\underline{Members affected} : Thomas
+~~\\
+Description : Learning the attempt of the CLEF organization (formalization of results documents following CLEF standards). Programming of the functions for the creation of normalized results documents (creation of the image descriptors document, creation of results sheet for the classification,...). Programming of the functions to parse and get the information from the CLEF xml documents). Writing of the technical documentation.
+~~\\
+\underline{Duration} : 3 weeks
+
+\item \underline{\textbf{Classification}} :
+~~\\
+\underline{Members affected} : Ga\"etan , Etienne
+~~\\
+\underline{Description} : Learning on the different methods of image classification (K-means, K-nn, image signature computing). Programming of these different methods. Creation and validation of test procedure to validate the good functioning of this part.Writing of the technical documentation.
+~~\\
+\underline{Duration} : 2.5 weeks
+
+\item \underline{\textbf{Process flow formatting}} :
+~~\\
+\underline{Members affected} : Ga\"etan
+~~\\
+\underline{Description} : Creation of a structure of program able to compute the descriptor calculation and the classification for a whole database by just specifying the path directory of the database and the name of the descriptor
+~~\\
+\underline{Duration} : 1.5 weeks
+
+\item \underline{\textbf{Final report writing}} :
+~~\\
+\underline{Members affected} : Ga\"etan , Etienne, Ibrahima, Thomas
+~~\\
+\underline{Description} : Redaction of the final educational report
+~~\\
+\underline{Duration} : 1 weeks
+
+
+\item \underline{\textbf{Technical documentation}} :
+~~\\
+\underline{Members affected} : Ga\"etan , Etienne, Thomas
+~~\\
+\underline{Description} : Redaction of the commentaries on each function to get the Sphinx autodocumentation.
+~~\\
+\underline{Duration} : 1 weeks
+\end{itemize}
+
 
 \newpage
 \section{Conclusion}
