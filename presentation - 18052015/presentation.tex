@@ -4,7 +4,7 @@
 \usepackage[latin1]{inputenc}
 \usepackage[normalem]{ulem}
 \usepackage[T1]{fontenc}
-\usepackage{fancyhdr}   %% Pour la gestion des numéros de page
+\usepackage{fancyhdr}   %% Pour la gestion des numï¿½ros de page
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{mathrsfs}
@@ -38,13 +38,13 @@
 \usetheme{allee_marine} %voir fichier beaerthemeallee_marine.sty   ==> \usetheme{allee_marine}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%% Présentation du document %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%% Prï¿½sentation du document %%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[Master 1 Project]{Indexing big colored image bank : Texture 3.0}
-\author[Etienne CAILLAUD, Thomas LE BRIS, Ibrahima GUEYE, Gaëtan ADIER]{\textbf{Etienne CAILLAUD, Thomas LE BRIS, Ibrahima GUEYE, Gaëtan ADIER}}
+\author[Etienne CAILLAUD, Thomas LE BRIS, Ibrahima GUEYE, Gaï¿½tan ADIER]{\textbf{Etienne CAILLAUD, Thomas LE BRIS, Ibrahima GUEYE, Gaï¿½tan ADIER}}
 \institute [XLIM-SIC UMR CNRS 7252]{\textbf{XLIM-SIC Laboratory UMR CNRS 7252, Poitiers, France}}
 \date{}
 
-%%%%%%%%%%%%%%%%%%%%%%% Numéro de pages en bas à gauche %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% Numï¿½ro de pages en bas ï¿½ gauche %%%%%%%%%%%%%%%%%%%%%%
 \addtobeamertemplate{footline}{\color{blue}\hfill\insertframenumber/\inserttotalframenumber}
 
 \pgfdeclareimage[height=96mm,width=128mm]{nombidon}{mood_eye_light}
@@ -54,14 +54,14 @@
 \setbeamertemplate{background}{\pgfuseimage{nombidon2}}
 
 %%----------------------------------------------------------------------------
-%% A chaque début de sous-section : génère une table des matières
+%% A chaque dï¿½but de sous-section : gï¿½nï¿½re une table des matiï¿½res
 %%----------------------------------------------------------------------------
 \AtBeginSection[]
 {
    \setbeamertemplate{background}{\pgfuseimage{nombidon}}
    \begin{frame}<beamer>
     \frametitle{Outline}
-    \tableofcontents[currentsection, hideallsubsections] %% affiche la section courante et les autres en grisé, masque les sous-sections
+    \tableofcontents[currentsection, hideallsubsections] %% affiche la section courante et les autres en grisï¿½, masque les sous-sections
    \end{frame}
   \setbeamertemplate{background}{\pgfuseimage{nombidon2}}
 }
@@ -87,7 +87,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%                       %%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%     DÉBUT DU DOCUMENT     %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%     Dï¿½BUT DU DOCUMENT     %%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%                       %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
@@ -110,7 +110,7 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%                        Début de la présentation                       			 %%%%%%%%
+%%%%%%%%%%%                        Dï¿½but de la prï¿½sentation                       			 %%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 %%-----------------------------------------------------------------------------------------
@@ -120,13 +120,33 @@
 
 
 \section{Team presentation}
+
 \begin{frame} \frametitle{Deadlines}
+XLIM-SIC Laboratory of University of Poitiers
+\begin{itemize}
+\item Noel Richard ( Researcher in Color images): Supervisor
+\item David Helbert ( Researcher in Signal-Image-Communications): Supervisor
+\item Thierry Urruty ( Researcher in Color images): Customer
+\end{itemize}
 
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
 \section{User requirement}
 \begin{frame} \frametitle{Software}
+\begin{itemize}
+ \item Design  software programs:\\
+   indexation of  images database,calculate descriptor according to  nature images
+\item Adapt the last up to date designed color and texture attributes to the current image classification
+\item Compare our results (using CLEF challenge metrics)
+\item Provide an abstract of the comparisons and a technical report 
+\end{itemize}
+
+
+
+
+
+
 %%-----------------------------------------------------------------------------------------
 \end{frame}
 %%-----------------------------------------------------------------------------------------
