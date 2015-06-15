@@ -1,9 +1,9 @@
 \beamer@endinputifotherversion {3.36pt}
 \select@language {french}
 \beamer@sectionintoc {1}{Introduction}{2}{0}{1}
-\beamer@sectionintoc {2}{Team presentation}{4}{0}{2}
-\beamer@sectionintoc {3}{User requirement}{6}{0}{3}
-\beamer@sectionintoc {4}{Work achievement}{8}{0}{4}
-\beamer@sectionintoc {5}{Results and Discussion}{25}{0}{5}
-\beamer@sectionintoc {6}{Project Management}{28}{0}{6}
-\beamer@sectionintoc {7}{Conclusion}{33}{0}{7}
+\beamer@sectionintoc {2}{Team presentation}{6}{0}{2}
+\beamer@sectionintoc {3}{User requirement}{8}{0}{3}
+\beamer@sectionintoc {4}{Work achievement}{10}{0}{4}
+\beamer@sectionintoc {5}{Results and Discussion}{27}{0}{5}
+\beamer@sectionintoc {6}{Project Management}{30}{0}{6}
+\beamer@sectionintoc {7}{Conclusion}{35}{0}{7}

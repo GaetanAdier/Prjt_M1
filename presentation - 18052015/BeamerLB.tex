@@ -1,0 +1,190 @@
+\documentclass[xcolor=table]{beamer}
+
+\usepackage[french]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[normalem]{ulem}
+\usepackage[T1]{fontenc}
+\usepackage{fancyhdr}   %% Pour la gestion des numéros de page
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{amsfonts}
+\usepackage{palatino}        %% Palatino fonts
+\usepackage{mathptm}        %% PostScript Type 1 math fonts
+\usepackage{dsfont} %% Pour mathds
+\usepackage{color}
+%%\usepackage{pstricks}
+\usepackage{xmpmulti}
+\usepackage{hyperref}
+\usepackage{multimedia}
+\usepackage{multirow}
+%\usepackage[table]{xcolor}
+\usepackage{fourier-orns}
+\usepackage{subfigure}
+\usepackage{tikz}
+
+\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+\definecolor{vert}{rgb}{0.07,0.7,0.00}
+\definecolor{gris}{gray}{0.70}
+\definecolor{gris2}{gray}{0.95}
+\definecolor{bleu}{rgb}{0.19,0.19,0.68}
+
+%table setting
+\newcommand\T{\rule{0pt}{2.6ex}}
+\newcommand\B{\rule[-1.2ex]{0pt}{0pt}}
+\renewcommand{\thesubfigure}{\thefigure.\arabic{subfigure}}
+
+\usetheme{allee_marine} %voir fichier beaerthemeallee_marine.sty   ==> \usetheme{allee_marine}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%% Présentation du document %%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[Master 1 Project]{Présentation 29/05/2015}
+\author[Etienne CAILLAUD, Thomas LE BRIS, Ibrahima GUEYE, Gaëtan ADIER]{\textbf{Etienne CAILLAUD, Thomas LE BRIS, Ibrahima GUEYE, Gaëtan ADIER}}
+\institute [XLIM-SIC UMR CNRS 7252]{\textbf{XLIM-SIC Laboratory UMR CNRS 7252, Poitiers, France}}
+\date{}
+
+%%%%%%%%%%%%%%%%%%%%%%% Numéro de pages en bas à gauche %%%%%%%%%%%%%%%%%%%%%%
+\addtobeamertemplate{footline}{\color{blue}\hfill\insertframenumber/\inserttotalframenumber}
+
+\pgfdeclareimage[height=96mm,width=128mm]{nombidon}{mood_eye_light}
+\setbeamertemplate{background}{\pgfuseimage{nombidon}}
+
+\pgfdeclareimage[height=96mm,width=128mm]{nombidon2}{mood_eye_light}
+\setbeamertemplate{background}{\pgfuseimage{nombidon2}}
+
+%%----------------------------------------------------------------------------
+%% A chaque début de sous-section : génère une table des matières
+%%----------------------------------------------------------------------------
+\AtBeginSection[]
+{
+   \setbeamertemplate{background}{\pgfuseimage{nombidon}}
+   \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection, hideallsubsections] %% affiche la section courante et les autres en grisé, masque les sous-sections
+   \end{frame}
+  \setbeamertemplate{background}{\pgfuseimage{nombidon2}}
+}
+
+\AtBeginSubsection[]
+{
+  \setbeamertemplate{background}{\pgfuseimage{nombidon}}
+  \begin{frame}<beamer>
+    \tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide, subsubsectionstyle =hide]
+  \end{frame}
+   \setbeamertemplate{background}{\pgfuseimage{nombidon2}}
+}
+
+\AtBeginSubsubsection[]
+{
+  \setbeamertemplate{background}{\pgfuseimage{nombidon}}
+  \begin{frame}<beamer>
+    \tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,subsubsectionstyle =show/shaded/hide]
+  \end{frame}
+   \setbeamertemplate{background}{\pgfuseimage{nombidon2}}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%                       %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%     DÉBUT DU DOCUMENT     %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%                       %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\graphicspath{{images/}}
+\setbeamercolor{block title example}{bg = gray}
+
+\begin{frame}
+    \vspace{-1.5cm}
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[xshift=0cm, above=8.6cm] at (current page.south west)
+        {\includegraphics[width=40cm,height=0.9cm]{cache_titre.png}};
+        \node[xshift=2cm, above=2.8cm] at (current page.south west)
+        {\includegraphics[height=1.5cm]{Xlim.png}};
+        \node[xshift=11cm, above=3cm] at (current page.south west)
+        {\includegraphics[height=1cm]{logo_une.jpg}};
+        \node[xshift=6.5cm, above=0.7cm] at (current page.south west)
+        {\includegraphics[height=1.6cm]{Lifeclef.png}};
+    \end{tikzpicture}
+    \titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%                        Début de la présentation                       			 %%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%%-----------------------------------------------------------------------------------------
+\begin{frame} \frametitle{Image Indexing}
+%%-----------------------------------------------------------------------------------------
+   \begin{figure}[ht]
+        \centering
+        \includegraphics[scale=0.35]{Dessin1.png}
+        \caption{Online image indexing}
+        \label{fig:img_index}
+    \end{figure}
+
+
+%%-----------------------------------------------------------------------------------------
+
+\begin{frame} \frametitle{Descriptor}
+%%-----------------------------------------------------------------------------------------
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[scale=0.35]{Densegrid.png}
+        \caption{Dense grid keypoints}
+        \label{fig:img_densegrid}
+    \end{figure}
+
+\end{frame}
+%%-----------------------------------------------------------------------------------------
+
+\begin{frame} \frametitle{Descriptor}
+%%-----------------------------------------------------------------------------------------
+    \begin{figure}[ht]
+        \centering
+        \includegraphics[scale=0.35]{poi.png}
+        \caption{points of interest keypoints}
+        \label{fig:img_poi}
+    \end{figure}
+
+\end{frame}
+%%-----------------------------------------------------------------------------------------
+
+
+\section{CLEF}
+%%-----------------------------------------------------------------------------------------
+\begin{frame} \frametitle{CLEF}
+%%-----------------------------------------------------------------------------------------
+   \begin{itemize}
+		\item What is CLEF ?
+	    \item What did we gained from enrolling ?
+		\begin{figure}[ht]
+			\centering
+			\includegraphics[scale=0.35]{oneprunus.png.png}
+			\caption{points of interest keypoints}
+			\label{fig:img_obsID}
+		
+		\end{figure}
+		\item benchmark
+	\end{itemize}
+\end{frame}
+%%-----------------------------------------------------------------------------------------
+
+\section{Conclusdion}
+%%-----------------------------------------------------------------------------------------
+\begin{frame} \frametitle{Conclusion}
+%%-----------------------------------------------------------------------------------------
+   \begin{itemize}[ht]
+        \item Things we learned
+        \item Errors/Perspectives
+        \item Thanks for attention
+    \end{itemize}
+
+\end frame
+
+%%-----------------------------------------------------------------------------------------
+
+
+\end{document}
+
+
