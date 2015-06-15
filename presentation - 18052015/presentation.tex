@@ -192,10 +192,55 @@ Describe the key-point with with a vector of 128 dimension
   \end{figure}
 \end{frame}
 %%-----------------------------------------------------------------------------------------
+\begin{frame}\frametitle{C$_2$O(1/3)}
 
-\begin{frame} \frametitle{C$_2$O}
+- The C$_2$O matrix
+
+\begin{itemize}
+\item Conversion to $L^* a^* b^*$ space
+\item C$_2$O matrix calculation.
+\item C$_2$O signature extraction.
+\end{itemize}
+
 
 \end{frame}
+
+
+\begin{frame}\frametitle{C$_2$O(2/3)}
+
+- The C$_2$O matrix
+
+\begin{itemize}
+\item<1-> The color difference computation (in the $L^* a^* b^*$ space).
+\only<1> {\includegraphics[height=4cm]{ColorDiff.png}} % Changer l'image
+\item<2-> The C$_2$O matrix in a 3-D repository.
+\only<2> {\includegraphics[height=4cm]{C2OMatrix.png}}
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}\frametitle{C$_2$O(3/3)}
+
+- The C$_2$O feature extraction
+
+\begin{itemize}
+\item<1-> Spherical from cartesian repository.
+\only<1> {\includegraphics[height=5cm]{Spherical_Coordinates.png}} % Changer l'image
+\item<2-> Quantization for one $\beta$ interval.
+\only<2> {\includegraphics[height=5cm]{QuantificationSphericToHist1.png}}
+\item<3-> Histogram obtained for one $\beta$ interval.
+\only<3> {\includegraphics[height=4cm]{QuantificationSphericToHist2.png}}
+\item<4-> Quantization for each $\beta$ interval.
+\only<4> {\includegraphics[height=5cm]{QuantificationSphericToHist3.png}}
+\item<5-> Final signature obtained.
+\only<5> {\includegraphics[height=3.5cm]{QuantificationSphericToHist4.png}}
+
+\end{itemize}
+
+
+\end{frame}
+
 %%-----------------------------------------------------------------------------------------
 
 \begin{frame} \frametitle{Classification (Bag of words)}
@@ -245,6 +290,34 @@ Reducing the number of points.
 
 
 \end{frame}
+
+
+\begin{frame}\frametitle{Classification (K-nn(1/2))}
+
+- The k nearest neighbor method
+
+\begin{itemize}
+\item<1-> Comparison to the dictionary .
+\only<1> {\includegraphics[height=4.2cm]{knnwc.png}} % Changer l'image
+\only<2> {\includegraphics[height=4cm]{knnac.png}
+\newline - 4 Occurrences of the 'red' class , - 1 occurrence of the 'blue' class \newline - The new point is attributed to the 'red' class}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}\frametitle{Classification (K-nn(1/2))}
+
+- Application for image classification
+
+\begin{itemize}
+\item More complex data.
+\item Distances on signature vectors extracted from the K-mean method.
+\item One most adapted distance type for each descriptor .
+\end{itemize}
+
+\end{frame}
+
+
 %%-----------------------------------------------------------------------------------------
 
 \begin{frame} \frametitle{CLEF}
@@ -346,8 +419,31 @@ Reducing the number of points.
 %%-----------------------------------------------------------------------------------------
 
 \section{Project Management}
-\begin{frame} \frametitle{SCRUM method}
-%%-----------------------------------------------------------------------------------------
+\begin{frame}\frametitle{Project management (1/2)}
+
+- The scrum methodology
+
+\begin{itemize}
+\item One sprint per week.
+\item Daily scrum meeting.
+\item Complete time repartition on the product backlog.
+
+\includegraphics[height=2cm]{scrum.jpg}
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}\frametitle{Project management (2/2)}
+
+- The sprint backlog : Trello board
+
+\begin{itemize}
+\item<1-> Progress on one sprint.
+\only<1> {\includegraphics[height=3.7cm]{trello1.png}} % Changer l'image
+\only<2> {\includegraphics[height=4cm]{trello2.png}}
+\only<3> {\includegraphics[height=4cm]{trello3.png}}
+\end{itemize}
 
 \end{frame}
 %%-----------------------------------------------------------------------------------------
