@@ -40,7 +40,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%% Pr�sentation du document %%%%%%%%%%%%%%%%%%%%%%%%%%
 \title[Master 1 Project]{Indexing big colored image bank : Texture 3.0}
-\author[Etienne CAILLAUD, Thomas LE BRIS, Ibrahima GUEYE, Ga�tan ADIER]{\textbf{Etienne CAILLAUD, Thomas LE BRIS, Ibrahima GUEYE, Ga�tan ADIER}}
+\author[Etienne CAILLAUD, Thomas LE BRIS, Ibrahima GUEYE, Gaetan ADIER]{\textbf{Etienne CAILLAUD, Thomas LE BRIS, Ibrahima GUEYE, Gaetan ADIER}}
 \institute [XLIM-SIC UMR CNRS 7252]{\textbf{XLIM-SIC Laboratory UMR CNRS 7252, Poitiers, France}}
 \date{}
 
@@ -139,7 +139,7 @@ XLIM-SIC Laboratory of University of Poitiers
    indexation of  images database,calculate descriptor according to  nature images
 \item Adapt the last up to date designed color and texture attributes to the current image classification
 \item Compare our results (using CLEF challenge metrics)
-\item Provide an abstract of the comparisons and a technical report 
+\item Provide an abstract of the comparisons and a technical report
 \end{itemize}
 
 
@@ -161,11 +161,11 @@ Key-points detection (x,y,$\sigma$)
 \item Scale-space extrema detection\\
 Find the best locations which characterize well the image
 
- \item  Key-point location\\ 
- Improve the position of the keypoints detected 
+ \item  Key-point location\\
+ Improve the position of the keypoints detected
 
 \item Orientation assignment\\
- Assign orientations to the key-points 
+ Assign orientations to the key-points
 
 \item key-point descriptor \\
 Describe the key-point with with a vector of 128 dimension
@@ -198,7 +198,51 @@ Describe the key-point with with a vector of 128 dimension
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
-\begin{frame} \frametitle{Classification}
+\begin{frame} \frametitle{Classification (Bag of words)}
+Reducing the number of points.
+
+\begin{figure}[htbp]
+    \begin{minipage}[c]{.55\linewidth}
+      \begin{center}
+        \begin{itemize}
+            \item K-means
+            \begin{itemize}
+                \item Attribute the vectors to centroid vectors.
+            \end{itemize}
+        \end{itemize}
+      \end{center}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{.40\linewidth}
+      \begin{center}
+    \includegraphics[scale=0.20]{kmeans.png}
+    \caption{K-means}
+    \label{fig:kmeans}
+      \end{center}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[htbp]
+    \begin{minipage}[c]{.40\linewidth}
+      \begin{center}
+    \includegraphics[scale=0.18]{132_sig.png}
+    \caption{Signature}
+    \label{fig:Sig}
+      \end{center}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{.55\linewidth}
+      \begin{center}
+        \begin{itemize}
+            \item Signature
+            \begin{itemize}
+                \item Design histogram in function of assignment of the vectors.
+            \end{itemize}
+        \end{itemize}
+      \end{center}
+    \end{minipage}
+\end{figure}
+
 
 \end{frame}
 %%-----------------------------------------------------------------------------------------
@@ -210,18 +254,94 @@ Describe the key-point with with a vector of 128 dimension
 
 \begin{frame} \frametitle{Process flow}
 
+\begin{itemize}
+    \item Main function which control all the process
+    \begin{itemize}
+        \item Create the tree structure.
+        \item Allows the choice of descriptors.
+    \end{itemize}
+\end{itemize}
+
+\begin{figure}[ht]
+        \centering
+        \includegraphics[scale=0.25]{arborescence.png}
+        \caption{Tree structure}
+        \label{fig:img_arbo}
+    \end{figure}
+
+
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
 \section{Results and Discussion}
 \begin{frame} \frametitle{Results}
 %%-----------------------------------------------------------------------------------------
+\begin{itemize}
+    \item Reduce data-base of 100 images composed of only 4 species.
+    \item Compare the two descriptors SIFT and C$_2$O.
+\end{itemize}
+
+\begin{figure}[htbp]
+    \resizebox{3.5cm}{!}{
+    \begin{minipage}[c]{.55\linewidth}
+      \begin{center}
+        \begin{table}[H]
+        \centering
+        \caption{SIFT result}
+        \label{tab1}
+        \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        ID & Training Base & Test Base & Correct & Accuracy \\ \hline
+        173 & 17 & 8 & 4 & 50\% \\ \hline
+        1102 & 22 & 3 & 1 & 33\% \\ \hline
+        1889 & 16 & 9 & 1 & 11\% \\ \hline
+        2717 & 15 & 10 & 7 & 70\% \\ \hline
+        Total & 70 & 30 & 9 & / \\ \hline
+        \end{tabular}
+        \end{table}
+      \end{center}
+    \end{minipage}}
+
+    \resizebox{3.5cm}{!}{
+    \begin{minipage}[c]{.55\linewidth}
+      \begin{center}
+            \begin{table}[H]
+            \caption{C$_2$O result}
+            \label{tab2}
+            \begin{tabular}{|l|l|l|l|l|}
+            \hline
+            ID & Training Base & Test Base & Correct & Accuracy \\ \hline
+            173 & 17 & 8 & 1 & 12.5\% \\ \hline
+            1102 & 22 & 3 & 1 & 33\% \\ \hline
+            1889 & 16 & 9 & 0 & 0\% \\ \hline
+            2717 & 15 & 10 & 7 & 70\% \\ \hline
+            Total & 70 & 30 & 9 & / \\ \hline
+            \end{tabular}
+            \end{table}
+      \end{center}
+    \end{minipage}}
+\end{figure}
 
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
 \begin{frame} \frametitle{Discussion}
 
+\begin{itemize}
+    \item Classification
+    \vspace{0.3cm}
+    \begin{itemize}
+        \item To much reducing on the K-means (100 words).
+        \vspace{0.15cm}
+        \item Euclidean distance not the most efficient or adapt.
+    \end{itemize}
+    \vspace{0.7cm}
+    \item C$_2$O
+    \vspace{0.3cm}
+    \begin{itemize}
+        \item The concatenation way is not optimal.
+    \end{itemize}
+\end{itemize}
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
