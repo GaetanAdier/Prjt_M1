@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {french}
+\beamer@sectionintoc {1}{Introduction to the project context}{2}{0}{1}
+\beamer@sectionintoc {2}{Work and results}{8}{0}{2}
+\beamer@sectionintoc {3}{Project management}{19}{0}{3}
+\beamer@sectionintoc {4}{Conclusion}{23}{0}{4}

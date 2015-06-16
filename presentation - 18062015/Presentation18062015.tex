@@ -115,13 +115,63 @@
 \section{Introduction to the project context}
 %%-----------------------------------------------------------------------------------------
 %%-----------------------------------------------------------------------------------------
-\begin{frame} \frametitle{Project context}
+\begin{frame} \frametitle{Project context (1/3)}
 %%-----------------------------------------------------------------------------------------
-%% Parler de clef, des traitements couleurs marginaux ??}
+%% objective + image index
 %%-----------------------------------------------------------------------------------------
+\begin{block}{Objective}
+  Test a solution for content based image indexing flaw : standard descriptors (SIFT, SURF, etc) lacking real color and texture information.
+\end{block} 
+	
+\begin{figure}
+	\includegraphics[scale=0.38]{CBIR.png}
+\end{figure}
+
 
 
 \end{frame}
+%%-----------------------------------------------------------------------------------------
+
+\begin{frame} \frametitle{Project context 2/3}
+%%-----------------------------------------------------------------------------------------
+%% Image Indexing
+%%-----------------------------------------------------------------------------------------
+\begin{block}{What is a descriptor ?}
+	Algorithm applied to an image which output is a short vector
+	of numbers which is invariant to common image transformations
+	and can be compared with other descriptors in a	database.
+\end{block} 
+
+
+\begin{figure}
+   \begin{minipage}[c]{.56\linewidth}
+      \includegraphics[scale=0.40]{dense_grid.png}
+	  \caption{Densegrid}
+   \end{minipage} \hfill
+   \begin{minipage}[c]{.34\linewidth}
+      \includegraphics[scale=0.27]{siftKP.jpg}
+	  \caption{Interest points}
+   \end{minipage}
+\end{figure}
+
+
+
+
+
+\end{frame}
+%%-----------------------------------------------------------------------------------------
+
+\begin{frame} \frametitle{Project context 3/3}
+%%-----------------------------------------------------------------------------------------
+%% Parler de clef, des traitements couleurs marginaux ??}
+%%-----------------------------------------------------------------------------------------
+\begin{block}{What is a CLEF ?}
+	International contest which purpose is to provide a place where labs and companies solution for multimedia analysis of life can compete against each other.
+\end{block} 
+
+	\includegraphics[scale=0.27]{OnePrunus.png}
+\end{frame}
+%%-----------------------------------------------------------------------------------------
 %%-----------------------------------------------------------------------------------------
 
 \begin{frame} \frametitle{Team presentation}
@@ -158,27 +208,108 @@
 
 \begin{frame} \frametitle{C$_2$O (1/4)}
 %%-----------------------------------------------------------------------------------------
-
-% Commencer par l'interet des C2O par rapport aux autres descripteurs, (difference entre traitement vectoriel et marginal)
-
+% Commencer par l'interet des C2O par rapport aux autres descripteurs, (difference entre traitement vectoriel et marginal,...)
+   \begin{itemize}
+        \item Limitation of marginal approach 
+        \item Necessity to get a vectorial treatment
+        \item Include better texture and color informations
+    \end{itemize}
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
 
 \begin{frame} \frametitle{C$_2$O (2/4)}
 %%-----------------------------------------------------------------------------------------
-
 % Repprendre la premiere diapo en remplacant Lab par "perceptual space" et mettre les refs d'articles sur le lab en footnotes
+
+\begin{itemize}
+    \item Conversion to a perceptual space (adapted to human perception).
+    \item C$_2$O matrix calculation.
+    \item C$_2$O signature extraction.
+\end{itemize}
 
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
+
+\begin{frame} \frametitle{C$_2$O (3/4)}
+%%-----------------------------------------------------------------------------------------
+% Illustration de la difference de couleurs
+
+\begin{itemize}
+    \item Computation of the C$_2$O matrix by the color difference calculation
+    \includegraphics[scale=1.0]{ColorDiff.png}
+
+\end{itemize}
+
+\end{frame}
+%%-----------------------------------------------------------------------------------------
 
 
 \begin{frame} \frametitle{C$_2$O (3/4)}
 %%-----------------------------------------------------------------------------------------
 
 % Mettre des exemples de matrice C2O sur des images de la base qui seront parlant !!
+
+\begin{itemize}
+
+
+\item<1-> The C$_2$O matrix for a poorly textured image :
+\only<1> {\begin{figure}[htbp]
+    \begin{minipage}[c]{.40\linewidth}
+      \begin{center}
+    \includegraphics[scale=1.0]{61p.jpg}
+    \caption{Image to characterize}
+    \label{fig:Sig}
+      \end{center}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{.55\linewidth}
+      \begin{center}
+    \includegraphics[scale=0.38]{C2OMat61p.png}
+    \caption{Signature}
+    \label{fig:Sig}
+      \end{center}
+    \end{minipage}
+\end{figure}}
+\item<2-> The C$_2$O matrix for a more textured and colored image :
+\only<2> {\begin{figure}[htbp]
+    \begin{minipage}[c]{.40\linewidth}
+      \begin{center}
+    \includegraphics[scale=0.70]{97p.jpg}
+    \caption{Image to characterize}
+    \label{fig:Sig}
+      \end{center}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{.55\linewidth}
+      \begin{center}
+    \includegraphics[scale=0.38]{C2OMat97p.png}
+    \caption{Signature}
+    \label{fig:Sig}
+      \end{center}
+    \end{minipage}
+\end{figure}}
+\item<3-> The C$_2$O matrix for a more textured image :
+\only<3> {\begin{figure}[htbp]
+    \begin{minipage}[c]{.40\linewidth}
+      \begin{center}
+    \includegraphics[scale=0.50]{119p.jpg}
+    \caption{Image to characterize}
+    \label{fig:Sig}
+      \end{center}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{.55\linewidth}
+      \begin{center}
+    \includegraphics[scale=0.38]{C2OMat119p.png}
+    \caption{Signature}
+    \label{fig:Sig}
+      \end{center}
+    \end{minipage}
+\end{figure}}
+
+\end{itemize}
 
 \end{frame}
 %%-----------------------------------------------------------------------------------------
@@ -188,6 +319,27 @@
 %%-----------------------------------------------------------------------------------------
 
 % Mettre en petit en haut l'illustration coords spheriques et montrer les signatures correspondant aux matrices
+
+\begin{tikzpicture}[remember picture, overlay]
+  \node [anchor=north east, inner sep=4pt]  at (current page.north east)
+     {\includegraphics[height=3cm]{Spherical_Coordinates}};
+\end{tikzpicture}
+
+
+
+\begin{itemize}
+\item<1-> The spherical quantization :
+\only<1> {\includegraphics[height=3.4cm]{QuantificationSphericToHist.png}}
+\item<2-> The C$_2$O signature for a poorly textured image :
+\only<2> {\includegraphics[height=4cm]{C2OSig61p.png}}
+\item<3-> The C$_2$O signature for a more textured image :
+\only<3> {\includegraphics[height=4cm]{C2OSig119p.png}}
+\item<4-> The C$_2$O signature for a more textured and colored image :
+\only<4> {\includegraphics[height=4cm]{C2OSig97p.png}}
+
+\end{itemize}
+
+
 
 \end{frame}
 %%-----------------------------------------------------------------------------------------
@@ -206,7 +358,7 @@
 %%-----------------------------------------------------------------------------------------
 
 
-\begin{frame} \frametitle{k-nn}
+\begin{frame} \frametitle{K-nn}
 %%-----------------------------------------------------------------------------------------
 
 % Garder ce qui a été fait, notifier le fait que le point noir soit la donnee a classifier
@@ -217,7 +369,7 @@
 
 
 
-\begin{frame} \frametitle{Result and discussion (1/2)}
+\begin{frame} \frametitle{Result}
 %%-----------------------------------------------------------------------------------------
 
 % Mettre un fond coloré pour les case ou le resultat est le même que pour le sift
@@ -225,7 +377,7 @@
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
-\begin{frame} \frametitle{Result and discussion (2/2)}
+\begin{frame} \frametitle{Discussion}
 %%-----------------------------------------------------------------------------------------
 
 % Discussion : parler de l'impact des parametres (Norme de delta en fct de l'image, distance pas forcement bonne, ordre de concatenation pas bon,...)
@@ -240,12 +392,38 @@
 
 
 
-\begin{frame} \frametitle{Scheduling}
-%%-----------------------------------------------------------------------------------------
 
+\begin{frame} \frametitle{Scheduling (1/2)}
+%%-----------------------------------------------------------------------------------------
 % Montrer le passage d'un gantt a un backlog produit, => mettre l'accent sur la modification du gantt sans modification du backlog notable
+
+\begin{itemize}
+\item The previsional forecast Gantt chart  :
+\includegraphics[scale=0.40]{GanttPrez.png}
+\item All time affectation done before the beginning of the project
+\item Rarely respected in important project
+\end{itemize}
+
 \end{frame}
 %%-----------------------------------------------------------------------------------------
+
+
+\begin{frame} \frametitle{Scheduling (2/2)}
+%%-----------------------------------------------------------------------------------------
+% Montrer le passage d'un gantt a un backlog produit, => mettre l'accent sur la modification du gantt sans modification du backlog notable
+
+
+\begin{itemize}
+\item The project backlog  :
+\includegraphics[scale=0.30]{backlog.png}
+\item Allow to change the affectation of a task
+\item Weekly time affectation : could be adapted to unforeseen
+\end{itemize}
+
+
+\end{frame}
+%%-----------------------------------------------------------------------------------------
+
 
 \begin{frame} \frametitle{Project gestion}
 %%-----------------------------------------------------------------------------------------
