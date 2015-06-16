@@ -121,7 +121,7 @@
 %%-----------------------------------------------------------------------------------------
 \begin{block}{Objective}
   Test a solution for content based image indexing flaw : standard descriptors (SIFT, SURF, etc) lacking real color and texture information.
-\end{block} 
+\end{block}
 	
 \begin{figure}
 	\includegraphics[scale=0.38]{CBIR.png}
@@ -140,7 +140,7 @@
 	Algorithm applied to an image which output is a short vector
 	of numbers which is invariant to common image transformations
 	and can be compared with other descriptors in a	database.
-\end{block} 
+\end{block}
 
 
 \begin{figure}
@@ -167,7 +167,7 @@
 %%-----------------------------------------------------------------------------------------
 \begin{block}{What is a CLEF ?}
 	International contest which purpose is to provide a place where labs and companies solution for multimedia analysis of life can compete against each other.
-\end{block} 
+\end{block}
 
 	\includegraphics[scale=0.27]{OnePrunus.png}
 \end{frame}
@@ -214,7 +214,7 @@ Key-points detection (x,y,$\sigma$)
 \item Scale-space extrema detection\\
 
 
- \item  Key-point location\\
+\item  Key-point location\\
 
 
 \item Orientation assignment\\
@@ -252,7 +252,7 @@ Key-points detection (x,y,$\sigma$)
 %%-----------------------------------------------------------------------------------------
 % Commencer par l'interet des C2O par rapport aux autres descripteurs, (difference entre traitement vectoriel et marginal,...)
    \begin{itemize}
-        \item Limitation of marginal approach 
+        \item Limitation of marginal approach
         \item Necessity to get a vectorial treatment
         \item Include better texture and color informations
     \end{itemize}
@@ -389,15 +389,58 @@ Key-points detection (x,y,$\sigma$)
 
 
 
-\begin{frame} \frametitle{Bag of word}
+\begin{frame} \frametitle{Bag of word (1/2)}
 %%-----------------------------------------------------------------------------------------
+Reducing the number of points (100 in our case).
 
-% Mettre un exemple equivalent avec 4 classes : puis faire apparaitres clairement les points a ressortir
-% Expliquer le principe des k-means
-% Montrer et expliquer les histogrammes de mots
+\begin{itemize}
+    \item K-means
+    \begin{itemize}
+        \item Attribute the vectors to centroid vectors.
+    \end{itemize}
+\end{itemize}
+
+\begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.25]{k6n5000.png}
+        \caption{K-means}
+        \label{fig:kmeans}
+    \end{figure}
 
 \end{frame}
 %%-----------------------------------------------------------------------------------------
+
+\begin{frame} \frametitle{Bag of word (2/2)}
+%%-----------------------------------------------------------------------------------------
+\begin{itemize}
+    \item Signature
+    \begin{itemize}
+        \item Design histogram in function of assignment of the vectors.
+    \end{itemize}
+\end{itemize}
+
+\begin{figure}[htbp]
+    \begin{minipage}[c]{.45\linewidth}
+      \begin{center}
+    \includegraphics[scale=0.20]{131_sig.png}
+    \caption{Signature 100 words - 1}
+    \label{fig:image4}
+      \end{center}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{.45\linewidth}
+      \begin{center}
+    \includegraphics[scale=0.20]{132_sig.png}
+    \caption{Signature 100 words - 2}
+    \label{fig:image5}
+      \end{center}
+    \end{minipage}
+\end{figure}
+
+
+\end{frame}
+%%-----------------------------------------------------------------------------------------
+
 
 \begin{frame}\frametitle{K-nn(1/2)}
 
@@ -426,19 +469,120 @@ Key-points detection (x,y,$\sigma$)
 
 
 
-\begin{frame} \frametitle{Result}
-%%-----------------------------------------------------------------------------------------
+\begin{frame} \frametitle{Results (1/2)}
 
-% Mettre un fond coloré pour les case ou le resultat est le même que pour le sift
+\begin{itemize}
+    \item Reduce data-base of 100 images composed of only 4 species.
+\end{itemize}
+
+  \begin{figure}[htbp]
+    \begin{minipage}[c]{.45\linewidth}
+      \begin{center}
+	\includegraphics[scale=0.40]{63.jpg}
+	\caption{First specie}
+	\label{fig:image4}
+      \end{center}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{.45\linewidth}
+      \begin{center}
+	\includegraphics[scale=0.08]{2391.jpg}
+	\caption{Second specie}
+	\label{fig:image5}
+      \end{center}
+    \end{minipage}
+  \end{figure}
+
+
+  \begin{figure}[htbp]
+    \begin{minipage}[c]{.45\linewidth}
+      \begin{center}
+	\includegraphics[scale=0.20]{4971.jpg}
+	\caption{Third specie}
+	\label{fig:image6}
+      \end{center}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{.45\linewidth}
+      \begin{center}
+	\includegraphics[scale=0.08]{21604.jpg}
+	\caption{Fourth specie}
+	\label{fig:image7}
+      \end{center}
+    \end{minipage}
+  \end{figure}
+
+\end{frame}
+
+
+\begin{frame} \frametitle{Results (2/2)}
+%%-----------------------------------------------------------------------------------------
+\begin{itemize}
+    \item Compare the two descriptors SIFT and C$_2$O.
+\end{itemize}
+
+\begin{figure}[htbp]
+    \resizebox{3.5cm}{!}{
+    \begin{minipage}[c]{.55\linewidth}
+      \begin{center}
+        \begin{table}[H]
+        \centering
+        \caption{SIFT result}
+        \label{tab1}
+        \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        ID & Training Base & Test Base & Correct & Accuracy \\ \hline
+        173 & 17 & 8 & 4 & 50\% \\ \hline
+        1102 & 22 & 3 & 1 &\cellcolor{red!75} 33\% \\ \hline
+        1889 & 16 & 9 & 1 & 11\% \\ \hline
+        2717 & 15 & 10 & 7 &\cellcolor{red!75} 70\% \\ \hline
+        Total & 70 & 30 & 9 & / \\ \hline
+        \end{tabular}
+        \end{table}
+      \end{center}
+    \end{minipage}}
+
+    \resizebox{3.5cm}{!}{
+    \begin{minipage}[c]{.55\linewidth}
+      \begin{center}
+            \begin{table}[H]
+            \caption{C$_2$O result}
+            \label{tab2}
+            \begin{tabular}{|l|l|l|l|l|}
+            \hline
+            ID & Training Base & Test Base & Correct & Accuracy \\ \hline
+            173 & 17 & 8 & 1 & 12.5\% \\ \hline
+            1102 & 22 & 3 & 1 &\cellcolor{red!75} 33\% \\ \hline
+            1889 & 16 & 9 & 0 & 0\% \\ \hline
+            2717 & 15 & 10 & 7 &\cellcolor{red!75} 70\% \\ \hline
+            Total & 70 & 30 & 9 & / \\ \hline
+            \end{tabular}
+            \end{table}
+      \end{center}
+    \end{minipage}}
+\end{figure}
 
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
 \begin{frame} \frametitle{Discussion}
-%%-----------------------------------------------------------------------------------------
 
-% Discussion : parler de l'impact des parametres (Norme de delta en fct de l'image, distance pas forcement bonne, ordre de concatenation pas bon,...)
-
+\begin{itemize}
+    \item Classification
+    \vspace{0.3cm}
+    \begin{itemize}
+        \item To much reducing on the K-means (100 words).
+        \vspace{0.15cm}
+        \item Euclidean distance not the most efficient or adapt.
+    \end{itemize}
+    \vspace{0.7cm}
+    \item C$_2$O
+    \vspace{0.3cm}
+    \begin{itemize}
+        \item The concatenation way is not optimal.
+        \item Parameters D, alpha, and beta has to be discussed regarding to the images.
+    \end{itemize}
+\end{itemize}
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
