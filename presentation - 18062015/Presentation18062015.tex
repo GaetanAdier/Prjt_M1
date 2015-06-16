@@ -50,7 +50,7 @@
 \pgfdeclareimage[height=96mm,width=128mm]{nombidon}{Fond}
 \setbeamertemplate{background}{\pgfuseimage{nombidon}}
 
-\pgfdeclareimage[height=96mm,width=128mm]{nombidon2}{Fond}
+\pgfdeclareimage[height=96mm,width=128mm]{nombidon2}{Fond1}
 \setbeamertemplate{background}{\pgfuseimage{nombidon2}}
 
 %%----------------------------------------------------------------------------
@@ -248,47 +248,40 @@ Key-points detection (x,y,$\sigma$)
 
 
 
-\begin{frame} \frametitle{C$_2$O (1/4)}
+\begin{frame} \frametitle{What about nature images?}
 %%-----------------------------------------------------------------------------------------
 % Commencer par l'interet des C2O par rapport aux autres descripteurs, (difference entre traitement vectoriel et marginal,...)
-   \begin{itemize}
-        \item Limitation of marginal approach
-        \item Necessity to get a vectorial treatment
-        \item Include better texture and color informations
-    \end{itemize}
+\begin{columns}[t]
+  \begin{column}{5cm}
+  \begin{block}{SIFT}
+	\begin{itemize}
+		\item Description using orientation of shapes
+		\item Natively used on grayscale images
+		\item Only marginal methods for color images 
+		\item Unable to get the texture information from image
+	\end{itemize}
+  \end{block}
+  \end{column}
+
+  \begin{column}{5cm}
+  \begin{block}{C$_2$O}
+  \begin{itemize}
+		\item Description using color difference
+		\item Natively conceived for color images
+		\item Color difference gives an image of the texture information
+  \end{itemize}
+  \end{block}
+  \end{column}
+ \end{columns}
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
 
-\begin{frame} \frametitle{C$_2$O (2/4)}
-%%-----------------------------------------------------------------------------------------
-% Repprendre la premiere diapo en remplacant Lab par "perceptual space" et mettre les refs d'articles sur le lab en footnotes
-
-\begin{itemize}
-    \item Conversion to a perceptual space (adapted to human perception).
-    \item C$_2$O matrix calculation.
-    \item C$_2$O signature extraction.
-\end{itemize}
-
-\end{frame}
-%%-----------------------------------------------------------------------------------------
 
 
-\begin{frame} \frametitle{C$_2$O (3/4)}
-%%-----------------------------------------------------------------------------------------
-% Illustration de la difference de couleurs
-
-\begin{itemize}
-    \item Computation of the C$_2$O matrix by the color difference calculation
-    \includegraphics[scale=1.0]{ColorDiff.png}
-
-\end{itemize}
-
-\end{frame}
-%%-----------------------------------------------------------------------------------------
 
 
-\begin{frame} \frametitle{C$_2$O (3/4)}
+\begin{frame} \frametitle{C$_2$O (1/2)}
 %%-----------------------------------------------------------------------------------------
 
 % Mettre des exemples de matrice C2O sur des images de la base qui seront parlant !!
@@ -318,7 +311,7 @@ Key-points detection (x,y,$\sigma$)
 \only<2> {\begin{figure}[htbp]
     \begin{minipage}[c]{.40\linewidth}
       \begin{center}
-    \includegraphics[scale=0.70]{119p.jpg}
+    \includegraphics[scale=0.50]{119p.jpg}
     \caption{Image to characterize}
     \label{fig:Sig}
       \end{center}
@@ -357,7 +350,7 @@ Key-points detection (x,y,$\sigma$)
 %%-----------------------------------------------------------------------------------------
 
 
-\begin{frame} \frametitle{C$_2$O (4/4)}
+\begin{frame} \frametitle{C$_2$O (2/2)}
 %%-----------------------------------------------------------------------------------------
 
 % Mettre en petit en haut l'illustration coords spheriques et montrer les signatures correspondant aux matrices
@@ -370,14 +363,12 @@ Key-points detection (x,y,$\sigma$)
 
 
 \begin{itemize}
-\item<1-> The spherical quantization :
-\only<1> {\includegraphics[height=3.4cm]{QuantificationSphericToHist.png}}
-\item<2-> The C$_2$O signature for a poorly textured image :
-\only<2> {\includegraphics[height=4cm]{C2OSig61p.png}}
-\item<3-> The C$_2$O signature for a more textured image :
-\only<3> {\includegraphics[height=4cm]{C2OSig119p.png}}
-\item<4-> The C$_2$O signature for a more textured and colored image :
-\only<4> {\includegraphics[height=4cm]{C2OSig97p.png}}
+\item<1-> The C$_2$O signature for a poorly textured image :
+\only<1> {\includegraphics[height=4cm]{C2OSig61p.png}}
+\item<2-> The C$_2$O signature for a more textured image :
+\only<2> {\includegraphics[height=4cm]{C2OSig119p.png}}
+\item<3-> The C$_2$O signature for a more textured and colored image :
+\only<3> {\includegraphics[height=4cm]{C2OSig97p.png}}
 
 \end{itemize}
 
@@ -600,7 +591,7 @@ Reducing the number of points (100 in our case).
 
 \begin{itemize}
 \item The forecast Gantt chart  :
-\includegraphics[scale=0.40]{GanttPrez.png}
+\includegraphics[scale=0.80]{GanttPrez.png}
 \item All time affectation done before the beginning of the project
 \item Rarely respected in important project
 \end{itemize}
@@ -616,7 +607,7 @@ Reducing the number of points (100 in our case).
 
 \begin{itemize}
 \item The project backlog  :
-\includegraphics[scale=0.30]{backlog.png}
+\includegraphics[scale=0.40]{backlog.png}
 \item Allow to change the affectation of a task
 \item Weekly time affectation : could be adapted to unforeseen
 \end{itemize}
@@ -625,18 +616,6 @@ Reducing the number of points (100 in our case).
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
-
-\begin{frame} \frametitle{Our experience}
-%%-----------------------------------------------------------------------------------------
-% Complique? Utile ?
-\begin{itemize}
-\item Minimal lack of time
-\item The possibility of changing task affectation is really useful
-\item An adaptation of the initial schedule has been realised
-\end{itemize}
-
-\end{frame}
-%%-----------------------------------------------------------------------------------------
 
 
 
