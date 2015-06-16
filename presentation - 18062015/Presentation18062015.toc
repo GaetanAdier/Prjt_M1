@@ -2,5 +2,5 @@
 \select@language {french}
 \beamer@sectionintoc {1}{Introduction to the project context}{2}{0}{1}
 \beamer@sectionintoc {2}{Work and results}{8}{0}{2}
-\beamer@sectionintoc {3}{Project management}{25}{0}{3}
-\beamer@sectionintoc {4}{Conclusion}{30}{0}{4}
+\beamer@sectionintoc {3}{Project management}{27}{0}{3}
+\beamer@sectionintoc {4}{Conclusion}{31}{0}{4}

@@ -178,6 +178,12 @@
 %%-----------------------------------------------------------------------------------------
 
 % Schema demande par mr Richard
+\begin{figure}[h]
+    \center
+    \includegraphics[scale=0.5]{Dessin1.jpg}
+    \caption{Team}\label{fig:team}
+\end{figure}
+
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
@@ -186,23 +192,59 @@
 %%-----------------------------------------------------------------------------------------
 
 % Parler de la demande de base, ce qui etait convenu avec le client ...
+
+\begin{itemize}
+ \item Design  software programs:\\
+   indexation of  images database,calculate descriptor according to  nature images
+\item Adapt the last up to date designed color and texture attributes to the current image classification
+\item Compare our results (using CLEF challenge metrics)
+\item Provide an abstract of the comparisons and a technical report
+\end{itemize}
+
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
 
 \section{Work and results}
+\begin{frame} \frametitle{SIFT(1/2)}
 
-\begin{frame} \frametitle{SIFT (1/2)}
-%%-----------------------------------------------------------------------------------------
+Key-points detection (x,y,$\sigma$)
+\begin{itemize}
 
+\item Scale-space extrema detection\\
+
+
+ \item  Key-point location\\
+
+
+\item Orientation assignment\\
+
+
+\item key-point descriptor
+\\
+
+\end{itemize}
 \end{frame}
-%%-----------------------------------------------------------------------------------------
 
-\begin{frame} \frametitle{SIFT (2/2)}
-%%-----------------------------------------------------------------------------------------
-
+\begin{frame} \frametitle{SIFT(2/2)}
+\begin{figure}[htbp]
+    \begin{minipage}[c]{.45\linewidth}
+      \begin{center}
+	\includegraphics[scale=0.20]{Capture1.png}
+	\caption{SIFT test1}
+	\label{figure:Illustration}
+      \end{center}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{.45\linewidth}
+      \begin{center}
+	\includegraphics[scale=0.20]{Capture.png}
+	\caption{SIFT test2}
+	\label{figure:Illustration}
+      \end{center}
+    \end{minipage}
+  \end{figure}
 \end{frame}
-%%-----------------------------------------------------------------------------------------
 
 
 
@@ -272,29 +314,11 @@
       \end{center}
     \end{minipage}
 \end{figure}}
-\item<2-> The C$_2$O matrix for a more textured and colored image :
+\item<2-> The C$_2$O matrix for a more textured image :
 \only<2> {\begin{figure}[htbp]
     \begin{minipage}[c]{.40\linewidth}
       \begin{center}
-    \includegraphics[scale=0.70]{97p.jpg}
-    \caption{Image to characterize}
-    \label{fig:Sig}
-      \end{center}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[c]{.55\linewidth}
-      \begin{center}
-    \includegraphics[scale=0.38]{C2OMat97p.png}
-    \caption{Signature}
-    \label{fig:Sig}
-      \end{center}
-    \end{minipage}
-\end{figure}}
-\item<3-> The C$_2$O matrix for a more textured image :
-\only<3> {\begin{figure}[htbp]
-    \begin{minipage}[c]{.40\linewidth}
-      \begin{center}
-    \includegraphics[scale=0.50]{119p.jpg}
+    \includegraphics[scale=0.70]{119p.jpg}
     \caption{Image to characterize}
     \label{fig:Sig}
       \end{center}
@@ -303,6 +327,24 @@
     \begin{minipage}[c]{.55\linewidth}
       \begin{center}
     \includegraphics[scale=0.38]{C2OMat119p.png}
+    \caption{Signature}
+    \label{fig:Sig}
+      \end{center}
+    \end{minipage}
+\end{figure}}
+\item<3-> The C$_2$O matrix for a more textured and colored image :
+\only<3> {\begin{figure}[htbp]
+    \begin{minipage}[c]{.40\linewidth}
+      \begin{center}
+    \includegraphics[scale=0.50]{97p.jpg}
+    \caption{Image to characterize}
+    \label{fig:Sig}
+      \end{center}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{.55\linewidth}
+      \begin{center}
+    \includegraphics[scale=0.38]{C2OMat97p.png}
     \caption{Signature}
     \label{fig:Sig}
       \end{center}
@@ -357,15 +399,30 @@
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
+\begin{frame}\frametitle{K-nn(1/2)}
 
-\begin{frame} \frametitle{K-nn}
-%%-----------------------------------------------------------------------------------------
+- The k nearest neighbor method
 
-% Garder ce qui a été fait, notifier le fait que le point noir soit la donnee a classifier
+\begin{itemize}
+\item<1-> Comparison to the dictionary .
+\only<1> {\includegraphics[height=4.2cm]{knnwc.png}} % Changer l'image
+\only<2> {\includegraphics[height=4cm]{knnac.png}
+\newline - 4 Occurrences of the 'red' class , - 1 occurrence of the 'blue' class \newline - The new point is attributed to the 'red' class}
+\end{itemize}
 
 \end{frame}
-%%-----------------------------------------------------------------------------------------
 
+\begin{frame}\frametitle{K-nn(2/2)}
+
+- Application for image classification
+
+\begin{itemize}
+\item More complex data.
+\item Distances on signature vectors extracted from the K-mean method.
+\item One most adapted distance type for each descriptor .
+\end{itemize}
+
+\end{frame}
 
 
 
@@ -425,17 +482,15 @@
 %%-----------------------------------------------------------------------------------------
 
 
-\begin{frame} \frametitle{Project gestion}
-%%-----------------------------------------------------------------------------------------
-
-% Gestion par sprint : ????
-\end{frame}
-%%-----------------------------------------------------------------------------------------
-
 \begin{frame} \frametitle{Our experience}
 %%-----------------------------------------------------------------------------------------
-
 % Complique? Utile ?
+\begin{itemize}
+\item Minimal lack of time
+\item The possibility of changing task affectation is really useful
+\item An adaptation of the initial schedule has been realised
+\end{itemize}
+
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
