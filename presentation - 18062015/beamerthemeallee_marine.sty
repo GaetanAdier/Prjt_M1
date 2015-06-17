@@ -1,27 +1,27 @@
 %\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/monTheme.sty,v 1.0 10/04/2009 10:33:16 G.FALLOURD-M.LEBRETON Exp $
 \mode<presentation>
-\definecolor{sectionColor}{RGB}{138,145,163}
-\definecolor{subsectionColor}{RGB}{202,215,224}
+\definecolor{sectionColor}{RGB}{93,190,102}
+\definecolor{subsectionColor}{RGB}{157,205,134}
 \definecolor{sectionTextColor}{RGB}{0,0,0}
-\definecolor{subsectionTextColor}{RGB}{0,51,102}
-\definecolor{leftFootlineColor}{RGB}{0,102,255}
-\definecolor{middleFootlineColor}{RGB}{51,153,255}
-\definecolor{rightFootlineColor}{RGB}{102,204,255}
+\definecolor{subsectionTextColor}{RGB}{0,102,22}
+\definecolor{leftFootlineColor}{RGB}{0,192,0}
+\definecolor{middleFootlineColor}{RGB}{103,214,86}
+\definecolor{rightFootlineColor}{RGB}{174,255,147}
 \definecolor{authorColor}{RGB}{0,0,0}
 \definecolor{footlineTitleColor}{RGB}{0,0,0}
 \definecolor{instituteColor}{RGB}{0,0,0}
 \definecolor{dateColor}{RGB}{0,0,0}
 \definecolor{pageColor}{RGB}{0,0,0}
-\definecolor{titleColor}{RGB}{187,206,221}
-\definecolor{titleTextColor}{RGB}{0,0,102}
+\definecolor{titleColor}{RGB}{132,199,84}
+\definecolor{titleTextColor}{RGB}{0,85,0}
 \definecolor{bodyColor}{RGB}{255,255,255}
 \definecolor{normalTextColor}{RGB}{0,0,0}
 \definecolor{exampleTextColor}{RGB}{0,51,102}
 \definecolor{alertTextColor}{RGB}{51,102,0}
-\definecolor{chipColor}{RGB}{0,0,102}
+\definecolor{chipColor}{RGB}{0,102,0}
 \definecolor{chipTextColor}{RGB}{255,255,255}
-\definecolor{normalBlockColor}{RGB}{197,210,217}
-\definecolor{normalTitleBlockColor}{RGB}{0,0,51}
+\definecolor{normalBlockColor}{RGB}{153,242,131}
+\definecolor{normalTitleBlockColor}{RGB}{0,51,0}
 \definecolor{normalBlockTextColor}{RGB}{0,51,51}
 \definecolor{normalBlockTitleTextColor}{RGB}{255,255,255}
 \definecolor{exampleBlockColor}{RGB}{4,188,117}
@@ -32,6 +32,7 @@
 \definecolor{alertTitleBlockColor}{RGB}{49 ,29  , 77}
 \definecolor{alertBlockTextColor}{RGB}{255,255,255}
 \definecolor{alertBlockTitleTextColor}{RGB}{255,255,255}
+\definecolor{CaptionNameColor}{RGB}{58,137,35}
 \setbeamercolor{section in head/foot}{bg=sectionColor, fg=sectionTextColor}
 \setbeamercolor{subsection in head/foot}{bg=subsectionColor, fg=subsectionTextColor}
 \setbeamercolor*{block title}{fg=normalBlockTitleTextColor,bg=normalTitleBlockColor}
@@ -45,6 +46,8 @@
 \setbeamercolor*{normal text}{fg=normalTextColor,bg=bodyColor}
 \setbeamercolor*{example text}{fg=exampleTextColor}
 \setbeamercolor*{alerted text}{fg=alertTextColor}
+\setbeamercolor{caption name}{fg=CaptionNameColor}
+\setbeamercolor{structure}{fg=CaptionNameColor}
 \useinnertheme{rounded}
 \setbeamercolor{item projected}{bg=chipColor,fg=chipTextColor}
 \newif\ifbeamer@tree@showhooks

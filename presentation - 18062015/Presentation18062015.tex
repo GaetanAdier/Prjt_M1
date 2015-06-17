@@ -45,7 +45,7 @@
 \date{}
 
 %%%%%%%%%%%%%%%%%%%%%%% Num�ro de pages en bas � gauche %%%%%%%%%%%%%%%%%%%%%%
-\addtobeamertemplate{footline}{\color{blue}\hfill\insertframenumber/\inserttotalframenumber}
+\addtobeamertemplate{footline}{\color{vert}\hfill\insertframenumber/\inserttotalframenumber}
 
 \pgfdeclareimage[height=96mm,width=128mm]{nombidon}{Fond}
 \setbeamertemplate{background}{\pgfuseimage{nombidon}}
@@ -115,9 +115,25 @@
 \section{Introduction to the project context}
 %%-----------------------------------------------------------------------------------------
 %%-----------------------------------------------------------------------------------------
-\begin{frame} \frametitle{Project context (1/3)}
+\begin{frame} \frametitle{Project context (1/2)}
 %%-----------------------------------------------------------------------------------------
 %% objective + image index
+%%-----------------------------------------------------------------------------------------
+
+\begin{block}{What is a CLEF ?}
+	International contest organized every year since 2011 which purpose is to benchmark the progress in the area of plant identification from images.
+\end{block}
+
+	\includegraphics[scale=0.27]{OnePrunus.png}
+
+
+
+\end{frame}
+%%-----------------------------------------------------------------------------------------
+
+\begin{frame} \frametitle{Project context (2/2)}
+%%-----------------------------------------------------------------------------------------
+%% Image Indexing
 %%-----------------------------------------------------------------------------------------
 \begin{block}{Objective}
   Test a solution for content based image indexing flaw : standard descriptors (SIFT, SURF, etc) lacking real color and texture information.
@@ -127,50 +143,10 @@
 	\includegraphics[scale=0.38]{CBIR.png}
 \end{figure}
 
-
-
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
-\begin{frame} \frametitle{Project context 2/3}
-%%-----------------------------------------------------------------------------------------
-%% Image Indexing
-%%-----------------------------------------------------------------------------------------
-\begin{block}{What is a descriptor ?}
-	Algorithm applied to an image which output is a short vector
-	of numbers which is invariant to common image transformations
-	and can be compared with other descriptors in a	database.
-\end{block}
 
-
-\begin{figure}
-   \begin{minipage}[c]{.56\linewidth}
-      \includegraphics[scale=0.40]{dense_grid.png}
-	  \caption{Densegrid}
-   \end{minipage} \hfill
-   \begin{minipage}[c]{.34\linewidth}
-      \includegraphics[scale=0.27]{siftKP.jpg}
-	  \caption{Interest points}
-   \end{minipage}
-\end{figure}
-
-
-
-
-
-\end{frame}
-%%-----------------------------------------------------------------------------------------
-
-\begin{frame} \frametitle{Project context 3/3}
-%%-----------------------------------------------------------------------------------------
-%% Parler de clef, des traitements couleurs marginaux ??}
-%%-----------------------------------------------------------------------------------------
-\begin{block}{What is a CLEF ?}
-	International contest organized every year since 2011 which purpose is to benchmark the progress in the area of plant identification from images.
-\end{block}
-
-	\includegraphics[scale=0.27]{OnePrunus.png}
-\end{frame}
 %%-----------------------------------------------------------------------------------------
 %%-----------------------------------------------------------------------------------------
 
@@ -187,46 +163,75 @@
 \end{frame}
 %%-----------------------------------------------------------------------------------------
 
-
-\begin{frame} \frametitle{User requirement}
+% A INCLURE CLAIREMENT DANS L'INTRODUCTION
+%\begin{frame} \frametitle{User requirement}
 %%-----------------------------------------------------------------------------------------
 
 % Parler de la demande de base, ce qui etait convenu avec le client ...
 
-\begin{itemize}
- \item Design  software programs:\\
-   indexation of  images database,calculate descriptor according to  nature images
-\item Adapt the last up to date designed color and texture attributes to the current image classification
-\item Compare our results (using CLEF challenge metrics)
-\item Provide an abstract of the comparisons and a technical report
-\end{itemize}
+%\begin{itemize}
+% \item Design  software programs:\\
+%   indexation of  images database,calculate descriptor according to  nature images
+%\item Adapt the last up to date designed color and texture attributes to the current image classification
+%\item Compare our results (using CLEF challenge metrics)
+%\item Provide an abstract of the comparisons and a technical report
+%\end{itemize}
 
-\end{frame}
+%\end{frame}
 %%-----------------------------------------------------------------------------------------
 
 
 \section{Work and results}
 \begin{frame} \frametitle{SIFT(1/2)}
 
+\begin{tikzpicture}[remember picture, overlay]
+  \node [anchor=north east, inner sep=2pt]  at (current page.north east)
+     {\includegraphics[height=2.5cm]{DescriptorTopImg.png}};
+\end{tikzpicture}
+
 Key-points detection (x,y,$\sigma$)
-\begin{itemize}
-
-\item Scale-space extrema detection\\
 
 
-\item  Key-point location\\
+\begin{figure}[htbp]
+    \begin{minipage}[c]{.45\linewidth}
+      \begin{itemize}
+
+    \item Scale-space extrema detection\\
 
 
-\item Orientation assignment\\
+    \item  Key-point location\\
 
 
-\item key-point descriptor
-\\
+    \item Orientation assignment\\
 
-\end{itemize}
+
+    \item key-point descriptor
+
+    \end{itemize}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{.45\linewidth}
+      \begin{center}
+	\includegraphics[scale=0.27]{siftKP.jpg}
+	\caption{SIFT test2}
+	\label{figure:Illustration}
+      \end{center}
+    \end{minipage}
+  \end{figure}
+
+
+
+
+
 \end{frame}
 
 \begin{frame} \frametitle{SIFT(2/2)}
+% Image en haut a droite rapellant l'avancee dans le process flow
+\begin{tikzpicture}[remember picture, overlay]
+  \node [anchor=north east, inner sep=2pt]  at (current page.north east)
+     {\includegraphics[height=2.5cm]{DescriptorTopImg.png}};
+\end{tikzpicture}
+
 \begin{figure}[htbp]
     \begin{minipage}[c]{.45\linewidth}
       \begin{center}
@@ -251,6 +256,13 @@ Key-points detection (x,y,$\sigma$)
 \begin{frame} \frametitle{What about nature images?}
 %%-----------------------------------------------------------------------------------------
 % Commencer par l'interet des C2O par rapport aux autres descripteurs, (difference entre traitement vectoriel et marginal,...)
+
+% Image en haut a droite rapellant l'avancee dans le process flow
+\begin{tikzpicture}[remember picture, overlay]
+  \node [anchor=north east, inner sep=2pt]  at (current page.north east)
+     {\includegraphics[height=2.5cm]{DescriptorTopImg.png}};
+\end{tikzpicture}
+
 \begin{columns}[t]
   \begin{column}{5cm}
   \begin{block}{SIFT}
@@ -266,9 +278,9 @@ Key-points detection (x,y,$\sigma$)
   \begin{column}{5cm}
   \begin{block}{C$_2$O}
   \begin{itemize}
-		\item Description using color difference
+		\item Description based on color difference
 		\item Natively conceived for color images
-		\item Color difference gives an image of the texture information
+		\item Take account of the texture information
   \end{itemize}
   \end{block}
   \end{column}
@@ -283,6 +295,12 @@ Key-points detection (x,y,$\sigma$)
 
 \begin{frame} \frametitle{C$_2$O (1/2)}
 %%-----------------------------------------------------------------------------------------
+
+% Image en haut a droite rapellant l'avancee dans le process flow
+\begin{tikzpicture}[remember picture, overlay]
+  \node [anchor=north east, inner sep=2pt]  at (current page.north east)
+     {\includegraphics[height=2.5cm]{DescriptorTopImg.png}};
+\end{tikzpicture}
 
 % Mettre des exemples de matrice C2O sur des images de la base qui seront parlant !!
 
@@ -355,9 +373,17 @@ Key-points detection (x,y,$\sigma$)
 
 % Mettre en petit en haut l'illustration coords spheriques et montrer les signatures correspondant aux matrices
 
+
+% Image en haut a droite rapellant l'avancee dans le process flow
 \begin{tikzpicture}[remember picture, overlay]
-  \node [anchor=north east, inner sep=4pt]  at (current page.north east)
-     {\includegraphics[height=3cm]{Spherical_Coordinates}};
+  \node [anchor=north east, inner sep=2pt]  at (current page.north east)
+     {\includegraphics[height=2.5cm]{DescriptorTopImg.png}};
+\end{tikzpicture}
+
+
+\begin{tikzpicture}[remember picture, overlay]
+  \node [anchor=south east, inner sep=0pt]  at (current page.south east)
+     {\includegraphics[height=2.5cm]{Spherical_Coordinates}};
 \end{tikzpicture}
 
 
@@ -382,6 +408,13 @@ Key-points detection (x,y,$\sigma$)
 
 \begin{frame} \frametitle{Bag of word (1/2)}
 %%-----------------------------------------------------------------------------------------
+
+% Image en haut a droite rapellant l'avancee dans le process flow
+\begin{tikzpicture}[remember picture, overlay]
+  \node [anchor=north east, inner sep=2pt]  at (current page.north east)
+     {\includegraphics[height=2.5cm]{SignatureTopImg.png}};
+\end{tikzpicture}
+
 Reducing the number of points (100 in our case).
 
 \begin{itemize}
@@ -403,6 +436,13 @@ Reducing the number of points (100 in our case).
 
 \begin{frame} \frametitle{Bag of word (2/2)}
 %%-----------------------------------------------------------------------------------------
+
+% Image en haut a droite rapellant l'avancee dans le process flow
+\begin{tikzpicture}[remember picture, overlay]
+  \node [anchor=north east, inner sep=2pt]  at (current page.north east)
+     {\includegraphics[height=2.5cm]{SignatureTopImg.png}};
+\end{tikzpicture}
+
 \begin{itemize}
     \item Signature
     \begin{itemize}
@@ -435,18 +475,32 @@ Reducing the number of points (100 in our case).
 
 \begin{frame}\frametitle{K-nn(1/2)}
 
+% Image en haut a droite rapellant l'avancee dans le process flow
+\begin{tikzpicture}[remember picture, overlay]
+  \node [anchor=north east, inner sep=2pt]  at (current page.north east)
+     {\includegraphics[height=2.5cm]{knnTopImg.png}};
+\end{tikzpicture}
+
 - The k nearest neighbor method
 
 \begin{itemize}
 \item<1-> Comparison to the dictionary .
 \only<1> {\includegraphics[height=4.2cm]{knnwc.png}} % Changer l'image
 \only<2> {\includegraphics[height=4cm]{knnac.png}
-\newline - 4 Occurrences of the 'red' class , - 1 occurrence of the 'blue' class \newline - The new point is attributed to the 'red' class}
+\item 4 Occurrences of {the \color{red} red} class 
+\item 1 occurrence of {the \color{blue} blue} class 
+\item The new point is attributed to {the \color{red} red} class}
 \end{itemize}
 
 \end{frame}
 
 \begin{frame}\frametitle{K-nn(2/2)}
+
+% Image en haut a droite rapellant l'avancee dans le process flow
+\begin{tikzpicture}[remember picture, overlay]
+  \node [anchor=north east, inner sep=2pt]  at (current page.north east)
+     {\includegraphics[height=2.5cm]{knnTopImg.png}};
+\end{tikzpicture}
 
 - Application for image classification
 
@@ -608,6 +662,10 @@ Reducing the number of points (100 in our case).
 \begin{itemize}
 \item The project backlog  :
 \includegraphics[scale=0.40]{backlog.png}
+\item Division of each main task in subtasks
+\item Time attribution for each subtask
+\item Tasks sorted by priority
+\item Each subtask attributed to team member
 \item Allow to change the affectation of a task
 \item Weekly time affectation : could be adapted to unforeseen
 \end{itemize}
@@ -660,23 +718,40 @@ Reducing the number of points (100 in our case).
 
 
 
-\begin{frame}\frametitle{Personal gains}
-%%-----------------------------------------------------------------------------------------
-\begin{itemize}
-	\item New way to organize teamwork
-	\item Technical knowledge
-\end{itemize}
+\begin{frame}\frametitle{Personal conclusion}
+%----------------------------------------------------------------------------------------
+\begin{columns}[t]
+  \begin{column}{5cm}
+    \begin{block}{Personal gains}
+      \begin{itemize}
+            \item New way to organize teamwork
+            \item Technical knowledge
+            \item Contest participation context
+            \item Code management on a project scale
+      \end{itemize}
+    \end{block}
+  \end{column}
+
+  \begin{column}{5cm}
+  \begin{block}{Perspectives}
+  \begin{itemize}
+        \item Fixing technical issues
+        \item Test on the whole database
+        \item Classification programming
+  \end{itemize}
+  \end{block}
+  \end{column}
+\end{columns}
+
 
 \end{frame}
-%%-----------------------------------------------------------------------------------------
-
 
 
 \section{}
 \begin{frame}\frametitle{}
 %%-----------------------------------------------------------------------------------------
     \begin{center}
-        Thanks for attention
+        \huge Thank you for attention
     \end{center}
 \end{frame}
 %%-----------------------------------------------------------------------------------------
