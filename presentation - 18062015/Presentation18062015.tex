@@ -120,8 +120,8 @@
 %% objective + image index
 %%-----------------------------------------------------------------------------------------
 
-\begin{block}{What is a CLEF ?}
-	International contest organized every year since 2011 which purpose is to benchmark the progress in the area of plant identification from images.
+\begin{block}{What is a imageCLEF ?}
+    International contest which purpose is to benchmark plant identification from images.
 \end{block}
 
 	\includegraphics[scale=0.27]{OnePrunus.png}
@@ -135,8 +135,12 @@
 %%-----------------------------------------------------------------------------------------
 %% Image Indexing
 %%-----------------------------------------------------------------------------------------
-\begin{block}{Objective}
-  Test a solution for content based image indexing flaw : standard descriptors (SIFT, SURF, etc) lacking real color and texture information.
+\begin{block}{Objectives}
+    \begin{itemize}
+        \item Index image database composed of nature pictures
+        \item Adapt XLIM's descriptor to the current image classification
+        \item Benchmark results
+    \end{itemize}
 \end{block}
 	
 \begin{figure}
@@ -213,7 +217,7 @@ Key-points detection (x,y,$\sigma$)
     \begin{minipage}[c]{.45\linewidth}
       \begin{center}
 	\includegraphics[scale=0.27]{siftKP.jpg}
-	\caption{SIFT test2}
+	\caption{SIFT Keypoints}
 	\label{figure:Illustration}
       \end{center}
     \end{minipage}
@@ -236,7 +240,7 @@ Key-points detection (x,y,$\sigma$)
     \begin{minipage}[c]{.45\linewidth}
       \begin{center}
 	\includegraphics[scale=0.20]{Capture1.png}
-	\caption{SIFT test1}
+	\caption{SIFT Matching for rotation}
 	\label{figure:Illustration}
       \end{center}
     \end{minipage}
@@ -244,7 +248,7 @@ Key-points detection (x,y,$\sigma$)
     \begin{minipage}[c]{.45\linewidth}
       \begin{center}
 	\includegraphics[scale=0.20]{Capture.png}
-	\caption{SIFT test2}
+	\caption{SIFT matching for scale changes}
 	\label{figure:Illustration}
       \end{center}
     \end{minipage}
@@ -269,7 +273,7 @@ Key-points detection (x,y,$\sigma$)
 	\begin{itemize}
 		\item Description using orientation of shapes
 		\item Natively used on grayscale images
-		\item Only marginal methods for color images 
+		\item Only marginal methods for color images
 		\item Unable to get the texture information from image
 	\end{itemize}
   \end{block}
@@ -487,8 +491,8 @@ Reducing the number of points (100 in our case).
 \item<1-> Comparison to the dictionary .
 \only<1> {\includegraphics[height=4.2cm]{knnwc.png}} % Changer l'image
 \only<2> {\includegraphics[height=4cm]{knnac.png}
-\item 4 Occurrences of {the \color{red} red} class 
-\item 1 occurrence of {the \color{blue} blue} class 
+\item 4 Occurrences of {the \color{red} red} class
+\item 1 occurrence of {the \color{blue} blue} class
 \item The new point is attributed to {the \color{red} red} class}
 \end{itemize}
 
